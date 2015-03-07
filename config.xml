@@ -13,6 +13,6 @@ BullsEye
 </author>
 
 <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
-<gap:splash src="Images/HD/splash/aquarium.jpg" />
+<gap:splash src="Images/HD/splash/jungle.jpg" />
 
 </widget>
