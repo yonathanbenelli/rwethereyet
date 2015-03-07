@@ -11,8 +11,9 @@ Trip Indicator
 <author href="wwww.bullseye.com.uy" email="bullseye@bullseye.com">
 BullsEye
 </author>
+
 <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
-<preference name="SplashScreen" value="foo" />
+<preference name="SplashScreen" value="screen" />
 <preference name="SplashScreenDelay" value="10000" />
 
 <platform name="android">
@@ -20,12 +21,16 @@ BullsEye
      <!--<splash src="res/screen/android/splash-land-hdpi.png" density="land-hdpi"/>
     <splash src="res/screen/android/splash-land-ldpi.png" density="land-ldpi"/>
     <splash src="res/screen/android/splash-land-mdpi.png" density="land-mdpi"/>-->
-    <splash src="Images/HD/splash/jungle.jpg" density="land-xhdpi"/>
-    <!-- 
+    <!--     <splash src="Images/HD/splash/jungle.jpg" density="land-xhdpi"/>
+
     <splash src="res/screen/android/splash-port-hdpi.png" density="port-hdpi"/>
     <splash src="res/screen/android/splash-port-ldpi.png" density="port-ldpi"/>
-    <splash src="res/screen/android/splash-port-mdpi.png" density="port-mdpi"/>-->
-    <splash src="Images/HD/splash/jungle.jpg" density="port-xhdpi"/>
+    <splash src="res/screen/android/splash-port-mdpi.png" density="port-mdpi"/>
+    <splash src="Images/HD/splash/jungle.jpg" density="port-xhdpi"/>-->
+	
+	<splash src="res/screen/android/640x960.9.png" density="mdpi"/>
+	<splash src="res/screen/android/768x1024.jpg" density="hdpi"/>
+	<splash src="res/screen/android/1536x2048.jpg" density="xhdpi"/>
 </platform>
 
 <platform name="ios">
