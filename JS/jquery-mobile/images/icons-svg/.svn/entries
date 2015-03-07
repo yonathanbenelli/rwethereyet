@@ -40,14 +40,14 @@ file
 
 add
 
-tag-black.svg
+alert-white.svg
 file
 
 
 
 add
 
-alert-white.svg
+tag-black.svg
 file
 
 
@@ -61,14 +61,14 @@ file
 
 add
 
-bullets-white.svg
+gear-black.svg
 file
 
 
 
 add
 
-gear-black.svg
+bullets-white.svg
 file
 
 
@@ -103,14 +103,14 @@ file
 
 add
 
-recycle-black.svg
+mail-white.svg
 file
 
 
 
 add
 
-mail-white.svg
+recycle-black.svg
 file
 
 
@@ -306,13 +306,6 @@ file
 
 add
 
-carat-r-black.svg
-file
-
-
-
-add
-
 arrow-u-l-white.svg
 file
 
@@ -320,7 +313,7 @@ file
 
 add
 
-arrow-u-black.svg
+carat-r-black.svg
 file
 
 
@@ -334,6 +327,13 @@ file
 
 add
 
+arrow-u-black.svg
+file
+
+
+
+add
+
 arrow-r-white.svg
 file
 
@@ -341,14 +341,14 @@ file
 
 add
 
-arrow-u-r-white.svg
+info-white.svg
 file
 
 
 
 add
 
-info-white.svg
+arrow-u-r-white.svg
 file
 
 
@@ -390,14 +390,14 @@ file
 
 add
 
-bullets-black.svg
+video-white.svg
 file
 
 
 
 add
 
-video-white.svg
+bullets-black.svg
 file
 
 
@@ -425,14 +425,14 @@ file
 
 add
 
-mail-black.svg
+gear-white.svg
 file
 
 
 
 add
 
-gear-white.svg
+mail-black.svg
 file
 
 

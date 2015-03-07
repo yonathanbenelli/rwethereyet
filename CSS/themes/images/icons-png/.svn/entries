@@ -26,7 +26,7 @@ has-prop-mods
 
 3c04fffb-76ff-e3b2-9574-ce57b7db7bff
 
-mail-black.png
+gear-white.png
 file
 
 
@@ -40,7 +40,7 @@ add
 has-props
 has-prop-mods
 
-gear-white.png
+mail-black.png
 file
 
 
@@ -124,7 +124,7 @@ add
 has-props
 has-prop-mods
 
-minus-black.png
+clock-black.png
 file
 
 
@@ -152,7 +152,7 @@ add
 has-props
 has-prop-mods
 
-clock-black.png
+minus-black.png
 file
 
 
@@ -194,7 +194,7 @@ add
 has-props
 has-prop-mods
 
-forbidden-white.png
+power-white.png
 file
 
 
@@ -222,7 +222,7 @@ add
 has-props
 has-prop-mods
 
-power-white.png
+forbidden-white.png
 file
 
 
@@ -516,20 +516,6 @@ add
 has-props
 has-prop-mods
 
-arrow-u-r-black.png
-file
-
-
-
-add
-
-
-
-
-
-has-props
-has-prop-mods
-
 info-black.png
 file
 
@@ -544,7 +530,7 @@ add
 has-props
 has-prop-mods
 
-carat-u-black.png
+arrow-u-r-black.png
 file
 
 
@@ -559,6 +545,20 @@ has-props
 has-prop-mods
 
 lock-white.png
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+carat-u-black.png
 file
 
 
@@ -656,7 +656,7 @@ add
 has-props
 has-prop-mods
 
-tag-black.png
+alert-white.png
 file
 
 
@@ -670,7 +670,7 @@ add
 has-props
 has-prop-mods
 
-alert-white.png
+tag-black.png
 file
 
 
@@ -698,7 +698,7 @@ add
 has-props
 has-prop-mods
 
-gear-black.png
+bullets-white.png
 file
 
 
@@ -712,7 +712,7 @@ add
 has-props
 has-prop-mods
 
-bullets-white.png
+gear-black.png
 file
 
 
@@ -782,7 +782,7 @@ add
 has-props
 has-prop-mods
 
-recycle-black.png
+mail-white.png
 file
 
 
@@ -796,7 +796,7 @@ add
 has-props
 has-prop-mods
 
-mail-white.png
+recycle-black.png
 file
 
 
@@ -852,20 +852,6 @@ add
 has-props
 has-prop-mods
 
-power-black.png
-file
-
-
-
-add
-
-
-
-
-
-has-props
-has-prop-mods
-
 forbidden-black.png
 file
 
@@ -880,7 +866,7 @@ add
 has-props
 has-prop-mods
 
-clock-white.png
+power-black.png
 file
 
 
@@ -895,6 +881,20 @@ has-props
 has-prop-mods
 
 minus-white.png
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+clock-white.png
 file
 
 

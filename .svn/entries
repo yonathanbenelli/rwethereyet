@@ -33,13 +33,6 @@ file
 
 add
 
-.gitignore
-file
-
-
-
-add
-
 Images
 dir
 
@@ -48,13 +41,6 @@ dir
 add
 
 ProjectSettings
-file
-
-
-
-add
-
-.gitattributes
 file
 
 
