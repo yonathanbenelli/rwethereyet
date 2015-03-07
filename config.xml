@@ -6,15 +6,12 @@
 
 <name>RWeThereYet</name>
 <description>
-Trip Indicator
+				Trip Indicator
 </description>
 <author href="wwww.bullseye.com.uy" email="bullseye@bullseye.com">
 BullsEye
 </author>
 
-<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
-<preference name="SplashScreen" value="screen" />
-<preference name="SplashScreenDelay" value="10000" />
 
 <platform name="android">
     <!-- you can use any density that exists in the Android project -->
@@ -28,9 +25,13 @@ BullsEye
     <splash src="res/screen/android/splash-port-mdpi.png" density="port-mdpi"/>
     <splash src="Images/HD/splash/jungle.jpg" density="port-xhdpi"/>-->
 	
-	<splash src="res/screen/android/640x960.9.png" density="mdpi"/>
-	<splash src="res/screen/android/768x1024.jpg" density="hdpi"/>
-	<splash src="res/screen/android/1536x2048.jpg" density="xhdpi"/>
+	<splash src="res/screen/android/640x960.9.png" density="port-mdpi"/>
+	<splash src="res/screen/android/640x960.9.png" density="port-hdpi"/>
+	<splash src="res/screen/android/640x960.9.png" density="port-xhdpi"/>
+
+	<splash src="res/screen/android/640x960.9.png" density="land-mdpi"/>
+	<splash src="res/screen/android/640x960.9.png" density="land-hdpi"/>
+	<splash src="res/screen/android/640x960.9.png" density="land-xhdpi"/>
 </platform>
 
 <platform name="ios">
@@ -46,4 +47,6 @@ BullsEye
     <splash src="res/screen/ios/Default-736h.png" width="1242" height="2208"/>
     <splash src="res/screen/ios/Default-Landscape-736h.png" width="2208" height="1242"/>-->
 </platform>
+<preference name="SplashScreenDelay" value="10000" />
+
 </widget>
