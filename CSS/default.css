@@ -3,13 +3,33 @@
    Note: Fluid media requires that you remove the media's height and width attributes from the HTML
    http://www.alistapart.com/articles/fluid-images/ 
 */
+[data-role=page]{height: 100% !important; position:relative !important;}
+[data-role=footer]{bottom:0; position:absolute !important; top: auto !important; width:100%;} 
+#settings
+{
+	vertical-align:middle;
+}
+#main
+{
+	vertical-align:middle;
+}
+.footer
+{
+	background-color:transparent !important;
+	border-color:transparent !important;
+}
+.menu
+{
+	background-image:url(../Images/HD/screen/menu.jpg);
+	width:100%;	
+	background-size: 100%;
+}
+
+
 img, object, embed, video {
 	max-width: 100%;
 }
-.screenImg
-{
-	width="100%"
-}
+
 
 /* IE 6 does not support max-width so default to width 100% */
 .ie6 img {
