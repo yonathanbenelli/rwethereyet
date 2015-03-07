@@ -13,6 +13,7 @@ BullsEye
 </author>
 
 <gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
-<preference name="SplashScreen" value="Images/HD/splash/640x960.9" />
+<gap:splash src="splash.png" />
+
 <preference name="SplashScreenDelay" value="10000" />
 </widget>
