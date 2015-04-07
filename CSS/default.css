@@ -5,7 +5,15 @@
 */
 [data-role=page]{height: 100% !important; position:relative !important;}
 [data-role=footer]{bottom:0; position:absolute !important; top: auto !important; width:100%;} 
+.menu1buttons
+{
 
+	
+background-repeat:no-repeat;
+  background-size:contain;
+   background-color: transparent !important;
+  border: none;
+}
 .map_canvas_character
 {
 	width: 80%;
@@ -518,16 +526,6 @@ background-repeat:no-repeat;
 	border-color:transparent !important;
 	  left: 0px !important;
 }
-.menu
-{
-	-webkit-background-size:cover;
-	background-repeat:no-repeat;
-	background-size:cover;
-	padding: 0px !important;
-   background-color: transparent !important;
-  border: none;
- 
-}
 
 
 
@@ -595,7 +593,15 @@ position: absolute;
   margin-left: auto;
 }
 
+img, object, embed, video {
+	max-width: 100%;
+}
 
+
+/* IE 6 does not support max-width so default to width 100% */
+.ie6 img {
+	width:100%;
+}
 /*
 	Dreamweaver Fluid Grid Properties
 	----------------------------------
@@ -646,6 +652,22 @@ position: absolute;
     display: none;
 }
 
+
+/* Tablet Layout:  320px. */
+.menu
+{
+	background-image:url(../resources/backgrounds/0.png);
+	/*
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	padding: 0px !important;
+   	background-color: transparent !important;
+    border: none;*/
+	background-position:center center;
+	
+	background-size:100% 100%;
+	width:100%;
+}
 /* Tablet Layout: 481px to 768px. Inherits styles from: Mobile Layout. */
 
 @media only screen and (min-width: 481px) {

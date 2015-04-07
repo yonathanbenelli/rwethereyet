@@ -84,15 +84,26 @@ $(document).on('pageshow','#main', function(e,data){
       $('#mainHeaders').css('width',($(window).width()/9*6));
 	$('#mainHeaders').css('height',($(window).height()/16*3));
 
-	// $('#main-content').css('width',($(window).height()/36*5*3));
-	//	$('#menu1button1').css('width',($(window).width()/2));
+	$('#main-content').css('width',($(window).height()/36*5*3));
 
-//	    $('#menu1button2').css('height',($(window).height()/18));
-//		    $('#menu1button3').css('height',($(window).height()/18));
+
+$('#menu1button1').css('height',($(window).height()/18));
+	    $('#menu1button2').css('height',($(window).height()/18));
+		   $('#menu1button3').css('height',($(window).height()/18));
 
 	  //  $('#menu1button2').css('height',26);
 		//    $('#menu1button3').css('width',100);
- 
+ /*$('#fish')
+			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
+			.flyToTap()
+			.spRandom({
+          top: 70,
+          left: 100,
+          right: 200,
+          bottom: 340,
+          speed: 4000,
+          pause: 3000
+      });*/
 // adjust menu 1 buttons
 
 if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
