@@ -84,7 +84,7 @@ $(document).on('pageshow','#main', function(e,data){
       $('#mainHeaders').css('width',($(window).width()/9*6));
 	$('#mainHeaders').css('height',($(window).height()/16*3));
 
-	   // $('#main-content').css('width',($(window).height()/36*5*3));
+	// $('#main-content').css('width',($(window).height()/36*5*3));
 	//	$('#menu1button1').css('width',($(window).width()/2));
 
 //	    $('#menu1button2').css('height',($(window).height()/18));
@@ -92,7 +92,7 @@ $(document).on('pageshow','#main', function(e,data){
 
 	  //  $('#menu1button2').css('height',26);
 		//    $('#menu1button3').css('width',100);
-
+ 
 // adjust menu 1 buttons
 
 if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
