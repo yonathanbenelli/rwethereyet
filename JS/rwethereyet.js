@@ -80,14 +80,18 @@
 //vertical align options
 $(document).on('pageshow','#main', function(e,data){    
    // $('#main-content').css('margin-top',($(window).height() - ( $(window).height()/18*3)  - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#main-content').outerHeight())/2);
-      $('#mainHeaders').html('jquery works?');
+
       $('#mainHeaders').css('width',($(window).width()/9*6));
 	$('#mainHeaders').css('height',($(window).height()/16*3));
 
-	    $('#main-content').css('width',($(window).height()/36*5*3));
-	 $('#menu1button1').css('height',($(window).height()/18));
-	    $('#menu1button2').css('height',($(window).height()/18));
-		    $('#menu1button3').css('height',($(window).height()/18));
+	   // $('#main-content').css('width',($(window).height()/36*5*3));
+		$('#menu1button1').css('width',($(window).width()/2));
+
+//	    $('#menu1button2').css('height',($(window).height()/18));
+//		    $('#menu1button3').css('height',($(window).height()/18));
+
+	    $('#menu1button2').css('height',26);
+		    $('#menu1button3').css('width',100);
 
 // adjust menu 1 buttons
 

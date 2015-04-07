@@ -419,9 +419,10 @@ background-repeat:no-repeat;
 }
 .menu1buttons
 {
-
+background-position:center center;
+	background-size:cover;
+-webkit-background-size:cover;
 background-repeat:no-repeat;
-  background-size:contain;
    background-color: transparent !important;
   border: none;
 }
