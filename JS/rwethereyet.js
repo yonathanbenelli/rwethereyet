@@ -958,7 +958,7 @@ $('#fish')
           speed: 4000,
           pause: 3000
       });
-$('#waterLevel').sprite({fps: 4, no_of_frames:6}).activeOnClick().active();
+//$('#waterLevel').sprite({fps: 4, no_of_frames:6}).activeOnClick().active();
 	if(setTrip==0)
 	{
 		timeNow=(new Date()).getTime();
