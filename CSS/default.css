@@ -2,10 +2,10 @@
 /* Simple fluid media
    Note: Fluid media requires that you remove the media's height and width attributes from the HTML
    http://www.alistapart.com/articles/fluid-images/ 
-
+*/
 [data-role=page]{height: 100% !important; position:relative !important;}
 [data-role=footer]{bottom:0; position:absolute !important; top: auto !important; width:100%;} 
-*/
+
 .map_canvas_character
 {
 	width: 80%;
