@@ -82,10 +82,7 @@
 
 $(document).on('pageinit','#main', function(e,data){    
 
-      $('#mainHeaders').css('width',($(window).width()/9*6));
-	$('#mainHeaders').css('height',($(window).height()/16*3));
-
-
+   
 $('#main').css('background-image','url(resources/backgrounds/back0_'+resolution+'.png)')
 $('#menu1button1').attr('src','resources/buttons/tripplannerbutton_'+resolution+'.png');
 $('#menu1button2').attr('src','resources/buttons/settingsbutton_'+resolution+'.png');
