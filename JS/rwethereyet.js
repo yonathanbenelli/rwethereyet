@@ -93,6 +93,17 @@ $('#backMain').attr('src','resources/buttons/backarrow_'+resolution+'.png');
 });
 
 $(document).on('pageshow','#main', function(e,data){    
+$('#fish')
+			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
+			.flyToTap()
+			.spRandom({
+          top: 70,
+          left: 100,
+          right: 200,
+          bottom: 340,
+          speed: 4000,
+          pause: 3000
+      });
 if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 {
 	$('#backMain').css('visibility','visible');	

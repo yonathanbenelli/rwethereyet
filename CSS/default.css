@@ -516,7 +516,9 @@ background-repeat:no-repeat;
 {
 	background-color:transparent !important;
 	border-color:transparent !important;
+	border:none !important;
 	  left: 0px !important;
+	    color: transparent !important;
 }
 
 
