@@ -420,7 +420,12 @@ background-repeat:no-repeat;
 .menu1buttons
 {
 	  height: 26px;
-	  width:132px;
+  width: 132px;
+-webkit-background-size:100% 100%;
+-webkit-background-repeat:no-repeat;
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	padding: 0px !important;
    background-color: transparent !important;
   border: none;
 }
