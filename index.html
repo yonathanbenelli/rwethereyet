@@ -38,12 +38,14 @@
   <div data-role="content"  id="main-content">
     
 
-      <div data-role="button" id="menu1button1" style="background-image:url(resources/buttons/tripplannerbutton_0.png);" class="menu1buttons" ></div>
+      <div  id="menu1button1" style="background-image:url(resources/buttons/tripplannerbutton_0.png);" class="menu1buttons" ></div>
     <a href="#settings" data-role="button" id="menu1button2" style="background-image:url(resources/buttons/settingsbutton_0.png);" class="menu1buttons" ></a>
     <a href="#help" data-role="button" id="menu1button3" style="background-image:url(resources/buttons/helpbutton_0.png);" class="menu1buttons" ></a>
 
     
-    <div data-role="button" id="menu1button4" style="background-image:url(resources/buttons/helpbutton_0.png);" class="menu1buttons" ></div>
+    <div id="menu1button4" >
+    <img src="resources/buttons/helpbutton_0.png" onClick="$.mobile.changePage('#settings');"/>
+    </div>
 
     
   </div>
