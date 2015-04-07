@@ -590,3 +590,126 @@ position: absolute;
 }
 
 
+.fluid {
+	clear: both;
+	margin-left: 0;
+	width: 100%;
+	float: left;
+	display: block;
+}
+
+.fluidList {
+    list-style:none;
+    list-style-image:none;
+    margin:0;
+    padding:0;        
+}
+
+/* Mobile Layout: 480px and below. */
+  
+.gridContainer {
+	margin-left: auto;
+	margin-right: auto;
+	width: 86.45%;
+	padding-left: 2.275%;
+	padding-right: 2.275%;
+	clear: none;
+	float: none;
+}
+#div1 {
+}
+.zeroMargin_mobile {
+    margin-left: 0;
+}
+.hide_mobile {
+    display: none;
+}
+
+
+/* Tablet Layout:  320px. */
+.menu
+{
+	background-image:url(resources/backgrounds/0.png);
+	-webkit-background-size:cover;
+	background-repeat:no-repeat;
+	background-size:cover;
+	padding: 0px !important;
+   	background-color: transparent !important;
+    border: none;
+}
+#menu1button1
+{
+content:url(../resources/buttons/tripplannerbutton_0.png);
+}
+
+#menu1button2
+{
+content:url(../resources/buttons/settingsbutton_0.png);
+}
+#menu1button3
+{
+content:url(../resources/buttons/helpbutton_0.png);
+}
+/* Tablet Layout: 321px to 480px. Inherits styles from: Mobile Layout. */
+
+@media only screen and (min-width: 321px) {
+#menu1button1
+{
+		content:url(../resources/buttons/tripplannerbutton_0.png);
+}
+}
+/* Tablet Layout: 481px to 768px. Inherits styles from: Mobile Layout. */
+
+@media only screen and (min-width: 481px) {
+#menu1button1
+{
+	content:url(../resources/buttons/tripplannerbutton_0.png);
+}
+
+.gridContainer {
+	width: 90.675%;
+	padding-left: 1.1625%;
+	padding-right: 1.1625%;
+	clear: none;
+	float: none;
+	margin-left: auto;
+}
+#div1 {
+}
+.zeroMargin_tablet {
+    margin-left: 0;
+}
+.hide_tablet {
+    display: none;
+}
+}
+
+/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+
+@media only screen and (min-width: 769px) {
+
+.gridContainer {
+	width: 87.75%;
+	max-width: 1232px;
+	padding-left: 1.125%;
+	padding-right: 1.125%;
+	margin: auto;
+	clear: none;
+	float: none;
+	margin-left: auto;
+}
+#splashJungle
+{
+	display:none;
+}
+#splashAquarium
+{
+	display:block;
+}
+.zeroMargin_desktop {
+    margin-left: 0;
+}
+.hide_desktop {
+    display: none;
+}
+}
