@@ -960,7 +960,7 @@ $(document).on('pageshow','#aquarium', function(e,data){
           bottom: 340,
           speed: 4000,
           pause: 3000
-      });*/
+      });
 //$('#waterLevel').sprite({fps: 4, no_of_frames:6}).activeOnClick().active();
 	if(setTrip==0)
 	{
@@ -971,7 +971,7 @@ $(document).on('pageshow','#aquarium', function(e,data){
 	{
 		intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
 	}
-	
+	*/
 });
 			
 
