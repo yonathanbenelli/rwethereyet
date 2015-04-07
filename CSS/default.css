@@ -292,6 +292,15 @@ background-repeat:no-repeat;
 }
 .fish1
 {
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+
+  text-align: center;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 	position:relative;
 	top:50px;
 	left:50px;
