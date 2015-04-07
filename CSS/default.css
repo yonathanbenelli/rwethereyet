@@ -419,13 +419,8 @@ background-repeat:no-repeat;
 }
 .menu1buttons
 {
-	  height: 40px;
-	background:no-repeat;
-background-position:center center;
-	background-size:100% 100%;;
--webkit-background-size:100% 100%;
-
-background-repeat:no-repeat;
+	  height: 26px;
+	  width:132px;
    background-color: transparent !important;
   border: none;
 }
@@ -605,15 +600,7 @@ position: absolute;
 	margin-right: auto;
   margin-left: auto;
 }
-img, object, embed, video {
-	max-width: 100%;
-}
 
-
-/* IE 6 does not support max-width so default to width 100% */
-.ie6 img {
-	width:100%;
-}
 
 /*
 	Dreamweaver Fluid Grid Properties
