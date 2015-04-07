@@ -56,6 +56,7 @@
 		{
 					resolution=0;
 		}
+							resolution=0;
 	
 	function clearTrip()
 	{
@@ -78,12 +79,13 @@
 		
 	}
 //vertical align options
-$(document).on('pageshow','#main', function(e,data){    
-   // $('#main-content').css('margin-top',($(window).height() - ( $(window).height()/18*3)  - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#main-content').outerHeight())/2);
+
+$(document).on('pageinit','#main', function(e,data){    
 
       $('#mainHeaders').css('width',($(window).width()/9*6));
 	$('#mainHeaders').css('height',($(window).height()/16*3));
 
+<<<<<<< HEAD
 	$('#main-content').css('width',($(window).height()/36*5*3));
 
 
@@ -105,7 +107,41 @@ $('#menu1button1').css('height',($(window).height()/18));
           pause: 3000
       });*/
 // adjust menu 1 buttons
+=======
 
+$('#main').css('background-image','url(resources/backgrounds/back0_'+resolution+'.png)')
+$('#menu1button1').attr('src','resources/buttons/tripplannerbutton_'+resolution+'.png');
+$('#menu1button2').attr('src','resources/buttons/settingsbutton_'+resolution+'.png');
+$('#menu1button3').attr('src','resources/buttons/helpbutton_'+resolution+'.png');
+$('#backMain').attr('src','resources/buttons/backarrow_'+resolution+'.png');
+//$('#fish10').css('background-image','url(resources/characters/aquarium/animated/fish1_1.png)');
+});
+
+
+$(document).on('pageshow','#main', function(e,data){    
+      $('#mainHeaders').css('width',($(window).width()/9*6));
+	$('#mainHeaders').css('height',($(window).height()/16*3));
+
+>>>>>>> origin/master
+
+$('#main').css('background-image','url(resources/backgrounds/back0_'+resolution+'.png)')
+$('#menu1button1').attr('src','resources/buttons/tripplannerbutton_'+resolution+'.png');
+$('#menu1button2').attr('src','resources/buttons/settingsbutton_'+resolution+'.png');
+$('#menu1button3').attr('src','resources/buttons/helpbutton_'+resolution+'.png');
+$('#backMain').attr('src','resources/buttons/backarrow_'+resolution+'.png');
+$('#fish10').css('background-image','url(resources/characters/aquarium/animated/fish1_1.png)');
+$('#fish10')
+			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
+			.flyToTap()
+			.spRandom({
+          top: 70,
+          left: 100,
+          right: 200,
+          bottom: 340,
+          speed: 4000,
+          pause: 3000
+      });
+	
 if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 {
 	$('#backMain').css('visibility','visible');	
@@ -116,11 +152,8 @@ else
 	 $('#menu1button1').css('visibility','visible');
 		$('#backMain').css('visibility','hidden');	
 }
-$('#backMain').css('width',($(window).width()/9*2));
-	$('#backMain').css('height',($(window).height()/16*1.5));
-
-
 });
+
 $(document).on('pageshow','#settings', function(e,data){    
       $('#settingsHeader').css('width',($(window).width()/9*6));
 	$('#settingsHeader').css('height',($(window).height()/16*3));
