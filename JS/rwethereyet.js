@@ -78,23 +78,21 @@
 		
 	}
 //vertical align options
-$(document).on('pageshow','#main', function(e,data){    
-   // $('#main-content').css('margin-top',($(window).height() - ( $(window).height()/18*3)  - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#main-content').outerHeight())/2);
+
+$(document).on('pageinit','#main', function(e,data){    
 
       $('#mainHeaders').css('width',($(window).width()/9*6));
 	$('#mainHeaders').css('height',($(window).height()/16*3));
 
-	// $('#main-content').css('width',($(window).height()/36*5*3));
-	//	$('#menu1button1').css('width',($(window).width()/2));
 
-//	    $('#menu1button2').css('height',($(window).height()/18));
-//		    $('#menu1button3').css('height',($(window).height()/18));
+$('#main').css('background-image','url(resources/backgrounds/back0_'+resolution+'.png)')
+$('#menu1button1').attr('src','resources/buttons/tripplannerbutton_'+resolution+'.png');
+$('#menu1button2').attr('src','resources/buttons/settingsbutton_'+resolution+'.png');
+$('#menu1button3').attr('src','resources/buttons/helpbutton_'+resolution+'.png');
+$('#backMain').attr('src','resources/buttons/backarrow_'+resolution+'.png');
+});
 
-	  //  $('#menu1button2').css('height',26);
-		//    $('#menu1button3').css('width',100);
- 
-// adjust menu 1 buttons
-
+$(document).on('pageshow','#main', function(e,data){    
 if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 {
 	$('#backMain').css('visibility','visible');	
@@ -105,9 +103,8 @@ else
 	 $('#menu1button1').css('visibility','visible');
 		$('#backMain').css('visibility','hidden');	
 }
-
-
 });
+
 $(document).on('pageshow','#settings', function(e,data){    
       $('#settingsHeader').css('width',($(window).width()/9*6));
 	$('#settingsHeader').css('height',($(window).height()/16*3));
