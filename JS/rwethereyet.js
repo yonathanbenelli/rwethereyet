@@ -950,6 +950,17 @@ $(document).on('pageshow','#aquarium', function(e,data){
 
 	$('#aquarium-content').css('width',($(window).height()/36*5*3));
 
+$('#fish1')
+			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
+			.flyToTap()
+			.spRandom({
+          top: 70,
+          left: 100,
+          right: 200,
+          bottom: 340,
+          speed: 4000,
+          pause: 3000
+      });
 $('#fish')
 			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
 			.flyToTap()
