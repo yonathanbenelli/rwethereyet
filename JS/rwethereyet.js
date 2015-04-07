@@ -947,6 +947,9 @@ $('#backCharacterArrow').css('width',($(window).width()/9*2));
 
 
 $(document).on('pageshow','#aquarium', function(e,data){ 
+
+	$('#aquarium-content').css('width',($(window).height()/36*5*3));
+
 /*$('#fish')
 			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
 			.flyToTap()
