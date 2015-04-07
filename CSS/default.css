@@ -528,19 +528,11 @@ background-repeat:no-repeat;
 .menu
 {
 	background-repeat:no-repeat;
-	background-size:contain;
+	background-size:100% 100% ;
 	padding: 0px !important;
    background-color: transparent !important;
   border: none;
  
--webkit-background-size: 100% 100%; 
-    -moz-background-size: 100% 100%; 
-    -o-background-size: 100% 100%; 
-    background-size: 100% 100%; 
- /*   -webkit-background-size: cover; 
-    -moz-background-size: cover; 
-    -o-background-size: cover; 
-    background-size: cover;*/
 }
 
 
