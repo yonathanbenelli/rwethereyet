@@ -96,7 +96,17 @@ $('#backMain').attr('src','resources/buttons/backarrow_'+resolution+'.png');
 
 
 $(document).on('pageshow','#main', function(e,data){    
-/*$('#fish11')
+      $('#mainHeaders').css('width',($(window).width()/9*6));
+	$('#mainHeaders').css('height',($(window).height()/16*3));
+
+
+$('#main').css('background-image','url(resources/backgrounds/back0_'+resolution+'.png)')
+$('#menu1button1').attr('src','resources/buttons/tripplannerbutton_'+resolution+'.png');
+$('#menu1button2').attr('src','resources/buttons/settingsbutton_'+resolution+'.png');
+$('#menu1button3').attr('src','resources/buttons/helpbutton_'+resolution+'.png');
+$('#backMain').attr('src','resources/buttons/backarrow_'+resolution+'.png');
+$('#fish10').css('background-image','url(resources/characters/aquarium/animated/fish1_1.png)');
+$('#fish10')
 			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
 			.flyToTap()
 			.spRandom({
@@ -107,7 +117,7 @@ $(document).on('pageshow','#main', function(e,data){
           speed: 4000,
           pause: 3000
       });
-	*/  
+	
 if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 {
 	$('#backMain').css('visibility','visible');	
