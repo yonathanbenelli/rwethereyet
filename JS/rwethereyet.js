@@ -80,7 +80,7 @@
 //vertical align options
 $(document).on('pageshow','#main', function(e,data){    
    // $('#main-content').css('margin-top',($(window).height() - ( $(window).height()/18*3)  - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#main-content').outerHeight())/2);
-      $('#mainHeaders').html($(window).width()+" "+$(window).height()+" "+ +" "+  $(document).width()+" " + $(document).height());
+      $('#mainHeaders').html($(window).width()+" "+$(window).height());
       $('#mainHeaders').css('width',($(window).width()/9*6));
 	$('#mainHeaders').css('height',($(window).height()/16*3));
 
