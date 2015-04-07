@@ -527,8 +527,10 @@ background-repeat:no-repeat;
 }
 .menu
 {
+-webkit-background-size:100% 100%;
+-webkit-background-repeat:no-repeat;
 	background-repeat:no-repeat;
-	background-size:100% 100% ;
+	background-size:100% 100%;
 	padding: 0px !important;
    background-color: transparent !important;
   border: none;
