@@ -455,7 +455,7 @@ position:relative;
 display:block;
 }
 
-
+/*
 .defaultback
 {
 	background-repeat:no-repeat;
@@ -465,7 +465,7 @@ display:block;
 position:relative;
 display:block;
 }
-
+*/
 .defaultSetScene
 {
 	background-repeat:no-repeat;
@@ -517,16 +517,6 @@ background-repeat:no-repeat;
 	background-color:transparent !important;
 	border-color:transparent !important;
 	  left: 0px !important;
-}
-.menu
-{
-	-webkit-background-size:cover;
-	background-repeat:no-repeat;
-	background-size:cover;
-	padding: 0px !important;
-   background-color: transparent !important;
-  border: none;
- 
 }
 
 
@@ -646,9 +636,52 @@ position: absolute;
     display: none;
 }
 
+
+/* Tablet Layout:  320px. */
+
+
+#backMain
+{
+	content:url(../resources/buttons/backarrow_0.png)
+}
+.menu
+{
+	background-image:url(../resources/backgrounds/0.png);
+	-webkit-background-size:cover;
+	background-repeat:no-repeat;
+	background-size:cover;
+	padding: 0px !important;
+   	background-color: transparent !important;
+    border: none;
+}
+#menu1button1
+{
+content:url(../resources/buttons/tripplannerbutton_0.png);
+}
+
+#menu1button2
+{
+content:url(../resources/buttons/settingsbutton_0.png);
+}
+#menu1button3
+{
+content:url(../resources/buttons/helpbutton_0.png);
+}
+/* Tablet Layout: 321px to 480px. Inherits styles from: Mobile Layout. */
+
+@media only screen and (min-width: 321px) {
+#menu1button1
+{
+		content:url(../resources/buttons/tripplannerbutton_0.png);
+}
+}
 /* Tablet Layout: 481px to 768px. Inherits styles from: Mobile Layout. */
 
 @media only screen and (min-width: 481px) {
+#menu1button1
+{
+	content:url(../resources/buttons/tripplannerbutton_0.png);
+}
 
 .gridContainer {
 	width: 90.675%;

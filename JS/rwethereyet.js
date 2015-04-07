@@ -105,8 +105,6 @@ else
 	 $('#menu1button1').css('visibility','visible');
 		$('#backMain').css('visibility','hidden');	
 }
-$('#backMain').css('width',($(window).width()/9*2));
-	$('#backMain').css('height',($(window).height()/16*1.5));
 
 
 });

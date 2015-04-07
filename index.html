@@ -30,20 +30,20 @@
 </head>
 
 <body>
-<div data-role="page" id="main" class="menu" style="background-image:url(resources/backgrounds/0.png);">
+<div data-role="page" id="main" class="menu">
 <div  id="mainHeaders" style="font-size:5em">
 
   </div>
 
   <div data-role="content"  id="main-content">
-    				<img id="menu1button1" src="resources/buttons/tripplannerbutton_0.png" onClick="$.mobile.changePage('#tripPlanner');"/>
-    				<img id="menu1button2" src="resources/buttons/settingsbutton_0.png" onClick="$.mobile.changePage('#settings');"/>
-    				<img id="menu1button3" src="resources/buttons/helpbutton_0.png" onClick="$.mobile.changePage('#help');"/>
+    				<img id="menu1button1"  onClick="$.mobile.changePage('#tripPlanner');"/>
+    				<img id="menu1button2" onClick="$.mobile.changePage('#settings');"/>
+    				<img id="menu1button3"  onClick="$.mobile.changePage('#help');"/>
   </div>
       <div data-role="footer" class="footer" >
             
-    	<a href="#character"  id="backMain" class="defaultback" style="background-image:url(resources/buttons/backarrow.png)"></a>
-
+            		<img id="backMain"  onClick="$.mobile.changePage('#character');"/>
+    
 	 </div>
 
 </div>
