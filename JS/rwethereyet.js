@@ -56,6 +56,7 @@
 		{
 					resolution=0;
 		}
+							resolution=0;
 	
 	function clearTrip()
 	{
