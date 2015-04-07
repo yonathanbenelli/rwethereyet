@@ -91,10 +91,12 @@ $('#menu1button1').attr('src','resources/buttons/tripplannerbutton_'+resolution+
 $('#menu1button2').attr('src','resources/buttons/settingsbutton_'+resolution+'.png');
 $('#menu1button3').attr('src','resources/buttons/helpbutton_'+resolution+'.png');
 $('#backMain').attr('src','resources/buttons/backarrow_'+resolution+'.png');
+$('#fish10').css('background-image','url(resources/characters/aquarium/animated/fish1_1.png)');
 });
 
+
 $(document).on('pageshow','#main', function(e,data){    
-$('#fish')
+/*$('#fish')
 			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
 			.flyToTap()
 			.spRandom({
@@ -105,6 +107,7 @@ $('#fish')
           speed: 4000,
           pause: 3000
       });
+	  */
 if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 {
 	$('#backMain').css('visibility','visible');	
