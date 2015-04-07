@@ -947,7 +947,7 @@ $('#backCharacterArrow').css('width',($(window).width()/9*2));
 
 
 $(document).on('pageshow','#aquarium', function(e,data){ 
-$('#fish')
+/*$('#fish')
 			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
 			.flyToTap()
 			.spRandom({
@@ -957,7 +957,7 @@ $('#fish')
           bottom: 340,
           speed: 4000,
           pause: 3000
-      });
+      });*/
 //$('#waterLevel').sprite({fps: 4, no_of_frames:6}).activeOnClick().active();
 	if(setTrip==0)
 	{
