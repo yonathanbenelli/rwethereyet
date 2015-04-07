@@ -527,11 +527,14 @@ background-repeat:no-repeat;
 }
 .menu
 {
+  
     background-position:center center;
-	
 	background-size:100% 100%;
 	width:100%;	
-
+-webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
 }
 
 
