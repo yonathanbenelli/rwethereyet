@@ -292,7 +292,7 @@ background-repeat:no-repeat;
 }
 .fish1
 {
-	
+	position:absolute;
 	top:50px;
 	left:50px;
 	width:72px;
