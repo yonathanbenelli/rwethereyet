@@ -124,6 +124,8 @@ $(document).ready(function() {
 	setPagesDimensions($(window).width(),$(window).height());
 	$('#main').css('visibility','visible');
 });
+
+
 //vertical align options
 $(document).on('pageshow','#main', function(e,data){    
    // $('#main-content').css('margin-top',($(window).height() - ( $(window).height()/18*3)  - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#main-content').outerHeight())/2);
