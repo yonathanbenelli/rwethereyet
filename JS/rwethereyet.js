@@ -127,16 +127,13 @@ $(document).ready(function() {
 	//setPagesDimensions($(window).width(),$(window).height());
 	//$('#main').css('visibility','visible');
 		$('#fish1')
-			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
-			.flyToTap()
-			.spRandom({
-          top: 70,
-          left: 100,
-          right: 200,
-          bottom: 340,
-          speed: 4000,
-          pause: 3000
-      });
+
+					.sprite({fps: 9, no_of_frames: 3})
+					.spRandom({top: 50, bottom: 200, left: 300, right: 320})
+					.isDraggable()
+					.activeOnClick()
+					.active();
+
 			});
 		})(jQuery);
 

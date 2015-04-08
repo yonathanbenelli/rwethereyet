@@ -23,10 +23,12 @@ body {
 
 .fishs
 {
-	position:absolute;
-	top:50px;
-	left:50px;
-	width:72px;
-	height:58px;
-	z-index: 2000;
+	
+			position: absolute;
+			top: 150px;
+			left: 65px;
+			width: 180px;
+			height: 123px;
+			z-index: 2000;
+			cursor: pointer;
 }
