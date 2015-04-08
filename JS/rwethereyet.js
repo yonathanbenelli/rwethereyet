@@ -81,7 +81,7 @@
 
 function onAquariumShow()
 {
-	$('#fish2')
+	$('#fish1')
 			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
 			.flyToTap()
 			.spRandom({
@@ -122,7 +122,7 @@ function setPagesDimensions(width,height)
 $(document).ready(function() {
 
 	setPagesDimensions($(window).width(),$(window).height());
-	$('#main').css('visibility','visible');
+	//$('#main').css('visibility','visible');
 		$('#fish1')
 			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
 			.flyToTap()
