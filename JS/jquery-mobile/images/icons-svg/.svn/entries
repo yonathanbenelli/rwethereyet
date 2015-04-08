@@ -1,728 +1,0 @@
-10
-
-dir
-0
-https://github.com:443/yonathanbenelli/rwethereyet.git/JS/jquery-mobile/images/icons-svg
-https://github.com:443/yonathanbenelli/rwethereyet.git
-add
-
-
-
-
-
-has-props
-has-prop-mods
-
-
-
-
-
-
-
-
-
-
-
-
-3c04fffb-76ff-e3b2-9574-ce57b7db7bff
-
-location-black.svg
-file
-
-
-
-add
-
-search-white.svg
-file
-
-
-
-add
-
-alert-white.svg
-file
-
-
-
-add
-
-tag-black.svg
-file
-
-
-
-add
-
-phone-white.svg
-file
-
-
-
-add
-
-gear-black.svg
-file
-
-
-
-add
-
-bullets-white.svg
-file
-
-
-
-add
-
-check-white.svg
-file
-
-
-
-add
-
-eye-black.svg
-file
-
-
-
-add
-
-plus-black.svg
-file
-
-
-
-add
-
-grid-black.svg
-file
-
-
-
-add
-
-mail-white.svg
-file
-
-
-
-add
-
-recycle-black.svg
-file
-
-
-
-add
-
-bars-black.svg
-file
-
-
-
-add
-
-camera-black.svg
-file
-
-
-
-add
-
-edit-white.svg
-file
-
-
-
-add
-
-forbidden-black.svg
-file
-
-
-
-add
-
-power-black.svg
-file
-
-
-
-add
-
-clock-white.svg
-file
-
-
-
-add
-
-navigation-black.svg
-file
-
-
-
-add
-
-minus-white.svg
-file
-
-
-
-add
-
-delete-black.svg
-file
-
-
-
-add
-
-refresh-white.svg
-file
-
-
-
-add
-
-heart-black.svg
-file
-
-
-
-add
-
-back-white.svg
-file
-
-
-
-add
-
-comment-white.svg
-file
-
-
-
-add
-
-arrow-d-l-white.svg
-file
-
-
-
-add
-
-forward-white.svg
-file
-
-
-
-add
-
-calendar-black.svg
-file
-
-
-
-add
-
-star-black.svg
-file
-
-
-
-add
-
-cloud-white.svg
-file
-
-
-
-add
-
-carat-d-black.svg
-file
-
-
-
-add
-
-shop-white.svg
-file
-
-
-
-add
-
-arrow-d-r-white.svg
-file
-
-
-
-add
-
-arrow-d-white.svg
-file
-
-
-
-add
-
-action-white.svg
-file
-
-
-
-add
-
-user-white.svg
-file
-
-
-
-add
-
-carat-l-black.svg
-file
-
-
-
-add
-
-arrow-l-white.svg
-file
-
-
-
-add
-
-lock-black.svg
-file
-
-
-
-add
-
-arrow-u-l-white.svg
-file
-
-
-
-add
-
-carat-r-black.svg
-file
-
-
-
-add
-
-home-white.svg
-file
-
-
-
-add
-
-arrow-u-black.svg
-file
-
-
-
-add
-
-arrow-r-white.svg
-file
-
-
-
-add
-
-info-white.svg
-file
-
-
-
-add
-
-arrow-u-r-white.svg
-file
-
-
-
-add
-
-carat-u-white.svg
-file
-
-
-
-add
-
-audio-black.svg
-file
-
-
-
-add
-
-search-black.svg
-file
-
-
-
-add
-
-alert-black.svg
-file
-
-
-
-add
-
-phone-black.svg
-file
-
-
-
-add
-
-video-white.svg
-file
-
-
-
-add
-
-bullets-black.svg
-file
-
-
-
-add
-
-location-white.svg
-file
-
-
-
-add
-
-check-black.svg
-file
-
-
-
-add
-
-tag-white.svg
-file
-
-
-
-add
-
-gear-white.svg
-file
-
-
-
-add
-
-mail-black.svg
-file
-
-
-
-add
-
-edit-black.svg
-file
-
-
-
-add
-
-eye-white.svg
-file
-
-
-
-add
-
-plus-white.svg
-file
-
-
-
-add
-
-grid-white.svg
-file
-
-
-
-add
-
-recycle-white.svg
-file
-
-
-
-add
-
-clock-black.svg
-file
-
-
-
-add
-
-bars-white.svg
-file
-
-
-
-add
-
-minus-black.svg
-file
-
-
-
-add
-
-camera-white.svg
-file
-
-
-
-add
-
-refresh-black.svg
-file
-
-
-
-add
-
-back-black.svg
-file
-
-
-
-add
-
-forbidden-white.svg
-file
-
-
-
-add
-
-power-white.svg
-file
-
-
-
-add
-
-comment-black.svg
-file
-
-
-
-add
-
-navigation-white.svg
-file
-
-
-
-add
-
-arrow-d-l-black.svg
-file
-
-
-
-add
-
-forward-black.svg
-file
-
-
-
-add
-
-delete-white.svg
-file
-
-
-
-add
-
-cloud-black.svg
-file
-
-
-
-add
-
-heart-white.svg
-file
-
-
-
-add
-
-shop-black.svg
-file
-
-
-
-add
-
-arrow-d-r-black.svg
-file
-
-
-
-add
-
-arrow-d-black.svg
-file
-
-
-
-add
-
-action-black.svg
-file
-
-
-
-add
-
-calendar-white.svg
-file
-
-
-
-add
-
-star-white.svg
-file
-
-
-
-add
-
-user-black.svg
-file
-
-
-
-add
-
-carat-d-white.svg
-file
-
-
-
-add
-
-arrow-l-black.svg
-file
-
-
-
-add
-
-arrow-u-l-black.svg
-file
-
-
-
-add
-
-carat-l-white.svg
-file
-
-
-
-add
-
-home-black.svg
-file
-
-
-
-add
-
-arrow-r-black.svg
-file
-
-
-
-add
-
-info-black.svg
-file
-
-
-
-add
-
-arrow-u-r-black.svg
-file
-
-
-
-add
-
-carat-u-black.svg
-file
-
-
-
-add
-
-lock-white.svg
-file
-
-
-
-add
-
-carat-r-white.svg
-file
-
-
-
-add
-
-arrow-u-white.svg
-file
-
-
-
-add
-
-audio-white.svg
-file
-
-
-
-add
-
-video-black.svg
-file
-
-
-
-add
-
