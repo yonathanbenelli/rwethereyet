@@ -115,7 +115,7 @@ $(divToSee).css('visibility','visible');
 function setPagesDimensions(width,height)
 {
 	$("body").find("div.page").css('width',width);
-		$("body").find("div.page").css('height',height);
+	$("body").find("div.page").css('height',height);
 
 }
 
