@@ -19,6 +19,13 @@ body {
 #content {
 	margin-right: 250px;
 }
+
+.main
+{
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .menu1buttons
 {
 
@@ -593,11 +600,7 @@ position: absolute;
 	margin-right: auto;
   margin-left: auto;
 }
-.main
-{
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+
 #setCharacter-content
 {
 		margin-right: auto;
