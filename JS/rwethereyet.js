@@ -120,20 +120,3 @@ function setPagesDimensions(width,height)
 
 }
 */
-(function($) {
-			
-$(document).ready(function() {
-
-	//setPagesDimensions($(window).width(),$(window).height());
-	//$('#main').css('visibility','visible');
-		$('#fish1')
-
-					.sprite({fps: 9, no_of_frames: 3})
-					.spRandom({top: 50, bottom: 200, left: 300, right: 320})
-					.isDraggable()
-					.activeOnClick()
-					.active();
-
-			});
-		})(jQuery);
-
