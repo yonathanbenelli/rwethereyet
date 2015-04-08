@@ -4,6 +4,12 @@
    http://www.alistapart.com/articles/fluid-images/ 
 */
 
+#container  {
+	min-width:900px;
+	padding-top:359px;
+	position:relative;
+	width:100%;
+}
 .page
 {
 
@@ -319,6 +325,7 @@ background-repeat:no-repeat;
 	left:50px;
 	width:72px;
 	height:58px;
+	z-index: 2000;
 }
 .fish2
 {
