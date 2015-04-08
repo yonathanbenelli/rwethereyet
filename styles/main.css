@@ -19,35 +19,594 @@ body {
 #content {
 	margin-right: 250px;
 }
-#button1
+.menu1buttons
 {
-	background-size: 100% 100%;
-  background: transparent url(../resources/buttons/helpbutton.png) 0 0 no-repeat;
-  position: absolute;
-  top: 50px;
-  /* left: 50px; */
+
+	
+background-repeat:no-repeat;
+  background-size:contain;
+   background-color: transparent !important;
+  border: none;
+}
+.map_canvas_character
+{
+	width: 80%;
+  margin-left: 10%;
+   margin-top: 15%;
+  height: 70%;
+}
+.resetTripYes
+{
+	background-repeat:no-repeat;
+	background-size:contain;
+	padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+    height: 20%;
+	  width: 25%;
+}
+.resetTripNo
+{	background-repeat:no-repeat;
+	background-size:contain;
+	padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+    height: 20%;
+	  width: 20%;
+}
+
+.resetTripTable
+{
+	width:80%;
+	height:80%;
+	
+}
+.resetTrip
+{
+	background-repeat:no-repeat;
+	background-size:contain;
+	padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+	  border: none;
+
+		position:absolute;
+	visibility:hidden;
+height: 50%;
   width: 80%;
-  height: 20%;
+  margin-left: 10%;
+  margin-top: 20%;
+  z-index: 2000;
+}
+.positionLeftCharacter
+{
+	position:absolute;
+	visibility:hidden;
+height: 50%;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 10%;
+  z-index: 2000;
 
 }
-#button2
+.borderMapCharacter
 {
-	background: transparent url(../resources/buttons/helpbutton.png) 0 0 no-repeat;
-	position: absolute;
+		position:absolute;
+	background-repeat:no-repeat;
+	background-size:contain;
+	padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+	  border: none;
+  height: 100%;
+  width: 100%;
+
+  top: 0%;
+  z-index: 2001;
+
+}
+.timeLeftCharacter
+{
+	position:absolute;
+	visibility:hidden;
+	height:20%;
+		width:80%;
+	margin-top:85%;
+	margin-left:20%;
+
+	
+}
+
+.hoursTimeLeftNumD
+{
+	width:15%;
+	height:33%;
+	background-repeat:no-repeat;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+}
+.leftTxt
+{
+	margin-left:20%;
+	width:80%;
+	height:33%;
+	background-repeat:no-repeat;
+	background-size:contain;
+	padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+}
+.hoursTimeLeftTxt
+{
+	margin-left:20%;
+	width:80%;
+	height:33%;
+	background-repeat:no-repeat;
+	background-size:contain;
+	padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+}
+.minutesTimeLeftTxt
+{
+	margin-left:20%;
+	width:80%;
+	height:33%;
+	background-repeat:no-repeat;
+	background-size:contain;
+	padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+}
+
+.minutesTimeLeftNumD
+{
+	width:15%;
+	height:33%;
+	
+	background-repeat:no-repeat;
+    padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+
+}
+.minutesTimeLeftNumC
+{
+	width:15%;
+	height:33%;
+	
+background-repeat:no-repeat;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+
+}
+
+.buttonMenuJungle1
+{
+	margin-left:1%;
+	position:absolute;
+	  height: 100%;
+  	width: 24%;
+	background-repeat:no-repeat;
+  background-size:contain;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;  
+}
+.buttonMenuJungle2
+{
+		margin-left:26%;
+	position:absolute;
+	  height: 100%;
+  	width: 24%;
+	background-repeat:no-repeat;
+  background-size:contain;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;  
+}
+.buttonMenuJungle3
+{
+		margin-left:51%;
+	position:absolute;
+	  height: 100%;
+  	width: 24%;
+	background-repeat:no-repeat;
+  background-size:contain;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;  
+}
+.buttonMenuJungle4
+{
+		margin-left:76%;
+	position:absolute;
+	  height: 100%;
+  	width: 24%;
+	background-repeat:no-repeat;
+  background-size:contain;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;  
+}
+
+.menuJungle
+{
+	position:fixed;
+	z-index:15000;
+	visibility:hidden;
+height:10%;
+width:80%;
+}
+.menuLeaf
+{
+	position:absolute;
+	  height: 8%;
+  width: 8%;
+  right: 0px;
+  top: 0px;
+	
+background-repeat:no-repeat;
+  background-size:contain;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+}
+.finishLeafs
+{
+	position:absolute;
+	height:100%;
+	width:100%;
+	overflow:hidden;
+	z-index:2500;
+	background-repeat:repeat-y;
+	background-size:cover;
+	visibility:hidden;
+	
+}
+.finishCharacter
+{
+	
+background-repeat:no-repeat;
+  background-size:contain;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+  z-index:3000;
+  height:60%;
+  width:100%;
+  position:absolute;
+  margin-top:20%;
+
+}
+.backCharacter
+{
+	position:absolute;
+	z-index:1000;
+		overflow:hidden;
+
+}
+.frontCharacter
+{
+	position:absolute;
+	overflow:hidden;
+	z-index:2000;
+	
+}
+
+.waterLevel
+{
+	position:absolute;
+	top:100px;
+	left:-320px;
+	width:960px;
+	height:43px;
+}
+.fish1
+{
+	position:absolute;
 	top:50px;
 	left:50px;
 	width:72px;
 	height:58px;
+}
+body{
+
+  scrollbar-base-color:#864217 ;
+  scrollbar-3dlight-color: #864217;
+  scrollbar-highlight-color: #864217;
+  scrollbar-track-color: #ffffff;
+  scrollbar-arrow-color: #864217;
+  scrollbar-shadow-color: #864217;
+  scrollbar-dark-shadow-color: #864217;
+}
+::-webkit-scrollbar { width: 3px; height: 3px;}
+::-webkit-scrollbar-button {  background-color: #864217; }
+::-webkit-scrollbar-track {  background-color: #666;}
+::-webkit-scrollbar-track-piece { background-color: #ffffff;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #864217; border-radius: 3px;}
+::-webkit-scrollbar-corner { background-color: #666;}
+::-webkit-resizer { background-color: #864217;}
+
+
+.ui-shadow {
+  -webkit-box-shadow: none;
 
 }
 
-#bird {
-			background: transparent url(../resources/characters/aquarium/animated/fish1_1.png) 0 0 no-repeat;
-			position: absolute;
-			top:50px;
-	left:50px;
-	width:72px;
-	height:58px;
-			z-index: 2000;
-			cursor: pointer;
-		}
+.rotatedLoading{
+-webkit-animation: rotate 2s linear infinite 0s;
+-moz-animation: rotateup 2s linear infinite 0s;
+  -o-animation: rotate 2s linear infinite 0s;
+  -ms-animation: rotate 2s linear infinite 0s;
+  animation: rotate 2s linear infinite 0s;
+ 
+
+}
+
+
+@-webkit-keyframes rotate {
+ from {
+    -webkit-transform: rotate(-360deg);
+  }
+  to {
+		-webkit-transform: rotateY(0deg);
+  }
+
+}
+
+@-moz-keyframes rotate {
+ from {
+     -moz-transform: rotate(-360deg);
+  }
+  to {
+     -moz-transform: rotate(0deg);
+  }
+
+}
+
+@-moz-keyframes rotateup {
+ from {
+     -moz-transform: rotate(-360deg);
+  }
+  to {
+     -moz-transform: rotate(0deg);
+  }
+   
+
+}
+
+
+
+@-o-keyframes rotate {
+ from {
+    -o-transform: rotate(-360deg);
+  }
+  to {
+    -o-transform: rotate(0deg);
+  }
+
+}
+@-ms-keyframes rotate {
+ from {
+    -ms-transform: rotate(-360deg);
+  }
+  to {
+    -ms-transform: rotateY(0deg);
+  }
+
+}
+
+
+.mapborder
+{
+
+background-repeat:no-repeat;
+  background-size:contain;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+
+}
+.hoursbuttons
+{
+
+background-repeat:no-repeat;
+  background-size:contain;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+
+}
+.minutesbuttons
+{
+
+background-repeat:no-repeat;
+  background-size:contain;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+
+}
+.tripbuttons
+{
+
+background-repeat:no-repeat;
+  background-size:contain;
+   background-color: transparent !important;
+  border: none;
+
+}
+
+.headersDiv
+{
+background-repeat:no-repeat;
+  background-size:contain;
+    background-color: transparent !important;
+  border: none !important;
+  position:relative;
+	
+}
+
+.defaulttripleafImg
+{
+background-repeat:no-repeat;
+  background-size:contain;
+    background-color: transparent !important;
+  border: none !important;
+	
+}
+
+.defaulttripoption
+{
+background-repeat:no-repeat;
+  background-size:contain;
+    background-color: transparent !important;
+  border: none !important;
+}
+
+.defaulttripleaf
+{
+	background-repeat:no-repeat;
+  	background-size:contain;
+	background-color: transparent !important;
+ 	border: none !important;
+position:relative;
+display:block;
+}
+
+
+.defaultback
+{
+	background-repeat:no-repeat;
+  	background-size:contain;
+	background-color: transparent !important;
+ 	border: none !important;
+position:relative;
+display:block;
+}
+.defaultSetScene
+{
+	background-repeat:no-repeat;
+  	background-size:contain;
+	background-color: transparent !important;
+ 	border: none !important;
+float:left;
+width:30%;
+height:20%;
+
+}
+.defaultnext
+{
+	background-repeat:no-repeat;
+  	background-size:contain;
+	background-color: transparent !important;
+ 	border: none !important;
+position:relative;
+display:block;
+float: right;
+
+}
+.onsound
+{
+
+background-repeat:no-repeat;
+  background-size:contain;
+    background-color: transparent !important;
+  border: none !important;
+}
+.offsound
+{
+background-repeat:no-repeat;
+  background-size:contain;
+    background-color: transparent !important;
+  border: none;
+}
+
+.labelsOption
+{
+
+background-repeat:no-repeat;
+  background-size:contain;
+    background-color: transparent !important;
+  border: none;
+}
+.footer
+{
+	background-color:transparent !important;
+	border-color:transparent !important;
+	border:none !important;
+	  left: 0px !important;
+
+
+}
+
+
+
+#loading-content
+{
+	
+	margin-right: auto;
+  margin-left: auto;
+  
+background-repeat:no-repeat;
+  background-size:contain;
+  padding: 0px !important;
+   background-color: transparent !important;
+  border: none;
+}
+
+#character-content
+{
+	padding:0;
+position: absolute;
+		margin-right: auto;
+  margin-left: auto;
+  overflow:hidden;
+
+}
+#dist-content
+{
+	
+	margin-right: auto;
+  margin-left: auto;
+  overflow:hidden;
+}
+#time-content
+{
+	
+	margin-right: auto;
+  margin-left: auto;
+}
+#settings-content
+{
+	
+	margin-right: auto;
+  margin-left: auto;
+}
+#main-content
+{
+	text-align:center;
+	
+	margin-right: auto;
+  margin-left: auto;
+}
+.main
+{
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#setCharacter-content
+{
+		margin-right: auto;
+  margin-left: auto;
+    padding-right: 0;
+}
+#tripPlanner-content
+{
+	
+	margin-right: auto;
+  margin-left: auto;
+}
