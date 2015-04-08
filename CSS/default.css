@@ -3,13 +3,34 @@
    Note: Fluid media requires that you remove the media's height and width attributes from the HTML
    http://www.alistapart.com/articles/fluid-images/ 
 */
-[data-role=page]{height: 100% !important; position:relative !important;}
-[data-role=footer]{bottom:0; position:absolute !important; top: auto !important; width:100%;} 
+
+.page
+{
+	visibility:hidden;
+	background-repeat:no-repeat;
+	background-size:cover;
+	position:absolute;
+}
+
+
+.content
+{
+		position:relative;
+	top:15%;
+	margin-right: auto;
+    margin-left: auto;
+	height:70%;
+	width:80%;
+}
+#menu1button1
+{
+	position:absolute;
+	width:50%;
+	height:20%;
+}
 .menu1buttons
 {
-
-	
-background-repeat:no-repeat;
+	background-repeat:no-repeat;
   background-size:contain;
    background-color: transparent !important;
   border: none;
@@ -292,14 +313,15 @@ background-repeat:no-repeat;
 }
 .fish1
 {
-	position:absolute;
+	position:relative;
 	top:50px;
 	left:50px;
 	width:72px;
 	height:58px;
 }
 body{
-
+	margin: 0 0 0 0;
+	overflow:hidden;
   scrollbar-base-color:#864217 ;
   scrollbar-3dlight-color: #864217;
   scrollbar-highlight-color: #864217;
@@ -570,13 +592,7 @@ position: absolute;
 	margin-right: auto;
   margin-left: auto;
 }
-#main-content
-{
-	text-align:center;
-	
-	margin-right: auto;
-  margin-left: auto;
-}
+
 
 
 
@@ -654,20 +670,7 @@ img, object, embed, video {
 
 
 /* Tablet Layout:  320px. */
-.menu
-{
-	
-	/*
-	background-repeat:no-repeat;
-	background-size:100% 100%;
-	padding: 0px !important;
-   	background-color: transparent !important;
-    border: none;*/
-	background-position:center center;
-	
-	background-size:100% 100%;
-	width:100%;
-}
+
 /* Tablet Layout: 481px to 768px. Inherits styles from: Mobile Layout. */
 
 @media only screen and (min-width: 481px) {

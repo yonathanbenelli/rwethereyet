@@ -1,5 +1,5 @@
 // JavaScript Document
-	var	sound=true;
+			var	sound=true;
 			var defaultTrip=0;
 			var hourpos=0;
 			var minute1pos=0;
@@ -77,10 +77,56 @@
 
 		
 	}
+	
+
+function onAquariumShow()
+{
+	$('#fish')
+			.sprite({fps: 4, no_of_frames:6}).activeOnClick().active()
+			.flyToTap()
+			.spRandom({
+          top: 70,
+          left: 100,
+          right: 200,
+          bottom: 340,
+          speed: 4000,
+          pause: 3000
+      });
+	  console.log('hehe');
+}
+
+function onShowPages(divShow)	
+{
+	switch (divShow)
+	{
+		case '#aquarium':
+				onAquariumShow();
+		break;
+	}
+}
+function showPage(divToSee)
+{
+$("body").find("div.page").css('visibility','hidden');
+onShowPages(divToSee);
+$(divToSee).css('visibility','visible');
+
+}
+
+function setPagesDimensions(width,height)
+{
+	$("body").find("div.page").css('width',width);
+		$("body").find("div.page").css('height',height);
+
+}
+
+$(function() {
+	setPagesDimensions($(window).width(),$(window).height());
+	$('#main').css('visibility','visible');
+});
 //vertical align options
 $(document).on('pageshow','#main', function(e,data){    
    // $('#main-content').css('margin-top',($(window).height() - ( $(window).height()/18*3)  - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#main-content').outerHeight())/2);
-
+console.log('ssss');
       $('#mainHeaders').css('width',($(window).width()/9*6));
 	$('#mainHeaders').css('height',($(window).height()/16*3));
 
