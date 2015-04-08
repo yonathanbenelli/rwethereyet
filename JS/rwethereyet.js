@@ -119,7 +119,8 @@ function setPagesDimensions(width,height)
 
 }
 
-$(function() {
+$(document).ready(function() {
+
 	setPagesDimensions($(window).width(),$(window).height());
 	$('#main').css('visibility','visible');
 });
