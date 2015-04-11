@@ -1,4 +1,3 @@
-
 /*	(function($) {
 			$(document).ready(function() {
 			
@@ -13,3 +12,112 @@
 			});
 		})(jQuery);
 	*/
+	var	sound=true;
+			var defaultTrip=0;
+			var hourpos=0;
+			var minute1pos=0;
+			var speedSwipeMap=0.5;
+			var minute2pos=0;
+			var zoomLevel=10;
+		var zoomLevelD=10;
+			var updateFreqMilis=3000;
+/// init google maps 
+/*			var defaultLatLng = new google.maps.LatLng(45.2501566,-75.8002568);
+			 var optionsCharacterMap = {
+            	zoom: zoomLevel,
+            center: defaultLatLng,
+			disableDefaultUI:true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+		*/
+        var map;
+        var mapDest;
+		
+        // Add an overlay to the map of current lat/lng
+        var marker;
+
+		var from;
+		var distanceLeft=-1;
+		var distanceFull=-1;
+		var currentPosition;
+		var setTrip=defaultTrip;
+		var destPosition;
+		var intervalDist;
+		var intervalTime;
+		var levelPos=-1;
+		var timeLeft=-1;
+		var timeFull=-1;
+		var doubleTapSpeed=500;
+		var timeNow=0;
+		var intervalRot;
+		var setScene=0;
+		var resolution;
+		var frontCharacterTop=0;
+		var characterContentHeight=0;
+		if ($(window).width()>960)
+		{
+			resolution=3;
+		}
+		else if($(window).width()>690)
+		{
+				resolution=2;
+		}
+		else if($(window).width()>460)
+		{
+					resolution=1;
+		}		
+		else 
+		{
+					resolution=0;
+		}
+		resolution=0;
+	
+	
+function soundSetting()
+{
+	
+	if(sound==false)
+	{
+		sound=true;
+		$('#soundImage').css('background','transparent url(resources/buttons/soundonbutton.png) 0 0 no-repeat');		
+	}
+	else
+	{
+		sound=false;
+		
+		$('#soundImage').css('background','transparent url(resources/buttons/soundoffbutton.png) 0 0 no-repeat');
+	
+	}
+}
+
+function defaultTripTime()
+{
+
+	 defaultTrip=0;
+				$('#defaultTripLeaf1').css('visibility','visible');
+				$('#defaultTripLeaf2').css('visibility','hidden');
+				$('#defaultTripLeaf3').css('visibility','hidden');
+	
+}
+
+function defaultTripDist()
+{
+	
+	defaultTrip=1;
+				$('#defaultTripLeaf1').css('visibility','hidden');
+				$('#defaultTripLeaf2').css('visibility','visible');
+				$('#defaultTripLeaf3').css('visibility','hidden');
+
+	
+}
+
+function defaultTripNone()
+{
+	
+	defaultTrip=1;
+		
+				$('#defaultTripLeaf1').css('visibility','hidden');
+				$('#defaultTripLeaf2').css('visibility','hidden');
+				$('#defaultTripLeaf3').css('visibility','visible');
+	
+}

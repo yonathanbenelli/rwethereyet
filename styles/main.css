@@ -1,9 +1,10 @@
 [data-role=page]{height: 100% !important; position:relative !important; overflow:hidden !important}
 [data-role=header]{bottom: auto !important; width:100%; height:20% !important;} 
-[data-role=content]{bottom: auto !important; width:80%; height:65%;} 
+[data-role=content]{bottom: auto !important; width:80%; height:65%;text-align:center;margin-right: auto;margin-left: auto;} 
 [data-role=footer]{width:100%;!important; height:15%;!important;} 
 [data-role=buttonMenuMain]{  background-size:100% !important;  height: 15% !important; width: 80% !important;     margin-left: 10% !important;	}
-[data-role=buttonBack]{  background-size: 100% !important;  height: 100% !important; width: 15% !important;  	}
+
+[data-role=buttonBack]{   background: transparent url(../resources/buttons/backarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important;  	}
 
 img, object, embed, video {
 	max-width: 100%;
@@ -16,16 +17,8 @@ img, object, embed, video {
 	padding: 0;
 }
 
-#headerContentMain
-{
 
-  	  background: transparent url(../resources/labels/settingslabel.png) 0 0 no-repeat;
-  	  background-size: 100% 100%;
-	  height: 100%;
-  	  width: 80%;
-      margin-left: 10%;	
-}
-#pageMain
+.page
 {
 	  background: transparent url(../resources/backgrounds/back0_0.png) 0 0 no-repeat;
 	-webkit-background-size:cover;
@@ -33,20 +26,70 @@ img, object, embed, video {
 	background-size:cover;
 
 }
-
-#contentMain
+.headerContent
 {
+  	  
+  	  background-size: 100% 100% !important;
+	  height: 100%;
+  	  width: 80%;
+      margin-left: 10%;	
+}
+.defaultTripLeaf
+{
+	background-size:100% !important;  height: 100% !important; width: 12% !important; margin-left:5%;  
 
-	text-align:center;
-	margin-right: auto;
-	margin-left: auto;
+		background: transparent url(../resources/buttons/leafbutton1.png) 0 0 no-repeat;
+}
+#defaultTripLeafSeparator
+{
+	background-size:100% !important;  height: 18% !important; width: 10% !important;     margin-left: 15% !important;
 
+	
+}
+.containerDefaultTripLeaf
+{display: inline-block; width: 80%; height: 25%;}
+
+#defaultTripLeaf1
+{
+visibility:hidden;
+}
+#defaultTripLeaf2
+{
+visibility:hidden;
+}
+#defaultTripLeaf3
+{
+}
+#defaultTripOption
+{
+	background: transparent url(../resources/buttons/defulttrip.png) 0 0 no-repeat;
+ background-size:100% !important;  height: 40% !important; width: 80% !important;     margin-left: 10% !important;
 
 }
+#defaultTripOptionlabel
+{ background: transparent url(../resources/labels/defaulttripplannerlabel.png) 0 0 no-repeat;
 
+ background-size:100% !important;  height: 15% !important; width: 80% !important;     margin-left: 10% !important;
+ }
+#containerSound
+{display: inline-block; width: 80%; height: 20%;}
+#soundLabel
+{ background: transparent url(../resources/labels/soundlabel.png) 0 0 no-repeat;
+ background-size:100% !important;  height: 100% !important; width: 60% !important;  
+ float:left;}
+#soundImage
+{ background: transparent url(../resources/buttons/soundonbutton.png) 0 0 no-repeat;
+ background-size:100% !important;  height: 80% !important; width: 20% !important;
+  float:right;}
+#headerContentMain
+{ 	  background: transparent url(../resources/labels/settingslabel.png) 0 0 no-repeat;}
+#headerContentSettings
+{ background: transparent url(../resources/labels/settingslabel.png) 0 0 no-repeat;}
+#headerContentHelp
+{  	  background: transparent url(../resources/labels/helplabel.png) 0 0 no-repeat; }
+#headerContentTripPlanner
+{  	  background: transparent url(../resources/labels/tripplannerlabel.png) 0 0 no-repeat; }
 
-#backMain
-{  background: transparent url(../resources/buttons/backarrow.png) 0 0 no-repeat;}
 
 #buttonHelp
 {  background: transparent url(../resources/buttons/helpbutton.png) 0 0 no-repeat;}
@@ -56,7 +99,6 @@ img, object, embed, video {
 
 #buttonTripPlanner
 { 	  background: transparent url(../resources/buttons/tripplannerbutton.png) 0 0 no-repeat;}
-
 
 #bird {
 			background: transparent url(../resources/characters/aquarium/animated/fish1_1.png) 0 0 no-repeat;
