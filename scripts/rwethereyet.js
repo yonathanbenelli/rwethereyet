@@ -94,20 +94,14 @@ function defaultTripTime()
 {
 
 	 defaultTrip=0;
-				$('#defaultTripLeaf1').css('visibility','visible');
-				$('#defaultTripLeaf2').css('visibility','hidden');
-				$('#defaultTripLeaf3').css('visibility','hidden');
-	
+	 $('#defaultTripOption').css('background','transparent url(resources/buttons/defulttrip0.png) 0 0 no-repeat');
 }
 
 function defaultTripDist()
 {
 	
 	defaultTrip=1;
-				$('#defaultTripLeaf1').css('visibility','hidden');
-				$('#defaultTripLeaf2').css('visibility','visible');
-				$('#defaultTripLeaf3').css('visibility','hidden');
-
+	 $('#defaultTripOption').css('background','transparent url(resources/buttons/defulttrip1.png) 0 0 no-repeat');
 	
 }
 
@@ -115,9 +109,5 @@ function defaultTripNone()
 {
 	
 	defaultTrip=1;
-		
-				$('#defaultTripLeaf1').css('visibility','hidden');
-				$('#defaultTripLeaf2').css('visibility','hidden');
-				$('#defaultTripLeaf3').css('visibility','visible');
-	
+			 $('#defaultTripOption').css('background','transparent url(resources/buttons/defulttrip2.png) 0 0 no-repeat');
 }
