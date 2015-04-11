@@ -77,11 +77,12 @@ background-size:100% !important;  height: 15% !important; width: 80% !important;
 #soundLabel
 { background: transparent url(../resources/labels/soundlabel.png) 0 0 no-repeat;
  background-size:100% !important;  height: 100% !important; width: 60% !important;  
-
+float:left;
  }
 #soundImage
 { background: transparent url(../resources/buttons/soundonbutton.png) 0 0 no-repeat;
  background-size:100% !important;  height: 80% !important; width: 20% !important;
+ float:right;
 }
 #headerContentMain
 { 	  background: transparent url(../resources/labels/settingslabel.png) 0 0 no-repeat;}
