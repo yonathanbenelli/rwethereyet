@@ -18,16 +18,27 @@
 
 </head>
 <body>
-<div data-role="page" id="main">
+<div data-role="page" id="pageMain" >
+                    
+<div  id="headerMain" data-role="header"  >
+    <div  id="headerContentMain"  >  
+ 	 </div>
+  </div>
 
-<div data-role="content" id="container">
-	<a href="#main2" data-role="button" id="button1"></a>
-<div  id="button2"></div>
-	<div id="bird"></div>
-	
+  <div data-role="content"  id="contentMain">
+	  <div data-role="buttonMenuMain"  id="buttonSeparator"  ></div>
+    <div data-role="buttonMenuMain"  id="buttonTripPlanner"  onClick="$.mobile.changePage('#tripPlanner');"></div>
+    <div data-role="buttonMenuMain" id="buttonSettings"  onClick="$.mobile.changePage('#settings');"></div>
+   <div data-role="buttonMenuMain" id="buttonHelp"  onClick="$.mobile.changePage('#help');"></div>
+       
+  </div>
+        <div data-role="footer" id="footerMain" >
+			   <div data-role="buttonBack" id="backMain"  ></div>
+            	
+	 </div>
+      
 </div>
-</div>
-<div data-role="page" id="main2">
+<div data-role="page" id="tripPlanner">
 2
 </div>
 </body>

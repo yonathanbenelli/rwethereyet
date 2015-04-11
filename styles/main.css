@@ -1,8 +1,21 @@
+[data-role=page]{height: 100% !important; position:relative !important; overflow:hidden !important;}
+[data-role=header]{bottom: auto !important; width:100%; height:20% !important;} 
+[data-role=content]{bottom: auto !important; width:80%; height:65%;} 
+[data-role=footer]{width:100%;!important; height:15%;!important;} 
+[data-role=buttonMenuMain]{  background-size:100%!important;  height: 15%!important; width: 80%!important;     margin-left: 10%!important;	}
+[data-role=buttonBack]{  background-size: 100% !important;  height: 100% !important; width: 20% !important;  	}
+
+img, object, embed, video {
+	max-width: 100%;
+}
+
 * {
+	  	background-color: transparent !important;
+    border: none !important; 
 	margin: 0;
 	padding: 0;
 }
-body {
+/*body {
 	background: #FFF;
 	width: auto;
 	height: 100%;
@@ -10,36 +23,49 @@ body {
 	font-size: 15px;
 	color: #474747;
 	line-height: 1.6em;
-}
-#container  {
-	  position: absolute;
-  width: 100%;
-  height: 80%;
-}
-#content {
-	margin-right: 250px;
-}
-#button1
+}*/
+
+#headerContentMain
 {
-	background-size: 100% 100%;
-  background: transparent url(../resources/buttons/helpbutton.png) 0 0 no-repeat;
-  position: absolute;
-  top: 50px;
-  /* left: 50px; */
-  width: 80%;
-  height: 20%;
+
+  	  background: transparent url(../resources/labels/settingslabel.png) 0 0 no-repeat;
+  	  background-size: 100% 100%;
+	  height: 100%;
+  	  width: 80%;
+      margin-left: 10%;	
+}
+#pageMain
+{
+	  background: transparent url(../resources/backgrounds/back0_0.png) 0 0 no-repeat;
+	-webkit-background-size:cover;
+	background-repeat:no-repeat;
+	background-size:cover;
 
 }
-#button2
+
+#contentMain
 {
-	background: transparent url(../resources/buttons/helpbutton.png) 0 0 no-repeat;
-	position: absolute;
-	top:50px;
-	left:50px;
-	width:72px;
-	height:58px;
+
+	text-align:center;
+	margin-right: auto;
+	margin-left: auto;
+
 
 }
+
+
+#backMain
+{  background: transparent url(../resources/buttons/backArrow.png) 0 0 no-repeat;}
+
+#buttonHelp
+{  background: transparent url(../resources/buttons/helpbutton.png) 0 0 no-repeat;}
+
+#buttonSettings
+{  background: transparent url(../resources/buttons/settingsbutton.png) 0 0 no-repeat;}
+
+#buttonTripPlanner
+{ 	  background: transparent url(../resources/buttons/tripplannerbutton.png) 0 0 no-repeat;}
+
 
 #bird {
 			background: transparent url(../resources/characters/aquarium/animated/fish1_1.png) 0 0 no-repeat;

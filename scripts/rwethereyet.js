@@ -1,4 +1,5 @@
-	(function($) {
+
+/*	(function($) {
 			$(document).ready(function() {
 			
 				$('#bird')
@@ -11,4 +12,4 @@
 				
 			});
 		})(jQuery);
-	
+	*/
