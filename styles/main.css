@@ -1,4 +1,4 @@
-[data-role=page]{height: 100% !important; position:relative !important; overflow:hidden !important}
+[data-role=page]{height: 100% !important; position:relative !important; }
 [data-role=header]{bottom: auto !important; width:100%; height:20% !important;} 
 [data-role=content]{bottom: auto !important; width:80%; height:65%;text-align:center;margin-right: auto;margin-left: auto;} 
 [data-role=footer]{width:100%;!important; height:15%;!important;} 
@@ -72,7 +72,7 @@ background-size:100% !important;  height: 15% !important; width: 80% !important;
  }
  
 #containerSound
-{display: inline-block; width: 80%; height: 20%;}
+{ width: 80%; height: 20%;}
 
 #soundLabel
 { background: transparent url(../resources/labels/soundlabel.png) 0 0 no-repeat;
