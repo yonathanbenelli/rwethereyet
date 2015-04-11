@@ -27,7 +27,7 @@
 
   <div data-role="content"  id="contentMain">
 	  <div data-role="buttonMenuMain"  id="buttonSeparator"  ></div>
-    <div data-role="buttonMenuMain"  id="buttonTripPlanner"  onClick="$.mobile.changePage('#tripPlanner');"></div>
+    <div data-role="buttonMenuMain"  id="buttonTripPlanner"  onClick="$.mobile.changePage(goToTripPlanner());"></div>
     <div data-role="buttonMenuMain" id="buttonSettings"  onClick="$.mobile.changePage('#settings');"></div>
    <div data-role="buttonMenuMain" id="buttonHelp"  onClick="$.mobile.changePage('#help');"></div>
        
@@ -38,7 +38,40 @@
 	 </div>
       
 </div>
+<div data-role="page" id="tripPlanner" class="page" >
+               
+<div  id="headerTripPlanner" data-role="header"  >    <div  id="headerContentTripPlanner"  class="headerContent" >   	 </div>  </div>
 
+  <div data-role="content" id="contentTripPlanner">
+<div data-role="buttonMenuMain"  id="buttonSeparator"  ></div>
+  <div  id="buttonTime"  onClick="$.mobile.changePage('#byTime');"></div>
+    <div  id="buttonDistance"  onClick="$.mobile.changePage('#byDistance');"></div>
+  </div>
+    <div data-role="footer" id="footerTripPlanner" >
+			   <div data-role="buttonBack" id="backTripPlanner" onClick="$.mobile.changePage('#main');" ></div>
+ 	 </div>
+</div>
+
+<div data-role="page" id="byTime" class="page" >
+               
+<div  id="headerByTime" data-role="header"  >    <div  id="headerContentByTime"  class="headerContent" >   	 </div>  </div>
+  <div data-role="content" id="contentByTime">
+  </div>
+    <div data-role="footer" id="footerByTime" >
+			   <div data-role="buttonBack" id="backByTime" onClick="$.mobile.changePage(goToBackPlanner());" ></div>
+ 	 </div>
+
+</div>
+<div data-role="page" id="byDistance" class="page" >
+               
+<div  id="headerByDistance" data-role="header"  >    <div  id="headerContentByDistance"  class="headerContent" >   	 </div>  </div>
+  <div data-role="content" id="contentByDistance">
+  </div>
+    <div data-role="footer" id="footerByDistance" >
+			   <div data-role="buttonBack" id="backByDistance" onClick="$.mobile.changePage(goToBackPlanner());" ></div>
+ 	 </div>
+
+</div>
 <div data-role="page" id="settings" class="page" >
                
 <div  id="headerSetting" data-role="header"  >    <div  id="headerContentSettings"  class="headerContent" >   	 </div>  </div>

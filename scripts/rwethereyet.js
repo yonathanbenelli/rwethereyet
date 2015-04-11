@@ -72,7 +72,39 @@
 		}
 		resolution=0;
 	
-	
+function goToTripPlanner()
+{
+	if(defaultTrip==0)
+	{	
+		return '#byDistance';
+
+	}
+	else if(defaultTrip==1)
+	{
+				return '#byTime';
+	}
+	else
+	{
+				return '#tripPlanner';
+	}
+}
+function goToBackPlanner()
+{
+	if(defaultTrip==0)
+	{	
+		return '#main';
+
+	}
+	else if(defaultTrip==1)
+	{
+				return '#main';
+	}
+	else
+	{
+				return '#tripPlanner';
+	}
+}
+
 function soundSetting()
 {
 	
@@ -108,6 +140,6 @@ function defaultTripDist()
 function defaultTripNone()
 {
 	
-	defaultTrip=1;
+	defaultTrip=2;
 			 $('#defaultTripOption').css('background','transparent url(resources/buttons/defulttrip2.png) 0 0 no-repeat');
 }

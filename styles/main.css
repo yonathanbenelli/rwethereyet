@@ -3,7 +3,6 @@
 [data-role=content]{bottom: auto !important; width:80%; height:65%;text-align:center;margin-right: auto;margin-left: auto;} 
 [data-role=footer]{width:100%;!important; height:15%;!important;} 
 [data-role=buttonMenuMain]{  background-size:100% !important;  height: 15% !important; width: 80% !important;     margin-left: 10% !important;	}
-
 [data-role=buttonBack]{   background: transparent url(../resources/buttons/backarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important;  	}
 
 img, object, embed, video {
@@ -74,6 +73,7 @@ float:left;
  background-size:100% !important;  height: 80% !important; width: 20% !important;
  float:right;
 }
+
 #headerContentMain
 { 	  background: transparent url(../resources/labels/settingslabel.png) 0 0 no-repeat;}
 #headerContentSettings
@@ -82,6 +82,24 @@ float:left;
 {  	  background: transparent url(../resources/labels/helplabel.png) 0 0 no-repeat; }
 #headerContentTripPlanner
 {  	  background: transparent url(../resources/labels/tripplannerlabel.png) 0 0 no-repeat; }
+#headerContentByTime
+{  	  background: transparent url(../resources/labels/settriptimelabel.png) 0 0 no-repeat; }
+#headerContentByDistance
+{  	  background: transparent url(../resources/labels/settripdistancelabel.png) 0 0 no-repeat; }
+
+
+
+#buttonTime
+{  background: transparent url(../resources/buttons/bytime.png) 0 0 no-repeat;
+
+ background-size:100% !important;  height: 20% !important; width: 55% !important;     margin-left: 10% !important;	
+ }
+
+#buttonDistance
+{  background: transparent url(../resources/buttons/bydistance.png) 0 0 no-repeat;
+
+ background-size:100% !important;  height: 20% !important; width: 80% !important;     margin-left: 10% !important;	
+ }
 
 
 #buttonHelp
