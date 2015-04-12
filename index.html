@@ -15,7 +15,7 @@
     <script src="scripts/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
 	<script src="scripts/jquery.spritely.js" type="text/javascript"></script>
     	<script src="scripts/rwethereyet.js" type="text/javascript"></script>
-
+<script type="text/javascript" charset="utf-8" src="scripts/jquery.touchSwipe.min.js"></script>	
 </head>
 <body>
 <div data-role="page" id="main" class="page" >
@@ -56,7 +56,22 @@
                
 <div  id="headerByTime" data-role="header"  >    <div  id="headerContentByTime"  class="headerContent" >   	 </div>  </div>
   <div data-role="content" id="contentByTime">
-  </div>
+  			<div id="containerTimeLabels">
+            	<div id="hoursLabel"></div>
+        	  <div id="minutesLabel" ></div>
+      	 </div>   
+          <div id="selectTimeOption" >
+          		<div id="containerHour" >
+                		<div  id="hourBoldTime" ></div>
+                </div>
+                <div id="containerMinute1">
+            	    	<div  id="minuteThinTime1"></div>
+                   </div>
+                <div id="containerMinute2">
+              			<div id="minuteThinTime2" ></div>
+  				</div>
+            </div>
+    </div>
     <div data-role="footer" id="footerByTime" >
 			   <div data-role="buttonBack" id="backByTime" onClick="$.mobile.changePage(goToBackPlanner());" ></div>
  	 </div>

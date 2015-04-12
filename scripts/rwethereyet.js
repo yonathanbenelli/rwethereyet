@@ -13,7 +13,7 @@
 		})(jQuery);
 	*/
 	var	sound=true;
-			var defaultTrip=0;
+			var defaultTrip=2;
 			var hourpos=0;
 			var minute1pos=0;
 			var speedSwipeMap=0.5;
@@ -72,6 +72,141 @@
 		}
 		resolution=0;
 	
+$(document).on('pageshow','#byTime', function(e,data){    
+
+		setTrip=0;
+	$(function() { $('#containerHour').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+
+			var mov=0;
+			if(direction=="up")
+			{
+				
+				if(hourpos<9)
+				{
+					hourpos=hourpos+1;
+					mov=+1;
+				}
+				else
+				{
+					mov=0;
+				}
+				
+			}
+			else if(direction=="down")
+			{
+
+				if(hourpos>0)
+				{
+					hourpos=hourpos-1;
+					mov=-1;
+				}
+				else
+				{
+					mov=0;
+				}
+			}
+			if(mov!=0)
+			{
+				var to=	$('#hourBoldTime').css('background-position-y');
+				var pos=parseFloat(to.replace('%',''))+((10+(2.4))*mov);
+				$('#hourBoldTime').css('background-position-y',pos+'%');
+				timeFull=(hourpos*3600)+(minute1pos*60*10)+(minute2pos*60);
+				timeLeft=timeFull;
+			}
+			
+        },        //Default is 75px, set to 0 for demo so any distance triggers swipe
+         threshold:0
+      });  });
+	  
+	  
+
+			$(function() { $('#containerMinute1').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+			var mov=0;
+			if(direction=="up")
+			{
+				if(minute1pos<5)
+				{
+					minute1pos=minute1pos+1;
+					mov=+1;
+				}
+				else
+				{
+					mov=0;
+				}
+			}
+			else if(direction=="down")
+			{
+
+				if(minute1pos>0)
+				{
+					minute1pos=minute1pos-1;
+					mov=-1;
+				}
+				else
+				{
+					mov=0;
+				}
+			}
+			if(mov!=0)
+			{
+				var to=	$('#minuteThinTime1').css('background-position-y');
+				var pos=parseFloat(to.replace('%',''))+((20+(4))*mov);
+				console.log(pos);
+				$('#minuteThinTime1').css('background-position-y',pos+'%');
+				timeFull=(hourpos*3600)+(minute1pos*60*10)+(minute2pos*60);
+				timeLeft=timeFull;
+			}
+			
+        },        //Default is 75px, set to 0 for demo so any distance triggers swipe
+         threshold:0
+      });  });
+	  
+			$(function() { $('#containerMinute2').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+			var mov=0;
+			if(direction=="up")
+			{
+				if(minute2pos<9)
+				{
+					minute2pos=minute2pos+1;
+					mov=+1;
+				}
+				else
+				{
+					mov=0;
+				}
+			}
+			else if(direction=="down")
+			{
+
+				if(minute2pos>0)
+				{
+					minute2pos=minute2pos-1;
+					mov=-1;
+				}
+				else
+				{
+					mov=0;
+				}
+			}
+			if(mov!=0)
+			{
+				var to=	$('#minuteThinTime2').css('background-position-y');
+				var pos=parseFloat(to.replace('%',''))+((10+(2.3))*mov);
+				$('#minuteThinTime2').css('background-position-y',pos+'%');
+				timeFull=(hourpos*3600)+(minute1pos*60*10)+(minute2pos*60);
+				timeLeft=timeFull;
+			}
+			
+        },        //Default is 75px, set to 0 for demo so any distance triggers swipe
+         threshold:0
+      });  });
+	  
+	  
+		
+
+});
+
+
 function goToTripPlanner()
 {
 	if(defaultTrip==0)

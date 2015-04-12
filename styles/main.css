@@ -39,15 +39,90 @@ img, object, embed, video {
 
 		background: transparent url(../resources/buttons/leafbutton1.png) 0 0 no-repeat;
 }
-#defaultTripLeafSeparator
-{
-	background-size:100% !important;  height: 10% !important; width: 10% !important;     margin-left: 15% !important;
-
-	
-}
 .containerDefaultTripLeaf
 { width: 100%; height: 20%;}
 
+#containerTimeLabels
+{ width: 90%; height: 13%; margin-left:5%}
+#hoursLabel
+{ background: transparent url(../resources/labels/hourslabel.png) 0 0 no-repeat;
+ background-size:100% !important;  height: 100% !important; width: 50% !important;  
+float:left;
+ }
+#minutesLabel
+{ background: transparent url(../resources/labels/minuteslabel.png) 0 0 no-repeat;
+ background-size:100% !important;  height: 100% !important; width: 50% !important;  
+float:right;
+ }
+#selectTimeOption
+{
+		background: transparent url(../resources/buttons/timecounter.png) 0 0 no-repeat;
+ background-size:100% !important;  height: 60% !important; width: 100% !important;    
+
+}
+#containerHour
+{
+width: 30%;
+  height: 50%;
+margin-top: 15%;
+  margin-left: 15%;
+  overflow: hidden;
+  float:left;
+  }
+#containerMinute1
+{
+width: 20%;
+  height: 50%;
+top: 22%;
+  left: 6%;
+    position: relative;
+  overflow: hidden;
+  float:left;
+    }
+#containerMinute2
+{
+top: 22%;
+  left: 6%;
+    position: relative;
+	width: 20%;
+  height: 50%;
+  overflow: hidden;
+    }
+
+#hourBoldTime
+{
+			background: transparent url(../resources/buttons/boldnumbers.png) 0 0 no-repeat;
+background-size: 45% !important;
+  height: 100% !important;
+  width: 100% !important;
+  margin-left: 30% !important;
+  background-position-y: -7%;
+}
+#minuteThinTime1
+{
+				background: transparent url(../resources/buttons/boldnumbers2.png) 0 0 no-repeat;
+  background-size: 70% !important;
+  height: 100% !important;
+  width: 100% !important;
+
+  margin-left: 15%;
+  float: left;
+    background-position-y: -10.5%;
+}
+#minuteThinTime2
+{
+				background: transparent url(../resources/buttons/boldnumbers.png) 0 0 no-repeat;
+  background-size: 70% !important;
+  height: 100% !important;
+  width: 100% !important;
+
+	  background-position-y: -5.7%;
+}
+
+#defaultTripLeafSeparator
+{
+	background-size:100% !important;  height: 10% !important; width: 10% !important;     margin-left: 15% !important;
+}
 
 #defaultTripOption
 {
