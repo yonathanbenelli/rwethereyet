@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.phonegap.rwethereyet"
+        version   = "1.0.0">
+
+    <name>R We There Yet?</name>
+
+    <description>
+	Navigation app
+    </description>
+
+    <author href="http://www.bullseye.com.uy" email="support@bullseye.com.uy">
+       BullsEye Team
+    </author>
+
+<preference name="orientation"                value="portrait" />  
+    <gap:plugin name="org.apache.cordova.splashscreen" />
+<gap:plugin name="org.apache.cordova.geolocation" />
+    <gap:plugin name="org.apache.cordova.device-motion" />
+    <gap:plugin name="org.apache.cordova.device-orientation" />
+</widget>
