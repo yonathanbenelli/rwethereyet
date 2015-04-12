@@ -74,6 +74,17 @@
 	
 $(document).on('pageshow','#byTime', function(e,data){    
 
+		
+				var height1=$('#minuteThinTime1').height()/1.65;
+				var height2=$('#minuteThinTime2').height()/1.65;
+				var height3=$('#hourBoldTime').height()/1.7;
+				$('#minuteThinTime1').css('background-position-y',$('#containerMinute1').height()/4);
+				$('#minuteThinTime2').css('background-position-y',$('#containerMinute1').height()/4);
+				$('#hourBoldTime').css('background-position-y',$('#containerHour').height()/3.4);
+				
+	hourpos=0;
+	minute1pos=0;
+	minute2pos=0;
 		setTrip=0;
 	$(function() { $('#containerHour').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
 
@@ -84,7 +95,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 				if(hourpos<9)
 				{
 					hourpos=hourpos+1;
-					mov=+1;
+					mov=-1;
 				}
 				else
 				{
@@ -98,7 +109,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 				if(hourpos>0)
 				{
 					hourpos=hourpos-1;
-					mov=-1;
+					mov=+1;
 				}
 				else
 				{
@@ -108,8 +119,9 @@ $(document).on('pageshow','#byTime', function(e,data){
 			if(mov!=0)
 			{
 				var to=	$('#hourBoldTime').css('background-position-y');
-				var pos=parseFloat(to.replace('%',''))+((10+(2.4))*mov);
-				$('#hourBoldTime').css('background-position-y',pos+'%');
+				var pos=parseFloat(to.replace('px',''))+((height3)*mov);
+
+				$('#hourBoldTime').css('background-position-y',pos);
 				timeFull=(hourpos*3600)+(minute1pos*60*10)+(minute2pos*60);
 				timeLeft=timeFull;
 			}
@@ -127,7 +139,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 				if(minute1pos<5)
 				{
 					minute1pos=minute1pos+1;
-					mov=+1;
+					mov=-1;
 				}
 				else
 				{
@@ -140,7 +152,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 				if(minute1pos>0)
 				{
 					minute1pos=minute1pos-1;
-					mov=-1;
+					mov=+1;
 				}
 				else
 				{
@@ -150,9 +162,9 @@ $(document).on('pageshow','#byTime', function(e,data){
 			if(mov!=0)
 			{
 				var to=	$('#minuteThinTime1').css('background-position-y');
-				var pos=parseFloat(to.replace('%',''))+((20+(4))*mov);
-				console.log(pos);
-				$('#minuteThinTime1').css('background-position-y',pos+'%');
+				var pos=parseFloat(to.replace('px',''))+((height1)*mov);
+
+				$('#minuteThinTime1').css('background-position-y',pos);
 				timeFull=(hourpos*3600)+(minute1pos*60*10)+(minute2pos*60);
 				timeLeft=timeFull;
 			}
@@ -168,7 +180,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 				if(minute2pos<9)
 				{
 					minute2pos=minute2pos+1;
-					mov=+1;
+					mov=-1;
 				}
 				else
 				{
@@ -181,7 +193,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 				if(minute2pos>0)
 				{
 					minute2pos=minute2pos-1;
-					mov=-1;
+					mov=+1;
 				}
 				else
 				{
@@ -191,8 +203,8 @@ $(document).on('pageshow','#byTime', function(e,data){
 			if(mov!=0)
 			{
 				var to=	$('#minuteThinTime2').css('background-position-y');
-				var pos=parseFloat(to.replace('%',''))+((10+(2.3))*mov);
-				$('#minuteThinTime2').css('background-position-y',pos+'%');
+				var pos=parseFloat(to.replace('px',''))+((height2)*mov);
+				$('#minuteThinTime2').css('background-position-y',pos);
 				timeFull=(hourpos*3600)+(minute1pos*60*10)+(minute2pos*60);
 				timeLeft=timeFull;
 			}
