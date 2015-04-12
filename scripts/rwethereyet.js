@@ -77,10 +77,10 @@ $(document).on('pageshow','#byTime', function(e,data){
 		
 				var height1=$('#minuteThinTime1').height()/1.65;
 				var height2=$('#minuteThinTime2').height()/1.65;
-				var height3=$('#hourBoldTime').height()/1.7;
+				var height3=$('#hourBoldTime').height()/1.42;
 				$('#minuteThinTime1').css('background-position-y',$('#containerMinute1').height()/4);
 				$('#minuteThinTime2').css('background-position-y',$('#containerMinute1').height()/4);
-				$('#hourBoldTime').css('background-position-y',$('#containerHour').height()/3.4);
+				$('#hourBoldTime').css('background-position-y',$('#containerHour').height()/4);
 				
 	hourpos=0;
 	minute1pos=0;

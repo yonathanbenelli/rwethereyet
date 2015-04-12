@@ -63,7 +63,7 @@ float:right;
 #containerHour
 {
 width: 30%;
-  height: 50%;
+  height: 55%;
 margin-top: 15%;
   margin-left: 15%;
   overflow: hidden;
@@ -71,31 +71,31 @@ margin-top: 15%;
   }
 #containerMinute1
 {
-width: 20%;
-  height: 50%;
-top: 22%;
-  left: 6%;
+	width: 20%;
+ 	height: 50%;
+	top: 22%;
+  	left: 6%;
     position: relative;
-  overflow: hidden;
-  float:left;
-    }
+  	overflow: hidden;
+  	float:left;
+ }
 #containerMinute2
 {
-top: 22%;
-  left: 6%;
+	top: 22%;
+  	left: 6%;
     position: relative;
 	width: 20%;
-  height: 50%;
-  overflow: hidden;
-    }
+  	height: 50%;
+  	overflow: hidden;
+}
 
 #hourBoldTime
 {
 			background: transparent url(../resources/buttons/boldnumbers.png) 0 0 no-repeat;
-background-size: 45% !important;
+background-size: 60% !important;
   height: 100% !important;
   width: 100% !important;
-  margin-left: 30% !important;
+  margin-left: 25% !important;
   background-position-y: -7%;
 }
 #minuteThinTime1
@@ -104,7 +104,6 @@ background-size: 45% !important;
   background-size: 70% !important;
   height: 100% !important;
   width: 100% !important;
-
   margin-left: 15%;
   float: left;
     background-position-y: -10%;
