@@ -5,17 +5,19 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>R We There Yet?</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    	<link rel="stylesheet" type="text/css" href="styles/theme.css" />
 	<link rel="stylesheet" type="text/css" href="styles/main.css" />
 	 <link rel="stylesheet" type="text/css" href="styles/jquery.mobile.structure-1.4.5.min.css" />
 
 	<!-- IE6 fixes are found in styles/ie6.css -->
 	<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="styles/ie6.css" /><![endif]-->
-	
 	<script src="scripts/jquery-2.1.3.min.js" type="text/javascript"></script>
     <script src="scripts/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places,geometry"></script> 
 	<script src="scripts/jquery.spritely.js" type="text/javascript"></script>
-    	<script src="scripts/rwethereyet.js" type="text/javascript"></script>
-<script type="text/javascript" charset="utf-8" src="scripts/jquery.touchSwipe.min.js"></script>	
+    <script src="scripts/rwethereyet.js" type="text/javascript"></script>
+	<script type="text/javascript" charset="utf-8" src="scripts/jquery.touchSwipe.min.js"></script>	
+
 </head>
 <body>
 <div data-role="page" id="main" class="page" >
@@ -77,12 +79,27 @@
                
 <div  id="headerByDistance" data-role="header"  >    <div  id="headerContentByDistance"  class="headerContent" >   	 </div>  </div>
   <div data-role="content" id="contentByDistance">
+
+  <div id="map_canvas_1"   > </div>					
+         
+   <div id="borderMap">
+     </div>
+     <div id="mapAdd" >	
+		
+           <label id="toText">To</label>  
+           <input id="toInput" class="ui-bar-c" type="text" value="Enter your destination" onFocus="if($('#toInput').val()=='Enter your destination'){$('#toInput').val('')}"/>     
+           <a id="submit" href="#" data-role="button" data-icon="search"></a>   
+	</div>
+     
+			
+     
   </div>
     <div data-role="footer" id="footerByDistance" >
 			   <div data-role="buttonBack" id="backByDistance" onClick="$.mobile.changePage(goToBackPlanner());" ></div>
  	 </div>
-
+    	<div id="msg"></div>
 </div>
+
 <div data-role="page" id="settings" class="page" >
                
 <div  id="headerSetting" data-role="header"  >    <div  id="headerContentSettings"  class="headerContent" >   	 </div>  </div>
