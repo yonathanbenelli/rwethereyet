@@ -16,16 +16,10 @@
 	
 
 $(document).bind("pagebeforechange", function(e,ob) {
-	//console.log("pagebeforechange");
-	//console.dir(ob.toPage);
-
-    if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {
-//        console.log("blocking the back");
-        e.preventDefault();
-    }
+    if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
-var opt = { enableHighAccuracy: true , timeout: 15000};
+var opt = { enableHighAccuracy: false , timeout: 15000};
 var charConH;
 	var	sound=true;
 	      var doubleTapCount=0;
@@ -92,7 +86,8 @@ var charConH;
 		var numbersWidth=[44,44,44];
 		var topSetCharIcon=0;
 		var android=0;
- var deviceAgent = navigator.userAgent;	
+		
+		var deviceAgent = navigator.userAgent;	
 		var agentIndex = deviceAgent.indexOf('Android');
 
     if (agentIndex != -1) {
