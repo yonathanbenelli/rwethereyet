@@ -91,13 +91,31 @@ var myScroll;
 		var numbersHeight=[711,711,711];
 		var numbersWidth=[44,44,44];
 		var topSetCharIcon=0;
+		var android=0;
+ var deviceAgent = navigator.userAgent;	
+		var agentIndex = deviceAgent.indexOf('Android');
+
+    if (agentIndex != -1) {
+       var androidversion = parseFloat(deviceAgent.match(/Android\s+([\d\.]+)/)[1]);
+       	if (androidversion < 3.1)
+        {
+        	  android=2;
+        	} else {
+                     android=4;
+        		}
+        } 
+	else {
+                 android=0;
+    }
 
 
 $(document).on('pageshow','#setCharacter', function(e,data){    
 
-	//myScroll = new iScroll('contentSetCharacter');
 
-/*$(function() { $('#containerSetCharacter').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+	if(android!=0 && android<4)
+	{
+
+$(function() { $('#containerSetCharacter').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
 
 
 
@@ -119,7 +137,7 @@ $(document).on('pageshow','#setCharacter', function(e,data){
 			}
 			$('#containerSetCharacter').css('top',topSetCharIcon*($('#containerSetCharacter').height()*0.35));
 }});});
-*/
+	}
 		});
 
 $(document).on('pageshow','#byTime', function(e,data){    
