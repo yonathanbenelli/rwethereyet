@@ -19,6 +19,10 @@
             e.preventDefault();
         }, false );
 }
+
+
+var myScroll;
+
 	var	sound=true;
 	      var doubleTapCount=0;
 			var defaultTrip=2;
@@ -86,7 +90,37 @@
 					resolution=0;
 		var numbersHeight=[711,711,711];
 		var numbersWidth=[44,44,44];
-	
+		var topSetCharIcon=0;
+
+
+$(document).on('pageshow','#setCharacter', function(e,data){    
+
+	//myScroll = new iScroll('contentSetCharacter');
+$(function() { $('#containerSetCharacter').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+
+
+
+			if(direction=="up")
+			{
+
+					if(topSetCharIcon>-3)
+					{
+						topSetCharIcon=	topSetCharIcon-1;
+					}
+				
+			}
+			else if(direction=="down")
+			{
+							if(topSetCharIcon<0)
+							{
+								topSetCharIcon=	topSetCharIcon+1;
+							}
+			}
+			$('#containerSetCharacter').css('top',topSetCharIcon*($('#containerSetCharacter').height()*0.35));
+}});});
+
+		});
+
 $(document).on('pageshow','#byTime', function(e,data){    
 
 				$('#selectTimeOption').css('height',$('#selectTimeOption').width()/1.475);

@@ -514,6 +514,17 @@ float:left;
   width: 50% !important;
   position: relative;
 }
+#containerSetCharacter
+{
+	  width: 100% !important;
+	  height:100% !important;
+	    position: relative !important;
+}
+
+#contentSetCharacter
+{
+			overflow-y:	scroll !important;
+}
 #wheelBorder
 { 	  background: transparent url(../resources/others/loadingborder.png) 0 0 no-repeat;
     background-size: 100%!important;
@@ -541,7 +552,9 @@ float:left;
   
   }
 #headerContentSetCharacter
-{  	  background: transparent url(../resources/labels/tripplannerlabel.png) 0 0 no-repeat; 
+{
+
+	  	  background: transparent url(../resources/labels/tripplannerlabel.png) 0 0 no-repeat; 
   
   }
   #headerContentCharacter
