@@ -72,6 +72,7 @@
     </div>
     <div data-role="footer" id="footerByTime" >
 			   <div data-role="buttonBack" id="backByTime" onClick="$.mobile.changePage(goToBackPlanner());" ></div>
+               <div data-role="buttonNext" id="nextByTime" onClick="$.mobile.changePage('#setCharacter');" ></div>
  	 </div>
 
 </div>
@@ -96,9 +97,11 @@
   </div>
     <div data-role="footer" id="footerByDistance" >
 			   <div data-role="buttonBack" id="backByDistance" onClick="$.mobile.changePage(goToBackPlanner());" ></div>
+               <div data-role="buttonNext" id="nextByDistance" onClick="$.mobile.changePage('#setCharacter');" ></div>
  	 </div>
     	<div id="msg"></div>
 </div>
+
 
 <div data-role="page" id="settings" class="page" >
                
@@ -132,6 +135,93 @@
 	 </div>
 </div>
 
+
+<div data-role="page" id="setCharacter" class="page" >
+               
+<div  id="headerSetCharacter" data-role="header"  >    <div  id="headerContentSetCharacter"  class="headerContent" >   	 </div>  </div>
+
+  <div data-role="content" id="contentSetCharacter">
+    <div id="setLion"   data-role="setCharacterButton"  onClick="setScene=0; $.mobile.changePage('#loading');">    </div>
+    <div    id="setZebra"  data-role="setCharacterButton"    onClick="setScene=1;$.mobile.changePage('#loading');"></div>
+    <div  id="setMonkey"  data-role="setCharacterButton" onClick="setScene=2;$.mobile.changePage('#loading');"></div>
+    <div   id="setHippo" data-role="setCharacterButton"    onClick="setScene=3;$.mobile.changePage('#loading');"></div>
+    <div  id="setRhino" data-role="setCharacterButton"   onClick="setScene=4;$.mobile.changePage('#loading');"></div>
+    <div  id="setElephant" data-role="setCharacterButton"   onClick="setScene=5;$.mobile.changePage('#loading');"></div>
+    <div   id="setOstrich" data-role="setCharacterButton"     onClick="setScene=6;$.mobile.changePage('#loading');"></div>
+    <div   id="setToucan" data-role="setCharacterButton"      onClick="setScene=7;$.mobile.changePage('#loading');"></div>
+    <div  id="setCrocodile" data-role="setCharacterButton"  onClick="setScene=8;$.mobile.changePage('#loading');"></div>
+    <div   id="setGiraffe" data-role="setCharacterButton"     onClick="setScene=9;$.mobile.changePage('#loading');"></div>
+    <div  id="setAquarium" data-role="setCharacterButton"     onClick="setScene=10;$.mobile.changePage('#loading');"></div>
+   
+    </div>
+    <div data-role="footer" id="footerSetCharacter" >
+			   <div data-role="buttonBack" id="backSetCharacter" onClick="$.mobile.changePage(goToTripPlanner());" ></div>
+            	
+	 </div>
+
+</div>
+
+
+
+<div data-role="page" id="character" class="page" >
+<div  id="menuLeaf" ></div>
+<div id="finishLeafs" class="finishLeafsClass"></div>
+               
+<div  id="headerCharacter" data-role="header"  >    <div  id="headerContentCharacter"  class="headerContent" >   	 </div>  </div>
+
+  <div data-role="content" id="contentCharacter">
+  
+    <div id="menuJungle" data-role="menuTap" >
+                 <div   id="buttonMenuJungle1" data-role="buttonMenuTap" ></div>
+                 <div  id="buttonMenuJungle2" data-role="buttonMenuTap" ></div>
+                 <div  id="buttonMenuJungle3" data-role="buttonMenuTap" ></div>
+                 <div  id="buttonMenuJungle4"  data-role="buttonMenuTap" ></div>
+      </div>
+    <div  id="finishCharacter"  onClick="clearTrip();$.mobile.changePage('#main');"> </div>
+                	
+    <div id="characterContainer">
+                <div id="colorCharacter" >
+
+                </div>
+                <div id="greyCharacter" >
+                    
+			  	</div>
+	</div>
+
+    <div id="timeLeftCharacter" >
+          8 HOURS AND <br/>59 MINUTES LEFT
+     </div>
+   	  <div id="resetTripContainer" >
+	      <div id="resetTripYes" onClick="clearTripYes()"></div>
+                <div id="resetTripSpacer" ></div>
+      		<div id="resetTripNo" onClick="clearTripNo()"></div>
+          
+	  </div>
+
+        
+	<div id="positionLeftCharacter" >
+   			
+            <div id="map_canvas_character"   > </div>					
+                     
+               <div id="borderMapCharacter">
+                 </div>
+            
+      </div>
+    </div>
+   	  
+<div data-role="footer" id="footerCharacter" >
+			   <div data-role="buttonBack" id="backCharacter" onClick="backFromCharacter();" ></div>
+            	
+	 </div>
+</div>
+
+<div data-role="page" id="loading" class="page" >
+  	<div data-role="content" id="loadingContent" >
+	    <div id="wheelBorder">
+  		<div id="wheelDiv" class="rotatedLoading" >   </div>
+        </div>
+	</div>
+</div>
 
 </body>
 </html>

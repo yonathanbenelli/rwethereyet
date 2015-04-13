@@ -13,6 +13,7 @@
 		})(jQuery);
 	*/
 	var	sound=true;
+	      var doubleTapCount=0;
 			var defaultTrip=2;
 			var hourpos=0;
 			var minute1pos=0;
@@ -75,7 +76,7 @@
 		{
 					resolution=0;
 		}
-
+					resolution=0;
 		var numbersHeight=[711,711,711];
 		var numbersWidth=[44,44,44];
 	
@@ -91,6 +92,9 @@ $(document).on('pageshow','#byTime', function(e,data){
 	$('#minuteThinTime2').css('background-position-y',parseInt((pixelMove2*(1-0.282))/2.5));
 	hourpos=0;
 	minute1pos=0;
+	timeLeft=-1;
+	timeFull=-1;
+		
 	minute2pos=0;
 		setTrip=0;
 	$(function() { $('#hourBoldTime').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
@@ -126,7 +130,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 			if(mov!=0)
 			{
 				var to=	$('#hourBoldTime').css('background-position-y');
-				console.log(resolution);
+
 				if(resolution==0)
 				{
 					var pos=parseFloat(to.replace('px',''))+((pixelMove1*(1+0.02))*mov);
@@ -138,6 +142,15 @@ $(document).on('pageshow','#byTime', function(e,data){
 				$('#hourBoldTime').css('background-position-y',pos+'px');
 				timeFull=(hourpos*3600)+(minute1pos*60*10)+(minute2pos*60);
 				timeLeft=timeFull;
+				if(timeFull>0)
+				{
+					$('#nextByTime').css('visibility','visible');
+				}
+				else
+				{
+										$('#nextByTime').css('visibility','hidden');
+				}
+				
 			}
 			
         },        //Default is 75px, set to 0 for demo so any distance triggers swipe
@@ -182,6 +195,14 @@ $(document).on('pageshow','#byTime', function(e,data){
 				
 				timeFull=(hourpos*3600)+(minute1pos*60*10)+(minute2pos*60);
 				timeLeft=timeFull;
+				if(timeFull>0)
+				{
+					$('#nextByTime').css('visibility','visible');
+				}
+				else
+				{
+										$('#nextByTime').css('visibility','hidden');
+				}
 			}
 			
         },        //Default is 75px, set to 0 for demo so any distance triggers swipe
@@ -221,13 +242,23 @@ $(document).on('pageshow','#byTime', function(e,data){
 				var pos=parseFloat(to.replace('px',''))+(parseFloat(pixelMove3)*mov);
 				$('#minuteThinTime2').css('background-position-y',pos+'px');
 				timeFull=(hourpos*3600)+(minute1pos*60*10)+(minute2pos*60);
-				timeLeft=timeFull;				timeFull=(hourpos*3600)+(minute1pos*60*10)+(minute2pos*60);
 				timeLeft=timeFull;
+				if(timeFull>0)
+				{
+					$('#nextByTime').css('visibility','visible');
+				}
+				else
+				{
+										$('#nextByTime').css('visibility','hidden');
+				}
 			}
 			
         },        //Default is 75px, set to 0 for demo so any distance triggers swipe
          threshold:0
-      });  });
+      });  
+	  
+	  
+	  });
 	  
 	  
 		
@@ -313,6 +344,14 @@ $(document).on('pageshow','#byDistance', function(e,data){
 //    $('#distance-content').css('margin-top',($(window).height() - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#distance-content').outerHeight())/2);
 $('#borderMap').height($('#borderMap').width());
 $('#map_canvas_1').height($('#map_canvas_1').width()*(1-0.05));
+				$('#msg').css('visibility','hidden');
+				$('#toInput').val('Enter your destination');
+defaultLatLng = new google.maps.LatLng(45.2501566,-75.8002568);
+from="";
+distanceLeft=-1;
+distanceFull=-1;
+
+
 		setTrip=1;
 		zoomLevelD=10;
 		     $(function() {  
@@ -416,13 +455,17 @@ marker.setMap(null);
 
 								//console.log(inspeccionar(response.routes[0].legs[0]));
 								//console.log(response.routes[0].legs[0].duration.text);
-												$('#nextDist').css('display','block');
-													$('#msg').html("");
+												$('#nextByDistance').css('visibility','visible');
+															$('#msg').css('visibility','hidden');
 													
 								}
 								else
 								{
-									$('#msg').css('color','red');
+									$('#nextByDistance').css('visibility','hidden');
+									$('#msg').css('visibility','visible');
+									
+
+
 									$('#msg').html("Destination not found, please be more specific");
 								}
   });
@@ -473,17 +516,19 @@ function getPosition()
 
 function getTimeCharacter()
 {
+
 	if(timeLeft>0)
 	{
 	//navigator.geolocation.getCurrentPosition(onSuccess, onError);
-	levelPos=100*(1-(Math.floor(timeLeft/timeFull)));
+
 	var timeOld=timeNow;
 	timeNow=(new Date()).getTime();
 	var timeLap=timeNow-timeOld;
-
-	timeLeft=timeLeft-Math.floor(timeLap/1000);
 	
-	updateFrontCharacter(getTopFrontCharacter(timeLeft,characterContentHeight));
+	
+	timeLeft=timeLeft-Math.floor(timeLap/1000);
+	levelPos=100*(1-(timeLeft/timeFull));
+	updateGreyCharacter(100-levelPos);
 	updateTimeLeftText(timeLeft);
 
 	getCurrentPosCharacter();
@@ -538,11 +583,341 @@ function updateTimeLeftText(timeL)
 				var minD=Math.floor(mins/10);
 				var minC=mins-(minD*10);
 				
-		 $("#hoursTimeLeftNumD").css('background-position-y',($("#hoursTimeLeftNumD").width()*(hrs*(0.07-1))));
-		 $("#minutesTimeLeftNumD").css('background-position-y',($("#minutesTimeLeftNumD").width()*(minD*(0.07-1))));
-		 $("#minutesTimeLeftNumC").css('background-position-y',($("#minutesTimeLeftNumC").width()*(minC*(0.07-1))));
-				
+		
 			
 }
+function showFinishJungle()
+{
+	
+	  $('#finishCharacter').css('visibility','visible');
+  		$('#finishLeafs').css('visibility','visible');
+		$('#finishLeafs').pan({fps: 30, speed: 4, dir: 'down', depth: 70});
+
+	  clearTrip();
+}
+
+function updateGreyCharacter(actHeightC)
+{
+	var val=$("#characterContainer").height()*(actHeightC/100);
 
 
+	$('#greyCharacter').animate({ "height": val}, "slow");
+
+}
+function getTopFrontCharacter(timeL,heightC)
+{
+	
+			
+			var timePercent=(timeL*100)/timeFull;
+			var actHeightC=Math.floor((timePercent*heightC/100));
+			return actHeightC;
+
+}
+
+$(document).on('pageshow','#character', function(e,data){ 
+
+//$("#characterContainer").height($("#characterContainer").width());
+
+$("#resetTripContainer").height($("#resetTripContainer").width()/1.33);
+$("#positionLeftCharacter").height($("#positionLeftCharacter").width());
+	 $('#backCharacter').css('visibility','hidden');
+	  $('#finishLeafs').css('visibility','hidden');
+	  $('#positionLeftCharacter').css('visibility','hidden');
+	 $('#resetTripContainer').css('visibility','hidden');
+	 $('#menuJungle').css('visibility','hidden');
+	  $('#finishCharacter').css('visibility','hidden');
+	  $('#finishLeafs').destroy();
+map = new google.maps.Map(document.getElementById("map_canvas_character"),optionsCharacterMap);
+        // Add an overlay to the map of current lat/lng
+         marker = new google.maps.Marker({
+            position: defaultLatLng,
+            map: map,
+            title: "We are here!"
+        });
+
+     $(function() {  
+      $("#borderMapCharacter").swipe( {
+		  swipeStatus:function(event, phase, direction, distance , duration , fingerCount){
+			  
+			   if(phase === $.fn.swipe.phases.PHASE_END || phase === $.fn.swipe.phases.PHASE_CANCEL) 
+				   {
+						if(fingerCount==1)
+						  {
+							  
+							   if(direction=='up')
+							   {		
+											   map.panBy(0,Math.floor(distance*speedSwipeMap));			   
+							   }
+							   else if(direction=='down')
+							   {
+											   map.panBy(0, -Math.floor(distance*speedSwipeMap));			   
+							   }
+							   else if(direction=='left')
+							   {
+											   map.panBy(Math.floor(distance*speedSwipeMap),0);			   
+							   }
+							   else if(direction=='right')
+							   {
+											   map.panBy(-Math.floor(distance*speedSwipeMap),0);			   
+							   }
+						  }
+				   }
+        },
+		pinchStatus:function(event, phase, direction, distance , duration , fingerCount, pinchZoom) {
+			 if(phase === $.fn.swipe.phases.PHASE_END || phase === $.fn.swipe.phases.PHASE_CANCEL) 
+				   {
+					   if(fingerCount==2)
+						  {
+							
+			
+								
+					if(direction=='out')
+						{
+										
+							if(map.getZoom()>0)
+							 {
+								// zoomLevelD=zoomLevelD-0.05;
+									map.setZoom(map.getZoom()-1);
+							 }
+													
+						}
+						else if(direction=='in')
+						{
+							
+			
+								   if(map.getZoom()<19)
+								  {
+									 // zoomLevelD=zoomLevelD+0.05;
+										map.setZoom(map.getZoom()+1);
+								  }
+			
+						}
+			
+						  }
+				   }
+        },
+        fingers:$.fn.swipe.fingers.ALL,  
+        pinchThreshold:0  
+    });	    });	
+			
+  $(function() {  
+
+      //Enable swiping...
+      $("#menuLeaf").swipe( {tap:function(event, target) {
+							doubleTapCount++;
+					     	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
+							if(doubleTapCount==2)
+							{
+								      $('#menuJungle').css('visibility','visible');
+									  $('#backCharacter').css('visibility','visible');
+							}
+	}, 
+		 
+		threshold:50 });
+  });
+
+
+      $("#buttonMenuJungle1").click(function() {
+				 $('#timeLeftCharacter').css('visibility','visible');
+				$('#positionLeftCharacter').css('visibility','hidden');
+				 $('#resetTrip').css('visibility','hidden');
+
+			});
+      $("#buttonMenuJungle2").click(function() {
+		  zoomLevel=10;
+		  map.setZoom(Math.floor(zoomLevel));
+				 $('#positionLeftCharacter').css('visibility','visible');
+ 					$('#timeLeftCharacter').css('visibility','hidden');
+					 $('#resetTripContainer').css('visibility','hidden');
+});
+
+      $("#buttonMenuJungle3").click(function() {
+		  
+		  		  		 $('#resetTripContainer').css('visibility','visible');
+		  		 $('#positionLeftCharacter').css('visibility','hidden');
+ 					$('#timeLeftCharacter').css('visibility','hidden');
+});
+
+      $("#buttonMenuJungle4").click(function() {
+					 $('#resetTripContainer').css('visibility','hidden');
+					$('#positionLeftCharacter').css('visibility','hidden');
+					$('#timeLeftCharacter').css('visibility','hidden');
+				 $('#menuJungle').css('visibility','hidden');
+				  $('#backCharacter').css('visibility','hidden');
+			});
+
+	 
+//$('#fish').sprite({fps: 12, no_of_frames: 6});
+	
+   		  
+  		
+				if(setTrip==0)
+				{
+					if (timeFull==timeLeft)
+					{
+						timeNow=new Date().getTime();
+						getTimeCharacter();
+					}
+				}
+				else if(setTrip==1)
+				{
+					if (distanceFull==distanceLeft)
+					{
+						intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
+					}
+				}
+
+  });
+  
+function getRandom(n,m)
+{
+	return Math.floor(Math.random()*(n-m+1))+m;
+}
+
+function loadCharacter()
+{
+	var backCharacter;
+	var frontCharacter;
+	var headerCharacter;
+	
+	var n=0;
+	var m=2;
+	var backGround=getRandom(0,2);
+
+	switch(setScene)
+	{
+		case 0:
+				backCharacter="resources/characters/jungle/lion2_"+resolution+".png";
+				frontCharacter="resources/characters/jungle/lion1_"+resolution+".png";
+				headerCharacter="resources/labels/lionlabel.png";
+		break;
+		case 1:
+				backCharacter="resources/characters/jungle/zebra2_"+resolution+".png";
+				frontCharacter="resources/characters/jungle/zebra1_"+resolution+".png";
+				headerCharacter="resources/labels/zebralabel.png";
+		break;
+		case 2:
+				backCharacter="resources/characters/jungle/monkey2_"+resolution+".png";
+				frontCharacter="resources/characters/jungle/monkey1_"+resolution+".png";
+				headerCharacter="resources/labels/monkeylabel.png";
+		break;
+		case 3:
+				backCharacter="resources/characters/jungle/hippo2_"+resolution+".png";
+				frontCharacter="resources/characters/jungle/hippo1_"+resolution+".png";
+				headerCharacter="resources/labels/hippolabel.png";				
+		break;				
+		case 4:
+				backCharacter="resources/characters/jungle/rhino2_"+resolution+".png";
+				frontCharacter="resources/characters/jungle/rhino1_"+resolution+".png";
+				headerCharacter="resources/labels/rhinolabel.png";								
+		break;
+		case 5:
+				backCharacter="resources/characters/jungle/elephant2_"+resolution+".png";
+				frontCharacter="resources/characters/jungle/elephant1_"+resolution+".png";
+				headerCharacter="resources/labels/elephantlabel.png";				
+		break;
+		case 6:
+		
+				backCharacter="resources/characters/jungle/ostrich2_"+resolution+".png";
+				frontCharacter="resources/characters/jungle/ostrich1_"+resolution+".png";
+				headerCharacter="resources/labels/ostrichlabel.png";								
+
+		break;
+		case 7:
+				backCharacter="resources/characters/jungle/toucan2_"+resolution+".png";
+				frontCharacter="resources/characters/jungle/toucan1_"+resolution+".png";
+				headerCharacter="resources/labels/toucanlabel.png";								
+
+		break;
+		case 8:
+				backCharacter="resources/characters/jungle/crocodile2_"+resolution+".png";
+				frontCharacter="resources/characters/jungle/crocodile1_"+resolution+".png";
+				headerCharacter="resources/labels/crocodilelabel.png";				
+		break;
+		case 9:
+				backCharacter="resources/characters/jungle/giraffe2_"+resolution+".png";
+				frontCharacter="resources/characters/jungle/giraffe1_"+resolution+".png";
+				headerCharacter="resources/labels/giraffelabel.png";				
+
+		break;						
+	}
+	
+		  $('#headerContentCharacter').css('background','transparent url('+headerCharacter+') 0 0 no-repeat');
+
+  $('#greyCharacter').css({
+    'background' : 'transparent url('+frontCharacter+') 0 0 no-repeat',
+    'background-size' : '100% ' + $('#loadingContent').height()+'px' ,
+});
+
+  $('#colorCharacter').css({
+    'background' : 'transparent url('+backCharacter+') 0 0 no-repeat',
+    'background-size' : '100% ' + $('#loadingContent').height()+'px',
+});
+}
+function clearTripYes()
+{
+
+
+	 	$('#backCharacter').css('visibility','hidden');
+		$('#resetTripContainer').css('visibility','hidden');
+		$('#menuJungle').css('visibility','hidden');
+		clearTrip();
+		$.mobile.changePage('#main');
+}
+
+function clearTripNo()
+{
+
+	$('#resetTripContainer').css('visibility','hidden');
+		$('#menuJungle').css('visibility','hidden');
+}
+	function clearTrip()
+	{
+			 hourpos=0;
+			 minute1pos=0;
+			 minute2pos=0;
+			
+			distanceLeft=-1;
+			distanceFull=-1;
+			levelPos=-1;
+			timeLeft=-1;
+			timeFull=-1;
+			timeNow=0;
+			intervalRot;
+			setScene=0;
+			resolution;
+			frontCharacterTop=0;
+			characterContentHeight=0;
+
+		
+	}
+	
+	
+$(document).on('pageshow','#loading', function(e,data){ 
+				 rotTimes=10;	
+				 $("#wheelBorder").height($("#wheelBorder").width());
+ 				 $("#wheelDiv").height($("#wheelBorder").width()/10);
+			  $("#wheelDiv").css('top',($("#wheelBorder").height()/2)-($("#wheelDiv").height()/2));
+			  loadCharacter();
+				setTimeout(function () { 
+
+						if(setScene<=9)
+						{
+							$.mobile.changePage("#character");
+						}
+						else
+						{
+							$.mobile.changePage("#aquarium");
+						}
+						},1000); 
+
+					
+			
+			});
+
+function backFromCharacter()
+{
+	 $('#menuJungle').css('visibility','hidden');
+									  $('#backCharacter').css('visibility','hidden');
+									  $.mobile.changePage('#setCharacter');
+}

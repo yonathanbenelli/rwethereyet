@@ -3,7 +3,105 @@
 [data-role=content]{bottom: auto !important; width:80%; height:65%;text-align:center;margin-right: auto;margin-left: auto; } 
 [data-role=footer]{width:100%;!important; height:15%;!important; z-index:1000 !important} 
 [data-role=buttonMenuMain]{  background-size:100% !important;  height: 15% !important; width: 80% !important;     margin-left: 10% !important;	}
-[data-role=buttonBack]{   background: transparent url(../resources/buttons/backarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important;  	}
+[data-role=buttonMenuTap]{  background-size:100% !important;  height: 100% !important; width: 25% !important;    !important; float:left !important	}
+[data-role=menuTap]{  height:15% !important;width:100% !important;   float: left !important; z-index: 1000;
+  position: relative;}
+[data-role=buttonBack]{   background: transparent url(../resources/buttons/backarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:left !important 	  	}
+[data-role=buttonNext]{   background: transparent url(../resources/buttons/nextarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:right !important; visibility:hidden 	}
+[data-role=setCharacterButton]{  height: 35% !important; width: 40% !important;     margin-left: 7% !important; float:left !important;
+background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
+
+@font-face {
+  font-family: 'sharkyspotdemo';
+  src: url('../styles/sharkyspotdemo.ttf');
+  src: local('☺'), url('../styles/sharkyspotdemo.ttf') format('truetype');
+}
+body{
+  font-family: 'sharkyspotdemo';
+  scrollbar-base-color:#864217 ;
+  scrollbar-3dlight-color: #864217;
+  scrollbar-highlight-color: #864217;
+  scrollbar-track-color: #ffffff;
+  scrollbar-arrow-color: #864217;
+  scrollbar-shadow-color: #864217;
+  scrollbar-dark-shadow-color: #864217;
+}
+::-webkit-scrollbar { width: 3px; height: 3px;}
+::-webkit-scrollbar-button {  background-color: #864217; }
+::-webkit-scrollbar-track {  background-color: #666;}
+::-webkit-scrollbar-track-piece { background-color: #ffffff;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #864217; border-radius: 3px;}
+::-webkit-scrollbar-corner { background-color: #666;}
+::-webkit-resizer { background-color: #864217;}
+
+
+.ui-shadow {
+  -webkit-box-shadow: none;
+
+}
+
+.rotatedLoading{
+-webkit-animation: rotate 2s linear infinite 0s;
+-moz-animation: rotateup 2s linear infinite 0s;
+  -o-animation: rotate 2s linear infinite 0s;
+  -ms-animation: rotate 2s linear infinite 0s;
+  animation: rotate 2s linear infinite 0s;
+ 
+
+}
+
+
+@-webkit-keyframes rotate {
+ from {
+    -webkit-transform: rotate(-360deg);
+  }
+  to {
+		-webkit-transform: rotateY(0deg);
+  }
+
+}
+
+@-moz-keyframes rotate {
+ from {
+     -moz-transform: rotate(-360deg);
+  }
+  to {
+     -moz-transform: rotate(0deg);
+  }
+
+}
+
+@-moz-keyframes rotateup {
+ from {
+     -moz-transform: rotate(-360deg);
+  }
+  to {
+     -moz-transform: rotate(0deg);
+  }
+   
+
+}
+
+
+
+@-o-keyframes rotate {
+ from {
+    -o-transform: rotate(-360deg);
+  }
+  to {
+    -o-transform: rotate(0deg);
+  }
+
+}
+@-ms-keyframes rotate {
+ from {
+    -ms-transform: rotate(-360deg);
+  }
+  to {
+    -ms-transform: rotateY(0deg);
+  }
+
+}
 
 img, object, embed, video {
 	max-width: 100%;
@@ -42,10 +140,150 @@ img, object, embed, video {
 .containerDefaultTripLeaf
 { width: 100%; height: 20%;}
 
+
+.finishLeafsClass
+{
+	position:absolute;
+	height:100%;
+	width:100%;
+	overflow:hidden;
+	z-index:2500;
+	background-repeat:repeat-y;
+	background-size:100% !important;
+	
+	
+}
+
+#finishLeafs
+{
+
+	background: transparent url(../resources/others/finishleafs2.png) 0 0 ;
+	
+}
+#positionLeftCharacter
+{
+	width:100%;
+	height:100%;
+	  position: absolute;
+  top: 30%;
+  left: 0%;
+  visibility:hidden;
+}
+#characterContainer
+{
+		height:100% !important; width:100% !important;position: relative !important;
+
+}
+#colorCharacter
+{
+	
+	height:100% ; width:100% !important; 
+position: absolute !important;
+	top:0px;
+}
+#loadingContent
+{
+	overflow:hidden;
+}
+#greyCharacter
+{
+	
+	height:100% ; width:100% !important;
+position: absolute !important;
+	top:0px;
+}
+#menuJungle
+{
+	  visibility:hidden;
+}
+#finishCharacter
+{
+	background: transparent url(../resources/buttons/finish.png) 0 0 no-repeat;
+height:60% !important;width:100% !important;background-size:100% !important;  
+	  float: left !important;
+	  visibility:hidden;
+	  z-index: 5000;
+  position: relative;
+}
+#buttonMenuJungle1
+{
+		background: transparent url(../resources/buttons/timemenubutton.png) 0 0 no-repeat;
+}
+#buttonMenuJungle2
+{
+		background: transparent url(../resources/buttons/positionmenubutton.png) 0 0 no-repeat;
+}
+#buttonMenuJungle3
+{
+		background: transparent url(../resources/buttons/resetmenubutton.png) 0 0 no-repeat;
+}
+#buttonMenuJungle4
+{
+		background: transparent url(../resources/buttons/closemenubutton.png) 0 0 no-repeat;
+}
+                 
+#menuLeaf
+{
+	height: 7% !important; width: 7% !important;    left:92% !important; background-size: 100% 100% !important; 
+	z-index:2000 !important; position:absolute !important;
+			background: transparent url(../resources/buttons/leafbutton2.png) 0 0 no-repeat;
+
+}
+#setLion
+{
+		background: transparent url(../resources/buttons/lionbutton.png) 0 0 no-repeat;
+}
+#setZebra
+{
+		background: transparent url(../resources/buttons/zebrabutton.png) 0 0 no-repeat;
+}
+#setMonkey
+{
+		background: transparent url(../resources/buttons/monkeybutton.png) 0 0 no-repeat;
+}
+#setHippo
+{
+		background: transparent url(../resources/buttons/hippobutton.png) 0 0 no-repeat;
+}
+
+#setRhino
+{
+		background: transparent url(../resources/buttons/rhinobutton.png) 0 0 no-repeat;
+}
+ 
+#setElephant
+{
+		background: transparent url(../resources/buttons/elephantbutton.png) 0 0 no-repeat;
+}
+#setOstrich
+{
+		background: transparent url(../resources/buttons/ostrichbutton.png) 0 0 no-repeat;
+}
+#setToucan
+{
+		background: transparent url(../resources/buttons/toucanbutton.png) 0 0 no-repeat;
+}
+#setCrocodile
+{
+		background: transparent url(../resources/buttons/crocodilebutton.png) 0 0 no-repeat;
+}
+
+#setGiraffe
+{
+		background: transparent url(../resources/buttons/giraffebutton.png) 0 0 no-repeat;
+}
+
+
+#setAquarium
+{
+		background: transparent url(../resources/buttons/aqueariumbuttonlock.png) 0 0 no-repeat;
+}
+
+
 #toText
 {
 	float: left;
-font-size:14px;
+font-size: 1.5em;
 }
 #submit
 {
@@ -61,16 +299,81 @@ width: 20% !important;
   width: 72%;
     z-index:1000;
 }
+#resetTripContainer
+{
+	background: transparent url(../resources/labels/clearTripJungle_0.png) 0 0 no-repeat;
+		background-size: 100%  !important; 
+  width: 80%;
+  height: 50%;
+  position: absolute;
+  top: 40%;
+  visibility:hidden;
+}
+#resetTripYes
+{
+	height:20%;
+	width:30%;
+
+  left: 12%;
+  		float: left;
+
+  position: relative;
+  top: 70%;
+z-index:1000px;
+}
+#resetTripSpacer
+{
+		height:20%;
+	width:20%;
+	
+		float: left;
+ left: 10%;
+  position: relative;
+  top: 70%;
+  z-index:500px;
+
+}
+#resetTripNo
+{
+		height:20%;
+	width:30%;
+
+		float: left;
+ left: 10%;
+  position: relative;
+  top: 70%;
+z-index:1000px;
+}
+	
+#timeLeftCharacter
+{
+		font-size: 1.5em;
+		background: transparent url(../resources/others/wood1.png) 0 0 no-repeat;
+		background-size: 100% 100% !important; 
+		color: #F4CE07 !important;
+		    width: 80%;
+			  height: 15%;
+	 visibility: hidden;
+  top: 70%;
+  position: absolute;
+}
 #msg
 {
 	
-	font-size: 14px;
-  width: 95% !important;
-  height: 20% !important;
+	font-size: 1.5em;
+  width: 90% !important;
+ height: 13% !important;
   position: absolute !important;
-  left: 5% !important;
-  bottom: -5% !important;
-    z-index:500;
+  left: 3% !important;
+  bottom: 1% !important;
+  z-index: 500;
+  text-align: center;
+  font-weight: lighter;
+  color: red !important;
+  padding-left: 10px;
+  padding-right: 10px;
+	background: transparent url(../resources/others/wood1.png) 0 0 no-repeat;
+	background-size: 100% 100% !important; 
 }
 #mapAdd
 {
@@ -88,7 +391,25 @@ width: 20% !important;
 		position:relative !important;
 		float:left !important;
 }
+#map_canvas_character
+{
+	width:80% !important;
+height:70%;
+  top: 15% !important;
+  		left:10% !important;
+		position:relative !important;
+		float:left !important;
+}
+
 #borderMap
+{
+	background: transparent url(../resources/others/bordermap.png) 0 0 no-repeat;
+ background-size:100% !important;  height:100% ; width: 100% !important;  
+	 position:relative !important;
+	 
+	 
+}
+#borderMapCharacter
 {
 	background: transparent url(../resources/others/bordermap.png) 0 0 no-repeat;
  background-size:100% !important;  height:100% ; width: 100% !important;  
@@ -183,6 +504,28 @@ float:left;
  float:right;
 }
 
+#wheelDiv
+{
+	 	  background: transparent url(../resources/others/loadingcenter.png) 0 0 no-repeat;
+		     height: 2% ;
+  margin-left: auto;
+  margin-right: auto;
+  top: 40%;
+  width: 50% !important;
+  position: relative;
+}
+#wheelBorder
+{ 	  background: transparent url(../resources/others/loadingborder.png) 0 0 no-repeat;
+    background-size: 100%!important;
+  height: 60% ;
+  width: 80% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 50% !important;
+}
+#contentCharacter
+{overflow:hidden !important;
+}
 #headerContentMain
 { 	  background: transparent url(../resources/labels/settingslabel.png) 0 0 no-repeat;}
 #headerContentSettings
@@ -197,7 +540,19 @@ float:left;
 {  	  background: transparent url(../resources/labels/settripdistancelabel.png) 0 0 no-repeat; 
   
   }
+#headerContentSetCharacter
+{  	  background: transparent url(../resources/labels/tripplannerlabel.png) 0 0 no-repeat; 
+  
+  }
+  #headerContentCharacter
+{
+	  top: 40% !important;
+  position: relative !important;
+	height:60% !important;
 
+	  	  background: transparent url(../resources/labels/lionlabel.png) 0 0 no-repeat; 
+  
+  }
 
 
 #buttonTime
