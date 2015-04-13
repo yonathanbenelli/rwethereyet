@@ -15,6 +15,7 @@
     <author href="http://www.bullseye.com.uy" email="support@bullseye.com.uy">
        BullsEye Team
     </author>
+ <icon src="icons/icon1.png" />
 
 <preference name="orientation"                value="portrait" />  
     <gap:plugin name="org.apache.cordova.splashscreen" />
