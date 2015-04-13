@@ -22,7 +22,7 @@
 
 
 var myScroll;
-
+var charConH;
 	var	sound=true;
 	      var doubleTapCount=0;
 			var defaultTrip=2;
@@ -59,7 +59,7 @@ var myScroll;
 		var levelPos=-1;
 		var timeLeft=-1;
 		var timeFull=-1;
-		var doubleTapSpeed=500;
+		var doubleTapSpeed=1000;
 		var timeNow=0;
 		var intervalRot;
 		var setScene=0;
@@ -108,8 +108,30 @@ var myScroll;
                  android=0;
     }
 
+$(document).on('pageshow','#main', function(e,data){    
+if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
+{
+	$('#backMain').css('visibility','visible');	
+	 $('#buttonTripPlanner').css('visibility','hidden');
+}
+else
+{
+	 $('#buttonTripPlanner').css('visibility','visible');
+		$('#backMain').css('visibility','hidden');	
+}
 
+});
 $(document).on('pageshow','#setCharacter', function(e,data){    
+if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
+{
+	$('#backMain').css('visibility','visible');	
+	 $('#buttonTripPlanner').css('visibility','hidden');
+}
+else
+{
+	 $('#buttonTripPlanner').css('visibility','visible');
+		$('#backMain').css('visibility','hidden');	
+}
 
 
 	if(android!=0 && android<4)
@@ -637,14 +659,23 @@ function updatePostionCharacter() {
 function updateTimeLeftText(timeL)
 {
 
-	
 				var hrs=Math.floor(timeL/3600);
 				var mins=Math.floor((timeL%3600)/60);
-				var minD=Math.floor(mins/10);
-				var minC=mins-(minD*10);
-				
-		
-			
+				if(hrs==0 && mins==0)
+				{
+					mins=1;
+				}
+				if(timeL==0)
+				{
+						mins=0;
+				}
+				$('#timeLeftCharacter').html(hrs+" HOURS AND <br/>"+mins+" MINUTES LEFT");
+}
+function finishTripJungle()
+{
+	  $('#finishLeafs').destroy();
+	  clearTrip();
+	  $.mobile.changePage('#main');
 }
 function showFinishJungle()
 {
@@ -653,14 +684,22 @@ function showFinishJungle()
   		$('#finishLeafs').css('visibility','visible');
 		$('#finishLeafs').pan({fps: 30, speed: 4, dir: 'down', depth: 70});
 
-	  clearTrip();
+	  
 }
-
+function goToBackFromSetCharacter()
+{
+	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
+	{
+			$.mobile.changePage('#main');
+	}
+	else
+	{
+				$.mobile.changePage(goToTripPlanner());
+	}
+}
 function updateGreyCharacter(actHeightC)
 {
-	var val=$("#characterContainer").height()*(actHeightC/100);
-
-
+	var val=charConH*(actHeightC/100);
 	$('#greyCharacter').animate({ "height": val}, "slow");
 
 }
@@ -678,15 +717,12 @@ $(document).on('pageshow','#character', function(e,data){
 
 //$("#characterContainer").height($("#characterContainer").width());
 
-$("#resetTripContainer").height($("#resetTripContainer").width()/1.33);
-$("#positionLeftCharacter").height($("#positionLeftCharacter").width());
-	 $('#backCharacter').css('visibility','hidden');
-	  $('#finishLeafs').css('visibility','hidden');
-	  $('#positionLeftCharacter').css('visibility','hidden');
-	 $('#resetTripContainer').css('visibility','hidden');
-	 $('#menuJungle').css('visibility','hidden');
-	  $('#finishCharacter').css('visibility','hidden');
-	  $('#finishLeafs').destroy();
+
+
+	$("#resetTripContainer").height($("#resetTripContainer").width()/1.33);
+	$("#positionLeftCharacter").height($("#positionLeftCharacter").width());
+	  charConH=$("#characterContainer").height();
+
 map = new google.maps.Map(document.getElementById("map_canvas_character"),optionsCharacterMap);
         // Add an overlay to the map of current lat/lng
          marker = new google.maps.Marker({
@@ -815,6 +851,7 @@ map = new google.maps.Map(document.getElementById("map_canvas_character"),option
 				{
 					if (timeFull==timeLeft)
 					{
+												
 						timeNow=new Date().getTime();
 						getTimeCharacter();
 					}
@@ -833,16 +870,32 @@ function getRandom(n,m)
 {
 	return Math.floor(Math.random()*(n-m+1))+m;
 }
+function loadBackground()
+{
+		
+	var n=0;
+	var m=4;
+	var backGround=getRandom(n,m);
+	var backgroundSet="resources/backgrounds/back"+backGround+"_"+resolution+".png";
+	
+	 $('#character').css({
+    'background' : 'transparent url('+backgroundSet+') 0 0 no-repeat',
+	'-webkit-background-size':'cover',
+	'background-repeat':'no-repeat',
+	'background-size':'cover',
+});
+		
+
+					 
+}
 
 function loadCharacter()
 {
+	loadBackground();
 	var backCharacter;
 	var frontCharacter;
 	var headerCharacter;
-	
-	var n=0;
-	var m=2;
-	var backGround=getRandom(0,2);
+
 
 	switch(setScene)
 	{
@@ -954,9 +1007,19 @@ function clearTripNo()
 	
 	
 $(document).on('pageshow','#loading', function(e,data){ 
-				 rotTimes=10;	
+				 rotTimes=2000;	
+				 
+				  $('#backCharacter').css('visibility','hidden');
+	  $('#finishLeafs').css('visibility','hidden');
+	  $('#positionLeftCharacter').css('visibility','hidden');
+	 $('#resetTripContainer').css('visibility','hidden');
+	 $('#menuJungle').css('visibility','hidden');
+	  $('#finishCharacter').css('visibility','hidden');
+	  $('#finishLeafs').destroy();
+	
 				 $("#wheelBorder").height($("#wheelBorder").width());
- 				 $("#wheelDiv").height($("#wheelBorder").width()/10);
+
+ 				 $("#wheelDiv").height($("#wheelBorder").width()/9);
 			  $("#wheelDiv").css('top',($("#wheelBorder").height()/2)-($("#wheelDiv").height()/2));
 			  loadCharacter();
 				setTimeout(function () { 
@@ -969,7 +1032,7 @@ $(document).on('pageshow','#loading', function(e,data){
 						{
 							$.mobile.changePage("#aquarium");
 						}
-						},1000); 
+						},rotTimes); 
 
 					
 			

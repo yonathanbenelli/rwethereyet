@@ -37,7 +37,7 @@
        
   </div>
         <div data-role="footer" id="footerMain" >
-			   <div data-role="buttonBack" id="backMain"  ></div>
+			   <div data-role="buttonBack" id="backMain" onClick="$.mobile.changePage('#character');" ></div>
             	
 	 </div>
       
@@ -158,7 +158,7 @@
 </div>   
     </div>
     <div data-role="footer" id="footerSetCharacter" >
-			   <div data-role="buttonBack" id="backSetCharacter" onClick="$.mobile.changePage(goToTripPlanner());" ></div>
+			   <div data-role="buttonBack" id="backSetCharacter" onClick="goToBackFromSetCharacter()" ></div>
             	
 	 </div>
 
@@ -180,7 +180,7 @@
                  <div  id="buttonMenuJungle3" data-role="buttonMenuTap" ></div>
                  <div  id="buttonMenuJungle4"  data-role="buttonMenuTap" ></div>
       </div>
-    <div  id="finishCharacter"  onClick="clearTrip();$.mobile.changePage('#main');"> </div>
+    <div  id="finishCharacter"  onClick="finishTripJungle();	"> </div>
                 	
     <div id="characterContainer">
                 <div id="colorCharacter" >

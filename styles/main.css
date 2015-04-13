@@ -153,7 +153,10 @@ img, object, embed, video {
 	
 	
 }
-
+#backMain
+{
+	visibility:hidden;
+}
 #finishLeafs
 {
 
@@ -225,7 +228,7 @@ height:60% !important;width:100% !important;background-size:100% !important;
 #menuLeaf
 {
 	height: 7% !important; width: 7% !important;    left:92% !important; background-size: 100% 100% !important; 
-	z-index:2000 !important; position:absolute !important;
+	z-index:6000 !important; position:absolute !important;
 			background: transparent url(../resources/buttons/leafbutton2.png) 0 0 no-repeat;
 
 }
@@ -527,7 +530,7 @@ float:left;
 }
 #wheelBorder
 { 	  background: transparent url(../resources/others/loadingborder.png) 0 0 no-repeat;
-    background-size: 100%!important;
+    background-size: 100% 100%!important;
   height: 60% ;
   width: 80% !important;
   margin-left: auto !important;
