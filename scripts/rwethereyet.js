@@ -597,9 +597,8 @@ marker.setMap(null);
 // onError Callback receives a PositionError object
 //
 function onError(error) {
-	//distanceLeft=-1;
-					   currentPosition=defaultLatLng; 
-					   				  
+				   currentPosition=null; 
+
 	//				$('#mapAdd').css('color','red');
 //				$('#mapAdd').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
 //				$('#nextDist').css('display','none');
@@ -656,9 +655,17 @@ function getCurrentPosCharacter()
 //navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			   if(currentPosition==undefined)
 			   {
-				   //currentPosition=defaultLatLng; 
+
 
 				   navigator.geolocation.getCurrentPosition(onSuccess, onError);
+				   if(currentPosition==null)
+				   {
+					   				   currentPosition=defaultLatLng; 
+				   }
+				   else
+				   {
+					   $('#toInput').val(currentPosition.lat());
+				   }
 			   }
 			   else
 			   {
