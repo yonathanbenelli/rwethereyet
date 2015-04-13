@@ -10,14 +10,14 @@
 [data-role=buttonNext]{   background: transparent url(../resources/buttons/nextarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:right !important; visibility:hidden 	}
 [data-role=setCharacterButton]{  height: 35% !important; width: 40% !important;     margin-left: 7% !important; float:left !important;
 background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
-
+/*
 @font-face {
   font-family: 'sharkyspotdemo';
   src: url('sharkyspotdemo.ttf');
   src: local('☺'), url('sharkyspotdemo.ttf') format('truetype');
-}
+}*/
 body{
-  font-family: 'sharkyspotdemo';
+ /* font-family: 'sharkyspotdemo';*/
   scrollbar-base-color:#864217 ;
   scrollbar-3dlight-color: #864217;
   scrollbar-highlight-color: #864217;
