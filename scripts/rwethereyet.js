@@ -491,6 +491,7 @@ distanceFull=-1;
 		pinchStatus:function(event, phase, direction, distance , duration , fingerCount, pinchZoom) {
 			 if(phase === $.fn.swipe.phases.PHASE_END || phase === $.fn.swipe.phases.PHASE_CANCEL) 
 				   {
+					   
 					   if(fingerCount==2)
 						  {
 					if(direction=='out')
@@ -580,7 +581,7 @@ marker.setMap(null);
   
   var onSuccess = function(position) {
 	currentPosition=google.maps.LatLng(position.coords.latitude,position.coords.longitude,false);
-   distanceLeft=google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition);
+  // distanceLeft=google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition);
    
 /*    alert('Latitude: '          + position.coords.latitude          + '\n' +
           'Longitude: '         + position.coords.longitude         + '\n' +
@@ -596,7 +597,9 @@ marker.setMap(null);
 // onError Callback receives a PositionError object
 //
 function onError(error) {
-	distanceLeft=-1;
+	//distanceLeft=-1;
+					   currentPosition=defaultLatLng; 
+					   				  
 	//				$('#mapAdd').css('color','red');
 //				$('#mapAdd').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
 //				$('#nextDist').css('display','none');
@@ -653,7 +656,9 @@ function getCurrentPosCharacter()
 //navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			   if(currentPosition==undefined)
 			   {
-				   currentPosition=defaultLatLng; 
+				   //currentPosition=defaultLatLng; 
+
+				   navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			   }
 			   else
 			   {

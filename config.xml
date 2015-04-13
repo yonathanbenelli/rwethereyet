@@ -20,10 +20,23 @@
 <preference name="orientation"                value="portrait" />  
 <preference name="exit-on-suspend" value="false"/>
 <icon src="icon1.png" />
+	<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
+	<gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.4" />
+	<gap:plugin name="org.apache.cordova.geolocation" />
+	    <gap:plugin name="org.apache.cordova.device-motion" />
+	    <gap:plugin name="org.apache.cordova.device-orientation" />
 
-<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
-<gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.4" />
-<gap:plugin name="org.apache.cordova.geolocation" />
-    <gap:plugin name="org.apache.cordova.device-motion" />
-    <gap:plugin name="org.apache.cordova.device-orientation" />
+    <!-- Define app splash screen for each platform. -->
+    <gap:splash src="splash1.png"       gap:platform="android" gap:qualifier="port-ldpi" />
+    <gap:splash src="splash1.png"              gap:platform="android" gap:qualifier="port-mdpi" />
+    <gap:splash src="splash1.png"             gap:platform="android" gap:qualifier="port-hdpi" />
+    <gap:splash src="splash1.png"             gap:platform="android" gap:qualifier="port-xhdpi" />
+    <gap:splash src="splash1.png"                     gap:platform="blackberry" />
+    <gap:splash src="splash1.png"                gap:platform="ios"     width="320" height="480" />
+    <gap:splash src="splash1.png"            gap:platform="ios"     width="640" height="960" />
+    <gap:splash src="splash1.png"        gap:platform="ios"     width="640" height="1136" />
+    <gap:splash src="splash1.png"                  gap:platform="ios"     width="768" height="1024" />
+    <gap:splash src="splash1.png"                 gap:platform="ios"     width="1024" height="768" />
+    <gap:splash src="splash1.png"             gap:platform="winphone" />
+
 </widget>
