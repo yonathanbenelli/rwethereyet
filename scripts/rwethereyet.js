@@ -12,6 +12,13 @@
 			});
 		})(jQuery);
 	*/
+	
+	document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        document.addEventListener("backbutton", function (e) {
+            e.preventDefault();
+        }, false );
+}
 	var	sound=true;
 	      var doubleTapCount=0;
 			var defaultTrip=2;
