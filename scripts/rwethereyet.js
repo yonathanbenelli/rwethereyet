@@ -25,7 +25,7 @@ $(document).bind("pagebeforechange", function(e,ob) {
     }
 });
 
-
+var opt = { enableHighAccuracy: true , timeout: 15000};
 var charConH;
 	var	sound=true;
 	      var doubleTapCount=0;
@@ -40,12 +40,7 @@ var charConH;
 			var updateFreqMilis=3000;
 /// init google maps 
 		var defaultLatLng = new google.maps.LatLng(45.2501566,-75.8002568);
-			 var optionsCharacterMap = {
-            	zoom: zoomLevel,
-            center: defaultLatLng,
-			disableDefaultUI:true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+		var optionsCharacterMap;			
 		
         var map;
         var mapDest;
@@ -447,6 +442,7 @@ $(document).on('pageshow','#byDistance', function(e,data){
 //intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);
 //    $('#distance-content').css('margin-top',($(window).height() - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#distance-content').outerHeight())/2);
 	pageRender='#byDistance';  
+	
 $('#borderMap').height($('#borderMap').width());
 $('#map_canvas_1').height($('#map_canvas_1').width()*(1-0.05));
 				$('#msg').css('visibility','hidden');
@@ -525,6 +521,12 @@ distanceFull=-1;
 getCurrentPosCharacter();
 var directionsDisplay = new google.maps.DirectionsRenderer();
 var directionsService=new google.maps.DirectionsService();
+ optionsCharacterMap = {
+            	zoom: zoomLevel,
+            center: currentPosition,
+			disableDefaultUI:true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
 
 mapDest = new google.maps.Map(document.getElementById("map_canvas_1"),optionsCharacterMap);
         // Add an overlay to the map of current lat/lng
@@ -653,25 +655,19 @@ function getCurrentPosCharacter()
 {
 
 //navigator.geolocation.getCurrentPosition(onSuccess, onError);
-			   if(currentPosition==undefined)
-			   {
-					var options = { enableHighAccuracy: true , timeout: 15000};
-
-				   navigator.geolocation.getCurrentPosition(onSuccess, onError,options);
+			      navigator.geolocation.getCurrentPosition(onSuccess, onError,opt);
 				   if(currentPosition==null)
 				   {
-					   				   currentPosition=defaultLatLng; 
+					  				   currentPosition=defaultLatLng; 
+									   					   $('#toInput').val('not pos');
 				   }
 				   else
 				   {
 					   $('#toInput').val(currentPosition.lat());
 				   }
-			   }
-			   else
-			   {
-				     currentPosition= new google.maps.LatLng(currentPosition.lat(),currentPosition.lng()-(currentPosition.lng()*0.0001));
-			   }
-
+			   
+				    // currentPosition= new google.maps.LatLng(currentPosition.lat(),currentPosition.lng()-(currentPosition.lng()*0.0001));
+			
 }
 function updatePostionCharacter() {
          
@@ -762,6 +758,16 @@ $(document).on('pageshow','#character', function(e,data){
 	$("#resetTripContainer").height($("#resetTripContainer").width()/1.33);
 	$("#positionLeftCharacter").height($("#positionLeftCharacter").width());
 	  charConH=$("#characterContainer").height();
+	  
+	  
+	  
+	  getCurrentPosCharacter();
+	   optionsCharacterMap = {
+            	zoom: zoomLevel,
+            center: currentPosition,
+			disableDefaultUI:true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
 
 map = new google.maps.Map(document.getElementById("map_canvas_character"),optionsCharacterMap);
         // Add an overlay to the map of current lat/lng
