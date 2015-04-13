@@ -13,8 +13,8 @@ background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
 
 @font-face {
   font-family: 'sharkyspotdemo';
-  src: url('../styles/sharkyspotdemo.ttf');
-  src: local('☺'), url('../styles/sharkyspotdemo.ttf') format('truetype');
+  src: url('sharkyspotdemo.ttf');
+  src: local('☺'), url('sharkyspotdemo.ttf') format('truetype');
 }
 body{
   font-family: 'sharkyspotdemo';
@@ -535,7 +535,7 @@ float:left;
   width: 80% !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  margin-top: 50% !important;
+  margin-top: 45% !important;
 }
 #contentCharacter
 {overflow:hidden !important;

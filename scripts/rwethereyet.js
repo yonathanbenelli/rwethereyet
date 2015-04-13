@@ -1,3 +1,4 @@
+
 /*	(function($) {
 			$(document).ready(function() {
 			
@@ -13,13 +14,16 @@
 		})(jQuery);
 	*/
 	
-	document.addEventListener("deviceready", onDeviceReady, false);
-    function onDeviceReady() {
-        document.addEventListener("backbutton", function (e) {
-            e.preventDefault();
-        }, false );
-}
 
+$(document).bind("pagebeforechange", function(e,ob) {
+	//console.log("pagebeforechange");
+	//console.dir(ob.toPage);
+
+    if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {
+//        console.log("blocking the back");
+        e.preventDefault();
+    }
+});
 
 var myScroll;
 var charConH;
@@ -712,6 +716,8 @@ function getTopFrontCharacter(timeL,heightC)
 			return actHeightC;
 
 }
+
+
 
 $(document).on('pageshow','#character', function(e,data){ 
 
