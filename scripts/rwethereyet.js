@@ -655,9 +655,9 @@ function getCurrentPosCharacter()
 //navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			   if(currentPosition==undefined)
 			   {
+					var options = { enableHighAccuracy: true , timeout: 15000};
 
-
-				   navigator.geolocation.getCurrentPosition(onSuccess, onError);
+				   navigator.geolocation.getCurrentPosition(onSuccess, onError,options);
 				   if(currentPosition==null)
 				   {
 					   				   currentPosition=defaultLatLng; 
