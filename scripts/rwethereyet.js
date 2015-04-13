@@ -580,7 +580,7 @@ marker.setMap(null);
   });
   
   var onSuccess = function(position) {
-	currentPosition=google.maps.LatLng(position.coords.latitude,position.coords.longitude,false);
+	currentPosition=google.maps.LatLng(position.coords.latitude,position.coords.longitude);
   // distanceLeft=google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition);
    
 /*    alert('Latitude: '          + position.coords.latitude          + '\n' +
