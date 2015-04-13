@@ -96,7 +96,8 @@ var myScroll;
 $(document).on('pageshow','#setCharacter', function(e,data){    
 
 	//myScroll = new iScroll('contentSetCharacter');
-$(function() { $('#containerSetCharacter').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+
+/*$(function() { $('#containerSetCharacter').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
 
 
 
@@ -118,7 +119,7 @@ $(function() { $('#containerSetCharacter').swipe( {swipe:function(event, directi
 			}
 			$('#containerSetCharacter').css('top',topSetCharIcon*($('#containerSetCharacter').height()*0.35));
 }});});
-
+*/
 		});
 
 $(document).on('pageshow','#byTime', function(e,data){    
