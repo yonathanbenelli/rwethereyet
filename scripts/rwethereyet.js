@@ -25,7 +25,7 @@ $(document).bind("pagebeforechange", function(e,ob) {
     }
 });
 
-var myScroll;
+
 var charConH;
 	var	sound=true;
 	      var doubleTapCount=0;
@@ -35,7 +35,7 @@ var charConH;
 			var speedSwipeMap=0.5;
 			var minute2pos=0;
 			var zoomLevel=10;
-			var pageRender='#main';
+			var pageRender='none';
 		var zoomLevelD=10;
 			var updateFreqMilis=3000;
 /// init google maps 
@@ -115,8 +115,6 @@ var charConH;
 
 $(document).on('pageshow','#main', function(e,data){    
 
-if(pageRender=='#main')
-{
 	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 	{
 		$('#backMain').css('visibility','visible');	
@@ -128,12 +126,7 @@ if(pageRender=='#main')
 		 $('#buttonTripPlanner').css('visibility','visible');
 			$('#backMain').css('visibility','hidden');	
 	}
-}
-else
-{
-			  $.mobile.changePage(pageRender);
 
-}
 });
 $(document).on('pageshow','#setCharacter', function(e,data){  
 	pageRender='#setCharacter';  
@@ -362,6 +355,16 @@ $(document).on('pageshow','#byTime', function(e,data){
 
 });
 
+function backToMain()
+{
+					pageRender='#main';  
+					$.mobile.changePage('#main');
+}
+function goToSetCharacter()
+{
+						pageRender='#setCharacter';  
+	$.mobile.changePage('#setCharacter');
+}
 
 function goToTripPlanner()
 {
@@ -395,6 +398,7 @@ function goToBackPlanner()
 	}
 	else
 	{
+						pageRender='#tripPlanner';  	
 				return '#tripPlanner';
 	}
 }

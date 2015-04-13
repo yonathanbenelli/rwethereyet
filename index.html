@@ -52,7 +52,7 @@
     <div  id="buttonDistance"  onClick="$.mobile.changePage('#byDistance');"></div>
   </div>
     <div data-role="footer" id="footerTripPlanner" >
-			   <div data-role="buttonBack" id="backTripPlanner" onClick="$.mobile.changePage('#main');" ></div>
+			   <div data-role="buttonBack" id="backTripPlanner" onClick="backToMain();" ></div>
  	 </div>
 </div>
 
@@ -74,7 +74,7 @@
     </div>
     <div data-role="footer" id="footerByTime" >
 			   <div data-role="buttonBack" id="backByTime" onClick="$.mobile.changePage(goToBackPlanner());" ></div>
-               <div data-role="buttonNext" id="nextByTime" onClick="$.mobile.changePage('#setCharacter');" ></div>
+               <div data-role="buttonNext" id="nextByTime" onClick="goToSetCharacter()" ></div>
  	 </div>
 
 </div>
@@ -99,7 +99,7 @@
   </div>
     <div data-role="footer" id="footerByDistance" >
 			   <div data-role="buttonBack" id="backByDistance" onClick="$.mobile.changePage(goToBackPlanner());" ></div>
-               <div data-role="buttonNext" id="nextByDistance" onClick="$.mobile.changePage('#setCharacter');" ></div>
+               <div data-role="buttonNext" id="nextByDistance" onClick="goToSetCharacter();" ></div>
  	 </div>
     	<div id="msg"></div>
 </div>
@@ -132,7 +132,7 @@
     
   </div>
     <div data-role="footer" id="footerSetting" >
-			   <div data-role="buttonBack" id="backSetting" onClick="$.mobile.changePage('#main');" ></div>
+			   <div data-role="buttonBack" id="backSetting" onClick="backToMain();"></div>
             	
 	 </div>
 </div>
