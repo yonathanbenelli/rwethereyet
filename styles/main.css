@@ -17,6 +17,7 @@ background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
 
 }
 body{
+	background-color:#86FDF0 !important;
   font-family: sharkyspotdemo;
   scrollbar-base-color:#864217 ;
   scrollbar-3dlight-color: #864217;
@@ -238,7 +239,9 @@ position: absolute !important;
 }
 #menuJungle
 {
-	  visibility:hidden;
+
+	  visibility: hidden;
+  opacity: 0.0;
 }
 #finishCharacter
 {
@@ -344,6 +347,17 @@ width: 20% !important;
 	float: left;
   width: 65% !important;
     z-index:1000;
+}
+#knowFactContainer
+{
+	background: transparent url(../resources/others/wood1.png) 0 0 no-repeat;
+	background-size: 100% 100% !important; 
+  width: 80%;
+  position: absolute;
+  top: 40%;
+  opacity:0;
+    padding: 1%;
+
 }
 #resetTripContainer
 {

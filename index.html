@@ -31,13 +31,13 @@
 
   <div data-role="content"  id="contentMain">
 	  <div data-role="buttonMenuMain"  id="buttonSeparator"  ></div>
-    <div data-role="buttonMenuMain"  id="buttonTripPlanner"  onClick="$.mobile.changePage(goToTripPlanner());"></div>
-    <div data-role="buttonMenuMain" id="buttonSettings"  onClick="$.mobile.changePage('#settings');"></div>
-   <div data-role="buttonMenuMain" id="buttonHelp"  onClick="$.mobile.changePage('#help');"></div>
+    <div data-role="buttonMenuMain"  id="buttonTripPlanner"  onClick="goToPage(goToTripPlanner(),false)"></div>
+    <div data-role="buttonMenuMain" id="buttonSettings"  onClick="goToPage('#settings',false);"></div>
+   <div data-role="buttonMenuMain" id="buttonHelp"  onClick="goToPage('#help',false);"></div>
        
   </div>
         <div data-role="footer" id="footerMain" >
-			   <div data-role="buttonBack" id="backMain" onClick="$.mobile.changePage('#character');" ></div>
+			   <div data-role="buttonBack" id="backMain" onClick="goToPage('#character',true);" ></div>
             	
 	 </div>
       
@@ -48,8 +48,8 @@
 
   <div data-role="content" id="contentTripPlanner">
 <div data-role="buttonMenuMain"  id="buttonSeparator"  ></div>
-  <div  id="buttonTime"  onClick="$.mobile.changePage('#byTime');"></div>
-    <div  id="buttonDistance"  onClick="$.mobile.changePage('#byDistance');"></div>
+  <div  id="buttonTime"  onClick="goToPage('#byTime',false);"></div>
+    <div  id="buttonDistance"  onClick="goToPage('#byDistance',false);"></div>
   </div>
     <div data-role="footer" id="footerTripPlanner" >
 			   <div data-role="buttonBack" id="backTripPlanner" onClick="backToMain();" ></div>
@@ -73,7 +73,7 @@
             </div>
     </div>
     <div data-role="footer" id="footerByTime" >
-			   <div data-role="buttonBack" id="backByTime" onClick="$.mobile.changePage(goToBackPlanner());" ></div>
+			   <div data-role="buttonBack" id="backByTime" onClick="goToPage(goToBackPlanner(),true);" ></div>
                <div data-role="buttonNext" id="nextByTime" onClick="goToSetCharacter()" ></div>
  	 </div>
 
@@ -100,7 +100,7 @@
      
   </div>
     <div data-role="footer" id="footerByDistance" >
-			   <div data-role="buttonBack" id="backByDistance" onClick="$.mobile.changePage(goToBackPlanner());" ></div>
+			   <div data-role="buttonBack" id="backByDistance" onClick="goToPage(goToBackPlanner(),true);" ></div>
                <div data-role="buttonNext" id="nextByDistance" onClick="goToSetCharacter();" ></div>
  	 </div>
     	<div id="msg"></div>
@@ -202,7 +202,9 @@
       		<div id="resetTripNo" onClick="clearTripNo()"></div>
           
 	  </div>
-
+	<div id="knowFactContainer" >
+          
+	  </div>
         
 	<div id="positionLeftCharacter" >
    			
