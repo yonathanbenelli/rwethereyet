@@ -51,6 +51,7 @@ body{
     transform: rotate(0deg);
   }
   to {
+
     -ms-transform: rotate(360deg);
     -moz-transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
@@ -367,6 +368,7 @@ width: 20% !important;
   height: 50%;
   position: absolute;
   top: 40%;
+  z-index:7000;
   visibility:hidden;
 }
 #resetTripYes
@@ -410,7 +412,7 @@ z-index:1000px;
 		font-size: 1.5em;
 		background: transparent url(../resources/others/wood1.png) 0 0 no-repeat;
 		background-size: 100% 100% !important; 
-		color: #F4CE07 !important;
+		color:#FDFD5E  !important;
 		    width: 80%;
 			  height: 15%;
 	 visibility: hidden;
