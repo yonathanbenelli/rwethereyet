@@ -1052,7 +1052,10 @@ function finishTripJungle()
 }
 function showFinishJungle()
 {
-	
+			window.clearInterval(intervalDist);
+				window.clearInterval(intervalDist2);
+			navigator.geolocation.clearWatch(watchID);
+
 	  $('#finishCharacter').css('visibility','visible');
   		$('#finishLeafs').css('visibility','visible');
 		$('#finishLeafs').pan({fps: 30, speed: 4, dir: 'down', depth: 70});
