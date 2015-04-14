@@ -10,14 +10,14 @@
 [data-role=buttonNext]{   background: transparent url(../resources/buttons/nextarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:right !important; visibility:hidden 	}
 [data-role=setCharacterButton]{  height: 35% !important; width: 40% !important;     margin-left: 7% !important; float:left !important;
 background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
-/*
+
 @font-face {
-  font-family: 'sharkyspotdemo';
+  font-family: sharkyspotdemo;
   src: url('sharkyspotdemo.ttf');
-  src: local('☺'), url('sharkyspotdemo.ttf') format('truetype');
-}*/
+
+}
 body{
- /* font-family: 'sharkyspotdemo';*/
+  font-family: sharkyspotdemo;
   scrollbar-base-color:#864217 ;
   scrollbar-3dlight-color: #864217;
   scrollbar-highlight-color: #864217;
@@ -342,7 +342,7 @@ width: 20% !important;
 #toInput
 {
 	float: left;
-  width: 72%;
+  width: 65% !important;
     z-index:1000;
 }
 #resetTripContainer
@@ -420,6 +420,7 @@ z-index:1000px;
   padding-right: 10px;
 	background: transparent url(../resources/others/wood1.png) 0 0 no-repeat;
 	background-size: 100% 100% !important; 
+	visibility:hidden;
 }
 #mapAdd
 {
@@ -436,6 +437,7 @@ z-index:1000px;
 		left:10% !important;
 		position:relative !important;
 		float:left !important;
+		visibility:hidden;
 }
 #map_canvas_character
 {
@@ -452,6 +454,7 @@ height:70%;
 	background: transparent url(../resources/others/bordermap.png) 0 0 no-repeat;
  background-size:100% !important;  height:100% ; width: 100% !important;  
 	 position:relative !important;
+	 visibility:hidden;
 	 
 	 
 }
@@ -559,6 +562,7 @@ float:left;
   top: 40%;
   width: 50% !important;
   position: relative;
+  visibility:hidden;
 }
 #containerSetCharacter
 {
@@ -579,6 +583,10 @@ float:left;
   margin-left: auto !important;
   margin-right: auto !important;
   margin-top: 45% !important;
+    visibility:hidden;
+}
+#contentByDistance
+{overflow:hidden !important;
 }
 #contentCharacter
 {overflow:hidden !important;

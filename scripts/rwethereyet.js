@@ -21,6 +21,7 @@ $(document).bind("pagebeforechange", function(e,ob) {
 
 var opt = { enableHighAccuracy: false , timeout: 15000};
 var charConH;
+var watchID;
 	var	sound=true;
 	      var doubleTapCount=0;
 			var defaultTrip=2;
@@ -34,7 +35,15 @@ var charConH;
 			var updateFreqMilis=3000;
 /// init google maps 
 		var defaultLatLng = new google.maps.LatLng(45.2501566,-75.8002568);
-		var optionsCharacterMap;			
+			var directionsDisplay = new google.maps.DirectionsRenderer();
+			var directionsService=new google.maps.DirectionsService();
+		var currentPosition= new google.maps.LatLng(45.2501566,-75.8002568);
+		var optionsCharacterMap= {
+					zoom: zoomLevel ,
+				center: currentPosition,
+				disableDefaultUI:true,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};			
 		
         var map;
         var mapDest;
@@ -45,7 +54,7 @@ var charConH;
 		var from;
 		var distanceLeft=-1;
 		var distanceFull=-1;
-		var currentPosition;
+
 		var setTrip=defaultTrip;
 		var destPosition;
 		var intervalDist;
@@ -437,12 +446,22 @@ $(document).on('pageshow','#byDistance', function(e,data){
 //intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);
 //    $('#distance-content').css('margin-top',($(window).height() - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#distance-content').outerHeight())/2);
 	pageRender='#byDistance';  
+	zoomLevel=10;
 	
+$('#msg').css('visibility','hidden');
+
 $('#borderMap').height($('#borderMap').width());
+
 $('#map_canvas_1').height($('#map_canvas_1').width()*(1-0.05));
-				$('#msg').css('visibility','hidden');
-				$('#toInput').val('Enter your destination');
-defaultLatLng = new google.maps.LatLng(45.2501566,-75.8002568);
+$('#map_canvas_1').css('visibility','visible');	
+$('#borderMap').css('visibility','visible');	
+$('#toInput').val('Juncal 1511 Montevideo');
+
+if(mapDest==undefined)
+{
+	mapDest = new google.maps.Map(document.getElementById("map_canvas_1"),optionsCharacterMap);
+}
+
 from="";
 distanceLeft=-1;
 distanceFull=-1;
@@ -513,28 +532,6 @@ distanceFull=-1;
         fingers:$.fn.swipe.fingers.ALL,  
         pinchThreshold:0  
     });	    });	
-getCurrentPosCharacter();
-var directionsDisplay = new google.maps.DirectionsRenderer();
-var directionsService=new google.maps.DirectionsService();
- optionsCharacterMap = {
-            	zoom: zoomLevel,
-            center: currentPosition,
-			disableDefaultUI:true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-mapDest = new google.maps.Map(document.getElementById("map_canvas_1"),optionsCharacterMap);
-        // Add an overlay to the map of current lat/lng
-         marker = new google.maps.Marker({
-            position: currentPosition,
-            map: mapDest,
-			
-            title: "We are here!"
-        });				
-mapDest.setCenter(currentPosition);
-directionsDisplay.setMap(mapDest);
-
-
 
  $('#submit').click(function() {
 marker.setMap(null);
@@ -551,7 +548,7 @@ marker.setMap(null);
 								
 								destPosition=response.routes[0].legs[0].end_location;
 								currentPosition=response.routes[0].legs[0].start_location;
-								distanceFull=google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition);
+								distanceFull=parseInt(google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition));
 								distanceLeft=distanceFull;
 								levelPos=0;
 								
@@ -574,47 +571,26 @@ marker.setMap(null);
   });
 
   });
+
+getCurrentPosByDistance();
+
   });
+
   
-  var onSuccess = function(position) {
-	currentPosition=google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-  // distanceLeft=google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition);
-   
-/*    alert('Latitude: '          + position.coords.latitude          + '\n' +
-          'Longitude: '         + position.coords.longitude         + '\n' +
-          'Altitude: '          + position.coords.altitude          + '\n' +
-          'Accuracy: '          + position.coords.accuracy          + '\n' +
-          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-          'Heading: '           + position.coords.heading           + '\n' +
-          'Speed: '             + position.coords.speed             + '\n' +
-          'Timestamp: '         + position.timestamp                + '\n');
-		  */
-};
-
-// onError Callback receives a PositionError object
-//
-function onError(error) {
-				   currentPosition=null; 
-
-	//				$('#mapAdd').css('color','red');
-//				$('#mapAdd').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
-//				$('#nextDist').css('display','none');
-
-//    alert('code: '    + error.code    + '\n' +
- //         'message: ' + error.message + '\n');
-}
 
 
 function getPosition()
 {
 	if(distanceLeft>=0)
 	{
+		
 	//navigator.geolocation.getCurrentPosition(onSuccess, onError);
-	levelPos=100*(1-(Math.floor(distanceLeft/distanceFull)));
-	   currentPosition= new google.maps.LatLng(currentPosition.lat()-(currentPosition.lat()*0.01),currentPosition.lng());
-   	distanceLeft=google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition);
-   
-
+			updateGreyCharacter(100-levelPos);
+   			setTimeout('getPosition()',updateFreqMilis);
+	}
+	else
+	{
+		showFinishJungle();
 	}
 }
 
@@ -625,19 +601,17 @@ function getTimeCharacter()
 	{
 	//navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
-	var timeOld=timeNow;
-	timeNow=(new Date()).getTime();
-	var timeLap=timeNow-timeOld;
-	
-	
-	timeLeft=timeLeft-Math.floor(timeLap/1000);
-	levelPos=100*(1-(timeLeft/timeFull));
-	updateGreyCharacter(100-levelPos);
-	updateTimeLeftText(timeLeft);
+			var timeOld=timeNow;
+			timeNow=(new Date()).getTime();
+			var timeLap=timeNow-timeOld;
+			timeLeft=timeLeft-Math.floor(timeLap/1000);
+			levelPos=100*(1-(timeLeft/timeFull));
+			updateGreyCharacter(100-levelPos);
+			updateTimeLeftText(timeLeft);
 
-	getCurrentPosCharacter();
-	updatePostionCharacter();
-	setTimeout('getTimeCharacter()',updateFreqMilis);
+	//	getCurrentPosCharacter();
+		
+		setTimeout('getTimeCharacter()',updateFreqMilis);
 	}
 	else
 	{
@@ -646,42 +620,94 @@ function getTimeCharacter()
 	
 	
 }
+var geo_options = {
+  enableHighAccuracy: true, 
+  maximumAge        : 30000, 
+  timeout           : 27000
+};
+
+
+
+function updatePostionCharacter()
+{
+	   watchID = navigator.geolocation.watchPosition(onSuccessC,onError,geo_options);
+}
+
+			function onSuccessC(position) {
+
+				currentPosition=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+
+				if(setTrip==1)
+				{			
+					levelPos =100*(1-(distanceLeft/distanceFull));
+						distanceLeft=parseInt(google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition));
+			
+				}
+	
+				
+					      // Add an overlay to the map of current lat/lng
+				         marker = new google.maps.Marker({
+				            position: currentPosition,
+				            map: map,
+				            title: "We are here!"
+				        });
+
+				map.setCenter(currentPosition);
+
+
+			}
+
+			function onSuccessByD(position) {
+				currentPosition=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+				        // Add an overlay to the map of current lat/lng
+				         marker = new google.maps.Marker({
+				            position: currentPosition,
+				            map: mapDest,
+							
+				            title: "We are here!"
+				        });				
+				mapDest.setCenter(currentPosition);
+				directionsDisplay.setMap(mapDest);
+
+			  // distanceLeft=google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition);
+			   
+			/*    alert('Latitude: '          + position.coords.latitude          + '\n' +
+					  'Longitude: '         + position.coords.longitude         + '\n' +
+					  'Altitude: '          + position.coords.altitude          + '\n' +
+					  'Accuracy: '          + position.coords.accuracy          + '\n' +
+					  'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+					  'Heading: '           + position.coords.heading           + '\n' +
+					  'Speed: '             + position.coords.speed             + '\n' +
+					  'Timestamp: '         + position.timestamp                + '\n');
+					  */
+			}
+			
+			// onError Callback receives a PositionError object
+			//
+			function onError(error) {
+				 alert('code: '    + error.code    + '\n' +
+							'message: ' + error.message + '\n');
+					  				   currentPosition=defaultLatLng; 
+			
+				//				$('#mapAdd').css('color','red');
+			//				$('#mapAdd').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
+			//				$('#nextDist').css('display','none');
+			
+			//    alert('code: '    + error.code    + '\n' +
+			 //         'message: ' + error.message + '\n');
+			}
+
+function getCurrentPosByDistance()
+{
+			      navigator.geolocation.getCurrentPosition(onSuccessByD, onError,opt);
+}
 function getCurrentPosCharacter()
 {
-
-//navigator.geolocation.getCurrentPosition(onSuccess, onError);
-			      navigator.geolocation.getCurrentPosition(onSuccess, onError,opt);
-				   if(currentPosition==null)
-				   {
-					  				   currentPosition=defaultLatLng; 
-									   					   $('#toInput').val('not pos');
-				   }
-				   else
-				   {
-					   $('#toInput').val(currentPosition.lat());
-				   }
-			   
-				    // currentPosition= new google.maps.LatLng(currentPosition.lat(),currentPosition.lng()-(currentPosition.lng()*0.0001));
-			
+			      navigator.geolocation.getCurrentPosition(onSuccessC, onError,opt);
 }
-function updatePostionCharacter() {
-         
-		
-	if(marker==undefined)
-	{
-		marker = new google.maps.Marker({
-            position: currentPosition,
-            map: map,
-            title: "We are Here!"
-        });
-	}
-	else
-	{
-		marker.setPosition(currentPosition);
-		}
-		
-		map.panTo(currentPosition);
-    }
+
+
+
 function updateTimeLeftText(timeL)
 {
 
@@ -750,28 +776,16 @@ $(document).on('pageshow','#character', function(e,data){
 
 
 	pageRender='#character';  
+	
+	
+	
 	$("#resetTripContainer").height($("#resetTripContainer").width()/1.33);
 	$("#positionLeftCharacter").height($("#positionLeftCharacter").width());
 	  charConH=$("#characterContainer").height();
-	  
-	  
-	  
-	  getCurrentPosCharacter();
-	   optionsCharacterMap = {
-            	zoom: zoomLevel,
-            center: currentPosition,
-			disableDefaultUI:true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-map = new google.maps.Map(document.getElementById("map_canvas_character"),optionsCharacterMap);
-        // Add an overlay to the map of current lat/lng
-         marker = new google.maps.Marker({
-            position: defaultLatLng,
-            map: map,
-            title: "We are here!"
-        });
-
+if(map==undefined)
+{	
+ map = new google.maps.Map(document.getElementById("map_canvas_character"),optionsCharacterMap);
+}
      $(function() {  
       $("#borderMapCharacter").swipe( {
 		  swipeStatus:function(event, phase, direction, distance , duration , fingerCount){
@@ -861,7 +875,7 @@ map = new google.maps.Map(document.getElementById("map_canvas_character"),option
 
 			});
       $("#buttonMenuJungle2").click(function() {
-		  zoomLevel=10;
+		  zoomLevel=16;
 		  map.setZoom(Math.floor(zoomLevel));
 				 $('#positionLeftCharacter').css('visibility','visible');
  					$('#timeLeftCharacter').css('visibility','hidden');
@@ -886,14 +900,16 @@ map = new google.maps.Map(document.getElementById("map_canvas_character"),option
 	 
 //$('#fish').sprite({fps: 12, no_of_frames: 6});
 	
-   		  
   		
 				if(setTrip==0)
 				{
 					if (timeFull==timeLeft)
 					{
-												
+	
+					
+	  											
 						timeNow=new Date().getTime();
+						  updatePostionCharacter();
 						getTimeCharacter();
 					}
 				}
@@ -901,10 +917,14 @@ map = new google.maps.Map(document.getElementById("map_canvas_character"),option
 				{
 					if (distanceFull==distanceLeft)
 					{
-						intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
+						$('#timeLeftCharacter').html("WITHOUT INFORMATION");
+										directionsDisplay.setMap(map);				
+						  updatePostionCharacter();
+						   intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
 					}
 				}
-
+	
+//	  getCurrentPosCharacter();
   });
   
 function getRandom(n,m)
@@ -1028,41 +1048,52 @@ function clearTripNo()
 }
 	function clearTrip()
 	{
+			navigator.geolocation.clearWatch(watchID);
 			 hourpos=0;
 			 minute1pos=0;
 			 minute2pos=0;
-			
+			timeNow=0;
+			setScene=0;	
 			distanceLeft=-1;
 			distanceFull=-1;
 			levelPos=-1;
 			timeLeft=-1;
 			timeFull=-1;
-			timeNow=0;
-			intervalRot;
-			setScene=0;
-			resolution;
 			frontCharacterTop=0;
 			characterContentHeight=0;
-
+			map=undefined;
+			mapDest=undefined;
 		
 	}
 	
-	
-$(document).on('pageshow','#loading', function(e,data){ 
-				 rotTimes=2000;	
-				 
-				  $('#backCharacter').css('visibility','hidden');
+function goToLoading()
+{
+		$.mobile.changePage('#loading');
+
+
+}
+function	loadLoading()
+{
+		  $('#backCharacter').css('visibility','hidden');
 	  $('#finishLeafs').css('visibility','hidden');
 	  $('#positionLeftCharacter').css('visibility','hidden');
 	 $('#resetTripContainer').css('visibility','hidden');
 	 $('#menuJungle').css('visibility','hidden');
 	  $('#finishCharacter').css('visibility','hidden');
 	  $('#finishLeafs').destroy();
-	
+
 				 $("#wheelBorder").height($("#wheelBorder").width());
 
  				 $("#wheelDiv").height($("#wheelBorder").width()/9);
 			  $("#wheelDiv").css('top',($("#wheelBorder").height()/2)-($("#wheelDiv").height()/2));
+			$("#wheelBorder").css('visibility','visible');			
+			$("#wheelDiv").css('visibility','visible');			
+}
+
+$(document).on('pageshow','#loading', function(e,data){ 
+	loadLoading();
+				 rotTimes=2000;	
+				 
 			  loadCharacter();
 				setTimeout(function () { 
 

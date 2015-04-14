@@ -86,11 +86,13 @@
   <div id="map_canvas_1"   > </div>					
          
    <div id="borderMap">
+
+
      </div>
      <div id="mapAdd" >	
 		
            <label id="toText">To</label>  
-           <input id="toInput" class="ui-bar-c" type="text" value="Enter your destination" onFocus="if($('#toInput').val()=='Enter your destination'){$('#toInput').val('')}"/>     
+           <input id="toInput" class="ui-bar-c" type="text" value="Enter destination" onFocus="if($('#toInput').val()=='Enter destination'){$('#toInput').val('')}"/>     
            <a id="submit" href="#" data-role="button" data-icon="search"></a>   
 	</div>
      
@@ -144,17 +146,17 @@
 
   <div data-role="content" id="contentSetCharacter">
     <div id="containerSetCharacter">
-        <div id="setLion"   data-role="setCharacterButton"  onClick="setScene=0; $.mobile.changePage('#loading');">    </div>
-        <div    id="setZebra"  data-role="setCharacterButton"    onClick="setScene=1;$.mobile.changePage('#loading');"></div>
-        <div  id="setMonkey"  data-role="setCharacterButton" onClick="setScene=2;$.mobile.changePage('#loading');"></div>
-        <div   id="setHippo" data-role="setCharacterButton"    onClick="setScene=3;$.mobile.changePage('#loading');"></div>
-        <div  id="setRhino" data-role="setCharacterButton"   onClick="setScene=4;$.mobile.changePage('#loading');"></div>
-        <div  id="setElephant" data-role="setCharacterButton"   onClick="setScene=5;$.mobile.changePage('#loading');"></div>
-        <div   id="setOstrich" data-role="setCharacterButton"     onClick="setScene=6;$.mobile.changePage('#loading');"></div>
-        <div   id="setToucan" data-role="setCharacterButton"      onClick="setScene=7;$.mobile.changePage('#loading');"></div>
-        <div  id="setCrocodile" data-role="setCharacterButton"  onClick="setScene=8;$.mobile.changePage('#loading');"></div>
-        <div   id="setGiraffe" data-role="setCharacterButton"     onClick="setScene=9;$.mobile.changePage('#loading');"></div>
-        <div  id="setAquarium" data-role="setCharacterButton"     onClick="setScene=10;$.mobile.changePage('#loading');"></div>
+        <div id="setLion"   data-role="setCharacterButton"  onClick="setScene=0; goToLoading();">    </div>
+        <div    id="setZebra"  data-role="setCharacterButton"    onClick="setScene=1;goToLoading();"></div>
+        <div  id="setMonkey"  data-role="setCharacterButton" onClick="setScene=2;goToLoading();"></div>
+        <div   id="setHippo" data-role="setCharacterButton"    onClick="setScene=3;goToLoading();"></div>
+        <div  id="setRhino" data-role="setCharacterButton"   onClick="setScene=4;goToLoading();"></div>
+        <div  id="setElephant" data-role="setCharacterButton"   onClick="setScene=5;goToLoading();"></div>
+        <div   id="setOstrich" data-role="setCharacterButton"     onClick="setScene=6;goToLoading();"></div>
+        <div   id="setToucan" data-role="setCharacterButton"      onClick="setScene=7;goToLoading();"></div>
+        <div  id="setCrocodile" data-role="setCharacterButton"  onClick="setScene=8;goToLoading();"></div>
+        <div   id="setGiraffe" data-role="setCharacterButton"     onClick="setScene=9;goToLoading();"></div>
+        <div  id="setAquarium" data-role="setCharacterButton"     onClick="setScene=10;goToLoading();"></div>
 </div>   
     </div>
     <div data-role="footer" id="footerSetCharacter" >
