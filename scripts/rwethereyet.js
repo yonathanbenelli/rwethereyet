@@ -843,7 +843,10 @@ distanceFull=-1;
     });	    });	
 
  $('#submit').click(function() {
-marker.setMap(null);
+ if(marker!=undefined)
+ {
+	marker.setMap(null);
+ }
 	  var request = {
       origin: currentPosition,
       destination: $('#toInput').val(),
@@ -931,7 +934,7 @@ function getTimeCharacter()
 }
 var geo_options = {
   enableHighAccuracy: true, 
-  maximumAge        : 30000, 
+  maximumAge        : 1000, 
   timeout           : 27000
 };
 
@@ -953,7 +956,10 @@ function updatePostionCharacter()
 			
 				}
 	
-				
+				 if(marker!=undefined)
+ {
+	marker.setMap(null);
+ }
 					      // Add an overlay to the map of current lat/lng
 				         marker = new google.maps.Marker({
 				            position: currentPosition,
@@ -969,6 +975,10 @@ function updatePostionCharacter()
 			function onSuccessByD(position) {
 				currentPosition=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 				        // Add an overlay to the map of current lat/lng
+				 if(marker!=undefined)
+ {
+	marker.setMap(null);
+ }
 				         marker = new google.maps.Marker({
 				            position: currentPosition,
 				            map: mapDest,
@@ -994,13 +1004,13 @@ function updatePostionCharacter()
 			// onError Callback receives a PositionError object
 			//
 			function onError(error) {
-				 alert('code: '    + error.code    + '\n' +
-							'message: ' + error.message + '\n');
-					  				   currentPosition=defaultLatLng; 
+				// alert('code: '    + error.code    + '\n' +
+					//		'message: ' + error.message + '\n');
+					  				 //  currentPosition=defaultLatLng; 
 			
-				//				$('#mapAdd').css('color','red');
-			//				$('#mapAdd').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
-			//				$('#nextDist').css('display','none');
+				$('#mapAdd').css('color','red');
+				$('#mapAdd').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
+						$('#nextByDistance').css('visibility','hidden');
 			
 			//    alert('code: '    + error.code    + '\n' +
 			 //         'message: ' + error.message + '\n');
@@ -1238,21 +1248,27 @@ if(map==undefined)
 				}
 	
 			$('#knowFactContainer').css('font-size','1.5em');
-						$('#knowFactContainer').css('color','#F4CE07');
+						$('#knowFactContainer').css('color','#FDFD5E');
 
 			
 $('#knowFactContainer').click(function() {if($('#knowFactContainer').css('opacity')==1){$('#knowFactContainer').animate({ "opacity": 0}, "slow");} }) ;
-	intervalDist2=setInterval(function () {loadKnowFact()}, updateFreqMilis*30);		
+	intervalDist2=setInterval(function () {loadKnowFact()}, updateFreqMilis*10);		
 //	  getCurrentPosCharacter();
   });
   
+  function correctFontKows(txt)
+  {
+	  
+		return	  txt.replace('?','<font face="Lucida Grande, Lucida Sans Unicode, Lucida Sans, DejaVu Sans, Verdana, sans-serif"> ?</font>');
+	  
+  }
  function loadKnowFact()
  {
 	 var r=getRandom(0,1);
 	if(r==0 && $('#knowFactContainer').css('opacity')==0)
 	{
 
-		$('#knowFactContainer').html(knows[getRandom(0,(knows.length-1))].toUpperCase());
+		$('#knowFactContainer').html(correctFontKows(knows[getRandom(0,(knows.length-1))].toUpperCase()));
 		$('#knowFactContainer').animate({ "opacity": 1}, "slow");
 		//$('#knowFactContainer').animate({ "visibility": 'visible'}, "slow");
 				
@@ -1397,6 +1413,7 @@ function clearTripNo()
 		window.clearInterval(intervalDist);
 				window.clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
+			$('#knowFactContainer').css('opacity','0');
 			directionsDisplay = new google.maps.DirectionsRenderer();
 			directionsService=new google.maps.DirectionsService();
 			 hourpos=0;
@@ -1466,8 +1483,9 @@ $(document).on('pageshow','#loading', function(e,data){
 function backFromCharacter()
 {
 	 $('#menuJungle').css('visibility','hidden');
-
-							$('#menuJungle').css('opacity', '0');
+	 $('#positionLeftCharacter').css('visibility','hidden');
+	 	 $('##timeLeftCharacter').css('visibility','hidden');
+    	$('#menuJungle').css('opacity', '0');
 									  $('#backCharacter').css('visibility','hidden');
 									  $.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:true});
 }
