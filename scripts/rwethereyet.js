@@ -378,6 +378,7 @@ var pageEfect="flip";
 		var resolution;
 		var frontCharacterTop=0;
 		var characterContentHeight=0;
+		var radiusDistanceFinish=20;
 		
 		if ($(window).width()>960)
 		{
@@ -952,14 +953,14 @@ function updatePostionCharacter()
 				if(setTrip==1)
 				{			
 					levelPos =100*(1-(distanceLeft/distanceFull));
-						distanceLeft=parseInt(google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition));
+						distanceLeft=parseInt(google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition))-radiusDistanceFinish;
 			
 				}
 	
 				 if(marker!=undefined)
- {
-	marker.setMap(null);
- }
+				 {
+					marker.setMap(null);
+				 }
 					      // Add an overlay to the map of current lat/lng
 				         marker = new google.maps.Marker({
 				            position: currentPosition,
@@ -1264,7 +1265,7 @@ $('#knowFactContainer').click(function() {if($('#knowFactContainer').css('opacit
   }
  function loadKnowFact()
  {
-	 var r=getRandom(0,1);
+	 var r=getRandom(0,2);
 	if(r==0 && $('#knowFactContainer').css('opacity')==0)
 	{
 
@@ -1484,7 +1485,7 @@ function backFromCharacter()
 {
 	 $('#menuJungle').css('visibility','hidden');
 	 $('#positionLeftCharacter').css('visibility','hidden');
-	 	 $('##timeLeftCharacter').css('visibility','hidden');
+	 	 $('#timeLeftCharacter').css('visibility','hidden');
     	$('#menuJungle').css('opacity', '0');
 									  $('#backCharacter').css('visibility','hidden');
 									  $.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:true});
