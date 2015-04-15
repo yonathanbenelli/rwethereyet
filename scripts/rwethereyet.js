@@ -16,7 +16,7 @@
 	
 
 $(document).bind("pagebeforechange", function(e,ob) {
-    if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+   if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -898,16 +898,30 @@ function getPosition()
 	{
 		
 	//navigator.geolocation.getCurrentPosition(onSuccess, onError);
+	if(setScene==10)
+	{
+	}
+	else
+		{
+		
 			updateGreyCharacter(100-levelPos);
    			setTimeout('getPosition()',updateFreqMilis);
+		}
 	}
 	else
 	{
-		showFinishJungle();
+		if(setScene==10)
+		{
+			showFinishAquarium();
+		}
+		else
+		{
+				showFinishJungle();
+		}
 	}
 }
 
-function getTimeCharacter()
+function getTimeC()
 {
 
 	if(timeLeft>0)
@@ -919,16 +933,32 @@ function getTimeCharacter()
 			var timeLap=timeNow-timeOld;
 			timeLeft=timeLeft-Math.floor(timeLap/1000);
 			levelPos=100*(1-(timeLeft/timeFull));
+		if(setScene==10)
+		{
+			showFinishAquarium();
+						updateTimeLeftTextA(timeLeft);
+		}
+		else
+		{
 			updateGreyCharacter(100-levelPos);
 			updateTimeLeftText(timeLeft);
 
+		}
+		
 	//	getCurrentPosCharacter();
 		
-		setTimeout('getTimeCharacter()',updateFreqMilis);
+		setTimeout('getTimeC()',updateFreqMilis);
 	}
 	else
 	{
-		showFinishJungle();
+		if(setScene==10)
+		{
+			showFinishAquarium();
+		}
+		else
+		{
+			showFinishJungle();
+		}
 	}
 	
 	
@@ -945,6 +975,38 @@ function updatePostionCharacter()
 {
 	   watchID = navigator.geolocation.watchPosition(onSuccessC,onError,geo_options);
 }
+function updatePostionAquarium()
+{
+	   watchID = navigator.geolocation.watchPosition(onSuccessA,onError,geo_options);
+}
+
+			function onSuccessA(position) {
+
+				currentPosition=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+
+				if(setTrip==1)
+				{			
+					levelPos =100*(1-(distanceLeft/distanceFull));
+						distanceLeft=parseInt(google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition))-radiusDistanceFinish;
+			
+				}
+	
+				 if(marker!=undefined)
+				 {
+					marker.setMap(null);
+				 }
+					      // Add an overlay to the map of current lat/lng
+				         marker = new google.maps.Marker({
+				            position: currentPosition,
+				            map: map,
+				            title: "We are here!"
+				        });
+
+				map.setCenter(currentPosition);
+
+
+			}
+
 
 			function onSuccessC(position) {
 
@@ -1026,7 +1088,10 @@ function getCurrentPosCharacter()
 			      navigator.geolocation.getCurrentPosition(onSuccessC, onError,geo_options);
 }
 
-
+function getCurrentPosAquarium()
+{
+			      navigator.geolocation.getCurrentPosition(onSuccessA, onError,geo_options);
+}
 
 function updateTimeLeftText(timeL)
 {
@@ -1041,11 +1106,35 @@ function updateTimeLeftText(timeL)
 				{
 						mins=0;
 				}
+				
 				$('#timeLeftCharacter').html(hrs+" HOURS AND <br/>"+mins+" MINUTES LEFT");
+}
+function updateTimeLeftTextA(timeL)
+{
+
+				var hrs=Math.floor(timeL/3600);
+				var mins=Math.floor((timeL%3600)/60);
+				if(hrs==0 && mins==0)
+				{
+					mins=1;
+				}
+				if(timeL==0)
+				{
+						mins=0;
+				}
+				
+				$('#timeLeftAquarium').html(hrs+" HOURS AND <br/>"+mins+" MINUTES LEFT");
 }
 function finishTripJungle()
 {
 	  $('#finishLeafs').destroy();
+	  clearTrip();
+	  				pageRender='#main';  
+	  $.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
+}
+function finishTripAquarium()
+{
+	  $('#finishBubbles').destroy();
 	  clearTrip();
 	  				pageRender='#main';  
 	  $.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
@@ -1062,6 +1151,28 @@ function showFinishJungle()
 
 	  
 }
+function showFinishAquarium()
+{
+			window.clearInterval(intervalDist);
+				window.clearInterval(intervalDist2);
+			navigator.geolocation.clearWatch(watchID);
+
+	  $('#finishAquarium').css('visibility','visible');
+  		$('#finishBubbles').css('visibility','visible');
+		(function($) {
+			$(document).ready(function() {
+			
+				$('#finishBubbles')
+					.sprite({fps: 5, no_of_frames: 5})
+					.active();
+				
+				
+			});
+		})(jQuery);
+
+	  
+}
+
 function goToBackFromSetCharacter()
 {
 	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
@@ -1094,14 +1205,7 @@ function getTopFrontCharacter(timeL,heightC)
 
 
 $(document).on('pageshow','#character', function(e,data){ 
-
-//$("#characterContainer").height($("#characterContainer").width());
-
-
 	pageRender='#character';  
-	
-	
-	
 	$("#resetTripContainer").height($("#resetTripContainer").width()/1.33);
 	$("#positionLeftCharacter").height($("#positionLeftCharacter").width());
 	  charConH=$("#characterContainer").height();
@@ -1237,7 +1341,7 @@ if(map==undefined)
 	  											
 						timeNow=new Date().getTime();
 						  updatePostionCharacter();
-						getTimeCharacter();
+						getTimeC();
 					}
 				}
 				else if(setTrip==1)
@@ -1259,6 +1363,312 @@ $('#knowFactContainer').click(function() {if($('#knowFactContainer').css('opacit
 	intervalDist2=setInterval(function () {loadKnowFact()}, updateFreqMilis*10);		
 //	  getCurrentPosCharacter();
   });
+
+
+
+
+function showSun()
+{
+	var l=getRandom(0,100);
+	$('#sun').css('left',l+'%');
+	$('#sun').css('visibility','visible');
+}
+function generateClouds(i)
+{
+			var sp;
+			var direction;
+
+			var he;
+
+			var fp=getRandom(15,250);
+
+			he=(getRandom(2,15)/100)*$(window).height();
+
+			//	he=getRandom(3,10)*10;
+			var tcloud=getRandom(0,2);
+			var widthc;
+			if(tcloud==2)
+			{
+				widthc=35.7;
+			}
+			else if(tcloud==1)
+			{
+					widthc=55.5;
+			}
+			else
+			{
+					widthc=15;
+			}
+			if(getRandom(0,1)==0)
+			{
+
+				direction='left';
+				$('#cloud'+i).css('background','transparent url(resources/characters/aquarium/static/cloud'+tcloud+'b.png) 0 0 no-repeat');
+
+			}
+			else
+			{
+				direction='right';
+				$('#cloud'+i).css('background','transparent url(resources/characters/aquarium/static/cloud'+tcloud+'a.png) 0 0 no-repeat');
+			}
+			var op=getRandom(8,10);
+						$('#cloud'+i).css('opacity',op/10);
+			$('#cloud'+i).css('height',he+"px");
+			//ss$('#cloud'+i).css('width',(he*widthc)+"px");
+			$('#cloud'+i).css('background-size',(he*widthc)+'px '+he+'px');
+			$('#cloud'+i).css('visibility','visible');
+
+		$('#cloud'+i).pan({fps: fp, speed: 1, dir: direction});
+
+}
+
+function showClouds(i)
+{
+	if(i<=8)
+	{
+
+			$('#cloud'+i).destroy();
+					
+		if(getRandom(0,2)<2)
+		{
+			generateClouds(i);
+			
+		}
+		else
+		{
+			$('#cloud'+i).css('visibility','hidden');
+		}
+			setTimeout(function(){ showClouds(i+1)},1000);
+	}
+
+}
+
+function generateBirds(i)
+{
+	
+	var r=$('#cloudsContainer').width();
+	var l=getRandom(10,90);
+	var sp=getRandom(1,15);
+	var p=getRandom(0,5);
+	var h=(getRandom(2,7)/100)*$(window).height();
+	$('#bird'+i).css('height',h);
+	$('#bird'+i).css('width',$('#bird'+i).height()*8);
+	$('#bird'+i).css('left',l+'%');
+	$('#bird'+i).css('visibility','visible');
+	var bot=parseInt($('#cloudsContainer').height())-parseInt($('#cloudsContainer').css('top').replace('px','').replace('%',''))-$('#bird'+i).height();
+	var t=getRandom(10,(bot/$('#cloudsContainer').height()));
+			$('#bird'+i).css('top',t+'%');
+			$('#bird'+i)
+			.sprite({fps: 4, no_of_frames:4})
+			.spRandom({top: 0, left: 0, right: r, bottom: bot, speed: sp*1000, pause: p*1000 })
+			.isDraggable({drag: function() {var topB=parseInt($('#bird'+i).css('top').replace('px',''));if(	topB>bot){return false;}}})
+	        .active();
+			
+
+
+
+
+}
+
+function showBirds(i)
+{
+	if(i<=8)
+	{
+
+			$('#bird'+i).destroy();
+					
+		if(getRandom(0,9)<8)
+		{
+			generateBirds(i);
+			
+		}
+		else
+		{
+			$('#bird'+i).css('visibility','hidden');
+		}
+					setTimeout(function(){ showBirds(i+1)},1000);
+
+	}
+
+}
+
+function showWaterLevel()
+{
+
+	$('#waterLevel').css('width',($('#waterLevel').height()*5)+'px');
+			$('#waterLevel').css('visibility','visible');
+$('#waterLevel').pan({fps: 100, speed: 5, dir: 'left'});
+}
+
+$(document).on('pageshow','#aquarium', function(e,data){ 
+
+
+	pageRender='#aquarium';  
+	showSun();
+	showWaterLevel();
+	showClouds(1);
+showBirds(1);
+$('#cloudsContainer').flyToTap();
+	/*
+	$("#resetTripContainerAquarium").height($("#resetTripContainerAquarium").width()/1.33);
+	$("#positionLeftAquarium").height($("#positionLeftAquarium").width());
+	  charConH=$("#aquariumContainer").height();
+if(map==undefined)
+{	
+ map = new google.maps.Map(document.getElementById("map_canvas_aquarium"),optionsCharacterMap);
+}
+     $(function() {  
+      $("#borderMapAquarium").swipe( {
+		  swipeStatus:function(event, phase, direction, distance , duration , fingerCount){
+			  
+			   if(phase === $.fn.swipe.phases.PHASE_END || phase === $.fn.swipe.phases.PHASE_CANCEL) 
+				   {
+						if(fingerCount==1)
+						  {
+							  
+							   if(direction=='up')
+							   {		
+											   map.panBy(0,Math.floor(distance*speedSwipeMap));			   
+							   }
+							   else if(direction=='down')
+							   {
+											   map.panBy(0, -Math.floor(distance*speedSwipeMap));			   
+							   }
+							   else if(direction=='left')
+							   {
+											   map.panBy(Math.floor(distance*speedSwipeMap),0);			   
+							   }
+							   else if(direction=='right')
+							   {
+											   map.panBy(-Math.floor(distance*speedSwipeMap),0);			   
+							   }
+						  }
+				   }
+        },
+		pinchStatus:function(event, phase, direction, distance , duration , fingerCount, pinchZoom) {
+			 if(phase === $.fn.swipe.phases.PHASE_END || phase === $.fn.swipe.phases.PHASE_CANCEL) 
+				   {
+					   if(fingerCount==2)
+						  {
+							
+			
+								
+					if(direction=='out')
+						{
+										
+							if(map.getZoom()>0)
+							 {
+								// zoomLevelD=zoomLevelD-0.05;
+									map.setZoom(map.getZoom()-1);
+							 }
+													
+						}
+						else if(direction=='in')
+						{
+							
+			
+								   if(map.getZoom()<19)
+								  {
+									 // zoomLevelD=zoomLevelD+0.05;
+										map.setZoom(map.getZoom()+1);
+								  }
+			
+						}
+			
+						  }
+				   }
+        },
+        fingers:$.fn.swipe.fingers.ALL,  
+        pinchThreshold:0  
+    });	    });	
+			
+  $(function() {  
+
+      //Enable swiping...
+      $("#menuBubble").swipe( {tap:function(event, target) {
+							doubleTapCount++;
+					     	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
+							if(doubleTapCount==2)
+							{
+								$('#menuAquarium').css('visibility', 'visible').animate({opacity: 1.0}, 200);
+
+
+									  $('#backAquarium').css('visibility','visible');
+							}
+	}, 
+		 
+		threshold:50 });
+  });
+
+
+      $("#buttonMenuAquarium1").click(function() {
+				 $('#timeLeftAquarium').css('visibility','visible');
+				$('#positionLeftAquarium').css('visibility','hidden');
+				 $('#resetTripAquarium').css('visibility','hidden');
+
+			});
+      $("#buttonMenuAquarium2").click(function() {
+		  zoomLevel=16;
+		  map.setZoom(Math.floor(zoomLevel));
+				 $('#positionLeftAquarium').css('visibility','visible');
+ 					$('#timeLeftAquarium').css('visibility','hidden');
+					 $('#resetTripContainerAquarium').css('visibility','hidden');
+});
+
+      $("#buttonMenuAquarium3").click(function() {
+		  
+		  		  		 $('#resetTripContainerAquarium').css('visibility','visible');
+		  		 $('#positionLeftAquarium').css('visibility','hidden');
+ 					$('#timeLeftAquarium').css('visibility','hidden');
+});
+
+      $("#buttonMenuAquarium4").click(function() {
+					 $('#resetTripContainerAquarium').css('visibility','hidden');
+					$('#positionLeftAquarium').css('visibility','hidden');
+					$('#timeLeftAquarium').css('visibility','hidden');
+
+				 		$('#menuAquarium').css('opacity','0');
+							$('#menuAquarium').css('visibility', 'hidden');
+				  $('#backAquarium').css('visibility','hidden');
+			});
+
+	 
+//$('#fish').sprite({fps: 12, no_of_frames: 6});
+	
+  		
+				if(setTrip==0)
+				{
+					if (timeFull==timeLeft)
+					{
+	
+					
+	  											
+						timeNow=new Date().getTime();
+						  updatePostionAquarium();
+						getTimeC();
+					}
+				}
+				else if(setTrip==1)
+				{
+					if (distanceFull==distanceLeft)
+					{
+						$('#timeLeftAquarium').html("WITHOUT INFORMATION");
+										directionsDisplay.setMap(map);				
+						  updatePostionAquarium();
+						   intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
+					}
+				}
+	
+			$('#knowFactContainerAquarium').css('font-size','1.5em');
+						$('#knowFactContainerAquarium').css('color','#FDFD5E');
+
+			
+$('#knowFactContainerAquarium').click(function() {if($('#knowFactContainerAquarium').css('opacity')==1){$('#knowFactContainerAquarium').animate({ "opacity": 0}, "slow");} }) ;
+	intervalDist2=setInterval(function () {loadKnowFact()}, updateFreqMilis*10);		
+//	  getCurrentPosCharacter();
+ */
+  });
+  
   
   function correctFontKows(txt)
   {
@@ -1394,7 +1804,7 @@ function clearTripYes()
 		$('#resetTripContainer').css('visibility','hidden');
 
 		$('#menuJungle').css('visibility','hidden');
-				$('#menuJungle').css('opacity','0');
+		$('#menuJungle').css('opacity','0');
 		clearTrip();
 						pageRender='#main';  
 		$.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
@@ -1447,6 +1857,7 @@ function	loadLoading()
 {
 		  $('#backCharacter').css('visibility','hidden');
 	  $('#finishLeafs').css('visibility','hidden');
+	  	  $('#finishBubbles').css('visibility','hidden');
 	  $('#positionLeftCharacter').css('visibility','hidden');
 	 $('#resetTripContainer').css('visibility','hidden');
 	 $('#menuJungle').css('visibility','hidden');
@@ -1492,4 +1903,23 @@ function backFromCharacter()
     	$('#menuJungle').css('opacity', '0');
 									  $('#backCharacter').css('visibility','hidden');
 									  $.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:true});
+}
+function backFromAquarium()
+{
+	 $('#menuAquarium').css('visibility','hidden');
+	 $('#positionLeftAquarium').css('visibility','hidden');
+	 	 $('#timeLeftAquarium').css('visibility','hidden');
+    	$('#menuAquarium').css('opacity', '0');
+									 // $('#backAquarium').css('visibility','hidden');
+									 stopAllAnimation();
+									  $.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:true});
+}
+function stopAllAnimation()
+{
+	for(var i=1;i<=8;i++)
+	{
+		$('#bird'+i).destroy();
+				$('#cloud'+i).destroy();
+	}
+$('#waterLevel').destroy();	
 }

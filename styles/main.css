@@ -1,4 +1,5 @@
 [data-role=page]{height: 100% !important; position:relative !important;overflow:hidden !important }
+
 [data-role=header]{bottom: auto !important; width:100%; height:20% !important;} 
 [data-role=content]{bottom: auto !important; width:80%; height:65%;text-align:center;margin-right: auto;margin-left: auto; } 
 [data-role=footer]{width:100%;!important; height:15%;!important; z-index:1000 !important} 
@@ -7,6 +8,8 @@
 [data-role=menuTap]{  height:15% !important;width:100% !important;   float: left !important; z-index: 1000;
   position: relative;}
 [data-role=buttonBack]{   background: transparent url(../resources/buttons/backarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:left !important 	  	}
+[data-role=buttonBackA]{   background: transparent url(../resources/buttons/backarrowa.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:left !important 	  	}
+
 [data-role=buttonNext]{   background: transparent url(../resources/buttons/nextarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:right !important; visibility:hidden 	}
 [data-role=setCharacterButton]{  height: 35% !important; width: 40% !important;     margin-left: 7% !important; float:left !important;
 background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
@@ -41,6 +44,87 @@ body{
 
 }
 
+#cloud1
+{
+
+}
+#cloud2
+{
+
+}
+#cloud3
+{
+
+}
+#cloud4
+{
+
+}
+.cloudsClass
+{
+	z-index:100;
+		width:200%;
+		height:20%;
+	margin-left:-50%;
+	top:0px;
+		position:absolute;
+			overflow:hidden;
+}
+.waterLevelClass
+{
+	position:relative !important;
+	background:transparent url(../resources/characters/aquarium/animated/waterLevel.png) 0 0;
+	height:100%;
+	visibility:hidden;
+	background-repeat:repeat-x;
+	width:100%;
+	background-size:100% 100% !important;
+}
+.birdClass
+{
+	position:absolute !important;
+	visibility:hidden;
+	background:transparent url(../resources/characters/aquarium/animated/birds.png) 0 0 no-repeat;
+	height:10%;
+	width:10%;
+	left:50%;
+	top:0px;
+	overflow:hidden;
+	background-size:400% 100% !important;
+}
+
+.cloudClass
+{
+	position:absolute !important;
+	visibility:hidden;
+	height:50%;
+	width:100%;
+	top:0px;
+	background-repeat:repeat-x;
+	background-size:100% 100% ;
+
+	
+	
+}
+	
+#sun
+{
+	background:transparent url(../resources/characters/aquarium/static/sun.png) 0 0 no-repeat;
+	height:100%;
+	width:10%;
+	background-size:contain !important;
+	visibility:hidden;
+	position:absolute !important;
+}
+.sunContainerClass
+{
+	width:200%;
+	height:10%;
+	top: 5%;
+	left:-50%;
+	position:absolute;
+	
+}
 @-webkit-keyframes rotating 
  {
   from {
@@ -82,70 +166,6 @@ body{
   -o-animation: rotating 2s linear infinite;
   animation: rotating 2s linear infinite;
 }
-/*
-.rotatedLoading{
--webkit-animation: rotate 2s linear infinite 0s;
--moz-animation: rotateup 2s linear infinite 0s;
-  -o-animation: rotate 2s linear infinite 0s;
-  -ms-animation: rotate 2s linear infinite 0s;
-  animation: rotate 2s linear infinite 0s;
- 
-
-}
-
-
-@-webkit-keyframes rotate {
- from {
-    -webkit-transform: rotate(-360deg);
-  }
-  to {
-		-webkit-transform: rotateY(0deg);
-  }
-
-}
-
-@-moz-keyframes rotate {
- from {
-     -moz-transform: rotate(-360deg);
-  }
-  to {
-     -moz-transform: rotate(0deg);
-  }
-
-}
-
-@-moz-keyframes rotateup {
- from {
-     -moz-transform: rotate(-360deg);
-  }
-  to {
-     -moz-transform: rotate(0deg);
-  }
-   
-
-}
-
-
-
-@-o-keyframes rotate {
- from {
-    -o-transform: rotate(-360deg);
-  }
-  to {
-    -o-transform: rotate(0deg);
-  }
-
-}
-@-ms-keyframes rotate {
- from {
-    -ms-transform: rotate(-360deg);
-  }
-  to {
-    -ms-transform: rotateY(0deg);
-  }
-
-}
-*/
 img, object, embed, video {
 	max-width: 100%;
 }
@@ -166,6 +186,16 @@ img, object, embed, video {
 	background-size:cover;
 
 }
+
+.pageA
+{
+	  background: transparent url(../resources/backgrounds/back4_0.png) 50% 0 no-repeat;
+	-webkit-background-size:200% 100% !important;
+	background-repeat:no-repeat;
+	background-size:200% 100% !important;
+
+}
+
 .headerContent
 {
   	  
@@ -196,6 +226,9 @@ img, object, embed, video {
 	
 	
 }
+
+
+
 #backMain
 {
 	visibility:hidden;
@@ -206,6 +239,28 @@ img, object, embed, video {
 	background: transparent url(../resources/others/finishleafs2.png) 0 0 ;
 	
 }
+.finishBubbleClass
+{
+	position:absolute;
+	height:100%;
+	width:150%;
+	left:-30%;
+	overflow:hidden;
+	z-index:2500;
+	background-repeat:repeat-y;
+	background-position-y:30% !important;
+	background-size:500% 200% !important;
+	
+	
+}
+#finishBubbles
+{
+visibility:hidden;
+	background: transparent url(../resources/others/finishbubble4.png) 0 0 ;
+	
+	
+}
+
 #positionLeftCharacter
 {
 	width:100%;
@@ -215,7 +270,21 @@ img, object, embed, video {
   left: 0%;
   visibility:hidden;
 }
+#positionLeftAquarium
+{
+	width:100%;
+	height:100%;
+	  position: absolute;
+  top: 30%;
+  left: 0%;
+  visibility:hidden;
+}
 #characterContainer
+{
+		height:100% !important; width:100% !important;position: relative !important;
+
+}
+#aquariumContainer
 {
 		height:100% !important; width:100% !important;position: relative !important;
 
@@ -244,9 +313,25 @@ position: absolute !important;
 	  visibility: hidden;
   opacity: 0.0;
 }
+#menuAquarium
+{
+
+	  visibility: hidden;
+  opacity: 0.0;
+}
 #finishCharacter
 {
 	background: transparent url(../resources/buttons/finish.png) 0 0 no-repeat;
+height:60% !important;width:100% !important;background-size:100% !important;  
+	  float: left !important;
+	  visibility:hidden;
+	  z-index: 5000;
+  position: relative;
+}
+
+#finishAquarium
+{
+	background: transparent url(../resources/buttons/finisha.png) 0 0 no-repeat;
 height:60% !important;width:100% !important;background-size:100% !important;  
 	  float: left !important;
 	  visibility:hidden;
@@ -269,6 +354,23 @@ height:60% !important;width:100% !important;background-size:100% !important;
 {
 		background: transparent url(../resources/buttons/closemenubutton.png) 0 0 no-repeat;
 }
+
+#buttonMenuAquarium1
+{
+		background: transparent url(../resources/buttons/timemenubuttona.png) 0 0 no-repeat;
+}
+#buttonMenuAquarium2
+{
+		background: transparent url(../resources/buttons/positionmenubuttona.png) 0 0 no-repeat;
+}
+#buttonMenuAquarium3
+{
+		background: transparent url(../resources/buttons/resetmenubuttona.png) 0 0 no-repeat;
+}
+#buttonMenuAquarium4
+{
+		background: transparent url(../resources/buttons/closemenubuttona.png) 0 0 no-repeat;
+}
                  
 #menuLeaf
 {
@@ -277,6 +379,15 @@ height:60% !important;width:100% !important;background-size:100% !important;
 	height: 10% !important; width: 10% !important;    left:88% !important; background-size: 100% 100% !important; 
 	z-index:6000 !important; position:absolute !important;
 			background: transparent url(../resources/buttons/leafbutton2.png) 0 0 no-repeat;
+
+}
+#menuBubble
+{
+  top: 2% !important;
+
+	height: 10% !important; width: 10% !important;    left:88% !important; background-size: 100% 100% !important; 
+	z-index:6000 !important; position:absolute !important;
+			background: transparent url(../resources/buttons/bubblebutton2.png) 0 0 no-repeat;
 
 }
 #setLion
@@ -360,6 +471,17 @@ width: 20% !important;
     padding: 1%;
 
 }
+#knowFactContainerAquarium
+{
+	background: transparent url(../resources/others/bubble1.png) 0 0 no-repeat;
+	background-size: 100% 100% !important; 
+  width: 80%;
+  position: absolute;
+  top: 40%;
+  opacity:0;
+    padding: 1%;
+
+}
 #resetTripContainer
 {
 	background: transparent url(../resources/labels/clearTripJungle_0.png) 0 0 no-repeat;
@@ -371,7 +493,30 @@ width: 20% !important;
   z-index:7000;
   visibility:hidden;
 }
+#resetTripContainerAquarium
+{
+	background: transparent url(../resources/labels/clearTripAquarium_0.png) 0 0 no-repeat;
+		background-size: 100%  !important; 
+  width: 80%;
+  height: 50%;
+  position: absolute;
+  top: 40%;
+  z-index:7000;
+  visibility:hidden;
+}
 #resetTripYes
+{
+	height:20%;
+	width:30%;
+
+  left: 12%;
+  		float: left;
+
+  position: relative;
+  top: 70%;
+z-index:1000px;
+}
+#resetTripYesAquarium
 {
 	height:20%;
 	width:30%;
@@ -395,6 +540,18 @@ z-index:1000px;
   z-index:500px;
 
 }
+
+#resetTripAquarium
+{
+		height:20%;
+	width:30%;
+
+		float: left;
+ left: 10%;
+  position: relative;
+  top: 70%;
+z-index:1000px;
+}
 #resetTripNo
 {
 		height:20%;
@@ -411,6 +568,18 @@ z-index:1000px;
 {
 		font-size: 1.5em;
 		background: transparent url(../resources/others/wood1.png) 0 0 no-repeat;
+		background-size: 100% 100% !important; 
+		color:#FDFD5E  !important;
+		    width: 80%;
+			  height: 15%;
+	 visibility: hidden;
+  top: 70%;
+  position: absolute;
+}
+#timeLeftAquarium
+{
+		font-size: 1.5em;
+		background: transparent url(../resources/others/bubble1.png) 0 0 no-repeat;
 		background-size: 100% 100% !important; 
 		color:#FDFD5E  !important;
 		    width: 80%;
@@ -455,6 +624,17 @@ z-index:1000px;
 		float:left !important;
 		visibility:hidden;
 }
+#map_canvas_aquarium
+{
+	width:80% !important;
+		height:60%;
+		top:10% !important;
+		left:10% !important;
+		position:relative !important;
+		float:left !important;
+		visibility:hidden;
+}
+
 #map_canvas_character
 {
 	width:80% !important;
@@ -481,6 +661,14 @@ height:70%;
 	 position:relative !important;
 	 
 }
+#borderMapAquarium
+{
+	background: transparent url(../resources/others/bordermapa.png) 0 0 no-repeat;
+ background-size:100% !important;  height:100% ; width: 100% !important;  
+	 position:relative !important;
+	 
+}
+
 #containerTimeLabels
 { width: 90%; height: 13%; margin-left:5%}
 #hoursLabel
@@ -607,6 +795,23 @@ float:left;
 #contentCharacter
 {overflow:hidden !important;
 }
+#backAquarium
+{
+	position:absolute;
+	  height: 10% !important;
+  width: 20% !important;
+  left: 0px;
+  bottom: 0px;
+}
+#contentAquarium
+{
+	position:relative !important;
+	width:200% !important;
+	height:100% !important;
+	left:-50% !important;
+	  padding:0 !important;
+	overflow:hidden !important;
+}
 #headerContentMain
 { 	  background: transparent url(../resources/labels/settingslabel.png) 0 0 no-repeat;}
 #headerContentSettings
@@ -621,6 +826,17 @@ float:left;
 {  	  background: transparent url(../resources/labels/settripdistancelabel.png) 0 0 no-repeat; 
   
   }
+ #headerAquarium
+  {
+	  z-index:10;
+  }
+#headerContentSetAquarium
+{
+
+	  	  /*background: transparent url(../resources/labels/tripplannerlabel.png) 0 0 no-repeat; */
+  
+  }
+
 #headerContentSetCharacter
 {
 
