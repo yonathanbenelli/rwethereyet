@@ -338,6 +338,79 @@ body{
 			background:transparent url(../resources/characters/aquarium/animated/fish10.png) 0 0 no-repeat;
 }
 
+.mermaidClass
+{
+		background:transparent url(../resources/characters/aquarium/animated/mermaid.png) 0 0 no-repeat;
+   width: 25%;
+  height: 25%;
+  top:70%;
+	position: absolute;
+  visibility: hidden;
+opacity:0;
+  background-size: 600% 200% !important;
+
+
+
+}
+.mermaidContentClass
+{
+	width:100%;
+		height:100%;
+		bottom:0%;
+		position:absolute;
+		overflow:hidden;
+	
+}
+
+.whaleClass
+{
+		background:transparent url(../resources/characters/aquarium/animated/whale.png) 0 0 no-repeat;
+   width: 40%;
+  height: 40%;
+  top:25%;
+	position: absolute;
+  visibility: hidden;
+opacity:0;
+  background-size: 600% 200% !important;
+
+
+
+}
+.whaleContentClass
+{
+	width:100%;
+		height:100%;
+		bottom:0%;
+		position:absolute;
+		overflow:hidden;
+	
+}
+
+.dolphinClass
+{
+		background:transparent url(../resources/characters/aquarium/animated/dolphin.png) 0 0 no-repeat;
+   width: 20%;
+  height: 20%;
+  top:5%;
+	position: absolute;
+  visibility: hidden;
+opacity:0;
+  background-size: 700% 200% !important;
+
+
+
+}
+.dolphinContentClass
+{
+	width:100%;
+		height:100%;
+		bottom:0%;
+		position:absolute;
+		overflow:hidden;
+	
+}
+
+
 .fishClass
 {
    width: 10px;
@@ -352,6 +425,7 @@ opacity:0;
 
 
 }
+
 
 .fishContentClass
 {

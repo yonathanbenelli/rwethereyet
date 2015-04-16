@@ -16,7 +16,7 @@
 	
 
 $(document).bind("pagebeforechange", function(e,ob) {
-   if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+   //if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -1513,6 +1513,134 @@ function showBirds(i)
 
 var apprsPlant=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var apprsFish=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var apprsMermaid=0;
+var apprsWhale=0;
+function apearMermaid()
+{
+		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+		var topP=parseInt($('#mermaid').css('top').replace('%','').replace('px',''));
+		
+		if(topW<=topP)
+		{
+						apprsMermaid=2;
+			showDivEfect($('#mermaid'));
+			var r=$('#contentAquarium').width()/2;
+									var maxT=$('#contentAquarium').height();
+			$('#mermaid')
+			.sprite({fps: 6, no_of_frames:6})
+			.spRandom({top: topP, left: -r, right: (r+$('#mermaid').width()), bottom: maxT, speed: 8000, pause: 5000, haveBack:true })
+			.active();
+	
+		}
+}
+var aspectRatioMermaid=1.961;
+function generateMermaid()
+{
+
+		var h=$('#mermaid').height();
+		var w=parseInt(aspectRatioMermaid*h);
+					var r=$('#contentAquarium').width();
+		var l=getRandom(-$('#contentAquarium').width(),(r+$('#mermaid').width()));
+		$('#mermaid').css('width',w+'px');
+			$('#mermaid').css('left',l+'px');
+						var zInd=getRandom(100,2000);
+
+		$('#mermaid').css('z-index',zInd);
+
+}
+
+function showMermaid()
+{
+			$('#mermaid').destroy();
+					
+					apprsMermaid=1;
+				generateMermaid();
+}
+var apprsWhale=0;
+function apearWhale()
+{
+		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+		var topP=parseInt($('#whale').css('top').replace('%','').replace('px',''));
+		
+		if(topW<=topP)
+		{
+						apprsWhale=2;
+			showDivEfect($('#whale'));
+						var maxT=$('#contentAquarium').height();
+			var r=$('#contentAquarium').width()/2;
+			$('#whale')
+			.sprite({fps: 5, no_of_frames:6})
+			.spRandom({top: topP, left: -r, right: (r+$('#whale').width()), bottom: maxT, speed: 10000, pause: 5000, haveBack:true })
+			.active();
+	
+		}
+}
+var aspectRatioWhale=2.1597;
+function generateWhale()
+{
+
+		var h=$('#whale').height();
+		var w=parseInt(aspectRatioWhale*h);
+					var r=$('#contentAquarium').width();
+		var l=getRandom(-$('#contentAquarium').width(),(r+$('#whale').width()));
+		$('#whale').css('width',w+'px');
+			$('#whale').css('left',l+'px');
+						var zInd=getRandom(100,2000);
+
+		$('#whale').css('z-index',zInd);
+
+}
+
+function showWhale()
+{
+			$('#whale').destroy();
+					
+					apprsWhale=1;
+				generateWhale();
+}
+var apprsDolphin=0;
+function apearDolphin()
+{
+		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+		var topP=parseInt($('#dolphin').css('top').replace('%','').replace('px',''));
+		
+	if(topW<=topP)
+		{
+						apprsDolphin=2;
+			showDivEfect($('#dolphin'));
+			var r=$('#contentAquarium').width()/2;
+			var maxT=$('#contentAquarium').height();
+			$('#dolphin')
+			.sprite({fps: 7, no_of_frames:7})
+			.spRandom({top: topP, left: -r, right: (r+$('#dolphin').width()), bottom: maxT, speed: 10000, pause: 5000, haveBack:true })
+			.active();
+	
+		}
+}
+var aspectRatioDolphin=1.75;
+function generateDolphin()
+{
+
+		var h=$('#dolphin').height();
+		var w=parseInt(aspectRatioWhale*h);
+					var r=$('#contentAquarium').width();
+		var l=getRandom(-$('#contentAquarium').width(),(r+$('#dolphin').width()));
+		$('#dolphin').css('width',w+'px');
+			$('#dolphin').css('left',l+'px');
+						var zInd=getRandom(100,2000);
+
+		$('#dolphin').css('z-index',zInd);
+
+}
+
+function showDolphin()
+{
+			$('#dolphin').destroy();
+					
+					apprsDolphin=1;
+				generateDolphin();
+}
+	
 	
 function apearPlants(i)
 {
@@ -1612,6 +1740,19 @@ function updateWaterLevel()
 				apearFishs(j);
 		}
 	}
+	if(apprsMermaid==1)
+		{
+				apearMermaid();
+		}
+		if(apprsWhale==1)
+		{
+				apearWhale();
+		}
+if(apprsDolphin==1)
+		{
+				apearDolphin();
+		}
+
 }
 
 function showWaterLevel()
@@ -1658,7 +1799,7 @@ function showWaterLevel()
 		 $('#waterLevel0').css('top',t+'px');
 		showDivEfect($('#waterLevel'));
 			showDivEfect($('#waterLevel0'));
-$('#waterLevel').pan({fps: 50, speed: 5, dir: 'left'});
+//$('#waterLevel').pan({fps: 50, speed: 5, dir: 'left'});
 }
 var aspectRatioStaticsElements=[1.127,1.58,1.48,1.78,1.41,1.63,1.26,1.605,1.07,1.095];
 function generateStaticElements(i)
@@ -1810,7 +1951,9 @@ $(document).on('pageshow','#aquarium', function(e,data){
 	
 apprsPlant=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 apprsFish=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-	
+	apprsMermaid=0;
+		apprsWhale=0;
+				apprsDolphin=0;
 	showWaterLevel();
 showClouds(1);
 showBirds(1);
@@ -1819,9 +1962,12 @@ showStaticElements(1);
 showPlants(1);
 
 showFishs(1);
+showMermaid();
+showWhale();
+showDolphin();
 
 
-$('#waterLevel').flyToTap();
+$('#waterLevel0').flyToTap();
 
 	
 	$("#resetTripContainerAquarium").height($("#resetTripContainerAquarium").width());
@@ -2361,6 +2507,20 @@ function stopAllAnimation()
 $('#waterLevel').destroy();	
 $('#waterLevel').css('visibility','hidden');
 $('#waterLevel').css('opacity','0');
+
+$('#mermaid').destroy();	
+$('#mermaid').css('visibility','hidden');
+$('#mermaid').css('opacity','0');
+
+$('#dolphin').destroy();	
+$('#dolphin').css('visibility','hidden');
+$('#dolphin').css('opacity','0');
+
+$('#whale').destroy();	
+$('#whale').css('visibility','hidden');
+$('#whale').css('opacity','0');
+
+
 $('#waterLevel0').css('visibility','hidden');
 $('#waterLevel0').css('opacity','0');
 $('#sun').css('visibility','hidden');
