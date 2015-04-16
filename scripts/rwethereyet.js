@@ -16,7 +16,7 @@
 	
 
 $(document).bind("pagebeforechange", function(e,ob) {
-  // if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+   if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -1585,19 +1585,24 @@ function showPlants(i)
 	}
 
 }
-	var aspRat=6.564 //alto img sobre alto franja
-
-	var bhw=Math.floor($(window).height()*0.8*0.12);
+var aspRat=6.564*2; //alto img sobre alto franja
+	//var aspRat=17.93/2 //alto img sobre alto franja
+	var bhw=Math.floor($(window).height()*0.8*0.06);
 
 function updateWaterLevel()
 {
 			
+			
+//		var bhc=$('#contentAquarium').height()-bhw;
+
 		var bhc=$('#contentAquarium').height()-bhw;
 	var newTop=bhc -(bhc*(levelPos/100));
 	var newHe=bhw+(bhc*(levelPos/100));
-	
+	 $('#waterLevel').animate({ "height": bhw+'px'}, "slow");	
+	 $('#waterLevel0').animate({ "height": newHe+'px'}, "slow");	
 	 $('#waterLevel').animate({ "top": newTop+'px'}, "slow");
-	 $('#waterLevel').animate({ "height": newHe+'px'}, "slow");
+	 	 $('#waterLevel0').animate({ "top": newTop+'px'}, "slow");
+
 	for(var j=1;j<=20;j++)
 	{
 		if(apprsPlant[j-1]==1)
@@ -1613,20 +1618,34 @@ function updateWaterLevel()
 
 function showWaterLevel()
 {
-		var bh=Math.floor($(window).height()*0.8*0.12*aspRat);
+		var bh=Math.floor($(window).height()*0.8*0.06*aspRat);
 	var bw=Math.floor(bh*5.42);
 
 	var bac=bw+'px '+bh+'px';
 
 	 $('#waterLevel').css({
-    'background' : 'transparent url(resources/characters/aquarium/animated/waterLevel6.png) 0 0',
+    'background' : 'transparent url(resources/characters/aquarium/animated/waterLevel_1.png) 0 0',
 	'-webkit-background-size':bac,
 	'background-repeat':'repeat-x',
 	'background-size':bac,
 });
+		var bh0=Math.floor($(window).height()*0.8);
+		 var bw0=Math.floor(bh0*6.48);
+		 var bac0=bw0+'px '+bh0+'px';
+ $('#waterLevel0').css({
+    'background' : 'transparent url(resources/characters/aquarium/animated/waterLevel_0.png) 0 0',
+	'-webkit-background-size':bac0,
+	'background-repeat':'repeat-x',
+	'background-size':bac0,
+});
 	
-	var bhc=$('#contentAquarium').height()-bhw;
-	 $('#waterLevel').height(bhw);
+
+//	var bhc=$('#contentAquarium').height()-bhw;
+// $('#waterLevel').height(bhw);
+		var bhc=$('#contentAquarium').height()-bhw;
+		$('#waterLevel').height(bhw);
+		$('#waterLevel0').height(bhw);
+	
 	 var lv;
 	 if(levelPos==-1)
 	 {
@@ -1638,7 +1657,9 @@ function showWaterLevel()
 	 }
 	 var t=bhc -(bhc*(lv/100));
 	 	 $('#waterLevel').css('top',t+'px');
-					showDivEfect($('#waterLevel'));
+		 $('#waterLevel0').css('top',t+'px');
+		showDivEfect($('#waterLevel'));
+			showDivEfect($('#waterLevel0'));
 $('#waterLevel').pan({fps: 50, speed: 5, dir: 'left'});
 }
 var aspectRatioStaticsElements=[1.127,1.58,1.48,1.78,1.41,1.63,1.26,1.605,1.07,1.095];
@@ -1710,7 +1731,7 @@ function apearFishs(i)
 		var hC=$('#contentAquarium').height();
 		var hF=$('#fish'+i).height();
 		var tF=parseInt($('#fish'+i).css('top').replace('px',''));
-		var topM=Math.floor($(window).height()*0.8*0.12);
+		var topM=Math.floor($(window).height()*0.8*0.06);
 		var wl=parseInt($('#waterLevel').css('top').replace('px',''))+topM;
 		if((tF>wl) && (hC>=(tF+hF)))
 		{
@@ -1746,7 +1767,7 @@ function generateFishs(i)
 			$('#fish'+i).css('height',h+'px');
 			var w=parseInt(aspectRatioFishs[(i%10)]*h);
 			$('#fish'+i).css('width',w+'px');
-			var minTop=Math.floor($(window).height()*0.8*0.12);;
+			var minTop=Math.floor($(window).height()*0.8*0.06);;
 			var maxTop=$('#contentAquarium').height();
 			var t=getRandom(minTop,maxTop);
 				var l=getRandom(0,$('#contentAquarium').width());
@@ -1802,7 +1823,7 @@ showPlants(1);
 showFishs(1);
 
 
-$('#fishContent').flyToTap();
+$('#waterLevel').flyToTap();
 
 	
 	$("#resetTripContainerAquarium").height($("#resetTripContainerAquarium").width());
@@ -2342,7 +2363,8 @@ function stopAllAnimation()
 $('#waterLevel').destroy();	
 $('#waterLevel').css('visibility','hidden');
 $('#waterLevel').css('opacity','0');
-
+$('#waterLevel0').css('visibility','hidden');
+$('#waterLevel0').css('opacity','0');
 $('#sun').css('visibility','hidden');
 $('#sun').css('opacity','0');
 }

@@ -383,7 +383,7 @@ opacity:0;
 		position:absolute;
 			overflow:visible;
 }
-.waterLevelClass
+.waterLevelClass0
 {
 	position:absolute !important;
 	visibility:hidden;
@@ -392,6 +392,16 @@ opacity:0;
 	width:100%;
 	height:100%;
 	z-index:5;
+}
+.waterLevelClass
+{
+	position:absolute !important;
+	visibility:hidden;
+  	opacity:0;
+	background-repeat:repeat-x;
+	width:100%;
+	height:100%;
+	z-index:5000;
 }
 .birdClass
 {
