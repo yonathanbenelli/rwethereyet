@@ -1624,7 +1624,7 @@ function showWaterLevel()
 	var bac=bw+'px '+bh+'px';
 
 	 $('#waterLevel').css({
-    'background' : 'transparent url(resources/characters/aquarium/animated/waterLevel_1.png) 0 0',
+    'background' : 'transparent url(resources/characters/aquarium/animated/waterLevel_1.png) 0 0 repeat-x',
 	'-webkit-background-size':bac,
 	'background-repeat':'repeat-x',
 	'background-size':bac,
@@ -1633,7 +1633,7 @@ function showWaterLevel()
 		 var bw0=Math.floor(bh0*6.48);
 		 var bac0=bw0+'px '+bh0+'px';
  $('#waterLevel0').css({
-    'background' : 'transparent url(resources/characters/aquarium/animated/waterLevel_0.png) 0 0',
+    'background' : 'transparent url(resources/characters/aquarium/animated/waterLevel_0.png) 0 0 repeat-x',
 	'-webkit-background-size':bac0,
 	'background-repeat':'repeat-x',
 	'background-size':bac0,
