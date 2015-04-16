@@ -1543,7 +1543,7 @@ function generateMermaid()
 		var l=getRandom(-$('#contentAquarium').width(),(r+$('#mermaid').width()));
 		$('#mermaid').css('width',w+'px');
 			$('#mermaid').css('left',l+'px');
-						var zInd=getRandom(1000,2000);
+						var zInd=getRandom(100,2000);
 
 		$('#mermaid').css('z-index',zInd);
 
