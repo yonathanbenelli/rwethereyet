@@ -16,7 +16,7 @@
 	
 
 $(document).bind("pagebeforechange", function(e,ob) {
-   //if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+   if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -1543,7 +1543,7 @@ function generateMermaid()
 		var l=getRandom(-$('#contentAquarium').width(),(r+$('#mermaid').width()));
 		$('#mermaid').css('width',w+'px');
 			$('#mermaid').css('left',l+'px');
-						var zInd=getRandom(100,2000);
+						var zInd=getRandom(1000,2000);
 
 		$('#mermaid').css('z-index',zInd);
 
@@ -1585,7 +1585,7 @@ function generateWhale()
 		var l=getRandom(-$('#contentAquarium').width(),(r+$('#whale').width()));
 		$('#whale').css('width',w+'px');
 			$('#whale').css('left',l+'px');
-						var zInd=getRandom(100,2000);
+						var zInd=getRandom(1000,2000);
 
 		$('#whale').css('z-index',zInd);
 
@@ -1673,7 +1673,7 @@ function generatePlants(i)
 
 		var l=getRandom(0,$('#plantContent').width());
 
-			var h=parseInt(getRandom(10,50)/100*heCont);
+			var h=parseInt(getRandom(10,30)/100*heCont);
 		$('#plant'+i).css('height',h+'px');
 		var w=parseInt(aspectRatioPlants[(i%10)]*h);
 		$('#plant'+i).css('width',w+'px');
@@ -1799,13 +1799,13 @@ function showWaterLevel()
 		 $('#waterLevel0').css('top',t+'px');
 		showDivEfect($('#waterLevel'));
 			showDivEfect($('#waterLevel0'));
-//$('#waterLevel').pan({fps: 50, speed: 5, dir: 'left'});
+$('#waterLevel').pan({fps: 15, speed: 20, dir: 'left'});
 }
 var aspectRatioStaticsElements=[1.127,1.58,1.48,1.78,1.41,1.63,1.26,1.605,1.07,1.095];
 function generateStaticElements(i)
 {
 		var hCont=$('#staticElementContent').height();
-		var hPor=parseInt(getRandom(3,10)/10*hCont);
+		var hPor=parseInt(getRandom(3,7)/10*hCont);
 		$('#staticElement'+i).css('height',hPor+'px');
 
 		var minTop=0-hPor;
@@ -1845,7 +1845,7 @@ function showStaticElements(i)
 	{
 					$('#staticElement'+i).destroy();
 					
-		if(getRandom(0,9)<=6)
+		if(getRandom(0,9)<=4)
 		{
 			generateStaticElements(i);
 			
@@ -1902,7 +1902,7 @@ function generateFishs(i)
 
 			
 			var conH=$('#contentAquarium').height();
-			var h=parseInt(getRandom(5,40)/100*conH);
+			var h=parseInt(getRandom(5,25)/100*conH);
 			$('#fish'+i).css('height',h+'px');
 			var w=parseInt(aspectRatioFishs[(i%10)]*h);
 			$('#fish'+i).css('width',w+'px');
