@@ -1597,11 +1597,9 @@ function updateWaterLevel()
 
 		var bhc=$('#contentAquarium').height()-bhw;
 	var newTop=bhc -(bhc*(levelPos/100));
-	var newHe=bhw+(bhc*(levelPos/100));
-	 $('#waterLevel').animate({ "height": bhw+'px'}, "slow");	
-	 $('#waterLevel0').animate({ "height": newHe+'px'}, "slow");	
+	 
 	 $('#waterLevel').animate({ "top": newTop+'px'}, "slow");
-	 	 $('#waterLevel0').animate({ "top": newTop+'px'}, "slow");
+	 $('#waterLevel0').css("top", newTop+'px');
 
 	for(var j=1;j<=20;j++)
 	{
@@ -1629,7 +1627,7 @@ function showWaterLevel()
 	'background-repeat':'repeat-x',
 	'background-size':bac,
 });
-		var bh0=Math.floor($(window).height()*0.8);
+		var bh0=Math.floor($(window).height()*0.81);
 		 var bw0=Math.floor(bh0*6.48);
 		 var bac0=bw0+'px '+bh0+'px';
  $('#waterLevel0').css({
@@ -1644,7 +1642,7 @@ function showWaterLevel()
 // $('#waterLevel').height(bhw);
 		var bhc=$('#contentAquarium').height()-bhw;
 		$('#waterLevel').height(bhw);
-		$('#waterLevel0').height(bhw);
+		$('#waterLevel0').height($(window).height());
 	
 	 var lv;
 	 if(levelPos==-1)
