@@ -1802,7 +1802,7 @@ showPlants(1);
 showFishs(1);
 
 
-$('fishContent').flyToTap();
+$('#fishContent').flyToTap();
 
 	
 	$("#resetTripContainerAquarium").height($("#resetTripContainerAquarium").width());
