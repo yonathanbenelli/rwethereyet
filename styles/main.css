@@ -1,12 +1,13 @@
 [data-role=page]{height: 100% !important; position:relative !important;overflow:hidden !important }
-
 [data-role=header]{bottom: auto !important; width:100%; height:20% !important;} 
 [data-role=content]{bottom: auto !important; width:80%; height:65%;text-align:center;margin-right: auto;margin-left: auto; } 
 [data-role=footer]{width:100%;!important; height:15%;!important; z-index:1000 !important} 
 [data-role=buttonMenuMain]{  background-size:100% !important;  height: 15% !important; width: 80% !important;     margin-left: 10% !important;	}
 [data-role=buttonMenuTap]{  background-size:100% !important;  height: 100% !important; width: 25% !important;    !important; float:left !important	}
 [data-role=menuTap]{  height:15% !important;width:100% !important;   float: left !important; z-index: 1000;
-  position: relative;}
+  position: relative; }
+  [data-role=menuTapA]{  height:10% !important;width:50% !important; left:25%; z-index: 6000;  position: absolute; top:2%}
+
 [data-role=buttonBack]{   background: transparent url(../resources/buttons/backarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:left !important 	  	}
 [data-role=buttonBackA]{   background: transparent url(../resources/buttons/backarrowa.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:left !important 	  	}
 
@@ -20,6 +21,7 @@ background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
 
 }
 body{
+
 	background-color:#86FDF0 !important;
   font-family: sharkyspotdemo;
   scrollbar-base-color:#864217 ;
@@ -70,20 +72,332 @@ body{
 		position:absolute;
 			overflow:hidden;
 }
+#staticElement11
+{
+		background:transparent url(../resources/characters/aquarium/static/1.png) 0 0 no-repeat;
+}
+#staticElement12
+{
+		background:transparent url(../resources/characters/aquarium/static/2.png) 0 0 no-repeat;
+}
+#staticElement13
+{
+		background:transparent url(../resources/characters/aquarium/static/3.png) 0 0 no-repeat;
+}
+#staticElement14
+{
+		background:transparent url(../resources/characters/aquarium/static/4.png) 0 0 no-repeat;
+}
+#staticElement15
+{
+		background:transparent url(../resources/characters/aquarium/static/5.png) 0 0 no-repeat;
+}
+#staticElement16
+{
+		background:transparent url(../resources/characters/aquarium/static/6.png) 0 0 no-repeat;
+}
+#staticElement17
+{
+		background:transparent url(../resources/characters/aquarium/static/7.png) 0 0 no-repeat;
+}
+#staticElement18
+{
+		background:transparent url(../resources/characters/aquarium/static/8.png) 0 0 no-repeat;
+}
+
+#staticElement19
+{
+		background:transparent url(../resources/characters/aquarium/static/9.png) 0 0 no-repeat;
+}
+#staticElement20
+{
+		background:transparent url(../resources/characters/aquarium/static/10.png) 0 0 no-repeat;
+}
+
+#staticElement1
+{
+		background:transparent url(../resources/characters/aquarium/static/1.png) 0 0 no-repeat;
+}
+#staticElement2
+{
+		background:transparent url(../resources/characters/aquarium/static/2.png) 0 0 no-repeat;
+}
+#staticElement3
+{
+		background:transparent url(../resources/characters/aquarium/static/3.png) 0 0 no-repeat;
+}
+#staticElement4
+{
+		background:transparent url(../resources/characters/aquarium/static/4.png) 0 0 no-repeat;
+}
+#staticElement5
+{
+		background:transparent url(../resources/characters/aquarium/static/5.png) 0 0 no-repeat;
+}
+#staticElement6
+{
+		background:transparent url(../resources/characters/aquarium/static/6.png) 0 0 no-repeat;
+}
+#staticElement7
+{
+		background:transparent url(../resources/characters/aquarium/static/7.png) 0 0 no-repeat;
+}
+#staticElement8
+{
+		background:transparent url(../resources/characters/aquarium/static/8.png) 0 0 no-repeat;
+}
+
+#staticElement9
+{
+		background:transparent url(../resources/characters/aquarium/static/9.png) 0 0 no-repeat;
+}
+#staticElement10
+{
+		background:transparent url(../resources/characters/aquarium/static/10.png) 0 0 no-repeat;
+}
+
+#plant1
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant1.png) 0 0 no-repeat;
+}
+#plant2
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant2.png) 0 0 no-repeat;
+}
+#plant3
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant3.png) 0 0 no-repeat;
+}
+#plant4
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant4.png) 0 0 no-repeat;
+}
+#plant5
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant5.png) 0 0 no-repeat;
+}
+#plant6
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant6.png) 0 0 no-repeat;
+}
+#plant7
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant7.png) 0 0 no-repeat;
+}
+#plant8
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant8.png) 0 0 no-repeat;
+}
+#plant9
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant9.png) 0 0 no-repeat;
+}
+#plant10
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant10.png) 0 0 no-repeat;
+}
+#plant11
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant1.png) 0 0 no-repeat;
+}
+#plant12
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant2.png) 0 0 no-repeat;
+}
+#plant13
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant3.png) 0 0 no-repeat;
+}
+#plant14
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant4.png) 0 0 no-repeat;
+}
+#plant15
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant5.png) 0 0 no-repeat;
+}
+#plant16
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant6.png) 0 0 no-repeat;
+}
+#plant17
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant7.png) 0 0 no-repeat;
+}
+#plant18
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant8.png) 0 0 no-repeat;
+}
+#plant19
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant9.png) 0 0 no-repeat;
+}
+#plant20
+{
+			background:transparent url(../resources/characters/aquarium/animated/plant10.png) 0 0 no-repeat;
+}
+.plantClass
+{
+	width: 10%;
+  height: 50%;
+
+  position: absolute;
+  visibility: hidden;
+  opacity:0;
+  background-size: 500% 100% !important;
+
+}
+.plantContentClass
+{
+
+		width:100%;
+		height:100%;
+		bottom:0%;
+		position:absolute;
+		overflow:hidden;
+		
+}
+#fish1
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish1.png) 0 0 no-repeat;
+}
+#fish2
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish2.png) 0 0 no-repeat;
+}
+#fish3
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish3.png) 0 0 no-repeat;
+}
+#fish4
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish4.png) 0 0 no-repeat;
+}
+#fish5
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish5.png) 0 0 no-repeat;
+}
+#fish6
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish6.png) 0 0 no-repeat;
+}
+#fish7
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish7.png) 0 0 no-repeat;
+}
+#fish8
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish8.png) 0 0 no-repeat;
+}
+#fish9
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish9.png) 0 0 no-repeat;
+}
+#fish10
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish10.png) 0 0 no-repeat;
+}
+#fish11
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish1.png) 0 0 no-repeat;
+}
+#fish12
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish2.png) 0 0 no-repeat;
+}
+#fish13
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish3.png) 0 0 no-repeat;
+}
+#fish14
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish4.png) 0 0 no-repeat;
+}
+#fish15
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish5.png) 0 0 no-repeat;
+}
+#fish16
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish6.png) 0 0 no-repeat;
+}
+#fish17
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish7.png) 0 0 no-repeat;
+}
+#fish18
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish8.png) 0 0 no-repeat;
+}
+#fish19
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish9.png) 0 0 no-repeat;
+}
+#fish20
+{
+			background:transparent url(../resources/characters/aquarium/animated/fish10.png) 0 0 no-repeat;
+}
+
+.fishClass
+{
+   width: 10px;
+  height: 10px;
+  top:50%;
+  left:50%;
+	position: absolute;
+  visibility: hidden;
+opacity:0;
+  background-size: 600% 200% !important;
+
+
+
+}
+
+.fishContentClass
+{
+	width:100%;
+		height:100%;
+		bottom:0%;
+		position:absolute;
+		overflow:hidden;
+	
+}
+
+.staticElementClass
+{
+	width:100%;
+	height:10%;
+	left:50%;
+	position:absolute;
+	visibility:hidden;
+	  opacity:0;
+		background-size:contain !important;
+}
+.staticElementContentClass
+{
+
+		width:100%;
+		height:16%;
+
+	bottom:0%;
+		position:absolute;
+			overflow:visible;
+}
 .waterLevelClass
 {
-	position:relative !important;
-	background:transparent url(../resources/characters/aquarium/animated/waterLevel.png) 0 0;
-	height:100%;
+	position:absolute !important;
 	visibility:hidden;
+  	opacity:0;
 	background-repeat:repeat-x;
 	width:100%;
-	background-size:100% 100% !important;
+	height:100%;
+	z-index:5;
 }
 .birdClass
 {
 	position:absolute !important;
 	visibility:hidden;
+	  opacity:0;
 	background:transparent url(../resources/characters/aquarium/animated/birds.png) 0 0 no-repeat;
 	height:10%;
 	width:10%;
@@ -97,6 +411,7 @@ body{
 {
 	position:absolute !important;
 	visibility:hidden;
+	  opacity:0;
 	height:50%;
 	width:100%;
 	top:0px;
@@ -114,6 +429,7 @@ body{
 	width:10%;
 	background-size:contain !important;
 	visibility:hidden;
+	  opacity:0;
 	position:absolute !important;
 }
 .sunContainerClass
@@ -246,10 +562,10 @@ img, object, embed, video {
 	width:150%;
 	left:-30%;
 	overflow:hidden;
-	z-index:2500;
+	z-index:5001;
 	background-repeat:repeat-y;
 	background-position-y:30% !important;
-	background-size:500% 200% !important;
+	background-size:500% 100% !important;
 	
 	
 }
@@ -272,11 +588,11 @@ visibility:hidden;
 }
 #positionLeftAquarium
 {
-	width:100%;
+	width:45%;
+	left:27.5%;
 	height:100%;
 	  position: absolute;
-  top: 30%;
-  left: 0%;
+
   visibility:hidden;
 }
 #characterContainer
@@ -318,6 +634,7 @@ position: absolute !important;
 
 	  visibility: hidden;
   opacity: 0.0;
+
 }
 #finishCharacter
 {
@@ -332,12 +649,15 @@ height:60% !important;width:100% !important;background-size:100% !important;
 #finishAquarium
 {
 	background: transparent url(../resources/buttons/finisha.png) 0 0 no-repeat;
-height:60% !important;width:100% !important;background-size:100% !important;  
-	  float: left !important;
-	  visibility:hidden;
-	  z-index: 5000;
-  position: relative;
-}
+height: 60% !important;
+  width: 40% !important;
+  left: 30%;
+  background-size: 100% !important;
+
+  visibility: hidden;
+  z-index: 7002;
+  position: absolute;
+  }
 #buttonMenuJungle1
 {
 		background: transparent url(../resources/buttons/timemenubutton.png) 0 0 no-repeat;
@@ -475,12 +795,14 @@ width: 20% !important;
 {
 	background: transparent url(../resources/others/bubble1.png) 0 0 no-repeat;
 	background-size: 100% 100% !important; 
-  width: 80%;
+  width: 40%;
+  left: 30%;
+  top: 25%;
+  text-align: center;
   position: absolute;
-  top: 40%;
-  opacity:0;
-    padding: 1%;
-
+  opacity: 0;
+  z-index:6900;
+  padding: 1%;
 }
 #resetTripContainer
 {
@@ -496,13 +818,17 @@ width: 20% !important;
 #resetTripContainerAquarium
 {
 	background: transparent url(../resources/labels/clearTripAquarium_0.png) 0 0 no-repeat;
-		background-size: 100%  !important; 
-  width: 80%;
-  height: 50%;
-  position: absolute;
-  top: 40%;
-  z-index:7000;
+		background-size: 100% 100% !important; 
+		
+		
+		width:45%;
+	left:27.5%;
+	height:100%;
+	  position: absolute;
+
   visibility:hidden;
+  z-index:7000;
+  
 }
 #resetTripYes
 {
@@ -514,19 +840,17 @@ width: 20% !important;
 
   position: relative;
   top: 70%;
-z-index:1000px;
+z-index:1000;
 }
 #resetTripYesAquarium
 {
-	height:20%;
-	width:30%;
-
-  left: 12%;
-  		float: left;
-
+	height: 20%;
+  width: 25%;
+  left: 20%;
+  float: left;
   position: relative;
   top: 70%;
-z-index:1000px;
+z-index:15000;
 }
 #resetTripSpacer
 {
@@ -537,20 +861,19 @@ z-index:1000px;
  left: 10%;
   position: relative;
   top: 70%;
-  z-index:500px;
+  z-index:5000px;
 
 }
 
-#resetTripAquarium
+#resetTripNoAquarium
 {
-		height:20%;
-	width:30%;
-
-		float: left;
- left: 10%;
+		  height: 20%;
+  width: 20%;
+  float: left;
+  left: 15%;
   position: relative;
   top: 70%;
-z-index:1000px;
+  z-index: 5000;
 }
 #resetTripNo
 {
@@ -561,7 +884,7 @@ z-index:1000px;
  left: 10%;
   position: relative;
   top: 70%;
-z-index:1000px;
+z-index:1000;
 }
 	
 #timeLeftCharacter
@@ -581,11 +904,13 @@ z-index:1000px;
 		font-size: 1.5em;
 		background: transparent url(../resources/others/bubble1.png) 0 0 no-repeat;
 		background-size: 100% 100% !important; 
-		color:#FDFD5E  !important;
-		    width: 80%;
-			  height: 15%;
+		color:rgb(0,133,192) !important;
+		    width: 40%;
+			left:30%;
+			  height: 40%;
+			  text-align:center;
 	 visibility: hidden;
-  top: 70%;
+
   position: absolute;
 }
 #msg
@@ -626,14 +951,14 @@ z-index:1000px;
 }
 #map_canvas_aquarium
 {
-	width:80% !important;
-		height:60%;
-		top:10% !important;
-		left:10% !important;
-		position:relative !important;
-		float:left !important;
-		visibility:hidden;
-}
+  width: 90% !important;
+  height: 90%;
+  left:5%;
+  top:5%;
+  position: absolute !important;
+
+    border-radius: 50%;
+  }
 
 #map_canvas_character
 {
@@ -664,8 +989,10 @@ height:70%;
 #borderMapAquarium
 {
 	background: transparent url(../resources/others/bordermapa.png) 0 0 no-repeat;
- background-size:100% !important;  height:100% ; width: 100% !important;  
-	 position:relative !important;
+ background-size:100% 100%!important; 
+  height:100% ; width: 100% !important;  
+
+	 position:absolute !important;
 	 
 }
 
@@ -801,13 +1128,15 @@ float:left;
 	  height: 10% !important;
   width: 20% !important;
   left: 0px;
+  visibility:hidden;
   bottom: 0px;
+  z-index:10000;
 }
 #contentAquarium
 {
 	position:relative !important;
 	width:200% !important;
-	height:100% !important;
+	height:80% !important;
 	left:-50% !important;
 	  padding:0 !important;
 	overflow:hidden !important;
@@ -876,13 +1205,3 @@ float:left;
 #buttonTripPlanner
 { 	  background: transparent url(../resources/buttons/tripplannerbutton.png) 0 0 no-repeat;}
 
-#bird {
-			background: transparent url(../resources/characters/aquarium/animated/fish1_1.png) 0 0 no-repeat;
-			position: absolute;
-			top:50px;
-	left:50px;
-	width:72px;
-	height:58px;
-			z-index: 2000;
-			cursor: pointer;
-		}

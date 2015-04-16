@@ -16,7 +16,7 @@
 	
 
 $(document).bind("pagebeforechange", function(e,ob) {
-   if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+  // if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -168,7 +168,7 @@ var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostric
 "Did you know?<br/>more people are killed by hippopotamuses then by lions, elephants and water buffalos combined",
 "Did you know?<br/>a woodpeckers tongue can wrap around its head twice",
 "Did you know?<br/>snakes can't blink",
-"Did you know?<br/>ants don�t like baby powder (talcum powder)",
+"Did you know?<br/>ants don't like baby powder (talcum powder)",
 "Did you know?<br/>a rat can tread water for 3 days",
 "Did you know?<br/>dolphins can kills sharks by ramming them with their snout",
 "Did you know?<br/>sharks can sense a drop of blood from 4km (2.5miles) away",
@@ -900,13 +900,15 @@ function getPosition()
 	//navigator.geolocation.getCurrentPosition(onSuccess, onError);
 	if(setScene==10)
 	{
+						updateWaterLevel();
 	}
 	else
 		{
 		
 			updateGreyCharacter(100-levelPos);
-   			setTimeout('getPosition()',updateFreqMilis);
+
 		}
+		   			setTimeout('getPosition()',updateFreqMilis);
 	}
 	else
 	{
@@ -935,8 +937,9 @@ function getTimeC()
 			levelPos=100*(1-(timeLeft/timeFull));
 		if(setScene==10)
 		{
-			showFinishAquarium();
+			//showFinishAquarium();
 						updateTimeLeftTextA(timeLeft);
+				updateWaterLevel();
 		}
 		else
 		{
@@ -1123,7 +1126,7 @@ function updateTimeLeftTextA(timeL)
 						mins=0;
 				}
 				
-				$('#timeLeftAquarium').html(hrs+" HOURS AND <br/>"+mins+" MINUTES LEFT");
+				$('#timeLeftAquarium').html("<br/><br/>"+hrs+" HOURS AND <br/>"+mins+" MINUTES LEFT");
 }
 function finishTripJungle()
 {
@@ -1134,8 +1137,15 @@ function finishTripJungle()
 }
 function finishTripAquarium()
 {
+	
 	  $('#finishBubbles').destroy();
-	  clearTrip();
+	  
+	 	$('#backAquarium').css('visibility','hidden');
+		$('#resetTripContainerAquarium').css('visibility','hidden');
+				 				 $('#resetTripContainerAquarium').css('z-index','0');
+		$('#menuAquarium').css('visibility','hidden');
+		$('#menuAquarium').css('opacity','0');
+	  clearTripA();
 	  				pageRender='#main';  
 	  $.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
 }
@@ -1145,6 +1155,8 @@ function showFinishJungle()
 				window.clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
 
+			$('#knowFactContainer').css('opacity','0');
+				  $('#menuJungle').css('visibility','visible');
 	  $('#finishCharacter').css('visibility','visible');
   		$('#finishLeafs').css('visibility','visible');
 		$('#finishLeafs').pan({fps: 30, speed: 4, dir: 'down', depth: 70});
@@ -1157,18 +1169,19 @@ function showFinishAquarium()
 				window.clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
 
+			$('#knowFactContainerAquarium').css('opacity','0');
+
+				  $('#menuAquarium').css('visibility','hidden');
+				   $('#timeLeftAquarium').css('visibility','hidden');
+				$('#positionLeftAquarium').css('visibility','hidden');
+				 $('#resetTripContainerAquarium').css('visibility','hidden');
+
 	  $('#finishAquarium').css('visibility','visible');
   		$('#finishBubbles').css('visibility','visible');
-		(function($) {
-			$(document).ready(function() {
-			
 				$('#finishBubbles')
 					.sprite({fps: 5, no_of_frames: 5})
 					.active();
-				
-				
-			});
-		})(jQuery);
+		
 
 	  
 }
@@ -1371,7 +1384,8 @@ function showSun()
 {
 	var l=getRandom(0,100);
 	$('#sun').css('left',l+'%');
-	$('#sun').css('visibility','visible');
+//	$('#sun').css('visibility','visible');
+	showDivEfect($('#sun'));
 }
 function generateClouds(i)
 {
@@ -1412,11 +1426,13 @@ function generateClouds(i)
 				$('#cloud'+i).css('background','transparent url(resources/characters/aquarium/static/cloud'+tcloud+'a.png) 0 0 no-repeat');
 			}
 			var op=getRandom(8,10);
-						$('#cloud'+i).css('opacity',op/10);
+//				$('#cloud'+i).css('opacity',op/10);
 			$('#cloud'+i).css('height',he+"px");
 			//ss$('#cloud'+i).css('width',(he*widthc)+"px");
 			$('#cloud'+i).css('background-size',(he*widthc)+'px '+he+'px');
-			$('#cloud'+i).css('visibility','visible');
+	showDivEfectC($('#cloud'+i),op/10);
+
+	//		$('#cloud'+i).css('visibility','visible');
 
 		$('#cloud'+i).pan({fps: fp, speed: 1, dir: direction});
 
@@ -1436,7 +1452,8 @@ function showClouds(i)
 		}
 		else
 		{
-			$('#cloud'+i).css('visibility','hidden');
+			hideDivEfect($('#cloud'+i));
+//			$('#cloud'+i).css('visibility','hidden');
 		}
 			setTimeout(function(){ showClouds(i+1)},1000);
 	}
@@ -1447,14 +1464,15 @@ function generateBirds(i)
 {
 	
 	var r=$('#cloudsContainer').width();
-	var l=getRandom(10,90);
+	var l=getRandom(0,r);
 	var sp=getRandom(1,15);
 	var p=getRandom(0,5);
 	var h=(getRandom(2,7)/100)*$(window).height();
 	$('#bird'+i).css('height',h);
 	$('#bird'+i).css('width',$('#bird'+i).height()*8);
-	$('#bird'+i).css('left',l+'%');
-	$('#bird'+i).css('visibility','visible');
+	$('#bird'+i).css('left',l+'px');
+	showDivEfect($('#bird'+i));
+//	$('#bird'+i).css('visibility','visible');
 	var bot=parseInt($('#cloudsContainer').height())-parseInt($('#cloudsContainer').css('top').replace('px','').replace('%',''))-$('#bird'+i).height();
 	var t=getRandom(10,(bot/$('#cloudsContainer').height()));
 			$('#bird'+i).css('top',t+'%');
@@ -1484,7 +1502,8 @@ function showBirds(i)
 		}
 		else
 		{
-			$('#bird'+i).css('visibility','hidden');
+			hideDivEfect($('#bird'+i));
+//			$('#bird'+i).css('visibility','hidden');
 		}
 					setTimeout(function(){ showBirds(i+1)},1000);
 
@@ -1492,12 +1511,276 @@ function showBirds(i)
 
 }
 
-function showWaterLevel()
+var apprsPlant=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var apprsFish=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	
+function apearPlants(i)
+{
+		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+		var topP=parseInt($('#plant'+i).css('top').replace('%','').replace('px',''));
+		if(topW<=topP)
+		{
+						apprsPlant[i-1]=2;
+			showDivEfect($('#plant'+i));
+			//$('#plant'+i).css('visibility','visible');
+			$('#plant'+i)
+		.sprite({fps: 5, no_of_frames:5})
+		.isDraggable({drag: function() {
+			var topMin=$('#plantContent').height()-$('#plant'+i).height()-$('#staticElementContent').height();
+			var toP=parseInt($('#plant'+i).css('top').replace('%','').replace('px',''));
+				if(	topMin>toP){
+					$('#plant'+i).css('top',topMin+'px');
+					return false;}}})       .active();
+	
+		}
+
+}
+var aspectRatioPlants=[0.934,0.947,0.942,1.196,0.777,0.963,0.598,0.572,1.023,1.17];
+function generatePlants(i)
 {
 
-	$('#waterLevel').css('width',($('#waterLevel').height()*5)+'px');
-			$('#waterLevel').css('visibility','visible');
-$('#waterLevel').pan({fps: 100, speed: 5, dir: 'left'});
+			var heSand=$('#staticElementContent').height();
+			var heCont=$('#plantContent').height();
+
+
+		var l=getRandom(0,$('#plantContent').width());
+
+			var h=parseInt(getRandom(10,50)/100*heCont);
+		$('#plant'+i).css('height',h+'px');
+		var w=parseInt(aspectRatioPlants[(i%10)]*h);
+		$('#plant'+i).css('width',w+'px');
+			var minTop=heCont-heSand-$('#plant'+i).height();
+			var maxTop=heCont-$('#plant'+i).height();
+
+		var t=getRandom(minTop,maxTop);
+					var zInd=t+$('#plant'+i).height();
+						
+		$('#plant'+i).css('top',t+'px');
+		$('#plant'+i).css('left',l+'px');
+		$('#plant'+i).css('z-index',zInd);
+
+}
+
+function showPlants(i)
+{
+	if(i<=20)
+	{
+
+			$('#plant'+i).destroy();
+					
+		if(getRandom(0,9)<5)
+		{
+					apprsPlant[i-1]=1;
+	
+			generatePlants(i);
+			
+		}
+		else
+		{
+							hideDivEfect($('#plant'+i));
+//			$('#plant'+i).css('visibility','hidden');
+		}
+					setTimeout(function(){ showPlants(i+1)},100);
+
+	}
+
+}
+	var aspRat=6.564 //alto img sobre alto franja
+
+	var bhw=Math.floor($(window).height()*0.8*0.12);
+
+function updateWaterLevel()
+{
+			
+		var bhc=$('#contentAquarium').height()-bhw;
+	var newTop=bhc -(bhc*(levelPos/100));
+	var newHe=bhw+(bhc*(levelPos/100));
+	
+	 $('#waterLevel').animate({ "top": newTop+'px'}, "slow");
+	 $('#waterLevel').animate({ "height": newHe+'px'}, "slow");
+	for(var j=1;j<=20;j++)
+	{
+		if(apprsPlant[j-1]==1)
+		{
+			apearPlants(j);
+		}
+		if(apprsFish[j-1]==1)
+		{
+				apearFishs(j);
+		}
+	}
+}
+
+function showWaterLevel()
+{
+		var bh=Math.floor($(window).height()*0.8*0.12*aspRat);
+	var bw=Math.floor(bh*5.42);
+
+	var bac=bw+'px '+bh+'px';
+
+	 $('#waterLevel').css({
+    'background' : 'transparent url(resources/characters/aquarium/animated/waterLevel6.png) 0 0',
+	'-webkit-background-size':bac,
+	'background-repeat':'repeat-x',
+	'background-size':bac,
+});
+	
+	var bhc=$('#contentAquarium').height()-bhw;
+	 $('#waterLevel').height(bhw);
+	 var lv;
+	 if(levelPos==-1)
+	 {
+		 lv=0;
+	 }
+	 else
+	 {
+		 lv=levelPos;
+	 }
+	 var t=bhc -(bhc*(lv/100));
+	 	 $('#waterLevel').css('top',t+'px');
+					showDivEfect($('#waterLevel'));
+$('#waterLevel').pan({fps: 50, speed: 5, dir: 'left'});
+}
+var aspectRatioStaticsElements=[1.127,1.58,1.48,1.78,1.41,1.63,1.26,1.605,1.07,1.095];
+function generateStaticElements(i)
+{
+		var hCont=$('#staticElementContent').height();
+		var hPor=parseInt(getRandom(3,10)/10*hCont);
+		$('#staticElement'+i).css('height',hPor+'px');
+
+		var minTop=0-hPor;
+		var maxTop=$('#staticElementContent').height()-hPor;
+		var t=getRandom(minTop,maxTop);
+		var l=getRandom(0,$('#staticElementContent').width());
+		var zInd=t+$('#plantContent').height()-$('#staticElementContent').height()+hPor;
+		var w=parseInt(hPor*aspectRatioStaticsElements[(i%10)]);
+		$('#staticElement'+i).css('width',w+'px');
+		$('#staticElement'+i).css('top',t+'px');
+		$('#staticElement'+i).css('z-index',zInd);
+		$('#staticElement'+i).css('left',l+'px');
+					showDivEfect($('#staticElement'+i));
+		//$('#staticElement'+i).css('visibility','visible');
+
+
+		var topW=0-$('#staticElement'+i).height();
+		var topP=parseInt($('#staticElement'+i).css('top').replace('%','').replace('px',''));
+			$('#staticElement'+i)
+			.sprite({fps: 1, no_of_frames:1})
+			.isDraggable({drag: function() {
+
+			var toP=parseInt($('#staticElement'+i).css('top').replace('%','').replace('px',''));
+				if(	topW>toP){
+						$('#staticElement'+i).css('top',topW+'px');
+					return false;}}})
+	        .active();
+		
+
+}
+
+
+function showStaticElements(i)
+{
+	
+	if(i<=20)
+	{
+					$('#staticElement'+i).destroy();
+					
+		if(getRandom(0,9)<=6)
+		{
+			generateStaticElements(i);
+			
+		}
+		else
+		{
+
+			hideDivEfect($('#staticElement'+i));
+//			$('#staticElement'+i).css('visibility','hidden');
+		}
+					setTimeout(function(){ showStaticElements(i+1)},100);
+
+					
+	}
+
+}
+
+var aspectRatioFishs=[1.634,1.393,1.589,1.605,1.495,1.746,1.899,2.034,1.865,1.951];
+
+function apearFishs(i)
+{
+		var hC=$('#contentAquarium').height();
+		var hF=$('#fish'+i).height();
+		var tF=parseInt($('#fish'+i).css('top').replace('px',''));
+		var topM=Math.floor($(window).height()*0.8*0.12);
+		var wl=parseInt($('#waterLevel').css('top').replace('px',''))+topM;
+		if((tF>wl) && (hC>=(tF+hF)))
+		{
+			apprsFish[i-1]=2;
+			showDivEfect($('#fish'+i));
+			var r=$('#contentAquarium').width();
+			var l=getRandom(0,r);
+			var sp=getRandom(1,15);
+			var p=getRandom(0,5);
+			var fp=parseInt(8-Math.floor(sp/2.8));
+			var bot=hC;
+			$('#fish'+i)
+			.sprite({fps: fp, no_of_frames:6})
+			.spRandom({top: wl, left: 0, right: r, bottom: bot, speed: sp*1000, pause: p*1000, haveBack:true })
+			.isDraggable({drag: function() {
+			var topMin=topM;
+			var toP=parseInt($('#fish'+i).css('top').replace('%','').replace('px',''));
+				if(	topM+parseInt($('#waterLevel').css('top').replace('px',''))>toP){
+					$('#fish'+i).css('top',(topM+parseInt($('#waterLevel').css('top').replace('px','')))+'px');
+					return false;}}})      
+			 .active();
+	
+		}
+
+}
+
+function generateFishs(i)
+{
+
+			
+			var conH=$('#contentAquarium').height();
+			var h=parseInt(getRandom(5,40)/100*conH);
+			$('#fish'+i).css('height',h+'px');
+			var w=parseInt(aspectRatioFishs[(i%10)]*h);
+			$('#fish'+i).css('width',w+'px');
+			var minTop=Math.floor($(window).height()*0.8*0.12);;
+			var maxTop=$('#contentAquarium').height();
+			var t=getRandom(minTop,maxTop);
+				var l=getRandom(0,$('#contentAquarium').width());
+			var zInd=getRandom(100,2000);
+
+		$('#fish'+i).css('top',t+'px');
+		$('#fish'+i).css('left',l+'px');
+		$('#fish'+i).css('z-index',zInd);
+
+
+}
+
+function showFishs(i)
+{
+	if(i<=20)
+	{
+
+			$('#fish'+i).destroy();
+					
+		if(getRandom(0,9)<7)
+		{
+			apprsFish[i-1]=1;
+			generateFishs(i);
+			
+		}
+		else
+		{
+							hideDivEfect($('#fish'+i));
+//			$('#plant'+i).css('visibility','hidden');
+		}
+					setTimeout(function(){ showFishs(i+1)},100);
+
+	}
+
 }
 
 $(document).on('pageshow','#aquarium', function(e,data){ 
@@ -1505,12 +1788,24 @@ $(document).on('pageshow','#aquarium', function(e,data){
 
 	pageRender='#aquarium';  
 	showSun();
+	
+apprsPlant=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+apprsFish=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	
 	showWaterLevel();
-	showClouds(1);
+showClouds(1);
 showBirds(1);
-$('#cloudsContainer').flyToTap();
-	/*
-	$("#resetTripContainerAquarium").height($("#resetTripContainerAquarium").width()/1.33);
+
+showStaticElements(1);
+showPlants(1);
+
+showFishs(1);
+
+
+$('fishContent').flyToTap();
+
+	
+	$("#resetTripContainerAquarium").height($("#resetTripContainerAquarium").width());
 	$("#positionLeftAquarium").height($("#positionLeftAquarium").width());
 	  charConH=$("#aquariumContainer").height();
 if(map==undefined)
@@ -1603,45 +1898,54 @@ if(map==undefined)
 
       $("#buttonMenuAquarium1").click(function() {
 				 $('#timeLeftAquarium').css('visibility','visible');
+				 $('#timeLeftAquarium').css('z-index','6899');
+				 	$('#positionLeftAquarium').css('z-index','0');
 				$('#positionLeftAquarium').css('visibility','hidden');
-				 $('#resetTripAquarium').css('visibility','hidden');
+				 $('#resetTripContainerAquarium').css('visibility','hidden');
+				 				 $('#resetTripContainerAquarium').css('z-index','0');
 
 			});
       $("#buttonMenuAquarium2").click(function() {
 		  zoomLevel=16;
 		  map.setZoom(Math.floor(zoomLevel));
+		  	$('#positionLeftAquarium').css('z-index','6890');
 				 $('#positionLeftAquarium').css('visibility','visible');
  					$('#timeLeftAquarium').css('visibility','hidden');
+					$('#timeLeftAquarium').css('z-index','0');
 					 $('#resetTripContainerAquarium').css('visibility','hidden');
+					 				 				 $('#resetTripContainerAquarium').css('z-index','0');
 });
 
       $("#buttonMenuAquarium3").click(function() {
 		  
 		  		  		 $('#resetTripContainerAquarium').css('visibility','visible');
+						 				 				 $('#resetTripContainerAquarium').css('z-index','7002');
+						 	$('#positionLeftAquarium').css('z-index','0');
 		  		 $('#positionLeftAquarium').css('visibility','hidden');
  					$('#timeLeftAquarium').css('visibility','hidden');
+					$('#timeLeftAquarium').css('z-index','0');
 });
 
       $("#buttonMenuAquarium4").click(function() {
 					 $('#resetTripContainerAquarium').css('visibility','hidden');
+					 				 				 $('#resetTripContainerAquarium').css('z-index','0');
+					 	$('#positionLeftAquarium').css('z-index','0');
 					$('#positionLeftAquarium').css('visibility','hidden');
 					$('#timeLeftAquarium').css('visibility','hidden');
+					$('#timeLeftAquarium').css('z-index','0');
 
 				 		$('#menuAquarium').css('opacity','0');
 							$('#menuAquarium').css('visibility', 'hidden');
 				  $('#backAquarium').css('visibility','hidden');
 			});
 
-	 
-//$('#fish').sprite({fps: 12, no_of_frames: 6});
-	
-  		
+		
 				if(setTrip==0)
 				{
 					if (timeFull==timeLeft)
 					{
 	
-					
+
 	  											
 						timeNow=new Date().getTime();
 						  updatePostionAquarium();
@@ -1660,13 +1964,13 @@ if(map==undefined)
 				}
 	
 			$('#knowFactContainerAquarium').css('font-size','1.5em');
-						$('#knowFactContainerAquarium').css('color','#FDFD5E');
+						$('#knowFactContainerAquarium').css('color','rgb(0,133,192)');
 
 			
-$('#knowFactContainerAquarium').click(function() {if($('#knowFactContainerAquarium').css('opacity')==1){$('#knowFactContainerAquarium').animate({ "opacity": 0}, "slow");} }) ;
-	intervalDist2=setInterval(function () {loadKnowFact()}, updateFreqMilis*10);		
-//	  getCurrentPosCharacter();
- */
+$('#knowFactContainerAquarium').click(function() {if($('#knowFactContainerAquarium').css('opacity')==1){
+	$('#knowFactContainerAquarium').css('z-index','0');
+	$('#knowFactContainerAquarium').animate({ "opacity": 0}, "slow");} }) ;
+	intervalDist2=setInterval(function () {loadKnowFactA()}, updateFreqMilis*10);		
   });
   
   
@@ -1676,6 +1980,24 @@ $('#knowFactContainerAquarium').click(function() {if($('#knowFactContainerAquari
 		return	  txt.replace('?','<font face="Lucida Grande, Lucida Sans Unicode, Lucida Sans, DejaVu Sans, Verdana, sans-serif"> ?</font>');
 	  
   }
+ function loadKnowFactA()
+ {
+	 var r=getRandom(0,2);
+	if(r==0 && $('#knowFactContainerAquarium').css('opacity')==0)
+	{
+	$('#knowFactContainerAquarium').css('z-index','6900');
+		$('#knowFactContainerAquarium').html("<br/><br/>"+correctFontKows(knows[getRandom(0,(knows.length-1))].toUpperCase())+"<br/><br/>");
+		$('#knowFactContainerAquarium').animate({ "opacity": 1}, "slow");
+		//$('#knowFactContainer').animate({ "visibility": 'visible'}, "slow");
+				
+	}
+	else
+	{
+				
+	}
+ }
+  
+
  function loadKnowFact()
  {
 	 var r=getRandom(0,2);
@@ -1796,6 +2118,20 @@ function loadCharacter()
     'background-size' : '100% ' + $('#loadingContent').height()+'px',
 });
 }
+function clearTripYesAquarium()
+{
+	
+
+	 	$('#backAquarium').css('visibility','hidden');
+		$('#resetTripContainerAquarium').css('visibility','hidden');
+				 				 $('#resetTripContainerAquarium').css('z-index','0');
+		$('#menuAquarium').css('visibility','hidden');
+		$('#menuAquarium').css('opacity','0');
+		clearTripA();
+						pageRender='#main';  
+		$.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
+
+}
 function clearTripYes()
 {
 
@@ -1815,19 +2151,32 @@ function goToPage(page,rev)
 	$.mobile.changePage(page,{ transition: pageEfect,reverse:rev});
 
 }
+function clearTripNoAquarium()
+{
+		$('#resetTripContainerAquarium').css('visibility','hidden');
+						 				 $('#resetTripContainerAquarium').css('z-index','0');
+				$('#backAquarium').css('visibility','hidden');
+		$('#menuAquarium').css('opacity','0');
+				$('#menuAquarium').css('visibility', 'hidden');
+
+}
 function clearTripNo()
 {
 
 	$('#resetTripContainer').css('visibility','hidden');
+					$('#backJungle').css('visibility','hidden');
 		$('#menuJungle').css('opacity','0');
 				$('#menuJungle').css('visibility', 'hidden');
 }
 	function clearTrip()
 	{
+		
 		window.clearInterval(intervalDist);
 				window.clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
 			$('#knowFactContainer').css('opacity','0');
+				$('#knowFactContainerAquarium').css('opacity','0');
+												
 			directionsDisplay = new google.maps.DirectionsRenderer();
 			directionsService=new google.maps.DirectionsService();
 			 hourpos=0;
@@ -1846,6 +2195,35 @@ function clearTripNo()
 			mapDest=undefined;
 		
 	}
+	
+	function clearTripA()
+	{
+		stopAllAnimation();
+		window.clearInterval(intervalDist);
+				window.clearInterval(intervalDist2);
+			navigator.geolocation.clearWatch(watchID);
+						$('#knowFactContainerAquarium').css('opacity','0');
+
+				  $('#finishAquarium').css('visibility','hidden');
+			directionsDisplay = new google.maps.DirectionsRenderer();
+			directionsService=new google.maps.DirectionsService();
+			 hourpos=0;
+			 minute1pos=0;
+			 minute2pos=0;
+			timeNow=0;
+			setScene=0;	
+			distanceLeft=-1;
+			distanceFull=-1;
+			levelPos=-1;
+			timeLeft=-1;
+			timeFull=-1;
+			frontCharacterTop=0;
+			characterContentHeight=0;
+			map=undefined;
+			mapDest=undefined;
+		stopAllAnimation();
+	}
+	
 	
 function goToLoading()
 {
@@ -1908,18 +2286,63 @@ function backFromAquarium()
 {
 	 $('#menuAquarium').css('visibility','hidden');
 	 $('#positionLeftAquarium').css('visibility','hidden');
+	 	$('#positionLeftAquarium').css('z-index','0');
 	 	 $('#timeLeftAquarium').css('visibility','hidden');
+		 	 	$('#timeLeftAquarium').css('z-index','0');
     	$('#menuAquarium').css('opacity', '0');
-									 // $('#backAquarium').css('visibility','hidden');
+									 $('#backAquarium').css('visibility','hidden');
 									 stopAllAnimation();
 									  $.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:true});
+}
+
+function showDivEfect(d)
+{
+	d.css('visibility', 'visible');
+	d.animate({opacity: 1}, 1000);
+}
+function showDivEfectC(d,o)
+{
+	d.css('visibility', 'visible')
+	d.animate({opacity: o}, 1000);
+}
+
+function hideDivEfect(d)
+{
+	d.css('opacity','0');
+	d.css('visibility', 'hidden');
 }
 function stopAllAnimation()
 {
 	for(var i=1;i<=8;i++)
 	{
+		
 		$('#bird'+i).destroy();
-				$('#cloud'+i).destroy();
+		$('#cloud'+i).destroy();
+		$('#bird'+i).css('visibility','hidden');
+				$('#plant'+i).css('opacity','0');
+		$('#cloud'+i).css('visibility','hidden');
+				$('#cloud'+i).css('opacity','0');
+				
+	}
+		for(var j=1;j<=20;j++)
+	{
+				
+		$('#plant'+j).destroy();
+				$('#fish'+j).destroy();
+		$('#staticElement'+j).destroy();
+		$('#plant'+j).css('visibility','hidden');
+				$('#plant'+j).css('opacity','0');
+								$('#staticElement'+j).css('visibility','hidden');
+				$('#staticElement'+j).css('opacity','0');
+
+				$('#fish'+j).css('visibility','hidden');
+				$('#fish'+j).css('opacity','0');
+
 	}
 $('#waterLevel').destroy();	
+$('#waterLevel').css('visibility','hidden');
+$('#waterLevel').css('opacity','0');
+
+$('#sun').css('visibility','hidden');
+$('#sun').css('opacity','0');
 }
