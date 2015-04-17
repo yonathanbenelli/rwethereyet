@@ -45,7 +45,13 @@ body{
   -webkit-box-shadow: none;
 
 }
-
+#sounds
+{
+	position:absolute;
+	visibility:hidden;
+	top:0px;
+	left:0px;
+}
 #cloud1
 {
 

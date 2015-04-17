@@ -1407,7 +1407,7 @@ if(map==undefined)
 				{
 					if (distanceFull==distanceLeft)
 					{
-						$('#timeLeftCharacter').html("WITHOUT INFORMATION");
+						$('#timeLeftCharacter').html("<br/>WITHOUT INFORMATION");
 										directionsDisplay.setMap(map);				
 						  updatePostionCharacter();
 						  clearInterval(intervalDist);
@@ -2212,7 +2212,7 @@ if(map==undefined)
 				{
 					if (distanceFull==distanceLeft)
 					{
-						$('#timeLeftAquarium').html("WITHOUT INFORMATION");
+						$('#timeLeftAquarium').html("<br/>WITHOUT INFORMATION");
 										directionsDisplay.setMap(map);				
 						  updatePostionAquarium();
 						  							  clearInterval(intervalDist);
