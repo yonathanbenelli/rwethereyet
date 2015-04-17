@@ -1745,9 +1745,6 @@ var aspRat=6.564*2; //alto img sobre alto franja
 
 function updateWaterLevel()
 {
-			console.log('sartup');
-	console.log(new Date().getTime());
-
 			
 //		var bhc=$('#contentAquarium').height()-bhw;
 
@@ -1808,8 +1805,6 @@ if(apprsDolphin==1)
 		{
 			hideDivEfect($('#dolphin'));
 		}
-console.log('finup');
-	console.log(new Date().getTime());
 
 }
 
@@ -1830,7 +1825,7 @@ function showWaterLevel()
 		 var bw0=Math.floor(bh0*6.48);
 		 var bac0=bw0+'px '+bh0+'px';
  $('#waterLevel0').css({
-    'background' : 'transparent url(resources/characters/aquarium/animated/waterlevel_0.png) 0 0',
+    'background' : 'transparent url(resources/characters/aquarium/animated/) 0 0',
 	'-webkit-background-size':bac0,
 	'background-repeat':'repeat-x',
 	'background-size':bac0,
@@ -1997,8 +1992,6 @@ function showFishs(i)
 }
 
 $(document).on('pageshow','#aquarium', function(e,data){ 
-console.log('begin');
-	console.log(new Date().getTime());
 render=true;
 	pageRender='#aquarium';  
 	showSun();
@@ -2030,12 +2023,9 @@ $('#pipe').css('left',lP+'px');
 showDivEfect($('#pipe'));
 showDivEfect($('#waterPipe'));
 $('#waterPipe').pan({fps: 40, speed: 7, dir: 'down', depth: 70});
-console.log('hide');
-console.log(new Date().getTime());
 	updateWaterLevel();
 $('#allA').css('visibility','visible');
-console.log('show');
-	console.log(new Date().getTime());
+
 	$("#resetTripContainerAquarium").height($("#resetTripContainerAquarium").width());
 	$("#positionLeftAquarium").height($("#positionLeftAquarium").width());
 	  charConH=$("#aquariumContainer").height();
