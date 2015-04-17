@@ -16,7 +16,7 @@
 	
 
 $(document).bind("pagebeforechange", function(e,ob) {
-  // if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+  if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -269,7 +269,7 @@ var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostric
 "Did you know?<br/>ants can lift 50 times their own weight",
 "Did you know?<br/>bees can see ultraviolet light",
 "Did you know?<br/>80% of the world's food crops are pollinated by insects",
-"Did you know?<br/>10% of with world's food supply is consumed by insects",
+"Did you know?<br/>10% of the world's food supply is consumed by insects",
 "Did you know?<br/>it takes 110 silkworm cocoons to make an average tie",
 "Did you know?<br/>queen termites can live up to 50 years",
 "Did you know?<br/>most spiders have transparent blood",
