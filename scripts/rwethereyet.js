@@ -13,14 +13,6 @@
 			});
 		})(jQuery);
 	*/
-	document.addEventListener("deviceready", onDeviceReady, false);
-
-        // device APIs are available
-        //
-        function onDeviceReady() {
-           loadSounds();
-        }
-
 
 $(document).bind("pagebeforechange", function(e,ob) {
   if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
@@ -365,8 +357,10 @@ var pageEfect="flip";
 		
         // Add an overlay to the map of current lat/lng
         var marker;
-		var volMusic=0.5;
-		var volMusicD=0.3;
+		var volMusic=50;
+		var volMusicD=30;
+		var soundVol50=50;
+		var soundVol10=10;
 		var from;
 		var distanceLeft=-1;
 		var distanceFull=-1;
@@ -419,25 +413,20 @@ var render=true;
 		var agentIndex = deviceAgent.indexOf('Android');
 
     if (agentIndex != -1) {
-       var androidversion = parseFloat(deviceAgent.match(/Android\s+([\d\.]+)/)[1]);
-       	if (androidversion < 3.1)
-        {
-        	  android=2;
-        	} else {
-                     android=4;
-        		}
+				   var androidversion = parseFloat(deviceAgent.match(/Android\s+([\d\.]+)/)[1]);
+					if (androidversion < 3.1)
+					{
+						  android=2;
+					}
+			 else {
+						 android=4;
+					}
         } 
 	else {
                  android=0;
     }
 
-var music1=null;
-var music2=null;
-var music3=null;
-var music4=null;
-var music5=null;
-var music6=null;
-var music7=null;
+var music=[null,null,null,null,null,null,null,null];
 var wavesSound=null;
 var dolphinSound=null;
 var birdsConSound=null;
@@ -463,37 +452,51 @@ var zebraSound=null;
    
 function   loadSounds()
 {
-	music1= new Media("resources/music/music1.mp3", onSuccessS, onErrorS,onStatusSMusic);
-		music12= new Media("resources/music/music2.mp3", onSuccessS, onErrorS,onStatusSMusic);
-	music3= new Media("resources/music/music3.mp3", onSuccessS, onErrorS,onStatusSMusic);
 
-	music4= new Media("resources/music/music4.mp3", onSuccessS, onErrorS,onStatusSMusic);			
-	music5= new Media("resources/music/music5.mp3", onSuccessS, onErrorS,onStatusSMusic);			
-	music6= new Media("resources/music/music6.mp3", onSuccessS, onErrorS,onStatusSMusic);			
-	music7= new Media("resources/music/music7.mp3", onSuccessS, onErrorS,onStatusSMusic);	
-	toucanSound= new Media("resources/sounds/toucan.mp3", onSuccessS, onErrorS);	
-	zebraSound= new Media("resources/sounds/zebra.mp3", onSuccessS, onErrorS);	
-		swipe2Sound= new Media("resources/sounds/swipe2.mp3", onSuccessS, onErrorS);	
-		pinchSound= new Media("resources/sounds/pinch.mp3", onSuccessS, onErrorS);	
-	ovation= new Media("resources/sounds/ovation.mp3", onSuccessS, onErrorS);	
-	crocodileSound= new Media("resources/sounds/crocodile.mp3", onSuccessS, onErrorS);		
-		elephantSound= new Media("resources/sounds/elephant.mp3", onSuccessS, onErrorS);		
-	jungleSound= new Media("resources/sounds/jungle.mp3", onSuccessS, onErrorS);		
-	lionSound= new Media("resources/sounds/lion.mp3", onSuccessS, onErrorS);			
-		monkeySound= new Media("resources/sounds/monkey.mp3", onSuccessS, onErrorS);			
-		wavesSound= new Media("resources/sounds/waves.mp3", onSuccessS, onErrorS,onStatusSWave);					
-		dolphinSound= new Media("resources/sounds/dolphin.mp3", onSuccessS, onErrorS);							
-		birdsConSound= new Media("resources/sounds/birdscon.mp3", onSuccessS, onErrorS,onStatusSBirdCon);							
-		bird1Sound= new Media("resources/sounds/bird1.mp3", onSuccessS, onErrorS);									
-		bird2Sound= new Media("resources/sounds/bird2.mp3", onSuccessS, onErrorS);											
-		tapASound= new Media("resources/sounds/tapa.mp3", onSuccessS, onErrorS);													
-		aquarium1Sound= new Media("resources/sounds/aquarium1.mp3", onSuccessS, onErrorS,onStatusSAquarium1);															
-		aquarium2Sound= new Media("resources/sounds/aquarium2.mp3", onSuccessS, onErrorS,onStatusSAquarium1);															
-		bubblesFinishSound= new Media("resources/sounds/bubblesfinish.mp3", onSuccessS, onErrorS,onStatusSBubbleF);															
-		waterPipeSound= new Media("resources/sounds/waterpipe.mp3", onSuccessS, onErrorS,onStatusSWaterP);															
-		tapJSound= new Media("resources/sounds/tapj.mp3", onSuccessS, onErrorS);															
-		scrollSound= new Media("resources/sounds/scroll.mp3", onSuccessS, onErrorS);																	
-				swipe1Sound= new Media("resources/sounds/swipe1.mp3", onSuccessS, onErrorS);																	
+			tapJSound= new buzz.sound("resources/sounds/tapj.mp3", { preload: true});
+					scrollSound= new buzz.sound("resources/sounds/scroll.mp3");
+
+	music[1]= new buzz.sound("resources/music/music1.mp3", { loop: true});
+
+		music[2]= new buzz.sound("resources/music/music2.mp3", { loop: true});
+
+	music[3]= new buzz.sound("resources/music/music3.mp3", { loop: true});
+
+
+	music[4]= new buzz.sound("resources/music/music4.mp3", { loop: true});
+
+	music[5]= new buzz.sound("resources/music/music5.mp3", { loop: true});
+
+	music[6]= new buzz.sound("resources/music/music6.mp3", { loop: true});
+	music[7]= new buzz.sound("resources/music/music7.mp3", { loop: true});
+	
+	toucanSound= new buzz.sound("resources/sounds/toucan.mp3");
+
+	zebraSound= new buzz.sound("resources/sounds/zebra.mp3");
+
+		swipe2Sound= new buzz.sound("resources/sounds/swipe2.mp3");
+
+		pinchSound= new buzz.sound("resources/sounds/pinch.mp3");
+
+	ovation= new buzz.sound("resources/sounds/ovation.mp3");
+	crocodileSound= new buzz.sound("resources/sounds/crocodile.mp3");
+		elephantSound= new buzz.sound("resources/sounds/elephant.mp3");
+	jungleSound= new buzz.sound("resources/sounds/jungle.mp3");
+	lionSound= new buzz.sound("resources/sounds/lion.mp3");
+		monkeySound= new buzz.sound("resources/sounds/monkey.mp3");
+		wavesSound= new buzz.sound("resources/sounds/waves.mp3");
+		dolphinSound= new buzz.sound("resources/sounds/dolphin.mp3");
+		birdsConSound= new buzz.sound("resources/sounds/birdscon.mp3");
+		bird1Sound= new buzz.sound("resources/sounds/bird1.mp3");
+		bird2Sound= new buzz.sound("resources/sounds/bird2.mp3");
+		tapASound= new buzz.sound("resources/sounds/tapa.mp3");
+		aquarium1Sound= new buzz.sound("resources/sounds/aquarium1.mp3", { loop: true});
+		aquarium2Sound= new buzz.sound("resources/sounds/aquarium2.mp3", { loop: true});
+		bubblesFinishSound= new buzz.sound("resources/sounds/bubblesfinish.mp3", { loop: true});
+		waterPipeSound= new buzz.sound("resources/sounds/waterpipe.mp3", { loop: true});
+		tapJSound= new buzz.sound("resources/sounds/tapj.mp3");
+		scrollSound= new buzz.sound("resources/sounds/scroll.mp3");
+				swipe1Sound= new buzz.sound("resources/sounds/swipe1.mp3");
 
 }
  function onSuccessS() {
@@ -547,7 +550,7 @@ function   loadSounds()
         }
 	}
 $(document).on('pageshow','#main', function(e,data){    
-           loadSounds();
+
 	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 	{
 		$('#backMain').css('visibility','visible');	
@@ -2658,19 +2661,19 @@ $(document).on('pageshow','#loading', function(e,data){
 	
 	playMusic();
 			
-			$('#jungleSound').on('ended', function(){
-	$('#music'+nMusic).prop("volume", volMusic);
+jungleSound.bind('ended', function(e) {
+	music[nMusic].setVolume(volMusic);
 });
-	$('#jungleSound').on('playing', function(){
-	$('#music'+nMusic).prop("volume", volMusicD);
+	jungleSound.bind('playing', function(e) {
+	music[nMusic].setVolume(volMusicD);
 });
 
 
-$('#ovation').on('ended', function(){
-	$('#music'+nMusic).prop("volume", volMusic);
+ovation.bind('ended', function(e) {
+	music[nMusic].setVolume( volMusic);
 });
-	$('#ovation').on('playing', function(){
-	$('#music'+nMusic).prop("volume", volMusicD);
+	ovation.bind('playing', function(e) {
+	music[nMusic].setVolume(volMusicD);
 });
 
 				 rotTimes=2000;	
@@ -2811,17 +2814,7 @@ clearInterval(bird2SoundIn);
 clearInterval(ovationSoundIn);
 	if(nMusic!=0)
 	{
-				switch(nMusic)
-		{
-			case 1:		music1.stop();			break;
-			case 2:		music2.stop();			break;
-			case 3:		music3.stop();			break;
-			case 4:		music4.stop();			break;
-			case 5:		music5.stop();			break;												
-			case 6:		music6.stop();			break;
-			case 7:		music7.stop();			break;						
-		}
-		
+		music[nMusic].stop();
 
 	}
 		ovation.stop();	
@@ -2838,36 +2831,17 @@ function playMusic()
 {
 	if(nMusic!=0)
 	{
-		switch(nMusic)
-		{
-			case 1:		music1.stop();			break;
-			case 2:		music2.stop();			break;
-			case 3:		music3.stop();			break;
-			case 4:		music4.stop();			break;
-			case 5:		music5.stop();			break;												
-			case 6:		music6.stop();			break;
-			case 7:		music7.stop();			break;						
-		}
+		music[nMusic].stop();
 		
 
 	}
 	nMusic=getRandom(1,7);
-			switch(nMusic)
-		{
-			case 1:		music1.setVolume(volMusic);	music1.play();						break;
-			case 2:		music2.setVolume(volMusic);	music2.play();			break;
-			case 3:		music3.setVolume(volMusic);	music3.play();			break;
-			case 4:		music4.setVolume(volMusic);	music4.play();			break;
-			case 5:		music5.setVolume(volMusic);	music5.play();			break;												
-			case 6:		music6.setVolume(volMusic);	music6.play();			break;
-			case 7:		music8.setVolume(volMusic);	music7.play();			break;						
-		}
-		
+	music[nMusic].setVolume(volMusic);	music[nMusic].play();	
 
 }			
 function aquarium2SoundF(acc)
 {
-		aquarium2Sound.setVolume(0.5);		
+		aquarium2Sound.setVolume(soundVol50);		
 	if(acc=='play')
 	{
 		aquarium2Sound.play();
@@ -2901,7 +2875,7 @@ clearInterval(dolphinSoundIn);
 	
 		
 	
-	dolphinSound.setVolume(0.5);		
+	dolphinSound.setVolume(soundVol50);		
 	if(acc=='play')
 	{
 		dolphinSound.play();
@@ -2920,7 +2894,7 @@ clearInterval(bird1SoundIn);
 bird1SoundIn=setInterval(function () {
 	
 	
-	bird1Sound.setVolume(0.1);		
+	bird1Sound.setVolume(soundVol10);		
 	if(acc=='play')
 	{
 		bird1Sound.play();
@@ -2938,7 +2912,7 @@ function bird2SoundF(acc)
 clearInterval(bird2SoundIn);
 bird2SoundIn=setInterval(function () {
 	
-	bird2Sound.setVolume(0.1);		
+	bird2Sound.setVolume(soundVol10);		
 	if(acc=='play')
 	{
 		bird2Sound.play();
@@ -2964,7 +2938,7 @@ function scrollSoundF(acc)
 
 function birdsConSoundF(acc)
 {
-					birdsConSound.setVolume(0.1);		
+					birdsConSound.setVolume(soundVol10);		
 	if(acc=='play')
 	{
 		birdsConSound.play();
@@ -2976,7 +2950,7 @@ function birdsConSoundF(acc)
 }
 function wavesSoundF(acc)
 {
-					wavesSound.setVolume(0.1);		
+					wavesSound.setVolume(soundVol10);		
 	if(acc=='play')
 	{
 		wavesSound.play();
@@ -3032,7 +3006,7 @@ function finishBubblesSoundAF(acc)
 
 function aquarium1SoundF(acc)
 {
-				aquarium1Sound.setVolume(0.5);		
+				aquarium1Sound.setVolume(soundVol50);		
 	if(acc=='play')
 	{
 		aquarium1Sound.play();
@@ -3048,7 +3022,7 @@ function aquarium1SoundF(acc)
 function waterPipeSoundF(acc)
 {
 
-	waterPipeSound.setVolume(0.1);		
+	waterPipeSound.setVolume(soundVol10);		
 	if(acc=='play')
 	{
 		waterPipeSound.play();
