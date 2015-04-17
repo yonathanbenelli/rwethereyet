@@ -362,7 +362,7 @@ var pageEfect="flip";
 		var from;
 		var distanceLeft=-1;
 		var distanceFull=-1;
-
+var render=true;
 		var setTrip=defaultTrip;
 		var destPosition;
 		var intervalDist;
@@ -900,7 +900,10 @@ function getPosition()
 	//navigator.geolocation.getCurrentPosition(onSuccess, onError);
 	if(setScene==10)
 	{
+		if(render)
+		{
 						updateWaterLevel();
+		}
 	}
 	else
 		{
@@ -938,8 +941,12 @@ function getTimeC()
 		if(setScene==10)
 		{
 			//showFinishAquarium();
+			if(render)
+		{
 						updateTimeLeftTextA(timeLeft);
 				updateWaterLevel();
+		}
+		
 		}
 		else
 		{
@@ -1444,19 +1451,15 @@ function showClouds(i)
 	if(i<=8)
 	{
 
-			$('#cloud'+i).destroy();
 					
 		if(getRandom(0,2)<2)
 		{
 			generateClouds(i);
 			
 		}
-		else
-		{
-			hideDivEfect($('#cloud'+i));
-//			$('#cloud'+i).css('visibility','hidden');
-		}
-			setTimeout(function(){ showClouds(i+1)},1000);
+		
+//			setTimeout(function(){ showClouds(i+1)},1000);
+			 showClouds(i+1);
 	}
 
 }
@@ -1502,20 +1505,15 @@ function showBirds(i)
 	if(i<=8)
 	{
 
-			$('#bird'+i).destroy();
 					
 		if(getRandom(0,9)<8)
 		{
 			generateBirds(i);
 			
 		}
-		else
-		{
-			hideDivEfect($('#bird'+i));
-//			$('#bird'+i).css('visibility','hidden');
-		}
-					setTimeout(function(){ showBirds(i+1)},1000);
-
+	
+					//setTimeout(function(){ showBirds(i+1)},1000);
+		showBirds(i+1);
 	}
 
 }
@@ -1696,12 +1694,12 @@ function apearPlants(i)
 		}
 
 }
-var aspectRatioPlants=[0.934,0.947,0.942,1.196,0.777,0.963,0.598,0.572,1.023,1.17];
+var aspectRatioPlants=[0.934,0.947,0.942,1.196,0.777,0.9625,0.598,0.572,1.023,1.17];
 function generatePlants(i)
 {
 
 			var heSand=$('#staticElementContent').height();
-			var heCont=$('#plantContent').height();
+			var heCont=$('#contentAquarium').height();
 
 
 		var l=getRandom(0,$('#plantContent').width());
@@ -1727,7 +1725,6 @@ function showPlants(i)
 	if(i<=20)
 	{
 
-			$('#plant'+i).destroy();
 					
 		if(getRandom(0,9)<5)
 		{
@@ -1736,13 +1733,9 @@ function showPlants(i)
 			generatePlants(i);
 			
 		}
-		else
-		{
-							hideDivEfect($('#plant'+i));
-//			$('#plant'+i).css('visibility','hidden');
-		}
-					setTimeout(function(){ showPlants(i+1)},100);
-
+		
+				//	setTimeout(function(){ showPlants(i+1)},100);
+ showPlants(i+1);
 	}
 
 }
@@ -1752,18 +1745,19 @@ var aspRat=6.564*2; //alto img sobre alto franja
 
 function updateWaterLevel()
 {
-			
+			console.log('sartup');
+	console.log(new Date().getTime());
+
 			
 //		var bhc=$('#contentAquarium').height()-bhw;
 
 		var bhc=$('#contentAquarium').height()-bhw;
 		
 	var newTop=bhc -(bhc*(levelPos/100));
-	var oldTop=parseInt($('#waterLevel').css("top").replace('px',''));
-	var oldHeight=$('#waterPipe').height();
+	var wLH=$('#waterLevel').height();
 //	 $('#waterLevel').animate({ "top": newTop+'px'}, "slow");
 	 	 $('#waterLevel').css("top", newTop+'px');
-$('#waterPipe').height(oldHeight-(oldTop-newTop));
+$('#waterPipe').height(newTop+wLH+parseFloat($('#waterPipe').css('top').replace('px','')));
 	 	// $('#waterPipe').animate({ "height": oldHeight-(oldTop-newTop)+'px'}, "slow");
 
 	 $('#waterLevel0').css("top", newTop+'px');
@@ -1774,23 +1768,48 @@ $('#waterPipe').height(oldHeight-(oldTop-newTop));
 		{
 			apearPlants(j);
 		}
+		else if(apprsPlant[j-1]==0)
+		{
+			hideDivEfect($('#plant'+j));
+						}
 		if(apprsFish[j-1]==1)
 		{
 				apearFishs(j);
 		}
+				else if(apprsFish[j-1]==0)
+		{
+			hideDivEfect($('#fish'+j));
+						}
+
 	}
 	if(apprsMermaid==1)
 		{
 				apearMermaid();
 		}
+				else if(apprsMermaid==0)
+		{
+			hideDivEfect($('#mermaid'));
+		}
+		
 		if(apprsWhale==1)
 		{
 				apearWhale();
 		}
+				else if(apprsWhale==0)
+		{
+			hideDivEfect($('#whale'));
+		}
+		
 if(apprsDolphin==1)
 		{
 				apearDolphin();
 		}
+				else if(apprsDolphin==0)
+		{
+			hideDivEfect($('#dolphin'));
+		}
+console.log('finup');
+	console.log(new Date().getTime());
 
 }
 
@@ -1818,8 +1837,6 @@ function showWaterLevel()
 });
 	
 
-//	var bhc=$('#contentAquarium').height()-bhw;
-// $('#waterLevel').height(bhw);
 		var bhc=$('#contentAquarium').height()-bhw;
 		$('#waterLevel').height(bhw);
 		$('#waterLevel0').height($(window).height()*1.1);
@@ -1838,7 +1855,7 @@ function showWaterLevel()
 		 $('#waterLevel0').css('top',t+'px');
 $('#waterLevel').css('visibility','visible');
 $('#waterLevel0').css('visibility','visible');
-		
+	
 $('#waterLevel').pan({fps: 15, speed: 20, dir: 'left'});
 }
 var aspectRatioStaticsElements=[1.127,1.58,1.48,1.78,1.41,1.63,1.26,1.605,1.07,1.095];
@@ -1883,21 +1900,15 @@ function showStaticElements(i)
 	
 	if(i<=20)
 	{
-					$('#staticElement'+i).destroy();
 					
 		if(getRandom(0,9)<=4)
 		{
 			generateStaticElements(i);
 			
 		}
-		else
-		{
-
-			hideDivEfect($('#staticElement'+i));
-//			$('#staticElement'+i).css('visibility','hidden');
-		}
-					setTimeout(function(){ showStaticElements(i+1)},100);
-
+		
+					//setTimeout(function(){ showStaticElements(i+1)},100);
+showStaticElements(i+1);
 					
 	}
 
@@ -1972,39 +1983,32 @@ function showFishs(i)
 	if(i<=20)
 	{
 
-			$('#fish'+i).destroy();
-					
 		if(getRandom(0,9)<7)
 		{
 			apprsFish[i-1]=1;
 			generateFishs(i);
 			
 		}
-		else
-		{
-							hideDivEfect($('#fish'+i));
-//			$('#plant'+i).css('visibility','hidden');
-		}
-					setTimeout(function(){ showFishs(i+1)},100);
+		
+		showFishs(i+1);
 
 	}
 
 }
 
 $(document).on('pageshow','#aquarium', function(e,data){ 
-
-
+console.log('begin');
+	console.log(new Date().getTime());
+render=true;
 	pageRender='#aquarium';  
 	showSun();
-	$('#bubblesLevel')
-					.sprite({fps: 5, no_of_frames: 5})
-					.active();
 apprsPlant=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 apprsFish=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	apprsMermaid=0;
 		apprsWhale=0;
 				apprsDolphin=0;
 	showWaterLevel();
+
 showClouds(1);
 showBirds(1);
 
@@ -2015,17 +2019,23 @@ showFishs(1);
 showMermaid();
 showWhale();
 showDolphin();
+	$('#bubblesLevel')
+					.sprite({fps: 5, no_of_frames: 5})
+					.active();
 
 
-var lP=($('#pipe').css('left').replace('px',''))-($('#pipe').width()*0.91);
+var lP=($('#pipeContainer').width()*0.08)-($('#pipe').width()*0.91);
+$('#waterPipe').height(0.90*$('#waterPipeContent').height());
 $('#pipe').css('left',lP+'px');
 showDivEfect($('#pipe'));
 showDivEfect($('#waterPipe'));
 $('#waterPipe').pan({fps: 40, speed: 7, dir: 'down', depth: 70});
-
-$('#waterLevel0').flyToTap();
-
-	
+console.log('hide');
+console.log(new Date().getTime());
+	updateWaterLevel();
+$('#allA').css('visibility','visible');
+console.log('show');
+	console.log(new Date().getTime());
 	$("#resetTripContainerAquarium").height($("#resetTripContainerAquarium").width());
 	$("#positionLeftAquarium").height($("#positionLeftAquarium").width());
 	  charConH=$("#aquariumContainer").height();
@@ -2419,7 +2429,9 @@ function clearTripNo()
 	
 	function clearTripA()
 	{
-		stopAllAnimation();
+		render=true;
+			$('#allA').css('visibility','hidden');
+		
 		window.clearInterval(intervalDist);
 				window.clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
@@ -2443,6 +2455,14 @@ function clearTripNo()
 			characterContentHeight=0;
 			map=undefined;
 			mapDest=undefined;
+		stopAllAnimation();
+	}
+	function clearBackA()
+	{
+						$('#knowFactContainerAquarium').css('opacity','0');
+
+				  $('#finishAquarium').css('visibility','hidden');
+				  				  $('#finishAquarium').css('opacity','0');
 		stopAllAnimation();
 	}
 	
@@ -2507,12 +2527,17 @@ function backFromCharacter()
 }
 function backFromAquarium()
 {
+	render=false;
+	$('#allA').css('visibility','hidden');
 	 $('#menuAquarium').css('visibility','hidden');
 	 $('#positionLeftAquarium').css('visibility','hidden');
 	 	$('#positionLeftAquarium').css('z-index','0');
 	 	 $('#timeLeftAquarium').css('visibility','hidden');
 		 	 	$('#timeLeftAquarium').css('z-index','0');
     	$('#menuAquarium').css('opacity', '0');
+		
+
+
 									 $('#backAquarium').css('visibility','hidden');
 									 stopAllAnimation();
 									  $.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:true});
