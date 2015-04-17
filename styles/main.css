@@ -522,7 +522,7 @@ opacity:0;
 }
 #waterLevel0
 {
-    background : transparent url(../resources/characters/aquarium/animated/waterlevel0.png) 0 0;
+    background : transparent url() 0 0;
 	-webkit-background-size:contain;
 	background-repeat:repeat-x;
 	background-size:contain;
