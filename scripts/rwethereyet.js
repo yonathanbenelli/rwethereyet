@@ -1810,28 +1810,6 @@ if(apprsDolphin==1)
 
 function showWaterLevel()
 {
-		var bh=Math.floor($(window).height()*0.8*0.06*aspRat);
-	var bw=Math.floor(bh*5.42);
-
-	var bac=bw+'px '+bh+'px';
-
-	 $('#waterLevel').css({
-    'background' : 'transparent url(resources/characters/aquarium/animated/waterlevel_1.png) 0 0',
-	'-webkit-background-size':bac,
-	'background-repeat':'repeat-x',
-	'background-size':bac,
-});
-		var bh0=Math.floor($(window).height()*0.81);
-		 var bw0=Math.floor(bh0*6.48);
-		 var bac0=bw0+'px '+bh0+'px';
- $('#waterLevel0').css({
-    'background' : 'transparent url(resources/characters/aquarium/animated/) 0 0',
-	'-webkit-background-size':bac0,
-	'background-repeat':'repeat-x',
-	'background-size':bac0,
-});
-	
-
 		var bhc=$('#contentAquarium').height()-bhw;
 		$('#waterLevel').height(bhw);
 		$('#waterLevel0').height($(window).height()*1.1);
@@ -1848,8 +1826,8 @@ function showWaterLevel()
 	 var t=bhc -(bhc*(lv/100));
 	 	 $('#waterLevel').css('top',t+'px');
 		 $('#waterLevel0').css('top',t+'px');
-$('#waterLevel').css('visibility','visible');
-$('#waterLevel0').css('visibility','visible');
+		$('#waterLevel').css('visibility','visible');
+		$('#waterLevel0').css('visibility','visible');
 	
 $('#waterLevel').pan({fps: 15, speed: 20, dir: 'left'});
 }
