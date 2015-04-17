@@ -358,7 +358,8 @@ var pageEfect="flip";
 		
         // Add an overlay to the map of current lat/lng
         var marker;
-
+		var volMusic=0.5;
+		var volMusicD=0.3;
 		var from;
 		var distanceLeft=-1;
 		var distanceFull=-1;
@@ -374,6 +375,7 @@ var render=true;
 		var doubleTapSpeed=500;
 		var timeNow=0;
 		var intervalRot;
+		var timeOut1;
 		var setScene=0;
 		var resolution;
 		var frontCharacterTop=0;
@@ -438,6 +440,7 @@ $(document).on('pageshow','#main', function(e,data){
 
 });
 $(document).on('pageshow','#setCharacter', function(e,data){  
+clearInterval(intervalDist2);
 	pageRender='#setCharacter';  
 if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 {
@@ -456,7 +459,7 @@ else
 
 $(function() { $('#containerSetCharacter').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
 
-
+							scrollSound('play');	
 
 			if(direction=="up")
 			{
@@ -476,6 +479,11 @@ $(function() { $('#containerSetCharacter').swipe( {swipe:function(event, directi
 			}
 			$('#containerSetCharacter').css('top',topSetCharIcon*($('#containerSetCharacter').height()*0.35));
 }});});
+	}
+	else
+	{
+		
+			$('#contentSetCharacter').scroll(function() {scrollSound('play');	});
 	}
 		});
 
@@ -501,7 +509,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 			var mov=0;
 			if(direction=="up")
 			{
-				
+
 				if(hourpos<9)
 				{
 					hourpos=hourpos+1;
@@ -518,6 +526,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 
 				if(hourpos>0)
 				{
+					
 					hourpos=hourpos-1;
 					mov=+1;
 				}
@@ -528,6 +537,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 			}
 			if(mov!=0)
 			{
+							scrollSound('play');	
 				var to=	$('#hourBoldTime').css('background-position-y');
 
 				if(resolution==0)
@@ -587,7 +597,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 			}
 			if(mov!=0)
 			{
-				
+							scrollSound('play');	
 				var to=	$('#minuteThinTime1').css('background-position-y');
 				var pos=parseFloat(to.replace('px',''))+(parseFloat(pixelMove2)*mov);
 				$('#minuteThinTime1').css('background-position-y',pos+'px');
@@ -637,6 +647,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 			}
 			if(mov!=0)
 			{
+							scrollSound('play');	
 				var to=	$('#minuteThinTime2').css('background-position-y');
 				var pos=parseFloat(to.replace('px',''))+(parseFloat(pixelMove3)*mov);
 				$('#minuteThinTime2').css('background-position-y',pos+'px');
@@ -666,17 +677,20 @@ $(document).on('pageshow','#byTime', function(e,data){
 
 function backToMain()
 {
+		 			tapJSound('play');	
 					pageRender='#main';  
 					$.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
 }
 function goToSetCharacter()
 {
+		 			tapJSound('play');	
 						pageRender='#setCharacter';  
 	$.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:false});
 }
 
 function goToTripPlanner()
 {
+		 			tapJSound('play');	
 	if(defaultTrip==0)
 	{	
 
@@ -694,6 +708,7 @@ function goToTripPlanner()
 }
 function goToBackPlanner()
 {
+		 			tapJSound('play');	
 	if(defaultTrip==0)
 	{
 				pageRender='#main';  	
@@ -714,7 +729,7 @@ function goToBackPlanner()
 
 function soundSetting()
 {
-	
+	tapJSound('play');
 	if(sound==false)
 	{
 		sound=true;
@@ -731,24 +746,33 @@ function soundSetting()
 
 function defaultTripTime()
 {
-
+	tapJSound('play');
 	 defaultTrip=0;
-	 $('#defaultTripOption').css('background','transparent url(resources/buttons/defulttrip0.png) 0 0 no-repeat');
+	 $('#defaultTripOption0').css('z-index','100');
+	 	 $('#defaultTripOption1').css('z-index','99');
+		 	 $('#defaultTripOption2').css('z-index','98');
 }
 
 function defaultTripDist()
 {
-	
+		tapJSound('play');
 	defaultTrip=1;
-	 $('#defaultTripOption').css('background','transparent url(resources/buttons/defulttrip1.png) 0 0 no-repeat');
+		 $('#defaultTripOption0').css('z-index','98');
+	 	 $('#defaultTripOption1').css('z-index','100');
+		 	 $('#defaultTripOption2').css('z-index','99');
+
 	
 }
 
 function defaultTripNone()
 {
-	
+		tapJSound('play');
 	defaultTrip=2;
-			 $('#defaultTripOption').css('background','transparent url(resources/buttons/defulttrip2.png) 0 0 no-repeat');
+		 $('#defaultTripOption0').css('z-index','99');
+	 	 $('#defaultTripOption1').css('z-index','98');
+		 	 $('#defaultTripOption2').css('z-index','100');
+
+
 }
 
 
@@ -787,7 +811,7 @@ distanceFull=-1;
 				   {
 						if(fingerCount==1)
 						  {
-							  
+							  pinchSound('play');
 							   if(direction=='up')
 							   {		
 											   mapDest.panBy(0,Math.floor(distance*speedSwipeMap));			   
@@ -814,10 +838,11 @@ distanceFull=-1;
 					   
 					   if(fingerCount==2)
 						  {
+
 					if(direction=='out')
 						{
-										
-							if(mapDest.getZoom()>0)
+								  swipe2Sound('play');
+						if(mapDest.getZoom()>0)
 							 {
 								// zoomLevelD=zoomLevelD-0.05;
 									mapDest.setZoom(mapDest.getZoom()-1);
@@ -826,7 +851,7 @@ distanceFull=-1;
 						}
 						else if(direction=='in')
 						{
-							
+															  swipe2Sound('play');
 			
 								   if(mapDest.getZoom()<19)
 								  {
@@ -844,6 +869,7 @@ distanceFull=-1;
     });	    });	
 
  $('#submit').click(function() {
+	 			tapJSound('play');	
  if(marker!=undefined)
  {
 	marker.setMap(null);
@@ -911,7 +937,7 @@ function getPosition()
 			updateGreyCharacter(100-levelPos);
 
 		}
-		   			setTimeout('getPosition()',updateFreqMilis);
+		   			timeOut1=setTimeout('getPosition()',updateFreqMilis);
 	}
 	else
 	{
@@ -957,7 +983,7 @@ function getTimeC()
 		
 	//	getCurrentPosCharacter();
 		
-		setTimeout('getTimeC()',updateFreqMilis);
+		timeOut1=setTimeout('getTimeC()',updateFreqMilis);
 	}
 	else
 	{
@@ -1137,14 +1163,18 @@ function updateTimeLeftTextA(timeL)
 }
 function finishTripJungle()
 {
+			tapJSound('play');
+			
 	  $('#finishLeafs').destroy();
+	  		stopAllSoundA();
 	  clearTrip();
 	  				pageRender='#main';  
 	  $.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
 }
 function finishTripAquarium()
 {
-	
+		tapSoundA('play');
+		stopAllSoundA();
 	  $('#finishBubbles').destroy();
 	  
 	 	$('#backAquarium').css('visibility','hidden');
@@ -1158,10 +1188,10 @@ function finishTripAquarium()
 }
 function showFinishJungle()
 {
-			window.clearInterval(intervalDist);
-				window.clearInterval(intervalDist2);
+			clearInterval(intervalDist);
+				clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
-
+			ovationSound('play');
 			$('#knowFactContainer').css('opacity','0');
 				  $('#menuJungle').css('visibility','visible');
 	  $('#finishCharacter').css('visibility','visible');
@@ -1172,8 +1202,10 @@ function showFinishJungle()
 }
 function showFinishAquarium()
 {
-			window.clearInterval(intervalDist);
-				window.clearInterval(intervalDist2);
+		finishBubblesSoundA('play');
+		ovationSound('play');
+			clearInterval(intervalDist);
+			clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
 
 			$('#knowFactContainerAquarium').css('opacity','0');
@@ -1196,6 +1228,7 @@ showDivEfect($('#finishBubbles'));
 
 function goToBackFromSetCharacter()
 {
+		 			tapJSound('play');	
 	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 	{
 					backFromHome=0;
@@ -1242,7 +1275,7 @@ if(map==undefined)
 				   {
 						if(fingerCount==1)
 						  {
-							  
+							  								  pinchSound('play');
 							   if(direction=='up')
 							   {		
 											   map.panBy(0,Math.floor(distance*speedSwipeMap));			   
@@ -1272,6 +1305,7 @@ if(map==undefined)
 								
 					if(direction=='out')
 						{
+															  swipe2Sound('play');
 										
 							if(map.getZoom()>0)
 							 {
@@ -1283,7 +1317,7 @@ if(map==undefined)
 						else if(direction=='in')
 						{
 							
-			
+											  swipe2Sound('play');
 								   if(map.getZoom()<19)
 								  {
 									 // zoomLevelD=zoomLevelD+0.05;
@@ -1303,6 +1337,7 @@ if(map==undefined)
 
       //Enable swiping...
       $("#menuLeaf").swipe( {tap:function(event, target) {
+		  								tapJSound('play');
 							doubleTapCount++;
 					     	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
 							if(doubleTapCount==2)
@@ -1319,12 +1354,14 @@ if(map==undefined)
 
 
       $("#buttonMenuJungle1").click(function() {
+		  			tapJSound('play');
 				 $('#timeLeftCharacter').css('visibility','visible');
 				$('#positionLeftCharacter').css('visibility','hidden');
 				 $('#resetTrip').css('visibility','hidden');
 
 			});
       $("#buttonMenuJungle2").click(function() {
+		  			tapJSound('play');
 		  zoomLevel=16;
 		  map.setZoom(Math.floor(zoomLevel));
 				 $('#positionLeftCharacter').css('visibility','visible');
@@ -1333,13 +1370,14 @@ if(map==undefined)
 });
 
       $("#buttonMenuJungle3").click(function() {
-		  
+		  			tapJSound('play');
 		  		  		 $('#resetTripContainer').css('visibility','visible');
 		  		 $('#positionLeftCharacter').css('visibility','hidden');
  					$('#timeLeftCharacter').css('visibility','hidden');
 });
 
       $("#buttonMenuJungle4").click(function() {
+		  			tapJSound('play');
 					 $('#resetTripContainer').css('visibility','hidden');
 					$('#positionLeftCharacter').css('visibility','hidden');
 					$('#timeLeftCharacter').css('visibility','hidden');
@@ -1372,6 +1410,7 @@ if(map==undefined)
 						$('#timeLeftCharacter').html("WITHOUT INFORMATION");
 										directionsDisplay.setMap(map);				
 						  updatePostionCharacter();
+						  clearInterval(intervalDist);
 						   intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
 					}
 				}
@@ -1380,8 +1419,11 @@ if(map==undefined)
 						$('#knowFactContainer').css('color','#FDFD5E');
 
 			
-$('#knowFactContainer').click(function() {if($('#knowFactContainer').css('opacity')==1){$('#knowFactContainer').animate({ "opacity": 0}, "slow");} }) ;
-	intervalDist2=setInterval(function () {loadKnowFact()}, updateFreqMilis*10);		
+$('#knowFactContainer').click(function() {
+				tapJSound('play');
+	if($('#knowFactContainer').css('opacity')==1){$('#knowFactContainer').animate({ "opacity": 0}, "slow");} }) ;
+							  clearInterval(intervalDist2);
+	intervalDist2=setInterval(function () {loadKnowFact()}, (updateFreqMilis*20)-15);		
 //	  getCurrentPosCharacter();
   });
 
@@ -1579,6 +1621,7 @@ function apearWhale()
 		
 		if(topW<=topP)
 		{
+			aquarium1Sound('play');
 						apprsWhale=2;
 			showDivEfect($('#whale'));
 						var maxT=$('#contentAquarium').height();
@@ -1630,6 +1673,7 @@ function apearDolphin()
 	if(topW<=topP)
 		{
 						apprsDolphin=2;
+						dolphinSound('play');
 			showDivEfect($('#dolphin'));
 			var r=$('#contentAquarium').width()/2;
 			var maxT=$('#contentAquarium').height();
@@ -1968,7 +2012,13 @@ function showFishs(i)
 	}
 
 }
-
+function startSoundsA()
+{
+birdsConSound('play');
+bird1Sound('play');
+bird2Sound('play');
+aquarium2Sound('play');
+}
 $(document).on('pageshow','#aquarium', function(e,data){ 
 render=true;
 	pageRender='#aquarium';  
@@ -1987,6 +2037,8 @@ showStaticElements(1);
 showPlants(1);
 
 showFishs(1);
+startSoundsA();
+
 showMermaid();
 showWhale();
 showDolphin();
@@ -1998,12 +2050,13 @@ showDolphin();
 var lP=($('#pipeContainer').width()*0.08)-($('#pipe').width()*0.91);
 $('#waterPipe').height(0.90*$('#waterPipeContent').height());
 $('#pipe').css('left',lP+'px');
+waterPipeSound('play');
 showDivEfect($('#pipe'));
 showDivEfect($('#waterPipe'));
 $('#waterPipe').pan({fps: 40, speed: 7, dir: 'down', depth: 70});
 	updateWaterLevel();
 $('#allA').css('visibility','visible');
-
+wavesSound('play');
 	$("#resetTripContainerAquarium").height($("#resetTripContainerAquarium").width());
 	$("#positionLeftAquarium").height($("#positionLeftAquarium").width());
 	  charConH=$("#aquariumContainer").height();
@@ -2018,7 +2071,7 @@ if(map==undefined)
 			   if(phase === $.fn.swipe.phases.PHASE_END || phase === $.fn.swipe.phases.PHASE_CANCEL) 
 				   {
 						if(fingerCount==1)
-						  {
+						  {								  pinchSound('play');
 							  
 							   if(direction=='up')
 							   {		
@@ -2049,7 +2102,7 @@ if(map==undefined)
 								
 					if(direction=='out')
 						{
-										
+																		  swipe2Sound('play');
 							if(map.getZoom()>0)
 							 {
 								// zoomLevelD=zoomLevelD-0.05;
@@ -2060,7 +2113,7 @@ if(map==undefined)
 						else if(direction=='in')
 						{
 							
-			
+											  swipe2Sound('play');
 								   if(map.getZoom()<19)
 								  {
 									 // zoomLevelD=zoomLevelD+0.05;
@@ -2081,6 +2134,7 @@ if(map==undefined)
       //Enable swiping...
       $("#menuBubble").swipe( {tap:function(event, target) {
 							doubleTapCount++;
+							tapSoundA('play');
 					     	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
 							if(doubleTapCount==2)
 							{
@@ -2096,6 +2150,7 @@ if(map==undefined)
 
 
       $("#buttonMenuAquarium1").click(function() {
+		  	tapSoundA('play');
 				 $('#timeLeftAquarium').css('visibility','visible');
 				 $('#timeLeftAquarium').css('z-index','6899');
 				 	$('#positionLeftAquarium').css('z-index','0');
@@ -2105,6 +2160,7 @@ if(map==undefined)
 
 			});
       $("#buttonMenuAquarium2").click(function() {
+		  	tapSoundA('play');
 		  zoomLevel=16;
 		  map.setZoom(Math.floor(zoomLevel));
 		  	$('#positionLeftAquarium').css('z-index','6890');
@@ -2116,7 +2172,7 @@ if(map==undefined)
 });
 
       $("#buttonMenuAquarium3").click(function() {
-		  
+		  	tapSoundA('play');
 		  		  		 $('#resetTripContainerAquarium').css('visibility','visible');
 						 				 				 $('#resetTripContainerAquarium').css('z-index','7002');
 						 	$('#positionLeftAquarium').css('z-index','0');
@@ -2126,6 +2182,7 @@ if(map==undefined)
 });
 
       $("#buttonMenuAquarium4").click(function() {
+		  	tapSoundA('play');
 					 $('#resetTripContainerAquarium').css('visibility','hidden');
 					 				 				 $('#resetTripContainerAquarium').css('z-index','0');
 					 	$('#positionLeftAquarium').css('z-index','0');
@@ -2158,6 +2215,7 @@ if(map==undefined)
 						$('#timeLeftAquarium').html("WITHOUT INFORMATION");
 										directionsDisplay.setMap(map);				
 						  updatePostionAquarium();
+						  							  clearInterval(intervalDist);
 						   intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
 					}
 				}
@@ -2166,10 +2224,13 @@ if(map==undefined)
 						$('#knowFactContainerAquarium').css('color','rgb(0,133,192)');
 
 			
-$('#knowFactContainerAquarium').click(function() {if($('#knowFactContainerAquarium').css('opacity')==1){
+$('#knowFactContainerAquarium').click(function() {
+		tapSoundA('play');
+	if($('#knowFactContainerAquarium').css('opacity')==1){
 	$('#knowFactContainerAquarium').css('z-index','0');
 	$('#knowFactContainerAquarium').animate({ "opacity": 0}, "slow");} }) ;
-	intervalDist2=setInterval(function () {loadKnowFactA()}, updateFreqMilis*10);		
+								  clearInterval(intervalDist2);
+	intervalDist2=setInterval(function () {loadKnowFactA()}, (updateFreqMilis*20)-15);		
   });
   
   
@@ -2202,6 +2263,7 @@ $('#knowFactContainerAquarium').click(function() {if($('#knowFactContainerAquari
 	 var r=getRandom(0,2);
 	if(r==0 && $('#knowFactContainer').css('opacity')==0)
 	{
+		knowJSound('play',setScene);
 
 		$('#knowFactContainer').html(correctFontKows(knows[getRandom(0,(knows.length-1))].toUpperCase()));
 		$('#knowFactContainer').animate({ "opacity": 1}, "slow");
@@ -2319,7 +2381,7 @@ function loadCharacter()
 }
 function clearTripYesAquarium()
 {
-	
+		tapSoundA('play');
 
 	 	$('#backAquarium').css('visibility','hidden');
 		$('#resetTripContainerAquarium').css('visibility','hidden');
@@ -2334,7 +2396,7 @@ function clearTripYesAquarium()
 function clearTripYes()
 {
 
-
+			tapJSound('play');
 	 	$('#backCharacter').css('visibility','hidden');
 		$('#resetTripContainer').css('visibility','hidden');
 
@@ -2347,11 +2409,13 @@ function clearTripYes()
 
 function goToPage(page,rev)
 {
+		 			tapJSound('play');	
 	$.mobile.changePage(page,{ transition: pageEfect,reverse:rev});
 
 }
 function clearTripNoAquarium()
 {
+		tapSoundA('play');
 		$('#resetTripContainerAquarium').css('visibility','hidden');
 						 				 $('#resetTripContainerAquarium').css('z-index','0');
 				$('#backAquarium').css('visibility','hidden');
@@ -2361,7 +2425,7 @@ function clearTripNoAquarium()
 }
 function clearTripNo()
 {
-
+			tapJSound('play');
 	$('#resetTripContainer').css('visibility','hidden');
 					$('#backJungle').css('visibility','hidden');
 		$('#menuJungle').css('opacity','0');
@@ -2369,9 +2433,10 @@ function clearTripNo()
 }
 	function clearTrip()
 	{
+		  clearTimeout(timeOut1);
 		
-		window.clearInterval(intervalDist);
-				window.clearInterval(intervalDist2);
+		clearInterval(intervalDist);
+				clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
 			$('#knowFactContainer').css('opacity','0');
 				$('#knowFactContainerAquarium').css('opacity','0');
@@ -2392,16 +2457,18 @@ function clearTripNo()
 			characterContentHeight=0;
 			map=undefined;
 			mapDest=undefined;
-		
+				stopAllSoundA();
 	}
 	
 	function clearTripA()
 	{
+		  clearTimeout(timeOut1);
 		render=true;
+		stopAllSoundA();
 			$('#allA').css('visibility','hidden');
 		
-		window.clearInterval(intervalDist);
-				window.clearInterval(intervalDist2);
+		clearInterval(intervalDist);
+				clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
 						$('#knowFactContainerAquarium').css('opacity','0');
 
@@ -2437,6 +2504,7 @@ function clearTripNo()
 	
 function goToLoading()
 {
+		 			tapJSound('play');	
 		$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
 
 
@@ -2465,6 +2533,24 @@ function	loadLoading()
 
 $(document).on('pageshow','#loading', function(e,data){ 
 	loadLoading();
+	
+	playMusic();
+			
+			$('#jungleSound').on('ended', function(){
+	$('#music'+nMusic).prop("volume", volMusic);
+});
+	$('#jungleSound').on('playing', function(){
+	$('#music'+nMusic).prop("volume", volMusicD);
+});
+
+
+$('#ovation').on('ended', function(){
+	$('#music'+nMusic).prop("volume", volMusic);
+});
+	$('#ovation').on('playing', function(){
+	$('#music'+nMusic).prop("volume", volMusicD);
+});
+
 				 rotTimes=2000;	
 				 
 			  loadCharacter();
@@ -2486,6 +2572,8 @@ $(document).on('pageshow','#loading', function(e,data){
 
 function backFromCharacter()
 {
+				tapJSound('play');
+					stopAllSoundA();
 	 $('#menuJungle').css('visibility','hidden');
 	 $('#positionLeftCharacter').css('visibility','hidden');
 	 	 $('#timeLeftCharacter').css('visibility','hidden');
@@ -2495,6 +2583,8 @@ function backFromCharacter()
 }
 function backFromAquarium()
 {
+	tapSoundA('play');
+	stopAllSoundA();
 	render=false;
 	$('#allA').css('visibility','hidden');
 	 $('#menuAquarium').css('visibility','hidden');
@@ -2584,3 +2674,138 @@ $('#waterPipe').css('opacity','0');
 $('#sun').css('visibility','hidden');
 $('#sun').css('opacity','0');
 }
+function stopAllSoundA()
+{
+
+	finishBubblesSoundA('pause');
+	aquarium1Sound('pause');
+	aquarium2Sound('pause');
+	waterPipeSound('pause');
+	wavesSound('pause');
+
+clearInterval(dolphinSoundIn);
+clearInterval(bird1SoundIn);
+clearInterval(bird2SoundIn);
+clearInterval(ovationSoundIn);
+	if(nMusic!=0)
+	{
+		$('#music'+nMusic).trigger('pause');	
+	}
+$('#ovation').trigger('pause');	
+			birdsConSound('pause');
+			$('#jungleSound').trigger('pause');	
+}
+
+var bird1SoundIn;
+var bird2SoundIn;
+var dolphinSoundIn;
+var ovationSoundIn;
+var nMusic=0;
+function playMusic()
+{
+	if(nMusic!=0)
+	{
+	$('#music'+nMusic).trigger('pause');	
+	}
+	nMusic=getRandom(1,7);
+	$('#music'+nMusic).trigger('play');	
+
+	$('#music'+nMusic).prop("volume",volMusic);
+
+}			
+function aquarium2Sound(acc)
+{
+	$('#aquarium2Sound').trigger(acc);
+	$('#aquarium2Sound').prop("volume",0.5);
+}
+
+function ovationSound(acc)
+{
+clearInterval(ovationSoundIn);
+ovationSoundIn=setInterval(function () {$('#ovation').trigger(acc)},5000);
+}
+function dolphinSound(acc)
+{
+clearInterval(dolphinSoundIn);
+	dolphinSoundIn=setInterval(function () {$('#dolphinSound').trigger(acc); 	$('#dolphinSound').prop("volume",0.5);},10000);
+}
+
+function bird1Sound(acc)
+{
+clearInterval(bird1SoundIn);
+bird1SoundIn=setInterval(function () {$('#bird1Sound').trigger(acc);	$('#bird1Sound').prop("volume",0.1);},20000);
+}
+
+
+function bird2Sound(acc)
+{
+clearInterval(bird2SoundIn);
+bird2SoundIn=setInterval(function () {$('#bird2Sound').trigger(acc);$('#bird2Sound').prop("volume",0.1);},4000);
+}
+function scrollSound(acc)
+{
+	$('#scrollSound').trigger(acc);
+}
+
+function birdsConSound(acc)
+{
+	$('#birdsConSound').trigger(acc);
+	$('#birdsConSound').prop("volume",0.1);
+}
+function wavesSound(acc)
+{
+	$('#wavesSound').trigger(acc);
+		$('#wavesSound').prop("volume",0.1);
+}
+function tapSoundA(acc)
+{
+	$('#tapASound').trigger(acc);
+}
+function tapJSound(acc)
+{
+	$('#tapJSound').trigger(acc);
+}
+
+function finishBubblesSoundA(acc)
+{
+	
+	$('#bubblesFinishSound').trigger(acc);
+}
+
+function aquarium1Sound(acc)
+{
+	$('#aquarium1Sound').trigger(acc);
+			$('#aquarium1Sound').prop("volume",0.5);
+}
+
+function waterPipeSound(acc)
+{
+	$('#waterPipeSound').trigger(acc);
+		$('#waterPipeSound').prop("volume",0.1);
+}			
+function swipe1Sound(acc)
+{
+	$('#swipe1Sound').trigger(acc);
+}			
+function swipe2Sound(acc)
+{
+	$('#swipe2Sound').trigger(acc);
+}			
+function pinchSound(acc)
+{
+	$('#pinchSound').trigger(acc);
+}		
+function knowJSound(acc,scene)
+{
+			$('#jungleSound').trigger(acc); 
+	switch(scene)
+	{
+		case 0: 	$('#lionSound').trigger(acc); break;
+		case 1:	$('#zebraSound').trigger(acc); break;
+		case 2:	$('#monkeySound').trigger(acc); break;
+		case 5:	$('#elephantSound').trigger(acc); break;
+		case 7: $('#toucanSound').trigger(acc); break;
+		case 8: $('#crocodileSound').trigger(acc); break;
+	}
+
+}	

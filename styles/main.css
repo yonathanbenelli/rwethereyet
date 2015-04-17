@@ -1223,17 +1223,42 @@ height: 60% !important;
 
 }
 
-#defaultTripLeafSeparator
+.defaultTripLeafSeparator
 {
 	background-size:100% !important;  height: 10% !important; width: 10% !important;     margin-left: 15% !important;
 }
-
-#defaultTripOption
+#defaultTripContainer
 {
-	background: transparent url(../resources/buttons/defulttrip2.png) 0 0 no-repeat;
- background-size:100% !important;  height: 45% !important; width: 80% !important;     margin-left: 10% !important;
-
+	position:relative;
+	height: 45% !important; width: 80% !important;     margin-left: 10% !important;
 }
+#defaultTripOption0
+{
+		position:absolute;
+	background: transparent url(../resources/buttons/defulttrip0.png) 0 0 no-repeat;
+ background-size:contain !important; 
+ height: 100% !important; width: 100% !important;
+	z-index:98;
+}	
+#defaultTripOption1
+{
+		position:absolute;
+	background: transparent url(../resources/buttons/defulttrip1.png) 0 0 no-repeat;
+ background-size:contain !important; 
+ height: 100% !important; width: 100% !important;
+
+	z-index:99;
+}
+	#defaultTripOption2
+{
+	position:absolute;
+	background: transparent url(../resources/buttons/defulttrip2.png) 0 0 no-repeat;
+	z-index:100;
+ background-size:contain !important; 
+ height: 100% !important; width: 100% !important;
+
+
+}	
 #defaultTripOptionlabel
 { background: transparent url(../resources/labels/defaulttripplannerlabel.png) 0 0 no-repeat;
 background-size:100% !important;  height: 15% !important; width: 80% !important;     margin-left: 10% !important;
