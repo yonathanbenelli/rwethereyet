@@ -257,6 +257,35 @@ body{
 		overflow:hidden;
 		
 }
+#waterPipe
+{
+			background:transparent url(../resources/characters/aquarium/animated/waterpipe1.png) 0 0 repeat-y;
+}
+.waterPipeClass
+{
+	width: 2%;
+left: 8%;
+  height: 90%;
+  position: absolute;
+  top: 10%;
+visibility:hidden;
+	  opacity:0;
+	  border-top-right-radius:20%;
+	  	  border-top-left-radius:20%;
+  background-size: cover !important;
+  z-index:4999;
+
+}
+.waterPipeContentClass
+{
+
+		width:200%;
+		height:100%;
+		bottom:0%;
+		position:absolute;
+		overflow:hidden;
+		
+}
 #fish1
 {
 			background:transparent url(../resources/characters/aquarium/animated/fish1.png) 0 0 no-repeat;
@@ -457,11 +486,34 @@ opacity:0;
 		position:absolute;
 			overflow:visible;
 }
+.bubblesLevelClass
+{
+	position:absolute;
+	height:200%;
+	width:15%;
+	left:25%;
+	overflow:hidden;
+	z-index:4999;
+	background-repeat:repeat-y;
+	background-position-y:30% !important;
+	background-size:500% 100% !important;
+	
+	
+}
+#bubblesLevel
+{
+/*visibility:hidden;*/
+	background: transparent url(../resources/characters/aquarium/animated/bubblespipe.png) 0 0 ;
+	
+	
+}
+
+
 .waterLevelClass0
 {
 	position:absolute !important;
 	visibility:hidden;
-  	opacity:0;
+opacity:0.7;
 	background-repeat:repeat-x;
 	width:100%;
 	height:100%;
@@ -471,7 +523,7 @@ opacity:0;
 {
 	position:absolute !important;
 	visibility:hidden;
-  	opacity:0;
+	
 	background-repeat:repeat-x;
 	width:100%;
 	height:100%;
@@ -505,7 +557,28 @@ opacity:0;
 	
 	
 }
+
+#pipe
+{
+	background:transparent url(../resources/characters/aquarium/static/pipeline1.png) 0 0 no-repeat;
+	height:100%;
+	width:30%;
+background-size: 100% 100%!important;
+visibility:hidden;
+	  opacity:0;
+	  left: 8%;
+	position:absolute !important;
+	z-index:4000;
+}
+.pipeContainerClass
+{
+	width:200%;
+	height:10%;
+	top: 1%;
+
+	position:absolute;
 	
+}	
 #sun
 {
 	background:transparent url(../resources/characters/aquarium/static/sun.png) 0 0 no-repeat;
@@ -656,6 +729,7 @@ img, object, embed, video {
 #finishBubbles
 {
 visibility:hidden;
+opacity:0;
 	background: transparent url(../resources/others/finishbubble4.png) 0 0 ;
 	
 	
@@ -737,7 +811,7 @@ height: 60% !important;
   width: 40% !important;
   left: 30%;
   background-size: 100% !important;
-
+opacity:0;
   visibility: hidden;
   z-index: 7002;
   position: absolute;

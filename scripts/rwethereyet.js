@@ -16,7 +16,7 @@
 	
 
 $(document).bind("pagebeforechange", function(e,ob) {
-   if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+  // if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -1176,8 +1176,9 @@ function showFinishAquarium()
 				$('#positionLeftAquarium').css('visibility','hidden');
 				 $('#resetTripContainerAquarium').css('visibility','hidden');
 
-	  $('#finishAquarium').css('visibility','visible');
-  		$('#finishBubbles').css('visibility','visible');
+showDivEfect($('#finishAquarium'));
+showDivEfect($('#finishBubbles'));
+  		
 				$('#finishBubbles')
 					.sprite({fps: 5, no_of_frames: 5})
 					.active();
@@ -1470,6 +1471,14 @@ function generateBirds(i)
 	var h=(getRandom(2,7)/100)*$(window).height();
 	$('#bird'+i).css('height',h);
 	$('#bird'+i).css('width',$('#bird'+i).height()*8);
+	if(l<=$('#contentAquarium').width()/2)
+				{
+					l=l-($(window).width()/2)-	$('#bird'+i).width();
+				}
+				else
+				{
+						l=l+($(window).width()/2);
+				}
 	$('#bird'+i).css('left',l+'px');
 	showDivEfect($('#bird'+i));
 //	$('#bird'+i).css('visibility','visible');
@@ -1542,6 +1551,14 @@ function generateMermaid()
 					var r=$('#contentAquarium').width();
 		var l=getRandom(-$('#contentAquarium').width(),(r+$('#mermaid').width()));
 		$('#mermaid').css('width',w+'px');
+		if(l<=$('#contentAquarium').width()/2)
+				{
+					l=l-($(window).width()/2)-w;
+				}
+				else
+				{
+						l=l+($(window).width()/2);
+				}
 			$('#mermaid').css('left',l+'px');
 						var zInd=getRandom(100,2000);
 
@@ -1584,6 +1601,14 @@ function generateWhale()
 					var r=$('#contentAquarium').width();
 		var l=getRandom(-$('#contentAquarium').width(),(r+$('#whale').width()));
 		$('#whale').css('width',w+'px');
+		if(l<=$('#contentAquarium').width()/2)
+				{
+					l=l-($(window).width()/2)-w;
+				}
+				else
+				{
+						l=l+($(window).width()/2);
+				}
 			$('#whale').css('left',l+'px');
 						var zInd=getRandom(1000,2000);
 
@@ -1626,6 +1651,14 @@ function generateDolphin()
 					var r=$('#contentAquarium').width();
 		var l=getRandom(-$('#contentAquarium').width(),(r+$('#dolphin').width()));
 		$('#dolphin').css('width',w+'px');
+		if(l<=$('#contentAquarium').width()/2)
+				{
+					l=l-($(window).width()/2)-w;
+				}
+				else
+				{
+						l=l+($(window).width()/2);
+				}
 			$('#dolphin').css('left',l+'px');
 						var zInd=getRandom(100,2000);
 
@@ -1724,9 +1757,15 @@ function updateWaterLevel()
 //		var bhc=$('#contentAquarium').height()-bhw;
 
 		var bhc=$('#contentAquarium').height()-bhw;
+		
 	var newTop=bhc -(bhc*(levelPos/100));
-	 
-	 $('#waterLevel').animate({ "top": newTop+'px'}, "slow");
+	var oldTop=parseInt($('#waterLevel').css("top").replace('px',''));
+	var oldHeight=$('#waterPipe').height();
+//	 $('#waterLevel').animate({ "top": newTop+'px'}, "slow");
+	 	 $('#waterLevel').css("top", newTop+'px');
+$('#waterPipe').height(oldHeight-(oldTop-newTop));
+	 	// $('#waterPipe').animate({ "height": oldHeight-(oldTop-newTop)+'px'}, "slow");
+
 	 $('#waterLevel0').css("top", newTop+'px');
 
 	for(var j=1;j<=20;j++)
@@ -1783,7 +1822,7 @@ function showWaterLevel()
 // $('#waterLevel').height(bhw);
 		var bhc=$('#contentAquarium').height()-bhw;
 		$('#waterLevel').height(bhw);
-		$('#waterLevel0').height($(window).height());
+		$('#waterLevel0').height($(window).height()*1.1);
 	
 	 var lv;
 	 if(levelPos==-1)
@@ -1797,8 +1836,9 @@ function showWaterLevel()
 	 var t=bhc -(bhc*(lv/100));
 	 	 $('#waterLevel').css('top',t+'px');
 		 $('#waterLevel0').css('top',t+'px');
-		showDivEfect($('#waterLevel'));
-			showDivEfect($('#waterLevel0'));
+$('#waterLevel').css('visibility','visible');
+$('#waterLevel0').css('visibility','visible');
+		
 $('#waterLevel').pan({fps: 15, speed: 20, dir: 'left'});
 }
 var aspectRatioStaticsElements=[1.127,1.58,1.48,1.78,1.41,1.63,1.26,1.605,1.07,1.095];
@@ -1910,6 +1950,14 @@ function generateFishs(i)
 			var maxTop=$('#contentAquarium').height();
 			var t=getRandom(minTop,maxTop);
 				var l=getRandom(0,$('#contentAquarium').width());
+				if(l<=$('#contentAquarium').width()/2)
+				{
+					l=l-($(window).width()/2)-w;
+				}
+				else
+				{
+						l=l+($(window).width()/2);
+				}
 			var zInd=getRandom(100,2000);
 
 		$('#fish'+i).css('top',t+'px');
@@ -1948,7 +1996,9 @@ $(document).on('pageshow','#aquarium', function(e,data){
 
 	pageRender='#aquarium';  
 	showSun();
-	
+	$('#bubblesLevel')
+					.sprite({fps: 5, no_of_frames: 5})
+					.active();
 apprsPlant=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 apprsFish=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 	apprsMermaid=0;
@@ -1966,6 +2016,12 @@ showMermaid();
 showWhale();
 showDolphin();
 
+
+var lP=($('#pipe').css('left').replace('px',''))-($('#pipe').width()*0.91);
+$('#pipe').css('left',lP+'px');
+showDivEfect($('#pipe'));
+showDivEfect($('#waterPipe'));
+$('#waterPipe').pan({fps: 40, speed: 7, dir: 'down', depth: 70});
 
 $('#waterLevel0').flyToTap();
 
@@ -2370,6 +2426,7 @@ function clearTripNo()
 						$('#knowFactContainerAquarium').css('opacity','0');
 
 				  $('#finishAquarium').css('visibility','hidden');
+				  				  $('#finishAquarium').css('opacity','0');
 			directionsDisplay = new google.maps.DirectionsRenderer();
 			directionsService=new google.maps.DirectionsService();
 			 hourpos=0;
@@ -2401,6 +2458,7 @@ function	loadLoading()
 		  $('#backCharacter').css('visibility','hidden');
 	  $('#finishLeafs').css('visibility','hidden');
 	  	  $('#finishBubbles').css('visibility','hidden');
+		  	  	  $('#finishBubbles').css('opacity','0');
 	  $('#positionLeftCharacter').css('visibility','hidden');
 	 $('#resetTripContainer').css('visibility','hidden');
 	 $('#menuJungle').css('visibility','hidden');
@@ -2506,7 +2564,11 @@ function stopAllAnimation()
 	}
 $('#waterLevel').destroy();	
 $('#waterLevel').css('visibility','hidden');
-$('#waterLevel').css('opacity','0');
+
+
+$('#waterLevel0').destroy();	
+$('#waterLevel0').css('visibility','hidden');
+
 
 $('#mermaid').destroy();	
 $('#mermaid').css('visibility','hidden');
@@ -2520,9 +2582,10 @@ $('#whale').destroy();
 $('#whale').css('visibility','hidden');
 $('#whale').css('opacity','0');
 
+$('#waterPipe').destroy();	
+$('#waterPipe').css('visibility','hidden');
+$('#waterPipe').css('opacity','0');
 
-$('#waterLevel0').css('visibility','hidden');
-$('#waterLevel0').css('opacity','0');
 $('#sun').css('visibility','hidden');
 $('#sun').css('opacity','0');
 }
