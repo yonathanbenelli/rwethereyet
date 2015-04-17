@@ -13,7 +13,14 @@
 			});
 		})(jQuery);
 	*/
-	
+	document.addEventListener("deviceready", onDeviceReady, false);
+
+        // device APIs are available
+        //
+        function onDeviceReady() {
+           loadSounds();
+        }
+
 
 $(document).bind("pagebeforechange", function(e,ob) {
   if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
@@ -424,8 +431,123 @@ var render=true;
                  android=0;
     }
 
-$(document).on('pageshow','#main', function(e,data){    
+var music1=null;
+var music2=null;
+var music3=null;
+var music4=null;
+var music5=null;
+var music6=null;
+var music7=null;
+var wavesSound=null;
+var dolphinSound=null;
+var birdsConSound=null;
+var bird1Sound=null;
+var bird2Sound=null;
+var tapASound=null;
+var aquarium1Sound=null;
+var aquarium2Sound=null;
+var bubblesFinishSound=null;
+var waterPipeSound=null;
+var tapJSound=null;
+var scrollSound=null;
+var swipe1Sound=null;
+var swipe2Sound=null;
+var ovation=null;
+var crocodileSound=null;
+var elephantSound=null;
+var jungleSound=null;
+var lionSound=null;
+var monkeySound=null;
+   var toucanSound=null;
+var zebraSound=null;
+   
+function   loadSounds()
+{
+	music1= new Media("resources/music/music1.mp3", onSuccessS, onErrorS,onStatusSMusic);
+		music12= new Media("resources/music/music2.mp3", onSuccessS, onErrorS,onStatusSMusic);
+	music3= new Media("resources/music/music3.mp3", onSuccessS, onErrorS,onStatusSMusic);
 
+	music4= new Media("resources/music/music4.mp3", onSuccessS, onErrorS,onStatusSMusic);			
+	music5= new Media("resources/music/music5.mp3", onSuccessS, onErrorS,onStatusSMusic);			
+	music6= new Media("resources/music/music6.mp3", onSuccessS, onErrorS,onStatusSMusic);			
+	music7= new Media("resources/music/music7.mp3", onSuccessS, onErrorS,onStatusSMusic);	
+	toucanSound= new Media("resources/sounds/toucan.mp3", onSuccessS, onErrorS);	
+	zebraSound= new Media("resources/sounds/zebra.mp3", onSuccessS, onErrorS);	
+		swipe2Sound= new Media("resources/sounds/swipe2.mp3", onSuccessS, onErrorS);	
+		pinchSound= new Media("resources/sounds/pinch.mp3", onSuccessS, onErrorS);	
+	ovation= new Media("resources/sounds/ovation.mp3", onSuccessS, onErrorS);	
+	crocodileSound= new Media("resources/sounds/crocodile.mp3", onSuccessS, onErrorS);		
+		elephantSound= new Media("resources/sounds/elephant.mp3", onSuccessS, onErrorS);		
+	jungleSound= new Media("resources/sounds/jungle.mp3", onSuccessS, onErrorS);		
+	lionSound= new Media("resources/sounds/lion.mp3", onSuccessS, onErrorS);			
+		monkeySound= new Media("resources/sounds/monkey.mp3", onSuccessS, onErrorS);			
+		wavesSound= new Media("resources/sounds/waves.mp3", onSuccessS, onErrorS,onStatusSWave);					
+		dolphinSound= new Media("resources/sounds/dolphin.mp3", onSuccessS, onErrorS);							
+		birdsConSound= new Media("resources/sounds/birdscon.mp3", onSuccessS, onErrorS,onStatusSBirdCon);							
+		bird1Sound= new Media("resources/sounds/bird1.mp3", onSuccessS, onErrorS);									
+		bird2Sound= new Media("resources/sounds/bird2.mp3", onSuccessS, onErrorS);											
+		tapASound= new Media("resources/sounds/tapa.mp3", onSuccessS, onErrorS);													
+		aquarium1Sound= new Media("resources/sounds/aquarium1.mp3", onSuccessS, onErrorS,onStatusSAquarium1);															
+		aquarium2Sound= new Media("resources/sounds/aquarium2.mp3", onSuccessS, onErrorS,onStatusSAquarium1);															
+		bubblesFinishSound= new Media("resources/sounds/bubblesfinish.mp3", onSuccessS, onErrorS,onStatusSBubbleF);															
+		waterPipeSound= new Media("resources/sounds/waterpipe.mp3", onSuccessS, onErrorS,onStatusSWaterP);															
+		tapJSound= new Media("resources/sounds/tapj.mp3", onSuccessS, onErrorS);															
+		scrollSound= new Media("resources/sounds/scroll.mp3", onSuccessS, onErrorS);																	
+				swipe1Sound= new Media("resources/sounds/swipe1.mp3", onSuccessS, onErrorS);																	
+
+}
+ function onSuccessS() {
+
+        }
+
+        // onError Callback
+        //
+        function onErrorS(error) {
+        }
+	function onStatusSWave(status) {
+        if( status==4 ) {
+
+			wavesSoundF('play');
+		}
+	}
+		function onStatusSWaterP(status) {
+        if( status==4 ) {
+
+			waterPipeSoundF('play');
+		}
+	}
+
+	function onStatusSBubbleF(status) {
+        if( status==4 ) {
+
+			finishBubblesSoundAF('play');
+		}
+	}
+		function onStatusSBirdCon(status) {
+        if( status==4 ) {
+
+
+		birdsConSoundF('play');
+		}
+	}
+	function onStatusSAquarium1(status) {
+        if( status==4 ) {
+			aquarium1SoundF('play');
+		}
+	}
+	function onStatusSAquarium2(status) {
+        if( status==4 ) {
+			aquarium2SoundF('play');
+		}
+	}
+
+	function onStatusSMusic(status) {
+        if( status==4 ) {
+			playMusic();
+        }
+	}
+$(document).on('pageshow','#main', function(e,data){    
+           loadSounds();
 	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 	{
 		$('#backMain').css('visibility','visible');	
@@ -459,7 +581,7 @@ else
 
 $(function() { $('#containerSetCharacter').swipe( {swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
 
-							scrollSound('play');	
+							scrollSoundF('play');	
 
 			if(direction=="up")
 			{
@@ -483,7 +605,7 @@ $(function() { $('#containerSetCharacter').swipe( {swipe:function(event, directi
 	else
 	{
 		
-			$('#contentSetCharacter').scroll(function() {scrollSound('play');	});
+			$('#contentSetCharacter').scroll(function() {scrollSoundF('play');	});
 	}
 		});
 
@@ -537,7 +659,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 			}
 			if(mov!=0)
 			{
-							scrollSound('play');	
+							scrollSoundF('play');	
 				var to=	$('#hourBoldTime').css('background-position-y');
 
 				if(resolution==0)
@@ -597,7 +719,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 			}
 			if(mov!=0)
 			{
-							scrollSound('play');	
+							scrollSoundF('play');	
 				var to=	$('#minuteThinTime1').css('background-position-y');
 				var pos=parseFloat(to.replace('px',''))+(parseFloat(pixelMove2)*mov);
 				$('#minuteThinTime1').css('background-position-y',pos+'px');
@@ -647,7 +769,7 @@ $(document).on('pageshow','#byTime', function(e,data){
 			}
 			if(mov!=0)
 			{
-							scrollSound('play');	
+							scrollSoundF('play');	
 				var to=	$('#minuteThinTime2').css('background-position-y');
 				var pos=parseFloat(to.replace('px',''))+(parseFloat(pixelMove3)*mov);
 				$('#minuteThinTime2').css('background-position-y',pos+'px');
@@ -677,20 +799,20 @@ $(document).on('pageshow','#byTime', function(e,data){
 
 function backToMain()
 {
-		 			tapJSound('play');	
+		 			tapJSoundF('play');	
 					pageRender='#main';  
 					$.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
 }
 function goToSetCharacter()
 {
-		 			tapJSound('play');	
+		 			tapJSoundF('play');	
 						pageRender='#setCharacter';  
 	$.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:false});
 }
 
 function goToTripPlanner()
 {
-		 			tapJSound('play');	
+		 			tapJSoundF('play');	
 	if(defaultTrip==0)
 	{	
 
@@ -708,7 +830,7 @@ function goToTripPlanner()
 }
 function goToBackPlanner()
 {
-		 			tapJSound('play');	
+		 			tapJSoundF('play');	
 	if(defaultTrip==0)
 	{
 				pageRender='#main';  	
@@ -729,7 +851,7 @@ function goToBackPlanner()
 
 function soundSetting()
 {
-	tapJSound('play');
+	tapJSoundF('play');
 	if(sound==false)
 	{
 		sound=true;
@@ -746,7 +868,7 @@ function soundSetting()
 
 function defaultTripTime()
 {
-	tapJSound('play');
+	tapJSoundF('play');
 	 defaultTrip=0;
 	 $('#defaultTripOption0').css('z-index','100');
 	 	 $('#defaultTripOption1').css('z-index','99');
@@ -755,7 +877,7 @@ function defaultTripTime()
 
 function defaultTripDist()
 {
-		tapJSound('play');
+		tapJSoundF('play');
 	defaultTrip=1;
 		 $('#defaultTripOption0').css('z-index','98');
 	 	 $('#defaultTripOption1').css('z-index','100');
@@ -766,7 +888,7 @@ function defaultTripDist()
 
 function defaultTripNone()
 {
-		tapJSound('play');
+		tapJSoundF('play');
 	defaultTrip=2;
 		 $('#defaultTripOption0').css('z-index','99');
 	 	 $('#defaultTripOption1').css('z-index','98');
@@ -811,7 +933,7 @@ distanceFull=-1;
 				   {
 						if(fingerCount==1)
 						  {
-							  pinchSound('play');
+							  pinchSoundF('play');
 							   if(direction=='up')
 							   {		
 											   mapDest.panBy(0,Math.floor(distance*speedSwipeMap));			   
@@ -841,7 +963,7 @@ distanceFull=-1;
 
 					if(direction=='out')
 						{
-								  swipe2Sound('play');
+								  swipe2SoundF('play');
 						if(mapDest.getZoom()>0)
 							 {
 								// zoomLevelD=zoomLevelD-0.05;
@@ -851,7 +973,7 @@ distanceFull=-1;
 						}
 						else if(direction=='in')
 						{
-															  swipe2Sound('play');
+															  swipe2SoundF('play');
 			
 								   if(mapDest.getZoom()<19)
 								  {
@@ -869,7 +991,7 @@ distanceFull=-1;
     });	    });	
 
  $('#submit').click(function() {
-	 			tapJSound('play');	
+	 			tapJSoundF('play');	
  if(marker!=undefined)
  {
 	marker.setMap(null);
@@ -1163,17 +1285,17 @@ function updateTimeLeftTextA(timeL)
 }
 function finishTripJungle()
 {
-			tapJSound('play');
+			tapJSoundF('play');
 			
 	  $('#finishLeafs').destroy();
-	  		stopAllSoundA();
+	  		stopAllSoundAF();
 	  clearTrip();
 	  				pageRender='#main';  
 	  $.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
 }
 function finishTripAquarium()
 {
-		tapSoundA('play');
+		tapSoundAF('play');
 		stopAllSoundA();
 	  $('#finishBubbles').destroy();
 	  
@@ -1191,7 +1313,7 @@ function showFinishJungle()
 			clearInterval(intervalDist);
 				clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
-			ovationSound('play');
+			ovationSoundF('play');
 			$('#knowFactContainer').css('opacity','0');
 				  $('#menuJungle').css('visibility','visible');
 	  $('#finishCharacter').css('visibility','visible');
@@ -1202,8 +1324,8 @@ function showFinishJungle()
 }
 function showFinishAquarium()
 {
-		finishBubblesSoundA('play');
-		ovationSound('play');
+		finishBubblesSoundAF('play');
+		ovationSoundF('play');
 			clearInterval(intervalDist);
 			clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
@@ -1228,7 +1350,7 @@ showDivEfect($('#finishBubbles'));
 
 function goToBackFromSetCharacter()
 {
-		 			tapJSound('play');	
+		 			tapJSoundF('play');	
 	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 	{
 					backFromHome=0;
@@ -1275,7 +1397,7 @@ if(map==undefined)
 				   {
 						if(fingerCount==1)
 						  {
-							  								  pinchSound('play');
+							  								  pinchSoundF('play');
 							   if(direction=='up')
 							   {		
 											   map.panBy(0,Math.floor(distance*speedSwipeMap));			   
@@ -1305,7 +1427,7 @@ if(map==undefined)
 								
 					if(direction=='out')
 						{
-															  swipe2Sound('play');
+															  swipe2SoundF('play');
 										
 							if(map.getZoom()>0)
 							 {
@@ -1317,7 +1439,7 @@ if(map==undefined)
 						else if(direction=='in')
 						{
 							
-											  swipe2Sound('play');
+											  swipe2SoundF('play');
 								   if(map.getZoom()<19)
 								  {
 									 // zoomLevelD=zoomLevelD+0.05;
@@ -1337,7 +1459,7 @@ if(map==undefined)
 
       //Enable swiping...
       $("#menuLeaf").swipe( {tap:function(event, target) {
-		  								tapJSound('play');
+		  								tapJSoundF('play');
 							doubleTapCount++;
 					     	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
 							if(doubleTapCount==2)
@@ -1354,14 +1476,14 @@ if(map==undefined)
 
 
       $("#buttonMenuJungle1").click(function() {
-		  			tapJSound('play');
+		  			tapJSoundF('play');
 				 $('#timeLeftCharacter').css('visibility','visible');
 				$('#positionLeftCharacter').css('visibility','hidden');
 				 $('#resetTrip').css('visibility','hidden');
 
 			});
       $("#buttonMenuJungle2").click(function() {
-		  			tapJSound('play');
+		  			tapJSoundF('play');
 		  zoomLevel=16;
 		  map.setZoom(Math.floor(zoomLevel));
 				 $('#positionLeftCharacter').css('visibility','visible');
@@ -1370,14 +1492,14 @@ if(map==undefined)
 });
 
       $("#buttonMenuJungle3").click(function() {
-		  			tapJSound('play');
+		  			tapJSoundF('play');
 		  		  		 $('#resetTripContainer').css('visibility','visible');
 		  		 $('#positionLeftCharacter').css('visibility','hidden');
  					$('#timeLeftCharacter').css('visibility','hidden');
 });
 
       $("#buttonMenuJungle4").click(function() {
-		  			tapJSound('play');
+		  			tapJSoundF('play');
 					 $('#resetTripContainer').css('visibility','hidden');
 					$('#positionLeftCharacter').css('visibility','hidden');
 					$('#timeLeftCharacter').css('visibility','hidden');
@@ -1414,13 +1536,13 @@ if(map==undefined)
 						   intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
 					}
 				}
-	
+
 			$('#knowFactContainer').css('font-size','1.5em');
 						$('#knowFactContainer').css('color','#FDFD5E');
 
 			
 $('#knowFactContainer').click(function() {
-				tapJSound('play');
+				tapJSoundF('play');
 	if($('#knowFactContainer').css('opacity')==1){$('#knowFactContainer').animate({ "opacity": 0}, "slow");} }) ;
 							  clearInterval(intervalDist2);
 	intervalDist2=setInterval(function () {loadKnowFact()}, (updateFreqMilis*20)-15);		
@@ -1621,7 +1743,7 @@ function apearWhale()
 		
 		if(topW<=topP)
 		{
-			aquarium1Sound('play');
+			aquarium1SoundF('play');
 						apprsWhale=2;
 			showDivEfect($('#whale'));
 						var maxT=$('#contentAquarium').height();
@@ -1673,7 +1795,7 @@ function apearDolphin()
 	if(topW<=topP)
 		{
 						apprsDolphin=2;
-						dolphinSound('play');
+						dolphinSoundF('play');
 			showDivEfect($('#dolphin'));
 			var r=$('#contentAquarium').width()/2;
 			var maxT=$('#contentAquarium').height();
@@ -2014,10 +2136,10 @@ function showFishs(i)
 }
 function startSoundsA()
 {
-birdsConSound('play');
-bird1Sound('play');
-bird2Sound('play');
-aquarium2Sound('play');
+birdsConSoundF('play');
+bird1SoundF('play');
+bird2SoundF('play');
+aquarium2SoundF('play');
 }
 $(document).on('pageshow','#aquarium', function(e,data){ 
 render=true;
@@ -2050,13 +2172,13 @@ showDolphin();
 var lP=($('#pipeContainer').width()*0.08)-($('#pipe').width()*0.91);
 $('#waterPipe').height(0.90*$('#waterPipeContent').height());
 $('#pipe').css('left',lP+'px');
-waterPipeSound('play');
+waterPipeSoundF('play');
 showDivEfect($('#pipe'));
 showDivEfect($('#waterPipe'));
 $('#waterPipe').pan({fps: 40, speed: 7, dir: 'down', depth: 70});
 	updateWaterLevel();
 $('#allA').css('visibility','visible');
-wavesSound('play');
+wavesSoundF('play');
 	$("#resetTripContainerAquarium").height($("#resetTripContainerAquarium").width());
 	$("#positionLeftAquarium").height($("#positionLeftAquarium").width());
 	  charConH=$("#aquariumContainer").height();
@@ -2071,7 +2193,7 @@ if(map==undefined)
 			   if(phase === $.fn.swipe.phases.PHASE_END || phase === $.fn.swipe.phases.PHASE_CANCEL) 
 				   {
 						if(fingerCount==1)
-						  {								  pinchSound('play');
+						  {								  pinchSoundF('play');
 							  
 							   if(direction=='up')
 							   {		
@@ -2102,7 +2224,7 @@ if(map==undefined)
 								
 					if(direction=='out')
 						{
-																		  swipe2Sound('play');
+																		  swipe2SoundF('play');
 							if(map.getZoom()>0)
 							 {
 								// zoomLevelD=zoomLevelD-0.05;
@@ -2113,7 +2235,7 @@ if(map==undefined)
 						else if(direction=='in')
 						{
 							
-											  swipe2Sound('play');
+											  swipe2SoundF('play');
 								   if(map.getZoom()<19)
 								  {
 									 // zoomLevelD=zoomLevelD+0.05;
@@ -2134,7 +2256,7 @@ if(map==undefined)
       //Enable swiping...
       $("#menuBubble").swipe( {tap:function(event, target) {
 							doubleTapCount++;
-							tapSoundA('play');
+							tapSoundAF('play');
 					     	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
 							if(doubleTapCount==2)
 							{
@@ -2150,7 +2272,7 @@ if(map==undefined)
 
 
       $("#buttonMenuAquarium1").click(function() {
-		  	tapSoundA('play');
+		  	tapSoundAF('play');
 				 $('#timeLeftAquarium').css('visibility','visible');
 				 $('#timeLeftAquarium').css('z-index','6899');
 				 	$('#positionLeftAquarium').css('z-index','0');
@@ -2160,7 +2282,7 @@ if(map==undefined)
 
 			});
       $("#buttonMenuAquarium2").click(function() {
-		  	tapSoundA('play');
+		  	tapSoundAF('play');
 		  zoomLevel=16;
 		  map.setZoom(Math.floor(zoomLevel));
 		  	$('#positionLeftAquarium').css('z-index','6890');
@@ -2172,7 +2294,7 @@ if(map==undefined)
 });
 
       $("#buttonMenuAquarium3").click(function() {
-		  	tapSoundA('play');
+		  	tapSoundAF('play');
 		  		  		 $('#resetTripContainerAquarium').css('visibility','visible');
 						 				 				 $('#resetTripContainerAquarium').css('z-index','7002');
 						 	$('#positionLeftAquarium').css('z-index','0');
@@ -2182,7 +2304,7 @@ if(map==undefined)
 });
 
       $("#buttonMenuAquarium4").click(function() {
-		  	tapSoundA('play');
+		  	tapSoundAF('play');
 					 $('#resetTripContainerAquarium').css('visibility','hidden');
 					 				 				 $('#resetTripContainerAquarium').css('z-index','0');
 					 	$('#positionLeftAquarium').css('z-index','0');
@@ -2225,7 +2347,7 @@ if(map==undefined)
 
 			
 $('#knowFactContainerAquarium').click(function() {
-		tapSoundA('play');
+		tapSoundAF('play');
 	if($('#knowFactContainerAquarium').css('opacity')==1){
 	$('#knowFactContainerAquarium').css('z-index','0');
 	$('#knowFactContainerAquarium').animate({ "opacity": 0}, "slow");} }) ;
@@ -2263,7 +2385,7 @@ $('#knowFactContainerAquarium').click(function() {
 	 var r=getRandom(0,2);
 	if(r==0 && $('#knowFactContainer').css('opacity')==0)
 	{
-		knowJSound('play',setScene);
+		knowJSoundF('play',setScene);
 
 		$('#knowFactContainer').html(correctFontKows(knows[getRandom(0,(knows.length-1))].toUpperCase()));
 		$('#knowFactContainer').animate({ "opacity": 1}, "slow");
@@ -2381,7 +2503,7 @@ function loadCharacter()
 }
 function clearTripYesAquarium()
 {
-		tapSoundA('play');
+		tapSoundAF('play');
 
 	 	$('#backAquarium').css('visibility','hidden');
 		$('#resetTripContainerAquarium').css('visibility','hidden');
@@ -2396,7 +2518,7 @@ function clearTripYesAquarium()
 function clearTripYes()
 {
 
-			tapJSound('play');
+			tapJSoundF('play');
 	 	$('#backCharacter').css('visibility','hidden');
 		$('#resetTripContainer').css('visibility','hidden');
 
@@ -2409,13 +2531,13 @@ function clearTripYes()
 
 function goToPage(page,rev)
 {
-		 			tapJSound('play');	
+		 			tapJSoundF('play');	
 	$.mobile.changePage(page,{ transition: pageEfect,reverse:rev});
 
 }
 function clearTripNoAquarium()
 {
-		tapSoundA('play');
+		tapSoundAF('play');
 		$('#resetTripContainerAquarium').css('visibility','hidden');
 						 				 $('#resetTripContainerAquarium').css('z-index','0');
 				$('#backAquarium').css('visibility','hidden');
@@ -2425,7 +2547,7 @@ function clearTripNoAquarium()
 }
 function clearTripNo()
 {
-			tapJSound('play');
+			tapJSoundF('play');
 	$('#resetTripContainer').css('visibility','hidden');
 					$('#backJungle').css('visibility','hidden');
 		$('#menuJungle').css('opacity','0');
@@ -2504,7 +2626,7 @@ function clearTripNo()
 	
 function goToLoading()
 {
-		 			tapJSound('play');	
+		 			tapJSoundF('play');	
 		$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
 
 
@@ -2572,7 +2694,7 @@ $('#ovation').on('ended', function(){
 
 function backFromCharacter()
 {
-				tapJSound('play');
+				tapJSoundF('play');
 					stopAllSoundA();
 	 $('#menuJungle').css('visibility','hidden');
 	 $('#positionLeftCharacter').css('visibility','hidden');
@@ -2583,7 +2705,7 @@ function backFromCharacter()
 }
 function backFromAquarium()
 {
-	tapSoundA('play');
+	tapSoundAF('play');
 	stopAllSoundA();
 	render=false;
 	$('#allA').css('visibility','hidden');
@@ -2677,11 +2799,11 @@ $('#sun').css('opacity','0');
 function stopAllSoundA()
 {
 
-	finishBubblesSoundA('pause');
-	aquarium1Sound('pause');
-	aquarium2Sound('pause');
-	waterPipeSound('pause');
-	wavesSound('pause');
+	finishBubblesSoundAF('pause');
+	aquarium1SoundF('pause');
+	aquarium2SoundF('pause');
+	waterPipeSoundF('pause');
+	wavesSoundF('pause');
 
 clearInterval(dolphinSoundIn);
 clearInterval(bird1SoundIn);
@@ -2689,11 +2811,22 @@ clearInterval(bird2SoundIn);
 clearInterval(ovationSoundIn);
 	if(nMusic!=0)
 	{
-		$('#music'+nMusic).trigger('pause');	
+				switch(nMusic)
+		{
+			case 1:		music1.stop();			break;
+			case 2:		music2.stop();			break;
+			case 3:		music3.stop();			break;
+			case 4:		music4.stop();			break;
+			case 5:		music5.stop();			break;												
+			case 6:		music6.stop();			break;
+			case 7:		music7.stop();			break;						
+		}
+		
+
 	}
-$('#ovation').trigger('pause');	
-			birdsConSound('pause');
-			$('#jungleSound').trigger('pause');	
+		ovation.stop();	
+			birdsConSoundF('pause');
+			jungleSound.stop();	
 }
 
 var bird1SoundIn;
@@ -2705,107 +2838,294 @@ function playMusic()
 {
 	if(nMusic!=0)
 	{
-	$('#music'+nMusic).trigger('pause');	
+		switch(nMusic)
+		{
+			case 1:		music1.stop();			break;
+			case 2:		music2.stop();			break;
+			case 3:		music3.stop();			break;
+			case 4:		music4.stop();			break;
+			case 5:		music5.stop();			break;												
+			case 6:		music6.stop();			break;
+			case 7:		music7.stop();			break;						
+		}
+		
+
 	}
 	nMusic=getRandom(1,7);
-	$('#music'+nMusic).trigger('play');	
-
-	$('#music'+nMusic).prop("volume",volMusic);
+			switch(nMusic)
+		{
+			case 1:		music1.setVolume(volMusic);	music1.play();						break;
+			case 2:		music2.setVolume(volMusic);	music2.play();			break;
+			case 3:		music3.setVolume(volMusic);	music3.play();			break;
+			case 4:		music4.setVolume(volMusic);	music4.play();			break;
+			case 5:		music5.setVolume(volMusic);	music5.play();			break;												
+			case 6:		music6.setVolume(volMusic);	music6.play();			break;
+			case 7:		music8.setVolume(volMusic);	music7.play();			break;						
+		}
+		
 
 }			
-function aquarium2Sound(acc)
+function aquarium2SoundF(acc)
 {
-	$('#aquarium2Sound').trigger(acc);
-	$('#aquarium2Sound').prop("volume",0.5);
+		aquarium2Sound.setVolume(0.5);		
+	if(acc=='play')
+	{
+		aquarium2Sound.play();
+	}
+	else
+	{
+			aquarium2Sound.stop();
+	}
+
 }
 
-function ovationSound(acc)
+function ovationSoundF(acc)
 {
 clearInterval(ovationSoundIn);
-ovationSoundIn=setInterval(function () {$('#ovation').trigger(acc)},5000);
+ovationSoundIn=setInterval(function () {
+
+	if(acc=='play')
+	{
+		ovation.play();
+	}
+	else
+	{
+			ovation.stop();
+	}
+	},5000);
 }
-function dolphinSound(acc)
+function dolphinSoundF(acc)
 {
 clearInterval(dolphinSoundIn);
-	dolphinSoundIn=setInterval(function () {$('#dolphinSound').trigger(acc); 	$('#dolphinSound').prop("volume",0.5);},10000);
+	dolphinSoundIn=setInterval(function () {
+	
+		
+	
+	dolphinSound.setVolume(0.5);		
+	if(acc=='play')
+	{
+		dolphinSound.play();
+	}
+	else
+	{
+			dolphinSound.stop();
+	}
+		
+		},10000);
 }
 
-function bird1Sound(acc)
+function bird1SoundF(acc)
 {
 clearInterval(bird1SoundIn);
-bird1SoundIn=setInterval(function () {$('#bird1Sound').trigger(acc);	$('#bird1Sound').prop("volume",0.1);},20000);
+bird1SoundIn=setInterval(function () {
+	
+	
+	bird1Sound.setVolume(0.1);		
+	if(acc=='play')
+	{
+		bird1Sound.play();
+	}
+	else
+	{
+			bird1Sound.stop();
+	}
+	},20000);
 }
 
 
-function bird2Sound(acc)
+function bird2SoundF(acc)
 {
 clearInterval(bird2SoundIn);
-bird2SoundIn=setInterval(function () {$('#bird2Sound').trigger(acc);$('#bird2Sound').prop("volume",0.1);},4000);
+bird2SoundIn=setInterval(function () {
+	
+	bird2Sound.setVolume(0.1);		
+	if(acc=='play')
+	{
+		bird2Sound.play();
+	}
+	else
+	{
+			bird2Sound.stop();
+	}
+	},4000);
 }
-function scrollSound(acc)
+function scrollSoundF(acc)
 {
-	$('#scrollSound').trigger(acc);
+	if(acc=='play')
+	{
+		scrollSound.play();
+	}
+	else
+	{
+			scrollSound.stop();
+	}
+	
 }
 
-function birdsConSound(acc)
+function birdsConSoundF(acc)
 {
-	$('#birdsConSound').trigger(acc);
-	$('#birdsConSound').prop("volume",0.1);
+					birdsConSound.setVolume(0.1);		
+	if(acc=='play')
+	{
+		birdsConSound.play();
+	}
+	else
+	{
+			birdsConSound.stop();
+	}
 }
-function wavesSound(acc)
+function wavesSoundF(acc)
 {
-	$('#wavesSound').trigger(acc);
-		$('#wavesSound').prop("volume",0.1);
+					wavesSound.setVolume(0.1);		
+	if(acc=='play')
+	{
+		wavesSound.play();
+	}
+	else
+	{
+			wavesSound.stop();
+	}
 }
-function tapSoundA(acc)
-{
-	$('#tapASound').trigger(acc);
-}
-function tapJSound(acc)
-{
-	$('#tapJSound').trigger(acc);
-}
-
-function finishBubblesSoundA(acc)
+function tapSoundAF(acc)
 {
 	
-	$('#bubblesFinishSound').trigger(acc);
-}
-
-function aquarium1Sound(acc)
-{
-	$('#aquarium1Sound').trigger(acc);
-			$('#aquarium1Sound').prop("volume",0.5);
-}
-
-function waterPipeSound(acc)
-{
-	$('#waterPipeSound').trigger(acc);
-		$('#waterPipeSound').prop("volume",0.1);
-}			
-function swipe1Sound(acc)
-{
-	$('#swipe1Sound').trigger(acc);
-}			
-function swipe2Sound(acc)
-{
-	$('#swipe2Sound').trigger(acc);
-}			
-function pinchSound(acc)
-{
-	$('#pinchSound').trigger(acc);
-}		
-function knowJSound(acc,scene)
-{
-			$('#jungleSound').trigger(acc); 
-	switch(scene)
+	if(acc=='play')
 	{
-		case 0: 	$('#lionSound').trigger(acc); break;
-		case 1:	$('#zebraSound').trigger(acc); break;
-		case 2:	$('#monkeySound').trigger(acc); break;
-		case 5:	$('#elephantSound').trigger(acc); break;
-		case 7: $('#toucanSound').trigger(acc); break;
-		case 8: $('#crocodileSound').trigger(acc); break;
+		tapASound.play();
+	}
+	else
+	{
+			tapASound.stop();
+	}
+
+	
+}
+function tapJSoundF(acc)
+{
+	
+	if(acc=='play')
+	{
+		tapJSound.play();
+	}
+	else
+	{
+			tapJSound.stop();
+	}
+
+}
+
+function finishBubblesSoundAF(acc)
+{
+				
+	if(acc=='play')
+	{
+		bubblesFinishSound.play();
+	}
+	else
+	{
+			bubblesFinishSound.stop();
+	}
+
+	
+	
+}
+
+function aquarium1SoundF(acc)
+{
+				aquarium1Sound.setVolume(0.5);		
+	if(acc=='play')
+	{
+		aquarium1Sound.play();
+	}
+	else
+	{
+			aquarium1Sound.stop();
+	}
+
+
+}
+
+function waterPipeSoundF(acc)
+{
+
+	waterPipeSound.setVolume(0.1);		
+	if(acc=='play')
+	{
+		waterPipeSound.play();
+	}
+	else
+	{
+			waterPipeSound.stop();
+	}
+
+	
+}			
+function swipe1SoundF(acc)
+{
+	
+	if(acc=='play')
+	{
+		swipe1Sound.play();
+	}
+	else
+	{
+			swipe1Sound.stop();
+	}
+	
+}			
+function swipe2SoundF(acc)
+{
+	
+	if(acc=='play')
+	{
+		swipe2Sound.play();
+	}
+	else
+	{
+			swipe2Sound.stop();
+	}
+}			
+function pinchSoundF(acc)
+{
+	
+	if(acc=='play')
+	{
+		pinchSound.play();
+	}
+	else
+	{
+			pinchSound.stop();
+	}
+}		
+function knowJSoundF(acc,scene)
+{
+	if(acc=='play')
+	{
+		
+			jungleSound.play(); 
+		switch(scene)
+		{
+			case 0: 	lionSound.play(); break;
+			case 1:	zebraSound.play(); break;
+			case 2:	monkeySound.play(); break;
+			case 5:	elephantSound.play(); break;
+			case 7: toucanSound.play(); break;
+			case 8: crocodileSound.play(); break;
+		}
+	}
+	else
+	{
+					jungleSound.stop(); 
+		switch(scene)
+		{
+			case 0: 	lionSound.stop(); break;
+			case 1:	zebraSound.stop(); break;
+			case 2:	monkeySound.stop(); break;
+			case 5:	elephantSound.stop(); break;
+			case 7: toucanSound.stop(); break;
+			case 8: crocodileSound.stop(); break;
+		}
+
 	}
 
 }	
