@@ -2521,12 +2521,14 @@ function backFromAquarium()
 function showDivEfect(d)
 {
 	d.css('visibility', 'visible');
-	d.animate({opacity: 1}, 1000);
+	d.css('opacity', '1');
+//	d.animate({opacity: 1}, 1000);
 }
 function showDivEfectC(d,o)
 {
 	d.css('visibility', 'visible')
-	d.animate({opacity: o}, 1000);
+	d.css('opacity', '1');
+//	d.animate({opacity: o}, 1000);
 }
 
 function hideDivEfect(d)
