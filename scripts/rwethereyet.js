@@ -323,10 +323,16 @@ var pageEfect="flip";
 			var zoomLevel=10;
 			var pageRender='none';
 		var zoomLevelD=10;
+		var clickDest=-1;
 			var updateFreqMilis=3000;
 /// init google maps 
 		var defaultLatLng = new google.maps.LatLng(45.2501566,-75.8002568);
-			var directionsDisplay = new google.maps.DirectionsRenderer();
+		var rendererOptions = {
+
+  suppressMarkers : true
+}
+			var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+			var directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions);
 			var directionsService=new google.maps.DirectionsService();
 		var currentPosition= new google.maps.LatLng(45.2501566,-75.8002568);
 		var optionsCharacterMap= {
@@ -338,9 +344,13 @@ var pageEfect="flip";
 		
         var map;
         var mapDest;
-		
+		        var mapDest2;
         // Add an overlay to the map of current lat/lng
         var marker;
+        var marker2;
+        var marker3;
+        var marker4;
+        var marker5;
 		var volMusic=50;
 		var volMusicD=30;
 		var soundVol50=50;
@@ -354,9 +364,11 @@ var render=true;
 		var intervalDist;
 		var 	intervalDist2;
 		var intervalTime;
+		var startPosition;
 		var levelPos=-1;
 		var timeLeft=-1;
 		var timeFull=-1;
+		var	stopTryGps=false;
 		var doubleTapSpeed=500;
 		var timeNow=0;
 		var intervalRot;
@@ -365,7 +377,7 @@ var render=true;
 		var resolution;
 		var frontCharacterTop=0;
 		var characterContentHeight=0;
-		var radiusDistanceFinish=20;
+		var radiusDistanceFinish=50;
 		
 		if ($(window).width()>960)
 		{
@@ -421,14 +433,14 @@ var app = {
     },
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        console.log('deviceready');
+        
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 
         if( window.plugins && window.plugins.NativeAudio ) {
-loadSounds1();
-loadSounds2();
+			loadSounds1();
+			loadSounds2();
       }
 
     },
@@ -457,20 +469,23 @@ var jungleSound=null;
 var lionSound=null;
 var monkeySound=null;
    var toucanSound=null;
+   var pinchSound=null;
 var zebraSound=null;
  var mermaidSound=null;
  var isLoadSound1=false;
     var isLoadSound2=true;
 	
+	var toImage= 'resources/others/to.png';
+		var fromImage= 'resources/others/from.png';
+				var nowImage= 'resources/others/now.png';
 function getMedia(src,loop,i,id)
 {
 		       var mediaRes; 
-			   console.log('comienza getMEdia');
+			  
 		if (isAndroid) 
 		{
 //          src = '/android_asset/www/' + src;
-			   console.log('es android');
-			   			   console.log('ruta '+ src);
+			 
 				if(loop)
 				{
 		
@@ -486,8 +501,6 @@ function getMedia(src,loop,i,id)
 		}
 			else
 			{
-							   			   console.log('no android');
-							   			   console.log('ruta '+ src);
 				if(loop)
 				{
 					mediaRes =new buzz.sound(src, { loop: true});
@@ -502,7 +515,7 @@ function getMedia(src,loop,i,id)
 function   loadSounds1()
 {
 
-console.log('comienza load1');
+
 		if (isAndroid) 
 		{
 		 volMusic=volMusic/100;
@@ -515,22 +528,28 @@ console.log('comienza load1');
  
 			tapJSound=getMedia("resources/sounds/tapj.mp3",false,0,'tapJSound');
 					scrollSound= getMedia("resources/sounds/scroll.mp3",false,0,'scrollSound');
+					pinchSound= getMedia("resources/sounds/pinch.mp3",false,0,'pinchSound');
 							changePageSound = getMedia("resources/sounds/changepage.mp3",false,0,'changePageSound');
 
 		swipe2Sound= getMedia("resources/sounds/swipe2.mp3",false,0,'swipe2Sound');
 		tapASound= getMedia("resources/sounds/tapa.mp3",false,0,'tapASound');
-		tapJSound= getMedia("resources/sounds/tapj.mp3",'tapJSound');
+		
 		scrollSound= getMedia("resources/sounds/scroll.mp3",'scrollSound');
 		swipe1Sound= getMedia("resources/sounds/swipe1.mp3",'swipe1Sound');
 		isLoadSound1=true;
-console.log('fin load1');
+
 }
 function   loadSounds2()
 {
 
-console.log('comienza load2');
 
 	music[1]= getMedia("resources/music/music1.mp3", true,1,'1');
+	/*music[2]=music[1];
+	music[3]=music[1];
+	music[4]=music[1];
+	music[5]= music[1];
+	music[6]=music[1];
+	music[7]=music[1];*/
 	music[2]= getMedia("resources/music/music2.mp3", true,2,'2');
 	music[3]= getMedia("resources/music/music3.mp3", true,3,'3');
 	music[4]= getMedia("resources/music/music4.mp3", true,4,'4');
@@ -556,16 +575,15 @@ console.log('comienza load2');
 		bubblesFinishSound= getMedia("resources/sounds/bubblesfinish.mp3", true,3,'bubblesFinishSound');
 		waterPipeSound= getMedia("resources/sounds/waterpipe.mp3", true,2,'waterPipeSound');
 				isLoadSound2=true;
-console.log('fin load2');
+
 }
  function onSuccessS() {
-			   			   console.log('exito ');
+
         }
 
         // onError Callback
         //
         function onErrorS(error) {
-						   			   console.log('falla '+ error);
         }
 	function onStatusSWave(status) {
         if( status==4 ) {
@@ -613,25 +631,20 @@ console.log('fin load2');
 	
 function minScreen()
 {
-			$('#minScreen').css('visibility','hidden');
-			$('#map_canvas_1').css('z-index','10000');
-			$('#map_canvas_1').css('width','80%');
-			$('#map_canvas_1').css('height','60%');
-			$('#map_canvas_1').css('top','10%');
-			$('#map_canvas_1').css('left','10%');
-			$('#map_canvas_1').css('position','relative');
-			$('#map_canvas_1').css('z-index','0');
+		tapJSoundF('play');
+			$('#minScreenMap').css('visibility','hidden');
+			$('#map_canvas_2').css('z-index','-100');
+				$('#mapFind').removeClass('mapFindFull');
+						$('#mapAdd').css('visibility','visible');
 }
 function fullScreen()
 {
+	tapJSoundF('play');
+	$('#map_canvas_2').css('z-index','10000');
+	$('#minScreenMap').css('visibility','visible');
+	$('#mapFind').addClass('mapFindFull');
+		$('#mapAdd').css('visibility','hidden');
 
-	$('#map_canvas_1').css('z-index','10000');
-	$('#map_canvas_1').css('width','100%');
-	$('#map_canvas_1').css('height','100%');
-	$('#map_canvas_1').css('top','0px');
-	$('#map_canvas_1').css('left','0px');
-	$('#map_canvas_1').css('position','absolute');
-	$('#minScreen').css('visibility','visible');
 }
 $(document).on('pageshow','#main', function(e,data){  
 if(!isLoadSound1)
@@ -987,10 +1000,16 @@ function defaultTripNone()
 
 }
 
-
+function clerToInput()
+{
+	$('#toInput').val('');
+	 clickDest=-1;
+}
 $(document).on('pageshow','#byDistance', function(e,data){ 
 //intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);
-//    $('#distance-content').css('margin-top',($(window).height() - $('[data-role=header]').height() - $('[data-role=footer]').height() - $('#distance-content').outerHeight())/2);
+//    $('#distance-content').css('margin-top',($(window).height() - $('[data-role=header]').height() - $('[data-role=footer]').height() - v$('#distance-content').outerHeight())/2);
+clickDest=-1;
+	stopTryGps=false;
 	pageRender='#byDistance';  
 	zoomLevel=10;
 	
@@ -1006,6 +1025,40 @@ $('#toInput').val('Juncal 1511 Montevideo');
 if(mapDest==undefined)
 {
 	mapDest = new google.maps.Map(document.getElementById("map_canvas_1"),optionsCharacterMap);
+	mapDest2 = new google.maps.Map(document.getElementById("map_canvas_2"),optionsCharacterMap);
+	google.maps.event.addListener(mapDest2, 'click', function(event) {
+	stopTryGps=true;
+if(marker3!=undefined)
+ {
+
+		marker3.setMap(null);
+	
+ }
+	if(marker4!=undefined)
+	{
+				marker4.setMap(null);
+	}
+	$('#toInput').val('');
+	clickDest=event.latLng;
+
+	     marker3 = new google.maps.Marker({
+				            position: clickDest,
+				            map: mapDest,
+				icon:toImage,
+				            title: "We go there!"
+				        });
+	     marker4 = new google.maps.Marker({
+				            position: clickDest,
+				            map: mapDest2,
+				icon:toImage,
+				            title: "We go there!"
+				        });
+
+				mapDest.panTo(clickDest);
+				mapDest2.panTo(clickDest);
+
+
+});
 }
 
 from="";
@@ -1082,28 +1135,78 @@ distanceFull=-1;
 
  $('#submit').click(function() {
 	 			tapJSoundF('play');	
- if(marker!=undefined)
+ if($('#toInput').val()=="" && clickDest!=-1)
  {
-	marker.setMap(null);
+	  var request = {
+      origin: currentPosition,
+      destination: clickDest,
+      travelMode: google.maps.TravelMode.DRIVING};
+	 
  }
+ else
+ {
 	  var request = {
       origin: currentPosition,
       destination: $('#toInput').val(),
       travelMode: google.maps.TravelMode.DRIVING
 					  };
+ }
+					  
   directionsService.route(request, function(response, status) {
     if (status == google.maps.DirectionsStatus.OK) {
 	
 					      directionsDisplay.setDirections(response);
+						    directionsDisplay2.setDirections(response);
 						  //    showSteps(response);
 								
 								destPosition=response.routes[0].legs[0].end_location;
+								startPosition=currentPosition;
 								currentPosition=response.routes[0].legs[0].start_location;
 								distanceFull=parseInt(google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition));
 								distanceLeft=distanceFull;
 								levelPos=0;
-								
+								 if(marker!=undefined)
+						 {
+							marker.setMap(null);
+						 }
+									 if(marker2!=undefined)
+						 {
+								marker2.setMap(null);
+								}
+									 if(marker3!=undefined)
+						 {
+									marker3.setMap(null);
+									}
+									 if(marker4!=undefined)
+						 {
+								marker4.setMap(null);
+						 }
+				         marker = new google.maps.Marker({
+				            position: currentPosition,
+				            map: mapDest,
+							icon:fromImage,
+				            title: "We are here!"
+				        });		
+						 marker2 = new google.maps.Marker({
+				            position: currentPosition,
+				            map: mapDest2,
+							icon:fromImage,
+				            title: "We are here!"
+				        });			
+								         marker3 = new google.maps.Marker({
+				            position: destPosition,
+				            map: mapDest,
+							icon:toImage,
+				            title: "We go there!"
+				        });		
+						 marker4 = new google.maps.Marker({
+				            position: destPosition,
+				            map: mapDest2,
+							icon:toImage,
+				            title: "We go there!"
+				        });			
 
+				
 								//console.log(inspeccionar(response.routes[0].legs[0]));
 								//console.log(response.routes[0].legs[0].duration.text);
 												$('#nextByDistance').css('visibility','visible');
@@ -1239,18 +1342,19 @@ function updatePostionAquarium()
 			
 				}
 	
-				 if(marker!=undefined)
+				 if(marker5!=undefined)
 				 {
-					marker.setMap(null);
+					marker5.setMap(null);
 				 }
 					      // Add an overlay to the map of current lat/lng
-				         marker = new google.maps.Marker({
+				         marker5 = new google.maps.Marker({
 				            position: currentPosition,
+								icon:nowImage,
 				            map: map,
 				            title: "We are here!"
 				        });
 
-				map.setCenter(currentPosition);
+				map.panTo(currentPosition);
 
 
 			}
@@ -1267,51 +1371,61 @@ function updatePostionAquarium()
 			
 				}
 	
-				 if(marker!=undefined)
+				 if(marker5!=undefined)
 				 {
-					marker.setMap(null);
+					marker5.setMap(null);
 				 }
 					      // Add an overlay to the map of current lat/lng
-				         marker = new google.maps.Marker({
+				         marker5 = new google.maps.Marker({
 				            position: currentPosition,
 				            map: map,
+							icon:nowImage,
 				            title: "We are here!"
 				        });
 
-				map.setCenter(currentPosition);
+				map.panTo(currentPosition);
 
 
 			}
-			function onProgress(position) {
+			function onFinish(position) {
+
+				 onSuccessByD(position);
 			}
 			function onSuccessByD(position) {
+
+
 				currentPosition=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 				        // Add an overlay to the map of current lat/lng
 				 if(marker!=undefined)
- {
-	marker.setMap(null);
+		 {
+			marker.setMap(null);
+			}
+									 if(marker2!=undefined)
+						 {
+		marker2.setMap(null);
  }
 				         marker = new google.maps.Marker({
 				            position: currentPosition,
 				            map: mapDest,
-							
+							icon:fromImage,
 				            title: "We are here!"
-				        });				
-				mapDest.setCenter(currentPosition);
+				        });		
+				 marker2 = new google.maps.Marker({
+				            position: currentPosition,
+				            map: mapDest2,
+							icon:fromImage,
+				            title: "We are here!"
+				        });			
+								if (!stopTryGps)
+				{
+				mapDest.panTo(currentPosition);
+				mapDest2.panTo(currentPosition);
+				}
 				directionsDisplay.setMap(mapDest);
-
-			  // distanceLeft=google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition);
-			   
-			/*    alert('Latitude: '          + position.coords.latitude          + '\n' +
-					  'Longitude: '         + position.coords.longitude         + '\n' +
-					  'Altitude: '          + position.coords.altitude          + '\n' +
-					  'Accuracy: '          + position.coords.accuracy          + '\n' +
-					  'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-					  'Heading: '           + position.coords.heading           + '\n' +
-					  'Speed: '             + position.coords.speed             + '\n' +
-					  'Timestamp: '         + position.timestamp                + '\n');
-					  */
+				directionsDisplay2.setMap(mapDest2);
+				
 			}
+			
 			
 			// onError Callback receives a PositionError object
 			//
@@ -1330,7 +1444,8 @@ function updatePostionAquarium()
 
 function getCurrentPosByDistance()
 {
-	navigator.geolocation.getAccurateCurrentPosition(onSuccessByD, onError, onProgress, {desiredAccuracy:20, maxWait:15000});
+	navigator.geolocation.getAccurateCurrentPosition(onFinish, onError, onSuccessByD, {desiredAccuracy:50, maxWait:50000});
+	
 			     // navigator.geolocation.getCurrentPosition(onSuccessByD, onError,geo_options);
 }
 function getCurrentPosCharacter()
@@ -1622,7 +1737,28 @@ if(map==undefined)
 					if (distanceFull==distanceLeft)
 					{
 						$('#timeLeftCharacter').html("<br/>WITHOUT INFORMATION");
-										directionsDisplay.setMap(map);				
+										directionsDisplay.setMap(map);		
+						if(marker3!=undefined)
+						 {
+									marker3.setMap(null);
+									}
+									 if(marker4!=undefined)
+						 {
+								marker4.setMap(null);
+						 }
+				         marker3 = new google.maps.Marker({
+				            position: startPosition,
+				            map: map,
+							icon:fromImage,
+				            title: "We come from!"
+				        });		
+								currentPosition
+						 marker4 = new google.maps.Marker({
+				            position: destPosition,
+				            map: map,
+							icon:toImage,
+				            title: "We go there!"
+				        });				
 						  updatePostionCharacter();
 						  clearInterval(intervalDist);
 						   intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
@@ -2657,7 +2793,8 @@ function clearTripNo()
 			$('#knowFactContainer').css('opacity','0');
 				$('#knowFactContainerAquarium').css('opacity','0');
 												
-			directionsDisplay = new google.maps.DirectionsRenderer();
+			directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+						directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions);
 			directionsService=new google.maps.DirectionsService();
 			 hourpos=0;
 			 minute1pos=0;
@@ -2673,6 +2810,7 @@ function clearTripNo()
 			characterContentHeight=0;
 			map=undefined;
 			mapDest=undefined;
+			
 				stopAllSoundA();
 	}
 	
@@ -2690,7 +2828,8 @@ function clearTripNo()
 
 				  $('#finishAquarium').css('visibility','hidden');
 				  				  $('#finishAquarium').css('opacity','0');
-			directionsDisplay = new google.maps.DirectionsRenderer();
+			directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+						directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions);
 			directionsService=new google.maps.DirectionsService();
 			 hourpos=0;
 			 minute1pos=0;
@@ -3349,14 +3488,14 @@ function tapJSoundF(acc)
 	}
 	else
 	{
-	if(acc=='play')
-	{
-		tapJSound.play();
-	}
-	else
-	{
-			tapJSound.stop();
-	}
+		if(acc=='play')
+		{
+			tapJSound.play();
+		}
+		else
+		{
+				tapJSound.stop();
+		}
 	}
 }
 

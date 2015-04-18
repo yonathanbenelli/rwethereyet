@@ -1,7 +1,7 @@
 navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess, geolocationError, geoprogress, options) {
     var lastCheckedPosition,
-        locationEventCount = 0,
-        watchID,
+        locationEventCount = 1,
+        watchID2,
         timerID;
 
     options = options || {};
@@ -11,9 +11,10 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
         locationEventCount = locationEventCount + 1;
         // We ignore the first event unless it's the only one received because some devices seem to send a cached
         // location even when maxaimumAge is set to zero
+		
         if ((position.coords.accuracy <= options.desiredAccuracy) && (locationEventCount > 1)) {
             clearTimeout(timerID);
-            navigator.geolocation.clearWatch(watchID);
+            navigator.geolocation.clearWatch(watchID2);
             foundPosition(position);
         } else {
             geoprogress(position);
@@ -21,13 +22,13 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
     };
 
     var stopTrying = function () {
-        navigator.geolocation.clearWatch(watchID);
+        navigator.geolocation.clearWatch(watchID2);
         foundPosition(lastCheckedPosition);
     };
 
     var onError = function (error) {
         clearTimeout(timerID);
-        navigator.geolocation.clearWatch(watchID);
+        navigator.geolocation.clearWatch(watchID2);
         geolocationError(error);
     };
 
@@ -42,6 +43,6 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
     options.maximumAge = 0; // Force current locations only
     options.enableHighAccuracy = true; // Force high accuracy (otherwise, why are you using this function?)
 
-    watchID = navigator.geolocation.watchPosition(checkLocation, onError, options);
+    watchID2 = navigator.geolocation.watchPosition(checkLocation, onError, options);
     timerID = setTimeout(stopTrying, options.maxWait); // Set a timeout that will abandon the location loop
 };
