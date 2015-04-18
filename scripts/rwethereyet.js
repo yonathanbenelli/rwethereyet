@@ -1,19 +1,3 @@
-
-/*	(function($) {
-			$(document).ready(function() {
-			
-				$('#bird')
-					.sprite({fps: 9, no_of_frames: 3})
-					.spRandom({top: 50, bottom: 200, left: 300, right: 320})
-					.isDraggable()
-					.activeOnClick()
-					.active();
-				
-				
-			});
-		})(jQuery);
-	*/
-
 $(document).bind("pagebeforechange", function(e,ob) {
   if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
@@ -408,7 +392,7 @@ var render=true;
 		var numbersWidth=[44,44,44];
 		var topSetCharIcon=0;
 		var android=0;
-		
+		var isAndroid=false;
 		var deviceAgent = navigator.userAgent;	
 		var agentIndex = deviceAgent.indexOf('Android');
 
@@ -421,6 +405,7 @@ var render=true;
 			 else {
 						 android=4;
 					}
+					isAndroid=true;
         } 
 	else {
                  android=0;
@@ -439,6 +424,7 @@ var bubblesFinishSound=null;
 var waterPipeSound=null;
 var tapJSound=null;
 var scrollSound=null;
+var changePageSound=null;
 var swipe1Sound=null;
 var swipe2Sound=null;
 var ovation=null;
@@ -449,63 +435,114 @@ var lionSound=null;
 var monkeySound=null;
    var toucanSound=null;
 var zebraSound=null;
-   
-function   loadSounds()
+ var mermaidSound=null;
+ var isLoadSound1=false;
+    var isLoadSound2=true;
+	
+function getMedia(src,loop,i,id)
+{
+		       var mediaRes; 
+			   console.log('comienza getMEdia');
+		if (isAndroid) 
+		{
+//          src = '/android_asset/www/' + src;
+			   console.log('es android');
+			   			   console.log('ruta '+ src);
+				if(loop)
+				{
+		
+						mediaRes =  window.plugins.NativeAudio.preloadComplex(id,src,1,1,0,onSuccessS,onErrorS); 
+				}
+				
+				else
+				{
+
+							mediaRes=	 window.plugins.NativeAudio.preloadSimple(id,src,onSuccessS,onErrorS); 
+				}
+
+		}
+			else
+			{
+							   			   console.log('no android');
+							   			   console.log('ruta '+ src);
+				if(loop)
+				{
+					mediaRes =new buzz.sound(src, { loop: true});
+				}
+				else
+				{
+						mediaRes =new buzz.sound(src);
+				}
+			}
+	return mediaRes;
+}
+function   loadSounds1()
 {
 
-			tapJSound= new buzz.sound("resources/sounds/tapj.mp3", { preload: true});
-					scrollSound= new buzz.sound("resources/sounds/scroll.mp3");
+console.log('comienza load1');
+		if (isAndroid) 
+		{
+		 volMusic=volMusic/100;
+		 volMusicD=volMusicD/100;
+		 soundVol50=soundVol50/100;
+		 soundVol10=soundVol10/100;
+		
+		}
 
-	music[1]= new buzz.sound("resources/music/music1.mp3", { loop: true});
+ 
+			tapJSound=getMedia("resources/sounds/tapj.mp3",false,0,'tapJSound');
+					scrollSound= getMedia("resources/sounds/scroll.mp3",false,0,'scrollSound');
+							changePageSound = getMedia("resources/sounds/changepage.mp3",false,0,'changePageSound');
 
-		music[2]= new buzz.sound("resources/music/music2.mp3", { loop: true});
+		swipe2Sound= getMedia("resources/sounds/swipe2.mp3",false,0,'swipe2Sound');
+		tapASound= getMedia("resources/sounds/tapa.mp3",false,0,'tapASound');
+		tapJSound= getMedia("resources/sounds/tapj.mp3",'tapJSound');
+		scrollSound= getMedia("resources/sounds/scroll.mp3",'scrollSound');
+		swipe1Sound= getMedia("resources/sounds/swipe1.mp3",'swipe1Sound');
+		isLoadSound1=true;
+console.log('fin load1');
+}
+function   loadSounds2()
+{
 
-	music[3]= new buzz.sound("resources/music/music3.mp3", { loop: true});
+console.log('comienza load2');
 
-
-	music[4]= new buzz.sound("resources/music/music4.mp3", { loop: true});
-
-	music[5]= new buzz.sound("resources/music/music5.mp3", { loop: true});
-
-	music[6]= new buzz.sound("resources/music/music6.mp3", { loop: true});
-	music[7]= new buzz.sound("resources/music/music7.mp3", { loop: true});
-	
-	toucanSound= new buzz.sound("resources/sounds/toucan.mp3");
-
-	zebraSound= new buzz.sound("resources/sounds/zebra.mp3");
-
-		swipe2Sound= new buzz.sound("resources/sounds/swipe2.mp3");
-
-		pinchSound= new buzz.sound("resources/sounds/pinch.mp3");
-
-	ovation= new buzz.sound("resources/sounds/ovation.mp3");
-	crocodileSound= new buzz.sound("resources/sounds/crocodile.mp3");
-		elephantSound= new buzz.sound("resources/sounds/elephant.mp3");
-	jungleSound= new buzz.sound("resources/sounds/jungle.mp3");
-	lionSound= new buzz.sound("resources/sounds/lion.mp3");
-		monkeySound= new buzz.sound("resources/sounds/monkey.mp3");
-		wavesSound= new buzz.sound("resources/sounds/waves.mp3");
-		dolphinSound= new buzz.sound("resources/sounds/dolphin.mp3");
-		birdsConSound= new buzz.sound("resources/sounds/birdscon.mp3");
-		bird1Sound= new buzz.sound("resources/sounds/bird1.mp3");
-		bird2Sound= new buzz.sound("resources/sounds/bird2.mp3");
-		tapASound= new buzz.sound("resources/sounds/tapa.mp3");
-		aquarium1Sound= new buzz.sound("resources/sounds/aquarium1.mp3", { loop: true});
-		aquarium2Sound= new buzz.sound("resources/sounds/aquarium2.mp3", { loop: true});
-		bubblesFinishSound= new buzz.sound("resources/sounds/bubblesfinish.mp3", { loop: true});
-		waterPipeSound= new buzz.sound("resources/sounds/waterpipe.mp3", { loop: true});
-		tapJSound= new buzz.sound("resources/sounds/tapj.mp3");
-		scrollSound= new buzz.sound("resources/sounds/scroll.mp3");
-				swipe1Sound= new buzz.sound("resources/sounds/swipe1.mp3");
-
+	music[1]= getMedia("resources/music/music1.mp3", true,1,'1');
+	music[2]= getMedia("resources/music/music2.mp3", true,2,'2');
+	music[3]= getMedia("resources/music/music3.mp3", true,3,'3');
+	music[4]= getMedia("resources/music/music4.mp3", true,4,'4');
+	music[5]= getMedia("resources/music/music5.mp3", true,5,'5');
+	music[6]= getMedia("resources/music/music6.mp3", true,6,'6');
+	music[7]= getMedia("resources/music/music7.mp3", true,7,'7');
+	toucanSound= getMedia("resources/sounds/toucan.mp3",false,0,'toucanSound');
+	zebraSound= getMedia("resources/sounds/zebra.mp3",false,0,'zebraSound');
+	ovation= getMedia("resources/sounds/ovation.mp3",false,0,'ovation');
+	crocodileSound= getMedia("resources/sounds/crocodile.mp3",false,0,'crocodileSound');
+		elephantSound= getMedia("resources/sounds/elephant.mp3",false,0,'elephantSound');
+	jungleSound= getMedia("resources/sounds/jungle.mp3",false,0,'jungleSound');
+	lionSound= getMedia("resources/sounds/lion.mp3",false,0,'lionSound');
+		monkeySound= getMedia("resources/sounds/monkey.mp3",false,0,'monkeySound');
+		wavesSound= getMedia("resources/sounds/waves.mp3",true,1,'wavesSound');
+		dolphinSound= getMedia("resources/sounds/dolphin.mp3",false,0,'dolphinSound');
+				mermaidSound= getMedia("resources/sounds/mermaid.mp3",false,0,'mermaidSound');
+		birdsConSound= getMedia("resources/sounds/birdscon.mp3",true,4,'birdsConSound');
+		bird1Sound= getMedia("resources/sounds/bird1.mp3",false,0,'bird1Sound');
+		bird2Sound= getMedia("resources/sounds/bird2.mp3",false,0,'bird2Sound');
+		aquarium1Sound= getMedia("resources/sounds/aquarium1.mp3", true,5,'aquarium1Sound');
+		aquarium2Sound= getMedia("resources/sounds/aquarium2.mp3", true,6,'aquarium2Sound');
+		bubblesFinishSound= getMedia("resources/sounds/bubblesfinish.mp3", true,3,'bubblesFinishSound');
+		waterPipeSound= getMedia("resources/sounds/waterpipe.mp3", true,2,'waterPipeSound');
+				isLoadSound2=true;
+console.log('fin load2');
 }
  function onSuccessS() {
-
+			   			   console.log('exito ');
         }
 
         // onError Callback
         //
         function onErrorS(error) {
+						   			   console.log('falla '+ error);
         }
 	function onStatusSWave(status) {
         if( status==4 ) {
@@ -549,8 +586,11 @@ function   loadSounds()
 			playMusic();
         }
 	}
-$(document).on('pageshow','#main', function(e,data){    
-
+$(document).on('pageshow','#main', function(e,data){  
+if(!isLoadSound1)
+{
+	loadSounds1();
+}
 	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 	{
 		$('#backMain').css('visibility','visible');	
@@ -802,20 +842,20 @@ $(document).on('pageshow','#byTime', function(e,data){
 
 function backToMain()
 {
-		 			tapJSoundF('play');	
+		 							changePageSoundF('play');
 					pageRender='#main';  
 					$.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
 }
 function goToSetCharacter()
 {
-		 			tapJSoundF('play');	
+				changePageSoundF('play');
 						pageRender='#setCharacter';  
 	$.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:false});
 }
 
 function goToTripPlanner()
 {
-		 			tapJSoundF('play');	
+				changePageSoundF('play');
 	if(defaultTrip==0)
 	{	
 
@@ -833,7 +873,7 @@ function goToTripPlanner()
 }
 function goToBackPlanner()
 {
-		 			tapJSoundF('play');	
+				changePageSoundF('play');
 	if(defaultTrip==0)
 	{
 				pageRender='#main';  	
@@ -1126,8 +1166,8 @@ function getTimeC()
 }
 var geo_options = {
   enableHighAccuracy: true, 
-  maximumAge        : 1000, 
-  timeout           : 27000
+  maximumAge        : 0, 
+  timeout           : 60000
 };
 
 
@@ -1288,7 +1328,7 @@ function updateTimeLeftTextA(timeL)
 }
 function finishTripJungle()
 {
-			tapJSoundF('play');
+				changePageSoundF('play');
 			
 	  $('#finishLeafs').destroy();
 	  		stopAllSoundAF();
@@ -1353,7 +1393,7 @@ showDivEfect($('#finishBubbles'));
 
 function goToBackFromSetCharacter()
 {
-		 			tapJSoundF('play');	
+		 							changePageSoundF('play');
 	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 	{
 					backFromHome=0;
@@ -1676,6 +1716,7 @@ function showBirds(i)
 		if(getRandom(0,9)<8)
 		{
 			generateBirds(i);
+
 			
 		}
 	
@@ -1696,6 +1737,7 @@ function apearMermaid()
 		
 		if(topW<=topP)
 		{
+									mermaidSoundF('play');
 						apprsMermaid=2;
 			showDivEfect($('#mermaid'));
 			var r=$('#contentAquarium').width()/2;
@@ -2521,7 +2563,7 @@ function clearTripYesAquarium()
 function clearTripYes()
 {
 
-			tapJSoundF('play');
+				changePageSoundF('play');
 	 	$('#backCharacter').css('visibility','hidden');
 		$('#resetTripContainer').css('visibility','hidden');
 
@@ -2534,7 +2576,7 @@ function clearTripYes()
 
 function goToPage(page,rev)
 {
-		 			tapJSoundF('play');	
+		 							changePageSoundF('play');
 	$.mobile.changePage(page,{ transition: pageEfect,reverse:rev});
 
 }
@@ -2629,7 +2671,7 @@ function clearTripNo()
 	
 function goToLoading()
 {
-		 			tapJSoundF('play');	
+				changePageSoundF('play');
 		$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
 
 
@@ -2658,7 +2700,10 @@ function	loadLoading()
 
 $(document).on('pageshow','#loading', function(e,data){ 
 	loadLoading();
-	
+	if(!isLoadSound2)
+{
+	loadSounds2();
+}
 	playMusic();
 			
 jungleSound.bind('ended', function(e) {
@@ -2697,7 +2742,7 @@ ovation.bind('ended', function(e) {
 
 function backFromCharacter()
 {
-				tapJSoundF('play');
+				changePageSoundF('play');
 					stopAllSoundA();
 	 $('#menuJungle').css('visibility','hidden');
 	 $('#positionLeftCharacter').css('visibility','hidden');
@@ -2713,6 +2758,7 @@ function backFromAquarium()
 	render=false;
 	$('#allA').css('visibility','hidden');
 	 $('#menuAquarium').css('visibility','hidden');
+
 	 $('#positionLeftAquarium').css('visibility','hidden');
 	 	$('#positionLeftAquarium').css('z-index','0');
 	 	 $('#timeLeftAquarium').css('visibility','hidden');
@@ -2809,26 +2855,69 @@ function stopAllSoundA()
 	wavesSoundF('pause');
 
 clearInterval(dolphinSoundIn);
+clearInterval(mermaidSoundIn);
 clearInterval(bird1SoundIn);
 clearInterval(bird2SoundIn);
 clearInterval(ovationSoundIn);
-	if(nMusic!=0)
-	{
-		music[nMusic].stop();
+	
 
-	}
-		ovation.stop();	
+			if(isAndroid)
+		{	
+			if(nMusic!=0)
+			{
+				window.plugins.NativeAudio.stop(nMusic);
+			}
+			window.plugins.NativeAudio.stop('ovation');	
+					window.plugins.NativeAudio.stop('jungleSound.stop()');	
+		}
+		else
+		{
+				if(nMusic!=0)
+				{
+					music[nMusic].stop();
+				}
+				ovation.stop();	
+						jungleSound.stop();	
+		}
+
 			birdsConSoundF('pause');
-			jungleSound.stop();	
+	
 }
 
 var bird1SoundIn;
 var bird2SoundIn;
 var dolphinSoundIn;
+var mermaidSoundIn;
 var ovationSoundIn;
 var nMusic=0;
 function playMusic()
 {
+	
+		if(isAndroid)
+	{	
+	
+if(nMusic!=0)
+	{
+
+			window.plugins.NativeAudio.stop(nMusic);
+
+	}
+	nMusic=getRandom(1,7);
+	window.plugins.NativeAudio.setVolumeForComplexAsset(nMusic, volMusic, function(msg){},function(msg){})
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.loop(nMusic);
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop(nMusic);
+		}
+		
+		
+	}
+	else
+	{	
 	if(nMusic!=0)
 	{
 		music[nMusic].stop();
@@ -2836,11 +2925,30 @@ function playMusic()
 
 	}
 	nMusic=getRandom(1,7);
-	music[nMusic].setVolume(volMusic);	music[nMusic].play();	
-
+	music[nMusic].setVolume(volMusic);
+		music[nMusic].play();	
+	}
 }			
 function aquarium2SoundF(acc)
 {
+	
+		if(isAndroid)
+	{	
+	
+
+	window.plugins.NativeAudio.setVolumeForComplexAsset('aquarium2Sound', soundVol50, function(msg){},function(msg){})
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.loop('aquarium2Sound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('aquarium2Sound');
+		}
+	}
+	else
+	{	
 		aquarium2Sound.setVolume(soundVol50);		
 	if(acc=='play')
 	{
@@ -2850,6 +2958,7 @@ function aquarium2SoundF(acc)
 	{
 			aquarium2Sound.stop();
 	}
+	}
 
 }
 
@@ -2858,6 +2967,21 @@ function ovationSoundF(acc)
 clearInterval(ovationSoundIn);
 ovationSoundIn=setInterval(function () {
 
+		if(isAndroid)
+	{	
+	
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.play('ovation');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('ovation');
+		}
+	}
+	else
+	{	
 	if(acc=='play')
 	{
 		ovation.play();
@@ -2866,6 +2990,7 @@ ovationSoundIn=setInterval(function () {
 	{
 			ovation.stop();
 	}
+	}
 	},5000);
 }
 function dolphinSoundF(acc)
@@ -2873,7 +2998,24 @@ function dolphinSoundF(acc)
 clearInterval(dolphinSoundIn);
 	dolphinSoundIn=setInterval(function () {
 	
-		
+		if(isAndroid)
+	{	
+	
+
+	window.plugins.NativeAudio.setVolumeForComplexAsset('dolphinSound', soundVol50, function(msg){},function(msg){})
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.play('dolphinSound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('dolphinSound');
+		}
+	}
+	else
+	{	
+			
 	
 	dolphinSound.setVolume(soundVol50);		
 	if(acc=='play')
@@ -2884,7 +3026,42 @@ clearInterval(dolphinSoundIn);
 	{
 			dolphinSound.stop();
 	}
+	}
+		},10000);
+}
+function mermaidSoundF(acc)
+{
+clearInterval(mermaidSoundIn);
+	mermaidSoundIn=setInterval(function () {
+		if(isAndroid)
+	{	
+	
+
+	window.plugins.NativeAudio.setVolumeForComplexAsset('mermaidSound', soundVol50, function(msg){},function(msg){})
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.play('mermaidSound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('mermaidSound');
+		}
+	}
+	else
+	{	
 		
+	
+	mermaidSound.setVolume(soundVol50);		
+	if(acc=='play')
+	{
+		mermaidSound.play();
+	}
+	else
+	{
+			mermaidSound.stop();
+	}
+	}
 		},10000);
 }
 
@@ -2892,7 +3069,23 @@ function bird1SoundF(acc)
 {
 clearInterval(bird1SoundIn);
 bird1SoundIn=setInterval(function () {
+		if(isAndroid)
+	{	
 	
+
+	window.plugins.NativeAudio.setVolumeForComplexAsset('bird1Sound', soundVol10, function(msg){},function(msg){})
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.play('bird1Sound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('bird1Sound');
+		}
+	}
+	else
+	{	
 	
 	bird1Sound.setVolume(soundVol10);		
 	if(acc=='play')
@@ -2903,6 +3096,7 @@ bird1SoundIn=setInterval(function () {
 	{
 			bird1Sound.stop();
 	}
+	}
 	},20000);
 }
 
@@ -2911,7 +3105,24 @@ function bird2SoundF(acc)
 {
 clearInterval(bird2SoundIn);
 bird2SoundIn=setInterval(function () {
+
+		if(isAndroid)
+	{	
 	
+
+	window.plugins.NativeAudio.setVolumeForComplexAsset('bird2Sound', soundVol10, function(msg){},function(msg){})
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.play('bird2Sound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('bird2Sound');
+		}
+	}
+	else
+	{	
 	bird2Sound.setVolume(soundVol10);		
 	if(acc=='play')
 	{
@@ -2921,10 +3132,26 @@ bird2SoundIn=setInterval(function () {
 	{
 			bird2Sound.stop();
 	}
+	}
 	},4000);
 }
 function scrollSoundF(acc)
 {
+	if(isAndroid)
+	{	
+	
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.play('scrollSound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('scrollSound');
+		}
+	}
+	else
+	{
 	if(acc=='play')
 	{
 		scrollSound.play();
@@ -2933,11 +3160,30 @@ function scrollSoundF(acc)
 	{
 			scrollSound.stop();
 	}
+	}
 	
 }
 
 function birdsConSoundF(acc)
 {
+		if(isAndroid)
+	{	
+	
+
+	window.plugins.NativeAudio.setVolumeForComplexAsset('birdsConSound', soundVol10, function(msg){},function(msg){})
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.loop('birdsConSound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('birdsConSound');
+		}
+	}
+	else
+	{
+
 					birdsConSound.setVolume(soundVol10);		
 	if(acc=='play')
 	{
@@ -2947,9 +3193,28 @@ function birdsConSoundF(acc)
 	{
 			birdsConSound.stop();
 	}
+	}
 }
 function wavesSoundF(acc)
 {
+	if(isAndroid)
+	{	
+	
+
+	window.plugins.NativeAudio.setVolumeForComplexAsset('wavesSound', soundVol10, function(msg){},function(msg){})
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.loop('wavesSound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('wavesSound');
+		}
+	}
+	else
+	{
+	
 					wavesSound.setVolume(soundVol10);		
 	if(acc=='play')
 	{
@@ -2959,9 +3224,24 @@ function wavesSoundF(acc)
 	{
 			wavesSound.stop();
 	}
+	}
 }
 function tapSoundAF(acc)
 {
+	
+	if(isAndroid)
+	{	
+			if(acc=='play')
+		{
+			window.plugins.NativeAudio.play('tapASound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('tapASound');
+		}
+	}
+	else
+	{
 	
 	if(acc=='play')
 	{
@@ -2971,12 +3251,55 @@ function tapSoundAF(acc)
 	{
 			tapASound.stop();
 	}
-
+	}
 	
 }
+
+function changePageSoundF(acc)
+{
+	
+	
+	if(isAndroid)
+	{	
+			if(acc=='play')
+		{
+			window.plugins.NativeAudio.play('changePageSound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('changePageSound');
+		}
+	}
+	else
+	{
+	if(acc=='play')
+	{
+		changePageSound.play();
+	}
+	else
+	{
+			changePageSound.stop();
+	}
+	}
+}
+
+
 function tapJSoundF(acc)
 {
 	
+	if(isAndroid)
+	{	
+			if(acc=='play')
+		{
+			window.plugins.NativeAudio.play('tapJSound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('tapJSound');
+		}
+	}
+	else
+	{
 	if(acc=='play')
 	{
 		tapJSound.play();
@@ -2985,12 +3308,26 @@ function tapJSoundF(acc)
 	{
 			tapJSound.stop();
 	}
-
+	}
 }
 
 function finishBubblesSoundAF(acc)
 {
-				
+			
+			
+	if(isAndroid)
+	{	
+			if(acc=='play')
+		{
+			window.plugins.NativeAudio.loop('bubblesFinishSound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('bubblesFinishSound');
+		}
+	}
+	else
+	{	
 	if(acc=='play')
 	{
 		bubblesFinishSound.play();
@@ -2999,14 +3336,32 @@ function finishBubblesSoundAF(acc)
 	{
 			bubblesFinishSound.stop();
 	}
-
+	}
 	
 	
 }
 
 function aquarium1SoundF(acc)
 {
-				aquarium1Sound.setVolume(soundVol50);		
+			
+	if(isAndroid)
+	{	
+	
+
+	window.plugins.NativeAudio.setVolumeForComplexAsset('aquarium1Sound', soundVol10, function(msg){},function(msg){})
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.loop('aquarium1Sound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('aquarium1Sound');
+		}
+	}
+	else
+	{
+							aquarium1Sound.setVolume(soundVol10);	
 	if(acc=='play')
 	{
 		aquarium1Sound.play();
@@ -3015,28 +3370,61 @@ function aquarium1SoundF(acc)
 	{
 			aquarium1Sound.stop();
 	}
-
+	}
 
 }
 
 function waterPipeSoundF(acc)
-{
 
-	waterPipeSound.setVolume(soundVol10);		
-	if(acc=='play')
-	{
-		waterPipeSound.play();
+{
+	if(isAndroid)
+	{	
+	
+
+	window.plugins.NativeAudio.setVolumeForComplexAsset('waterPipeSound', soundVol10, function(msg){},function(msg){})
+
+		if(acc=='play')
+		{
+			window.plugins.NativeAudio.loop('waterPipeSound');
+		}
+		else
+		{
+				window.plugins.NativeAudio.stop('waterPipeSound');
+		}
 	}
 	else
 	{
-			waterPipeSound.stop();
+			waterPipeSound.setVolume(soundVol10);		
+		if(acc=='play')
+		{
+			waterPipeSound.play();
+		}
+		else
+		{
+				waterPipeSound.stop();
+		}
 	}
-
 	
 }			
 function swipe1SoundF(acc)
 {
+
+
+	if(isAndroid)
+	{	
 	
+	
+			if(acc=='play')
+		{
+					window.plugins.NativeAudio.play('swipe1Sound');
+		}
+		else
+		{
+						window.plugins.NativeAudio.stop('swipe1Sound');
+		}
+	}
+	else
+	{
 	if(acc=='play')
 	{
 		swipe1Sound.play();
@@ -3045,12 +3433,25 @@ function swipe1SoundF(acc)
 	{
 			swipe1Sound.stop();
 	}
-	
+	}
 }			
 function swipe2SoundF(acc)
 {
-	
+
+	if(isAndroid)
+	{	
 	if(acc=='play')
+	{
+		window.plugins.NativeAudio.play('swipe2Sound');
+	}
+	else
+	{
+			window.plugins.NativeAudio.stop('swipe2Sound');
+	}
+	}
+	else
+	{
+		if(acc=='play')
 	{
 		swipe2Sound.play();
 	}
@@ -3058,10 +3459,25 @@ function swipe2SoundF(acc)
 	{
 			swipe2Sound.stop();
 	}
+	}
 }			
 function pinchSoundF(acc)
 {
 	
+	
+	if(isAndroid)
+	{
+		if(acc=='play')
+	{
+					window.plugins.NativeAudio.play('pinchSound');
+	}
+	else
+	{
+			window.plugins.NativeAudio.stop('pinchSound');
+	}
+	}
+	else
+	{
 	if(acc=='play')
 	{
 		pinchSound.play();
@@ -3070,9 +3486,44 @@ function pinchSoundF(acc)
 	{
 			pinchSound.stop();
 	}
+	}
 }		
 function knowJSoundF(acc,scene)
 {
+	
+	if(isAndroid)
+	{
+	if(acc=='play')
+	{
+		
+			window.plugins.NativeAudio.play('jungleSound'); 
+		switch(scene)
+		{
+			case 0: 	window.plugins.NativeAudio.play('lionSound'); break;
+			case 1:	window.plugins.NativeAudio.play('zebraSound'); break;
+			case 2:	window.plugins.NativeAudio.play('monkeySound'); break;
+			case 5:	window.plugins.NativeAudio.play('elephantSound'); break;
+			case 7: window.plugins.NativeAudio.play('toucanSound'); break;
+			case 8: window.plugins.NativeAudio.play('crocodileSound'); break;
+		}
+	}
+	else
+	{
+					window.plugins.NativeAudio.stop('jungleSound'); 
+		switch(scene)
+		{
+			case 0: 	window.plugins.NativeAudio.stop('lionSound'); break;
+			case 1:	window.plugins.NativeAudio.stop('zebraSound'); break;
+			case 2:	window.plugins.NativeAudio.stop('monkeySound'); break;
+			case 5:	window.plugins.NativeAudio.stop('elephantSound'); break;
+			case 7: window.plugins.NativeAudio.stop('toucanSound'); break;
+			case 8: window.plugins.NativeAudio.stop('crocodileSound'); break;
+		}
+
+	}	
+	}
+	else
+	{
 	if(acc=='play')
 	{
 		
@@ -3101,5 +3552,5 @@ function knowJSoundF(acc,scene)
 		}
 
 	}
-
+	}
 }	

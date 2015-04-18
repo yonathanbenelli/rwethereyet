@@ -28,6 +28,8 @@
 
 	    <gap:plugin name="org.apache.cordova.device-motion" />
 	    <gap:plugin name="org.apache.cordova.device-orientation" />
+<gap:plugin name="de.neofonie.cordova.plugin.nativeaudio"/>
+
 
     <!-- Define app splash screen for each platform. -->
     <gap:splash src="splash1.png"       gap:platform="android" gap:qualifier="port-ldpi" />
