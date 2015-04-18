@@ -1235,7 +1235,8 @@ function updatePostionAquarium()
 
 
 			}
-
+			function onProgress(position) {
+			}
 			function onSuccessByD(position) {
 				currentPosition=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 				        // Add an overlay to the map of current lat/lng
@@ -1282,7 +1283,8 @@ function updatePostionAquarium()
 
 function getCurrentPosByDistance()
 {
-			      navigator.geolocation.getCurrentPosition(onSuccessByD, onError,geo_options);
+	navigator.geolocation.getAccurateCurrentPosition(onSuccessByD, onError, onProgress, {desiredAccuracy:20, maxWait:15000});
+			     // navigator.geolocation.getCurrentPosition(onSuccessByD, onError,geo_options);
 }
 function getCurrentPosCharacter()
 {
@@ -3554,3 +3556,4 @@ function knowJSoundF(acc,scene)
 	}
 	}
 }	
+
