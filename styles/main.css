@@ -45,6 +45,28 @@ body{
   -webkit-box-shadow: none;
 
 }
+#minSreenMap
+{
+			background:transparent url(../resources/buttons/minscreen.png) 0 0 no-repeat;
+			background-size:contain;
+			position:absolute;
+			height:10%;
+			width:10%;
+			bottom:10%;
+			left:90%;
+			visibility:hidden;
+}
+#fullSreenMap
+{
+			background:transparent url(../resources/buttons/fullscreen.png) 0 0 no-repeat;
+						background-size:contain;
+			position:absolute;
+			height:10%;
+			width:20%;
+			bottom:20%;
+			
+			left:75%;
+}
 #sounds
 {
 	position:absolute;

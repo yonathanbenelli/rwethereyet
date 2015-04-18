@@ -411,6 +411,29 @@ var render=true;
                  android=0;
     }
 
+var app = {
+    // Application Constructor
+    initialize: function() {
+        this.bindEvents();
+    },
+    bindEvents: function() {
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
+    onDeviceReady: function() {
+        app.receivedEvent('deviceready');
+        console.log('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+
+        if( window.plugins && window.plugins.NativeAudio ) {
+loadSounds1();
+loadSounds2();
+      }
+
+    },
+
+};
 var music=[null,null,null,null,null,null,null,null];
 var wavesSound=null;
 var dolphinSound=null;
@@ -585,11 +608,35 @@ console.log('fin load2');
         if( status==4 ) {
 			playMusic();
         }
+		
 	}
+	
+function minScreen()
+{
+			$('#minScreen').css('visibility','hidden');
+			$('#map_canvas_1').css('z-index','10000');
+			$('#map_canvas_1').css('width','80%');
+			$('#map_canvas_1').css('height','60%');
+			$('#map_canvas_1').css('top','10%');
+			$('#map_canvas_1').css('left','10%');
+			$('#map_canvas_1').css('position','relative');
+			$('#map_canvas_1').css('z-index','0');
+}
+function fullScreen()
+{
+
+	$('#map_canvas_1').css('z-index','10000');
+	$('#map_canvas_1').css('width','100%');
+	$('#map_canvas_1').css('height','100%');
+	$('#map_canvas_1').css('top','0px');
+	$('#map_canvas_1').css('left','0px');
+	$('#map_canvas_1').css('position','absolute');
+	$('#minScreen').css('visibility','visible');
+}
 $(document).on('pageshow','#main', function(e,data){  
 if(!isLoadSound1)
 {
-	loadSounds1();
+	//loadSounds1();
 }
 	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
 	{
@@ -2704,7 +2751,7 @@ $(document).on('pageshow','#loading', function(e,data){
 	loadLoading();
 	if(!isLoadSound2)
 {
-	loadSounds2();
+	//loadSounds2();
 }
 	playMusic();
 			
