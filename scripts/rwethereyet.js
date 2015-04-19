@@ -439,7 +439,26 @@ var app = {
     receivedEvent: function(id) {
 
         if( window.plugins && window.plugins.NativeAudio ) {
-		
+			if(window.localStorage.getItem('default')=='0')
+			{	defaultTrip=0;
+			}
+			else if(window.localStorage.getItem('default')=='1')
+			{	
+				defaultTrip=1;
+			}
+			else 
+			{	
+				defaultTrip=2;
+			}
+			
+			if(window.localStorage.getItem('sound')=='false')
+			{
+				sound=false;
+			}
+			else
+			{
+				sound=true;	
+			}
        			loadSounds1();
 				loadSounds2();
 		
@@ -956,14 +975,16 @@ function soundSetting()
 	{
 		sound=true;
 		$('#soundImage').css('background','transparent url(resources/buttons/soundonbutton.png) 0 0 no-repeat');		
+			 window.localStorage.setItem('sound', 'true');	
 	}
 	else
 	{
 		sound=false;
 		
 		$('#soundImage').css('background','transparent url(resources/buttons/soundoffbutton.png) 0 0 no-repeat');
-	
+			 window.localStorage.setItem('sound', 'false');	
 	}
+
 }
 
 function defaultTripTime()
@@ -973,6 +994,7 @@ function defaultTripTime()
 	 $('#defaultTripOption0').css('z-index','100');
 	 	 $('#defaultTripOption1').css('z-index','99');
 		 	 $('#defaultTripOption2').css('z-index','98');
+			 		window.localStorage.setItem('default', '0');
 }
 
 function defaultTripDist()
@@ -982,7 +1004,7 @@ function defaultTripDist()
 		 $('#defaultTripOption0').css('z-index','98');
 	 	 $('#defaultTripOption1').css('z-index','100');
 		 	 $('#defaultTripOption2').css('z-index','99');
-
+			 		window.localStorage.setItem('default', '1');
 	
 }
 
@@ -993,6 +1015,7 @@ function defaultTripNone()
 		 $('#defaultTripOption0').css('z-index','99');
 	 	 $('#defaultTripOption1').css('z-index','98');
 		 	 $('#defaultTripOption2').css('z-index','100');
+			 		window.localStorage.setItem('default', '2');
 
 
 }
@@ -2891,33 +2914,28 @@ $(document).on('pageshow','#loading', function(e,data){
 }
 
 playMusic();
-			
-jungleSound.bind('ended', function(e) {
 	if(sound)
-	{
+	{		
+jungleSound.bind('ended', function(e) {
+	
 		music[nMusic].setVolume(volMusic);
-	}
+	
 });
 	jungleSound.bind('playing', function(e) {
-		if(sound)
-	{
 	music[nMusic].setVolume(volMusicD);
-	}
+	
 });
 
 
 ovation.bind('ended', function(e) {
-	if(sound)
-	{
 	music[nMusic].setVolume( volMusic);
-	}
+	
 });
 	ovation.bind('playing', function(e) {
-		if(sound)
-	{
 	music[nMusic].setVolume(volMusicD);
-	}
+	
 });
+	}
 
 				 rotTimes=2000;	
 				 
