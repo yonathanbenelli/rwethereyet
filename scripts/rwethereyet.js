@@ -407,7 +407,8 @@ var render=true;
 		var isAndroid=false;
 		var deviceAgent = navigator.userAgent;	
 		var agentIndex = deviceAgent.indexOf('Android');
-
+		var watchOrientation;
+		var orientationOptions = { frequency: 300,filter:10}; // Update every 3 seconds
     if (agentIndex != -1) {
 				   var androidversion = parseFloat(deviceAgent.match(/Android\s+([\d\.]+)/)[1]);
 					if (androidversion < 3.1)
@@ -2617,9 +2618,25 @@ $('#knowFactContainerAquarium').click(function() {
 	}) ;
 								  clearInterval(intervalDist2);
 	intervalDist2=setInterval(function () {loadKnowFactA()}, ((updateFreqMilis*20)-15000));		
+ watchOrientation=navigator.compass.watchHeading(compassSuccess, compassError,compassChange, orientationOptions);
   });
   
-  
+  function compassSuccess(heading) {
+
+alert('comok'); 
+};
+
+function compassError(compassError) {
+
+alert('comfail');
+};
+
+function compassChange(compassError) {
+
+alert('comchange'); 
+};
+
+
   function correctFontKows(txt)
   {
 	  

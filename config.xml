@@ -33,6 +33,7 @@
 	<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
 	<gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.4" />
 	<gap:plugin name="de.neofonie.cordova.plugin.nativeaudio"/>
+	<gap:plugin name="org.apache.cordova.device-orientation" />
 
 <access origin="*"/>
     <!-- Added the following intents to support the removal of whitelist code from base cordova to a plugin -->
