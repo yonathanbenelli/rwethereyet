@@ -426,7 +426,7 @@ var render=true;
 var app = {
     // Application Constructor
     initialize: function() {
-        this.bindEvents();
+			 this.bindEvents();
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
@@ -439,10 +439,11 @@ var app = {
     receivedEvent: function(id) {
 
         if( window.plugins && window.plugins.NativeAudio ) {
-			loadSounds1();
-			loadSounds2();
+		
+       			loadSounds1();
+				loadSounds2();
+		
       }
-
     },
 
 };
@@ -949,6 +950,7 @@ function goToBackPlanner()
 
 function soundSetting()
 {
+
 	tapJSoundF('play');
 	if(sound==false)
 	{
@@ -2887,21 +2889,34 @@ $(document).on('pageshow','#loading', function(e,data){
 {
 	//loadSounds2();
 }
-	playMusic();
+
+playMusic();
 			
 jungleSound.bind('ended', function(e) {
-	music[nMusic].setVolume(volMusic);
+	if(sound)
+	{
+		music[nMusic].setVolume(volMusic);
+	}
 });
 	jungleSound.bind('playing', function(e) {
+		if(sound)
+	{
 	music[nMusic].setVolume(volMusicD);
+	}
 });
 
 
 ovation.bind('ended', function(e) {
+	if(sound)
+	{
 	music[nMusic].setVolume( volMusic);
+	}
 });
 	ovation.bind('playing', function(e) {
+		if(sound)
+	{
 	music[nMusic].setVolume(volMusicD);
+	}
 });
 
 				 rotTimes=2000;	
@@ -3088,7 +3103,7 @@ if(nMusic!=0)
 	nMusic=getRandom(1,7);
 	window.plugins.NativeAudio.setVolumeForComplexAsset(nMusic, volMusic, function(msg){},function(msg){})
 
-		if(acc=='play')
+		if(sound)
 		{
 			window.plugins.NativeAudio.loop(nMusic);
 		}
@@ -3103,9 +3118,13 @@ if(nMusic!=0)
 		
 
 	}
-	nMusic=getRandom(1,7);
-	music[nMusic].setVolume(volMusic);
-		music[nMusic].play();	
+	if(sound)
+		{
+			nMusic=getRandom(1,7);
+			music[nMusic].setVolume(volMusic);
+			music[nMusic].play();	
+		}
+
 	}
 }			
 
@@ -3119,7 +3138,7 @@ function aquarium2SoundF(acc)
 
 	window.plugins.NativeAudio.setVolumeForComplexAsset('aquarium2Sound', soundVol50, function(msg){},function(msg){})
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.loop('aquarium2Sound');
 		}
@@ -3129,7 +3148,7 @@ function aquarium2SoundF(acc)
 			aquarium2Sound.stop();
 
 		aquarium2Sound.setVolume(soundVol50);		
-	if(acc=='play')
+	if(acc=='play' && sound)
 	{
 		aquarium2Sound.play();
 	}
@@ -3147,7 +3166,7 @@ ovationSoundIn=setInterval(function () {
 	
 				window.plugins.NativeAudio.stop('ovation');
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.play('ovation');
 		}
@@ -3156,7 +3175,7 @@ ovationSoundIn=setInterval(function () {
 	{	
 			ovation.stop();
 
-	if(acc=='play')
+	if(acc=='play' && sound)
 	{
 		ovation.play();
 	}
@@ -3176,7 +3195,7 @@ clearInterval(dolphinSoundIn);
 
 	window.plugins.NativeAudio.setVolumeForComplexAsset('dolphinSound', soundVol50, function(msg){},function(msg){})
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.play('dolphinSound');
 		}
@@ -3187,7 +3206,7 @@ clearInterval(dolphinSoundIn);
 			dolphinSound.stop();
 	
 	dolphinSound.setVolume(soundVol50);		
-	if(acc=='play')
+	if(acc=='play' && sound)
 	{
 		dolphinSound.play();
 	}
@@ -3206,7 +3225,7 @@ clearInterval(mermaidSoundIn);
 
 	window.plugins.NativeAudio.setVolumeForComplexAsset('mermaidSound', soundVol50, function(msg){},function(msg){})
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.play('mermaidSound');
 		}
@@ -3217,7 +3236,7 @@ clearInterval(mermaidSoundIn);
 			mermaidSound.stop();
 	mermaidSound.setVolume(soundVol50);		
 	
-	if(acc=='play')
+	if(acc=='play' && sound)
 	{
 		mermaidSound.play();
 	}
@@ -3236,7 +3255,7 @@ bird1SoundIn=setInterval(function () {
 
 	window.plugins.NativeAudio.setVolumeForComplexAsset('bird1Sound', soundVol10, function(msg){},function(msg){})
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.play('bird1Sound');
 		}
@@ -3246,7 +3265,7 @@ bird1SoundIn=setInterval(function () {
 			bird1Sound.stop();	
 	bird1Sound.setVolume(soundVol10);		
 
-	if(acc=='play')
+	if(acc=='play' && sound)
 	{
 		bird1Sound.play();
 	}
@@ -3267,7 +3286,7 @@ bird2SoundIn=setInterval(function () {
 			window.plugins.NativeAudio.stop('bird2Sound');
 	window.plugins.NativeAudio.setVolumeForComplexAsset('bird2Sound', soundVol10, function(msg){},function(msg){})
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.play('bird2Sound');
 		}
@@ -3276,7 +3295,7 @@ bird2SoundIn=setInterval(function () {
 	else
 	{				bird2Sound.stop();
 	bird2Sound.setVolume(soundVol10);		
-	if(acc=='play')
+	if(acc=='play' && sound)
 	{
 		bird2Sound.play();
 	}
@@ -3291,7 +3310,7 @@ function scrollSoundF(acc)
 	{	
 				window.plugins.NativeAudio.stop('scrollSound');
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.play('scrollSound');
 		}
@@ -3299,7 +3318,7 @@ function scrollSoundF(acc)
 	}
 	else
 	{	scrollSound.stop();
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			scrollSound.play();
 		}
@@ -3316,7 +3335,7 @@ function birdsConSoundF(acc)
 				window.plugins.NativeAudio.stop('birdsConSound');
 	window.plugins.NativeAudio.setVolumeForComplexAsset('birdsConSound', soundVol10, function(msg){},function(msg){})
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.loop('birdsConSound');
 		}
@@ -3326,7 +3345,7 @@ function birdsConSoundF(acc)
 	{
 		birdsConSound.stop();
 					birdsConSound.setVolume(soundVol10);		
-			if(acc=='play')
+			if(acc=='play' && sound)
 			{
 				birdsConSound.play();
 			}
@@ -3341,7 +3360,7 @@ function wavesSoundF(acc)
 				window.plugins.NativeAudio.stop('wavesSound');
 	window.plugins.NativeAudio.setVolumeForComplexAsset('wavesSound', soundVol10, function(msg){},function(msg){})
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.loop('wavesSound');
 		}
@@ -3351,7 +3370,7 @@ function wavesSoundF(acc)
 	{
 			wavesSound.stop();
 					wavesSound.setVolume(soundVol10);		
-	if(acc=='play')
+	if(acc=='play' && sound)
 	{
 		wavesSound.play();
 	}
@@ -3363,7 +3382,7 @@ function tapSoundAF(acc)
 	
 	if(isAndroid)
 	{			window.plugins.NativeAudio.stop('tapASound');
-			if(acc=='play')
+			if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.play('tapASound');
 		}
@@ -3372,7 +3391,7 @@ function tapSoundAF(acc)
 	else
 	{
 				tapASound.stop();	
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			tapASound.play();
 		}
@@ -3388,7 +3407,7 @@ function changePageSoundF(acc)
 	if(isAndroid)
 	{	
 			window.plugins.NativeAudio.stop('changePageSound');		
-			if(acc=='play')
+			if(acc=='play' && sound)
 		{
 
 			window.plugins.NativeAudio.play('changePageSound');	
@@ -3397,7 +3416,7 @@ function changePageSoundF(acc)
 	else
 	{
 						changePageSound.stop();
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 				changePageSound.play();
 		}
@@ -3410,7 +3429,7 @@ function tapJSoundF(acc)
 	
 	if(isAndroid)
 	{				window.plugins.NativeAudio.stop('tapJSound');
-			if(acc=='play')
+			if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.play('tapJSound');
 		}
@@ -3419,7 +3438,7 @@ function tapJSoundF(acc)
 	else
 	{	
 							tapJSound.stop();	
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 						tapJSound.play();
 		}
@@ -3433,7 +3452,7 @@ function finishBubblesSoundAF(acc)
 			
 	if(isAndroid)
 	{					window.plugins.NativeAudio.stop('bubblesFinishSound');
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.loop('bubblesFinishSound');
 		}
@@ -3443,7 +3462,7 @@ function finishBubblesSoundAF(acc)
 	else
 	{	
 		bubblesFinishSound.stop();
-			if(acc=='play')
+			if(acc=='play' && sound)
 			{
 				bubblesFinishSound.play();
 			}
@@ -3461,7 +3480,7 @@ function aquarium1SoundF(acc)
 				window.plugins.NativeAudio.stop('aquarium1Sound');
 	window.plugins.NativeAudio.setVolumeForComplexAsset('aquarium1Sound', soundVol10, function(msg){},function(msg){});
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.loop('aquarium1Sound');
 		}
@@ -3471,7 +3490,7 @@ function aquarium1SoundF(acc)
 	{
 		aquarium1Sound.stop();
 							aquarium1Sound.setVolume(soundVol10);	
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			aquarium1Sound.play();
 		}
@@ -3489,7 +3508,7 @@ function waterPipeSoundF(acc)
 			window.plugins.NativeAudio.stop('waterPipeSound');
 	window.plugins.NativeAudio.setVolumeForComplexAsset('waterPipeSound', soundVol10, function(msg){},function(msg){});
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.loop('waterPipeSound');
 		}
@@ -3499,7 +3518,7 @@ function waterPipeSoundF(acc)
 	{			waterPipeSound.stop();
 			waterPipeSound.setVolume(soundVol10);		
 	
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			waterPipeSound.play();
 		}
@@ -3516,7 +3535,7 @@ function swipe1SoundF(acc)
 	{	
 	
 						window.plugins.NativeAudio.stop('swipe1Sound');	
-			if(acc=='play')
+			if(acc=='play' && sound)
 		{
 					window.plugins.NativeAudio.play('swipe1Sound');
 		}
@@ -3525,7 +3544,7 @@ function swipe1SoundF(acc)
 	{
 					swipe1Sound.stop();
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			swipe1Sound.play();
 		}
@@ -3537,14 +3556,14 @@ function swipe2SoundF(acc)
 
 	if(isAndroid)
 		{			window.plugins.NativeAudio.stop('swipe2Sound');	
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			window.plugins.NativeAudio.play('swipe2Sound');
 		}
 	}
 	else
 	{			swipe2Sound.stop();
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			swipe2Sound.play();
 		}
@@ -3558,7 +3577,7 @@ function pinchSoundF(acc)
 	if(isAndroid)
 	{
 					window.plugins.NativeAudio.stop('pinchSound');
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 						window.plugins.NativeAudio.play('pinchSound');
 		}
@@ -3566,7 +3585,7 @@ function pinchSoundF(acc)
 		else
 		{	
 			pinchSound.stop();
-			if(acc=='play')
+			if(acc=='play' && sound)
 			{
 				pinchSound.play();
 			}
@@ -3590,7 +3609,7 @@ function knowJSoundF(acc,scene)
 					case 8: window.plugins.NativeAudio.stop('crocodileSound'); break;
 				}
 
-		if(acc=='play')
+		iif(acc=='play' && sound)
 		{
 		
 			window.plugins.NativeAudio.play('jungleSound'); 
@@ -3618,7 +3637,7 @@ function knowJSoundF(acc,scene)
 			}
 
 
-		if(acc=='play')
+		if(acc=='play' && sound)
 		{
 			
 				jungleSound.play(); 
