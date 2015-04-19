@@ -573,7 +573,7 @@ function   loadSounds2()
 	music[7]= getMedia("resources/music/music7.mp3", true,7,'7');
 	toucanSound= getMedia("resources/sounds/toucan.mp3",false,0,'toucanSound');
 	zebraSound= getMedia("resources/sounds/zebra.mp3",false,0,'zebraSound');
-	ovation= getMedia("resources/sounds/ovation.mp3",false,0,'ovation');
+	ovation= getMedia("resources/sounds/ovation.mp3",true,0,'ovation');
 	crocodileSound= getMedia("resources/sounds/crocodile.mp3",false,0,'crocodileSound');
 		elephantSound= getMedia("resources/sounds/elephant.mp3",false,0,'elephantSound');
 	jungleSound= getMedia("resources/sounds/jungle.mp3",false,0,'jungleSound');
@@ -2914,28 +2914,6 @@ $(document).on('pageshow','#loading', function(e,data){
 }
 
 playMusic();
-	if(sound)
-	{		
-jungleSound.bind('ended', function(e) {
-	
-		music[nMusic].setVolume(volMusic);
-	
-});
-	jungleSound.bind('playing', function(e) {
-	music[nMusic].setVolume(volMusicD);
-	
-});
-
-
-ovation.bind('ended', function(e) {
-	music[nMusic].setVolume( volMusic);
-	
-});
-	ovation.bind('playing', function(e) {
-	music[nMusic].setVolume(volMusicD);
-	
-});
-	}
 
 				 rotTimes=2000;	
 				 
@@ -3067,6 +3045,7 @@ function stopAllSoundA()
 	finishBubblesSoundAF('pause');
 	aquarium1SoundF('pause');
 	aquarium2SoundF('pause');
+	ovationSoundF('pause');
 	waterPipeSoundF('pause');
 	wavesSoundF('pause');
 
@@ -3074,29 +3053,12 @@ clearInterval(dolphinSoundIn);
 clearInterval(mermaidSoundIn);
 clearInterval(bird1SoundIn);
 clearInterval(bird2SoundIn);
-clearInterval(ovationSoundIn);
+knowJSoundF('pause',setScene);
+birdsConSoundF('pause');	
+jungleSoundF('pause');	
+stopMusic();
 	
 
-			if(isAndroid)
-		{	
-			if(nMusic!=0)
-			{
-				window.plugins.NativeAudio.stop(nMusic);
-			}
-			window.plugins.NativeAudio.stop('ovation');	
-					window.plugins.NativeAudio.stop('jungleSound.stop()');	
-		}
-		else
-		{
-				if(nMusic!=0)
-				{
-					music[nMusic].stop();
-				}
-				ovation.stop();	
-						jungleSound.stop();	
-		}
-
-			birdsConSoundF('pause');
 	
 }
 
@@ -3145,7 +3107,30 @@ if(nMusic!=0)
 
 	}
 }			
-
+function stopMusic()
+{
+	
+		if(isAndroid)
+	{	
+			
+		if(nMusic!=0)
+			{
+		
+					window.plugins.NativeAudio.stop(nMusic);
+		
+			}
+		
+		
+	}
+	else
+	{	
+	if(nMusic!=0)
+	{
+		music[nMusic].stop();
+		
+	}
+	}
+}
 function aquarium2SoundF(acc)
 {
 	
@@ -3176,29 +3161,30 @@ function aquarium2SoundF(acc)
 
 function ovationSoundF(acc)
 {
-clearInterval(ovationSoundIn);
-ovationSoundIn=setInterval(function () {
-
+		
 		if(isAndroid)
 	{	
 	
 				window.plugins.NativeAudio.stop('ovation');
 
+	window.plugins.NativeAudio.setVolumeForComplexAsset('ovation', soundVol50, function(msg){},function(msg){})
+
 		if(acc=='play' && sound)
 		{
-			window.plugins.NativeAudio.play('ovation');
+			window.plugins.NativeAudio.loop('ovation');
 		}
 	}
 	else
 	{	
 			ovation.stop();
 
+		ovation.setVolume(soundVol50);		
 	if(acc=='play' && sound)
 	{
 		ovation.play();
 	}
 	}
-	},5000);
+
 }
 
 function dolphinSoundF(acc)
