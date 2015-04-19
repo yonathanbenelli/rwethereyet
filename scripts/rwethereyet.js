@@ -2622,18 +2622,32 @@ $('#knowFactContainerAquarium').click(function() {
   });
   
   function compassSuccess(heading) {
+   navigator.notification.alert(
+            'comok',  // message
+            alertDismissed,         // callback
+            'Game Over',            // title
+            'Done'                  // buttonName
+        );
 
-alert('comok'); 
 };
 
 function compassError(compassError) {
 
-alert('comfail');
+   navigator.notification.alert(
+            'comf',  // message
+            alertDismissed,         // callback
+            'Game Over',            // title
+            'Done'                  // buttonName
+        );
 };
 
 function compassChange(compassError) {
-
-alert('comchange'); 
+   navigator.notification.alert(
+            'comchange',  // message
+            alertDismissed,         // callback
+            'Game Over',            // title
+            'Done'                  // buttonName
+        );
 };
 
 
