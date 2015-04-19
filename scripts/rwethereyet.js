@@ -1,5 +1,5 @@
 $(document).bind("pagebeforechange", function(e,ob) {
-  if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+//  if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -430,10 +430,13 @@ var app = {
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+window.addEventListener('deviceorientation', function(event) {
+rotateAquarium(event.alpha,event.beta,event.gamma);}, false);
     },
     onDeviceReady: function() {
+
         app.receivedEvent('deviceready');
-        
+    
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -591,6 +594,15 @@ function   loadSounds2()
 		waterPipeSound= getMedia("resources/sounds/waterpipe.mp3", true,2,'waterPipeSound');
 				isLoadSound2=true;
 
+}
+function rotateAquarium(a,b,z)
+{
+	if(setScene==10)
+	{
+		alert("ALPHA "+a);
+				alert("BETHA "+b);
+						alert("GAMMA "+z);
+	}
 }
  function onSuccessS() {
 
@@ -1492,7 +1504,7 @@ function updateTimeLeftText(timeL)
 						mins=0;
 				}
 				
-				$('#timeLeftCharacter').html(hrs+" HOURS AND <br/>"+mins+" MINUTES LEFT");
+				$('#timeLeftCharacter').html("<br/><br/>"+hrs+" HOURS AND <br/>"+mins+" MINUTES LEFT");
 }
 function updateTimeLeftTextA(timeL)
 {
@@ -1793,7 +1805,7 @@ $('#knowFactContainer').click(function() {
 				tapJSoundF('play');
 	if($('#knowFactContainer').css('opacity')==1){$('#knowFactContainer').animate({ "opacity": 0}, "slow");} }) ;
 							  clearInterval(intervalDist2);
-	intervalDist2=setInterval(function () {loadKnowFact()}, (updateFreqMilis*20)-15);		
+	intervalDist2=setInterval(function () {loadKnowFact()}, ((updateFreqMilis*20)-15000));		
 //	  getCurrentPosCharacter();
   });
 
@@ -2507,6 +2519,7 @@ if(map==undefined)
       $("#menuBubble").swipe( {tap:function(event, target) {
 							doubleTapCount++;
 							tapSoundAF('play');
+							
 					     	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
 							if(doubleTapCount==2)
 							{
@@ -2595,14 +2608,15 @@ if(map==undefined)
 			$('#knowFactContainerAquarium').css('font-size','1.5em');
 						$('#knowFactContainerAquarium').css('color','rgb(0,133,192)');
 
-			
+	
 $('#knowFactContainerAquarium').click(function() {
 		tapSoundAF('play');
 	if($('#knowFactContainerAquarium').css('opacity')==1){
 	$('#knowFactContainerAquarium').css('z-index','0');
-	$('#knowFactContainerAquarium').animate({ "opacity": 0}, "slow");} }) ;
+	$('#knowFactContainerAquarium').animate({ "opacity": 0}, "slow");} 
+	}) ;
 								  clearInterval(intervalDist2);
-	intervalDist2=setInterval(function () {loadKnowFactA()}, (updateFreqMilis*20)-15);		
+	intervalDist2=setInterval(function () {loadKnowFactA()}, ((updateFreqMilis*20)-15000));		
   });
   
   
@@ -2614,6 +2628,7 @@ $('#knowFactContainerAquarium').click(function() {
   }
  function loadKnowFactA()
  {
+
 	 var r=getRandom(0,2);
 	if(r==0 && $('#knowFactContainerAquarium').css('opacity')==0)
 	{
@@ -3055,7 +3070,7 @@ clearInterval(bird1SoundIn);
 clearInterval(bird2SoundIn);
 knowJSoundF('pause',setScene);
 birdsConSoundF('pause');	
-jungleSoundF('pause');	
+
 stopMusic();
 	
 
@@ -3613,7 +3628,7 @@ function knowJSoundF(acc,scene)
 					case 8: window.plugins.NativeAudio.stop('crocodileSound'); break;
 				}
 
-		iif(acc=='play' && sound)
+		if(acc=='play' && sound)
 		{
 		
 			window.plugins.NativeAudio.play('jungleSound'); 

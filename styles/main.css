@@ -6,7 +6,7 @@
 [data-role=buttonMenuTap]{  background-size:100% !important;  height: 100% !important; width: 25% !important;    !important; float:left !important	}
 [data-role=menuTap]{  height:15% !important;width:100% !important;   float: left !important; z-index: 1000;
   position: relative; }
-  [data-role=menuTapA]{  height:10% !important;width:50% !important; left:25%; z-index: 6000;  position: absolute; top:2%}
+  [data-role=menuTapA]{  height:10% !important;width:25% !important; left:37.5%; z-index: 6000;  position: absolute; top:2%}
 
 [data-role=buttonBack]{   background: transparent url(../resources/buttons/backarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:left !important ; z-index: 10100	  	}
 [data-role=buttonBackA]{   background: transparent url(../resources/buttons/backarrowa.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:left !important 	  	}
@@ -21,7 +21,7 @@ background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
 
 }
 body{
-
+	overflow:visible;
 	background-color:#86FDF0 !important;
   font-family: sharkyspotdemo;
   scrollbar-base-color:#864217 ;
@@ -103,9 +103,9 @@ body{
 .cloudsClass
 {
 	z-index:100;
-		width:200%;
+		width:100%;
 		height:20%;
-	margin-left:-50%;
+	margin-left:0%;
 	top:0px;
 		position:absolute;
 			overflow:hidden;
@@ -317,9 +317,10 @@ visibility:hidden;
 .waterPipeContentClass
 {
 
-		width:200%;
+		width:100%;
 		height:100%;
 		bottom:0%;
+		left: 25%;
 		position:absolute;
 		overflow:hidden;
 		
@@ -621,9 +622,10 @@ visibility:hidden;
 }
 .pipeContainerClass
 {
-	width:200%;
+	width:100%;
 	height:10%;
 	top: 1%;
+	  left: 25%;
 
 	position:absolute;
 	
@@ -640,10 +642,10 @@ visibility:hidden;
 }
 .sunContainerClass
 {
-	width:200%;
+	width:100%;
 	height:10%;
 	top: 5%;
-	left:-50%;
+
 	position:absolute;
 	
 }
@@ -708,13 +710,32 @@ img, object, embed, video {
 	background-size:cover;
 
 }
-
+#backGroundA
+{
+		  background: transparent url(../resources/backgrounds/back4_0.png) 50% 0 no-repeat;
+	-webkit-background-size:100% 100% !important;
+	background-repeat:no-repeat;
+	background-size:100% 100% !important;
+	position:absolute;
+	z-index:-1000;
+  height: 110%;
+  top: -5%;
+	width:100%;
+	
+}
+#allA
+{
+	width:100%; height:100%; visibility:hidden
+   /* -ms-transform: rotate(45deg); 
+    -webkit-transform: rotate(45deg); 
+    transform: rotate(45deg);*/
+}
 .pageA
 {
-	  background: transparent url(../resources/backgrounds/back4_0.png) 50% 0 no-repeat;
-	-webkit-background-size:200% 100% !important;
-	background-repeat:no-repeat;
-	background-size:200% 100% !important;
+
+width:200% !important;
+left:-50% !important;
+ 
 
 }
 
@@ -765,8 +786,9 @@ img, object, embed, video {
 {
 	position:absolute;
 	height:100%;
-	width:150%;
-	left:-30%;
+  width: 50%;
+  left: 25%;
+
 	overflow:hidden;
 	z-index:5001;
 	background-repeat:repeat-y;
@@ -912,7 +934,7 @@ opacity:0;
 {
   top: 2% !important;
 
-	height: 10% !important; width: 10% !important;    left:88% !important; background-size: 100% 100% !important; 
+	height: 10% !important; width: 5% !important;    left:68% !important; background-size: 100% 100% !important; 
 	z-index:6000 !important; position:absolute !important;
 			background: transparent url(../resources/buttons/bubblebutton2.png) 0 0 no-repeat;
 
@@ -996,10 +1018,11 @@ width: 20% !important;
   top: 40%;
   opacity:0;
     padding: 1%;
-
+	visibility:visible !important;
 }
 #knowFactContainerAquarium
 {
+	visibility:visible !important;
 	background: transparent url(../resources/others/bubble1.png) 0 0 no-repeat;
 	background-size: 100% 100% !important; 
   width: 40%;
@@ -1117,7 +1140,7 @@ z-index:1000;
 			  height: 40%;
 			  text-align:center;
 	 visibility: hidden;
-
+top:10%;
   position: absolute;
 }
 #msg
@@ -1390,8 +1413,8 @@ float:left;
 {
 	position:absolute;
 	  height: 10% !important;
-  width: 20% !important;
-  left: 0px;
+  width: 10% !important;
+  left: 25%;
   visibility:hidden;
   bottom: 0px;
   z-index:10000;
@@ -1399,9 +1422,9 @@ float:left;
 #contentAquarium
 {
 	position:relative !important;
-	width:200% !important;
+	width:100% !important;
 	height:80% !important;
-	left:-50% !important;
+	left:0% !important;
 	  padding:0 !important;
 	  visibility:hidden;
 	overflow:hidden !important;

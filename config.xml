@@ -25,16 +25,13 @@
 
     <gap:plugin name="org.apache.cordova.media-capture" />
     <gap:plugin name="org.apache.cordova.device" />
-    <gap:plugin name="org.apache.cordova.device-orientation" />
     <gap:plugin name="org.apache.cordova.file" />
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.media" />
+	<gap:plugin name="org.apache.cordova.device-motion"/>
     <gap:plugin name="org.apache.cordova.network-information" />
 	<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
 	<gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.4" />
-	<gap:plugin name="org.apache.cordova.geolocation"  />
-    <gap:plugin name="org.apache.cordova.device-motion" />
-    <gap:plugin name="org.apache.cordova.device-orientation" />
 	<gap:plugin name="de.neofonie.cordova.plugin.nativeaudio"/>
 
 <access origin="*"/>
