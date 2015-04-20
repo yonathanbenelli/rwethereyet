@@ -1,5 +1,5 @@
 $(document).bind("pagebeforechange", function(e,ob) {
-//if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
