@@ -2723,11 +2723,12 @@ $('#mov').html('r '+ r+' theta '+ theta+' phi '+phi+ ' x '+ x+ ' y '+y + 'z'+ z)
         y: y,
         z: z
     };
+	getAlpha(phi-90);
 }
 
   function getAlpha(dir)
   {
-	  var rot=	  dir/2;
+	  var rot=	  dir;
 	  if(rot>45)
 	  {
 		  rot=45;
