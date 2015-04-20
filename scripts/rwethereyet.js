@@ -1247,7 +1247,8 @@ distanceFull=-1;
 								{
 									$('#nextByDistance').css('visibility','hidden');
 									$('#msg').css('visibility','visible');
-									
+									$('#msg').css('z-index','5000');
+									$('#msg').click(function(){$('#msg').css('z-index','0');		$('#msg').css('visibility','hidden');});
 
 
 									$('#msg').html("Destination not found, please be more specific");
@@ -1481,15 +1482,14 @@ function onSuccesGetAc( position)
 	accuracyAct=position.accuracy;
 	if(position.accuracy<=accuracyAct && accuracyAct!=-1)
 	{
-		navigator.geolocation.clearWatch(watchID);
-		clearTimeout(isTime);
-		$('#gpsSearch').removeClass('rotatedLoading');
+		stopTryGps();
 	}
 }
 function stopTryGps()
 {
-  	navigator.geolocation.clearWatch(watchID);
-	$('#gpsSearch').removeClass('rotatedLoading');
+		navigator.geolocation.clearWatch(watchID);
+		clearTimeout(isTime);
+		$('#gpsSearch').removeClass('rotatedLoading');
 }
 function getCurrentPosByDistance()
 {
