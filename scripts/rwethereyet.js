@@ -667,6 +667,32 @@ function fullScreen()
 		$('#mapAdd').css('visibility','hidden');
 
 }
+$(document).on('pageshow','#tripPlanner', function(e,data){  
+
+ if (window.DeviceOrientationEvent) {  
+		  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.alpha; 
+		  
+$('#mov').html('alpha  '+ dir+' <br/>beta '+ eventData.beta+' <br/>gamma '+eventData.gamma+ ' <br/>x '+ eventData.x+ ' <br/>y '+eventData.y + '<br/>	z'+ eventData.z);
+
+		   getAlpha(dir);     }, false);
+		 
+	  }
+	  else
+	  {
+		   var options = { frequency: frequency };
+        // set accelerometer watcher
+
+		  if(navigator.accelerometer)
+			{		
+			        accelID = navigator.accelerometer.watchAcceleration(onSuccessAcc, onError, options);
+//		watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
+			}
+			else
+			{
+		
+			}
+		}
+});
 $(document).on('pageshow','#main', function(e,data){  
 if(!isLoadSound1)
 {
@@ -683,25 +709,6 @@ if(!isLoadSound1)
 		 $('#buttonTripPlanner').css('visibility','visible');
 			$('#backMain').css('visibility','hidden');	
 	}
- if (window.DeviceOrientationEvent) {  
-		  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.alpha;  getAlpha(dir);     }, false);
-		 
-	  }
-	  else
-	  {
-		   var options = { frequency: frequency };
-        // set accelerometer watcher
-
-		  if(navigator.accelerometer)
-			{		
-			        accelID = navigator.accelerometer.watchAcceleration(onSuccessAcc, onError, options);
-//		watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
-			}
-			else
-			{
-				$('#mov').html('none');
-			}
-		}
 });
 $(document).on('pageshow','#setCharacter', function(e,data){  
 clearInterval(intervalDist2);
@@ -2713,7 +2720,7 @@ function setBubble(accelerometer) {
     else {
         phi = parseInt((Math.atan(y/x))*180/Math.PI);
     }
-$('#mov').html('r '+ r+' <br/>theta '+ theta+' <br/>phi '+phi+ ' <br/>x '+ x+ ' <br/>y '+y + '<br/>z'+ z);
+$('#mov').html('r '+ r+' <br/>theta '+ theta+' <br/>phi '+phi+ ' <br/>x '+ x+ ' <br/>y '+y + '<br/>	z'+ z);
 
     var angles = {
         r: r,

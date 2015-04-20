@@ -26,7 +26,7 @@
     <script src="scripts/rwethereyet.js" type="text/javascript"></script>
     <script type="text/javascript">
             app.initialize();
-			//loadSounds1();
+			loadSounds1();
 			//
 			////loadSounds2();
         </script>
@@ -34,7 +34,7 @@
 </head>
 <body>
 <div data-role="page" id="main" class="page" >
-<div id="mov" > se ve o no </div>
+
 <div  id="headerMain" data-role="header"  >
     <div  id="headerContentMain" class="headerContent"  >  
  	 </div>
@@ -44,9 +44,8 @@
 
 	  <div data-role="buttonMenuMain"  id="buttonSeparator"  ></div>
 
-<div id="allA2" >
+
     <div data-role="buttonMenuMain"  id="buttonTripPlanner"  onClick="goToPage(goToTripPlanner(),false)"></div>
-          </div>
     <div data-role="buttonMenuMain" id="buttonSettings"  onClick="goToPage('#settings',false);"></div>
    <div data-role="buttonMenuMain" id="buttonHelp"  onClick="goToPage('#help',false);"></div>
        
@@ -54,16 +53,18 @@
   </div>
         <div data-role="footer" id="footerMain" >
 			   <div data-role="buttonBack" id="backMain" onClick="goToPage('#loading',true);" ></div>
-            	
+            </div>	
       
 </div>
 <div data-role="page" id="tripPlanner" class="page" >
-               
+
 <div  id="headerTripPlanner" data-role="header"  >    <div  id="headerContentTripPlanner"  class="headerContent" >   	 </div>  </div>
+
+<div id="mov" > se ve o no </div>
 
   <div data-role="content" id="contentTripPlanner">
 <div data-role="buttonMenuMain"  id="buttonSeparator"  ></div>
-  <div  id="buttonTime"  onClick="goToPage('#byTime',false);"></div>
+<div id="allA2">  <div  id="buttonTime"  onClick="goToPage('#byTime',false);"></div></div>
     <div  id="buttonDistance"  onClick="goToPage('#byDistance',false);"></div>
   </div>
     <div data-role="footer" id="footerTripPlanner" >
@@ -285,6 +286,7 @@
 
 <div data-role="page" id="aquarium" class="pageA" >
 
+
 <div  id="menuBubble" ></div>
  <div id="menuAquarium" data-role="menuTapA" >
                  <div   id="buttonMenuAquarium1" data-role="buttonMenuTap" ></div>
@@ -292,8 +294,6 @@
                  <div  id="buttonMenuAquarium3" data-role="buttonMenuTap" ></div>
                  <div  id="buttonMenuAquarium4"  data-role="buttonMenuTap" ></div>
       </div>
-
-<div id="allA2" >
 
 
 <div id="backGroundA"></div>
@@ -445,9 +445,8 @@
     
 
 </div>  	  
-</div>
+
 			   <div data-role="buttonBackA" id="backAquarium" onClick="backFromAquarium();" ></div>
-               
 </div>
 <script></script>
 </body>
