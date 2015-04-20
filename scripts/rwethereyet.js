@@ -408,7 +408,7 @@ var render=true;
 		var deviceAgent = navigator.userAgent;	
 		var agentIndex = deviceAgent.indexOf('Android');
 		var watchOrientation;
-		var orientationOptions = { frequency: 300,filter:10}; // Update every 3 seconds
+		var orientationOptions = { frequency: 1000}; // Update every 3 seconds
     if (agentIndex != -1) {
 				   var androidversion = parseFloat(deviceAgent.match(/Android\s+([\d\.]+)/)[1]);
 					if (androidversion < 3.1)
@@ -498,7 +498,7 @@ var zebraSound=null;
     var isLoadSound2=true;
 var accuracyAct=-1;
 var isTime;
-var timeAccDesired=50000;
+var timeAccDesired=20000;
 var accuracyDesired=50;	
 	var toImage= 'resources/others/to.png';
 		var fromImage= 'resources/others/from.png';
@@ -1471,20 +1471,20 @@ function updatePostionAquarium()
 
 function getPositionAcuracy(acc)
 {
- watchID = navigator.geolocation.watchPosition(onSuccesGetAc,onError,geo_options);	
+watchID=navigator.geolocation.watchPosition(onSuccesGetAc,onError,geo_options);	
 	
 }
-function onSuccesGetAc( position)
+function onSuccesGetAc(position)
 {
 	
 
 	onSuccessByD(position)
 	accuracyAct=position.accuracy;
-	console.log('ssss');
-	if(position.accuracy<=accuracyAct && accuracyAct!=-1)
+	if(position.accuracy<=accuracyDesired && accuracyAct!=-1)
 	{
 		stopTryGps();
 	}
+	
 }
 function stopTryGps()
 {
@@ -2637,7 +2637,7 @@ $('#knowFactContainerAquarium').click(function() {
 	intervalDist2=setInterval(function () {loadKnowFactA()}, ((updateFreqMilis*20)-15000));		
 if(navigator.compass)
 {
- watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
+	 watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
 }
       if (window.DeviceOrientationEvent) {  
 	  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.alpha;  getAlpha(dir);     }, false);
@@ -2653,7 +2653,7 @@ if(navigator.compass)
   }
   
   function compassSuccessE(heading) {
-  $('#mov').html('succes: ' + heading.magneticHeading);
+  $('#mov').html('succes: ' + heading.magneticHeading+' '+ heading.trueHeading);
 
 }
 
