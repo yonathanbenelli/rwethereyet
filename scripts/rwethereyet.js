@@ -1,5 +1,5 @@
 $(document).bind("pagebeforechange", function(e,ob) {
-//  if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+ if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -2635,25 +2635,60 @@ $('#knowFactContainerAquarium').click(function() {
 	}) ;
 	clearInterval(intervalDist2);
 	intervalDist2=setInterval(function () {loadKnowFactA()}, ((updateFreqMilis*20)-15000));		
-if(navigator.compass)
-{
-	 watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
-}
+
       if (window.DeviceOrientationEvent) {  
-	  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.alpha;  getAlpha(dir);     }, false);
+		  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.alpha;  getAlpha(dir);     }, false);
 		 
 	  }
+	  else
+	  {
+		  if(navigator.compass)
+			{		
+	 			watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
+			}
+		}
 });
 
 
 
   function getAlpha(dir)
   {
-	  $('#mov2').html('succes: gps html' + dir);
+	  var rot=	  dir/2;
+	  if(rot>45)
+	  {
+		  rot=45;
+	  }
+	  else if (rot<-45)
+	  {
+		  rot=45;
+	  }
+	  
+	  var rotation = 360 - rot;
+	  var capa=document.getElementById('allA');
+	capa.style.webkitTransform =  "rotate("+ rot +"deg)";
+	capa.style.MozTransform = "rotate("+ rot +"deg)";
+	capa.style.transform = "rotate("+ rot +"deg) ";
+
   }
   
   function compassSuccessE(heading) {
-  $('#mov').html('succes: ' + heading.magneticHeading+' '+ heading.trueHeading);
+  var rot=	  heading.magneticHeading/2;
+	  if(rot>45)
+	  {
+		  rot=45;
+	  }
+	  else if (rot<-45)
+	  {
+		  rot=45;
+	  }
+	  
+	  var rotation = 360 - rot;
+	  var capa=document.getElementById('allA');
+	capa.style.webkitTransform =  "rotate("+ rot +"deg)";
+	capa.style.MozTransform = "rotate("+ rot +"deg)";
+	capa.style.transform = "rotate("+ rot +"deg) ";
+
+
 
 }
 
