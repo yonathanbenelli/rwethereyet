@@ -1034,7 +1034,7 @@ function clerToInput()
 $(document).on('pageshow','#byDistance', function(e,data){ 
 //intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);
 //    $('#distance-content').css('margin-top',($(window).height() - $('[data-role=header]').height() - $('[data-role=footer]').height() - v$('#distance-content').outerHeight())/2);
-$('#gpsSearch').removeClass('rotatedLoading');
+
 $('#gpsSearch').css('width',($('#gpsSearch').height()*2.1)+"px");
 
 $('#gpsSearch').addClass('rotatedLoading');
@@ -1480,6 +1480,7 @@ function onSuccesGetAc( position)
 
 	onSuccessByD(position)
 	accuracyAct=position.accuracy;
+	console.log('ssss');
 	if(position.accuracy<=accuracyAct && accuracyAct!=-1)
 	{
 		stopTryGps();
@@ -1489,7 +1490,7 @@ function stopTryGps()
 {
 		navigator.geolocation.clearWatch(watchID);
 		clearTimeout(isTime);
-		$('#gpsSearch').removeClass('rotatedLoading');
+		//$('#gpsSearch').removeClass('rotatedLoading');
 }
 function getCurrentPosByDistance()
 {
@@ -2634,18 +2635,31 @@ $('#knowFactContainerAquarium').click(function() {
 	}) ;
 	clearInterval(intervalDist2);
 	intervalDist2=setInterval(function () {loadKnowFactA()}, ((updateFreqMilis*20)-15000));		
- watchOrientation=navigator.compass.watchHeading(compassSuccess, compassError, orientationOptions);
-  });
-  
-  
-  function compassSuccess(heading) {
-  $('#mov').html(heading);
+if(navigator.compass)
+{
+ watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
+}
+      if (window.DeviceOrientationEvent) {  
+	  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.alpha;  getAlpha(dir);     }, false);
+		 
+	  }
+});
 
-};
 
-function compassError(compassError) {
-  $('#mov').html(compassError);
-};
+
+  function getAlpha(dir)
+  {
+	  $('#mov2').html('succes: gps html' + dir);
+  }
+  
+  function compassSuccessE(heading) {
+  $('#mov').html('succes: ' + heading.magneticHeading);
+
+}
+
+function compassErrorE(compassError) {
+  $('#mov').html('Compass error: ' + compassError.code)
+}
 
 
 
