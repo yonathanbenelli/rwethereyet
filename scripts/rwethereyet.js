@@ -2713,7 +2713,7 @@ function setBubble(accelerometer) {
     else {
         phi = parseInt((Math.atan(y/x))*180/Math.PI);
     }
-$('#mov').html('r '+ r+' theta '+ theta+' phi '+phi+ ' x '+ x+ ' y '+y + 'z'+ z);
+$('#mov').html('r '+ r+' <br/>theta '+ theta+' <br/>phi '+phi+ ' <br/>x '+ x+ ' <br/>y '+y + '<br/>z'+ z);
 
     var angles = {
         r: r,
@@ -2739,7 +2739,7 @@ $('#mov').html('r '+ r+' theta '+ theta+' phi '+phi+ ' x '+ x+ ' y '+y + 'z'+ z)
 	  }
 	  
 	  var rotation = 360 - rot;
-	  var capa=document.getElementById('allA');
+	  var capa=document.getElementById('allA2');
 	capa.style.webkitTransform =  "rotate("+ rot +"deg)";
 	capa.style.MozTransform = "rotate("+ rot +"deg)";
 	capa.style.transform = "rotate("+ rot +"deg) ";

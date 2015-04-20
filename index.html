@@ -34,23 +34,27 @@
 </head>
 <body>
 <div data-role="page" id="main" class="page" >
-<div id="allA" >
+<div id="mov" > se ve o no </div>
 <div  id="headerMain" data-role="header"  >
     <div  id="headerContentMain" class="headerContent"  >  
  	 </div>
   </div>
 
   <div data-role="content"  id="contentMain">
+
 	  <div data-role="buttonMenuMain"  id="buttonSeparator"  ></div>
+
+<div id="allA2" >
     <div data-role="buttonMenuMain"  id="buttonTripPlanner"  onClick="goToPage(goToTripPlanner(),false)"></div>
+          </div>
     <div data-role="buttonMenuMain" id="buttonSettings"  onClick="goToPage('#settings',false);"></div>
    <div data-role="buttonMenuMain" id="buttonHelp"  onClick="goToPage('#help',false);"></div>
        
+
   </div>
         <div data-role="footer" id="footerMain" >
 			   <div data-role="buttonBack" id="backMain" onClick="goToPage('#loading',true);" ></div>
             	
-	 </div>
       
 </div>
 <div data-role="page" id="tripPlanner" class="page" >
@@ -280,7 +284,6 @@
 
 
 <div data-role="page" id="aquarium" class="pageA" >
-<div id="mov" > se ve o no </div>
 
 <div  id="menuBubble" ></div>
  <div id="menuAquarium" data-role="menuTapA" >
@@ -289,6 +292,8 @@
                  <div  id="buttonMenuAquarium3" data-role="buttonMenuTap" ></div>
                  <div  id="buttonMenuAquarium4"  data-role="buttonMenuTap" ></div>
       </div>
+
+<div id="allA2" >
 
 
 <div id="backGroundA"></div>
@@ -440,8 +445,9 @@
     
 
 </div>  	  
-
+</div>
 			   <div data-role="buttonBackA" id="backAquarium" onClick="backFromAquarium();" ></div>
+               
 </div>
 <script></script>
 </body>
