@@ -2510,7 +2510,7 @@ $('#pipe').css('left',lP+'px');
 waterPipeSoundF('play');
 showDivEfect($('#pipe'));
 showDivEfect($('#waterPipe'));
-$('#waterPipe').pan({fps: 40, speed: 7, dir: 'down', depth: 70});
+$('#waterPipe').pan({fps: 20, speed: 12, dir: 'down', depth: 70});
 	updateWaterLevel();
 $('#allA').css('visibility','visible');
 wavesSoundF('play');
