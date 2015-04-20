@@ -543,10 +543,10 @@ function   loadSounds1()
 
 		if (isAndroid) 
 		{
-		 volMusic=volMusic/100;
-		 volMusicD=volMusicD/100;
-		 soundVol50=soundVol50/100;
-		 soundVol10=soundVol10/100;
+		 volMusic=(volMusic/100)*2;
+		 volMusicD=(volMusicD/100)*2;
+		 soundVol50=(soundVol50/100)*2;
+		 soundVol10=(soundVol10/100)*2;
 		
 		}
 		tapJSound=getMedia("resources/sounds/tapj.mp3",false,0,'tapJSound');
