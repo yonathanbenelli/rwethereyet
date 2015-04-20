@@ -2642,14 +2642,88 @@ $('#knowFactContainerAquarium').click(function() {
 	  }
 	  else
 	  {
-		  if(navigator.compass)
+		   var options = { frequency: frequency };
+        // set accelerometer watcher
+
+		  if(navigator.accelerometer)
 			{		
-	 			watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
+			        accelID = navigator.accelerometer.watchAcceleration(onSuccess, onErrorAcc, options);
+//		watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
+			}
+			else
+			{
+				$('#mov').html('none');
 			}
 		}
 });
+var accelID=null;
+var frequency = 100;
+var FILTERFACTOR = 0.3;
+// We keep previous values to use filter
+var previous_parameters = {
+    x: 0,
+    y: 0, 
+    z: 0    };
+	
+function onSuccessAcc(acceleration) {
+    //   There is differences in axis directions on real devices
+    //         and in Device Emulator
+    //  For Device emulator use
+        var x = -acceleration.x;
+        var y = -acceleration.y;
+    //  For device build use next statements
+    //  var x = acceleration.x;
+    //  var y = acceleration.y;
+        var z = acceleration.z;
+        var valuex= (x * FILTERFACTOR) + (previous_parameters.x * (1.0 - FILTERFACTOR));
+        previous_parameters.x = valuex;
+        var valuey= (y * FILTERFACTOR) + (previous_parameters.y * (1.0 - FILTERFACTOR));
+        previous_parameters.y = valuey;
+        var valuez = (z * FILTERFACTOR) + (previous_parameters.z * (1.0 - FILTERFACTOR));
+        previous_parameters.z = valuez;
 
+        var direction = {
+            x: valuex,
+            y: valuey,
+            z: valuez
+        };
+        // main step
+        setBubble(direction);
+}
+function setBubble(accelerometer) {
 
+    var x = accelerometer.x;
+    var y = accelerometer.y;
+    var z = accelerometer.z;
+
+    //spherical coordinates (r, theta, phi)
+    var r = Math.sqrt(x*x + y*y +z*z);
+
+    var theta = 0;
+    var phi = 0;
+    if (z === 0) {
+        theta = x > 0 ? 90 : -90;
+    }
+    else {
+        theta = parseInt(Math.atan(Math.sqrt(x*x + y*y)/z)*180/Math.PI);
+    }
+    if (x === 0) {
+        phi = y > 0 ? 90:-90;
+    }
+    else {
+        phi = parseInt((Math.atan(y/x))*180/Math.PI);
+    }
+$('#mov').html('r '+ r+' theta '+ theta+' phi '+phi+ ' x '+ x+ ' y '+y + 'z'+ z);
+
+    var angles = {
+        r: r,
+        theta: theta,
+        phi : phi, 
+        x: x,
+        y: y,
+        z: z
+    };
+}
 
   function getAlpha(dir)
   {
