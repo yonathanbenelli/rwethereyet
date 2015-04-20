@@ -2792,7 +2792,9 @@ function setBubble(accelerometer) {
   function getDir(dir)
   {
 	  var rot=	  dir*(-1);
-	  
+	  if(!isAndroid)
+	  {rot=rot-90}
+		  
 	  var rotation = 360 - rot;
 	  var capa=document.getElementById('allA');
 	capa.style.webkitTransform =  "rotate("+ rot +"deg)";
