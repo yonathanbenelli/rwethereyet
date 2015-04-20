@@ -2637,7 +2637,7 @@ $('#knowFactContainerAquarium').click(function() {
 	}) ;
 	clearInterval(intervalDist2);
 	intervalDist2=setInterval(function () {loadKnowFactA()}, ((updateFreqMilis*20)-15000));		
-
+/*
  if (window.DeviceOrientationEvent) {  
 
 		  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.beta; 
@@ -2651,8 +2651,8 @@ $('#knowFactContainerAquarium').click(function() {
 			}
 }, false);
 		 
-	  }
-	  else
+	  }*/
+	  if(navigator.accelerometer)
 	  {
 		   var options = { frequency: frequency };
         // set accelerometer watcher
