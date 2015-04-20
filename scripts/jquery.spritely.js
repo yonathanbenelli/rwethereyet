@@ -417,6 +417,8 @@
                 bottom: 320,
                 speed: 4000,
                 pause: 0,
+               notRandom: false,
+			   dLeft: false,
                 haveBack: false
             }, options || {});
             var el_id = $(this).attr('id');
@@ -425,9 +427,42 @@
                 return this;
             }
             if (!$._spritely.instances[el_id].stop_random) {
+				if(options.notRandom)
+				{
+					var t = options.bottom;
+					if(options.dLeft)
+					{
+						var l = options.left;
+						var lT=$('#' + el_id).css('left').replace('%','').replace('px','');
+						if((l==lT))
+						{
+							$('#' + el_id).css('left',options.right+'px');
+						}
+						else
+						{
+	
+						}
+					}
+					else
+					{
+						var l = options.right;
+						var lT=$('#' + el_id).css('left').replace('%','').replace('px','');
+						if((l==lT))
+						{
+							$('#' + el_id).css('left',options.left+'px');
+						}
+						else
+						{
+	
+						}
+					}
+				}
+				else{
+					
                 var r = $._spritely.randomIntBetween;
                 var t = r(options.top, options.bottom);
 				var l = r(options.left, options.right);
+				}
 				if(options.haveBack)
 				{
                 
@@ -453,6 +488,8 @@
 						}
 					}
 				}
+				
+
                 $('#' + el_id).animate({
                     top: t + 'px',
                     left: l + 'px'

@@ -1,5 +1,5 @@
 $(document).bind("pagebeforechange", function(e,ob) {
- if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -1872,6 +1872,7 @@ function showSun()
 //	$('#sun').css('visibility','visible');
 	showDivEfect($('#sun'));
 }
+var aspectCloud=[];
 function generateClouds(i)
 {
 			var sp;
@@ -1879,47 +1880,66 @@ function generateClouds(i)
 
 			var he;
 
-			var fp=getRandom(15,250);
+			var fp=getRandom(15,30);
+
 
 			he=(getRandom(2,15)/100)*$(window).height();
 
 			//	he=getRandom(3,10)*10;
 			var tcloud=getRandom(0,2);
 			var widthc;
+			
 			if(tcloud==2)
 			{
-				widthc=35.7;
+				widthc=4.667;
+			
 			}
 			else if(tcloud==1)
 			{
-					widthc=55.5;
+					widthc=7.229;
 			}
 			else
 			{
-					widthc=15;
+					widthc=3.292;
 			}
 			if(getRandom(0,1)==0)
 			{
+								direction='left';
 
-				direction='left';
-				$('#cloud'+i).css('background','transparent url(resources/characters/aquarium/static/cloud'+tcloud+'b.png) 0 0 no-repeat');
+
+				$('#cloud'+i).css('background','transparent url(resources/characters/aquarium/static/cloud'+tcloud+'b_1.png) 0 0 no-repeat');
 
 			}
 			else
 			{
 				direction='right';
-				$('#cloud'+i).css('background','transparent url(resources/characters/aquarium/static/cloud'+tcloud+'a.png) 0 0 no-repeat');
+				$('#cloud'+i).css('background','transparent url(resources/characters/aquarium/static/cloud'+tcloud+'a_1.png) 0 0 no-repeat');
 			}
 			var op=getRandom(8,10);
-//				$('#cloud'+i).css('opacity',op/10);
+
 			$('#cloud'+i).css('height',he+"px");
-			//ss$('#cloud'+i).css('width',(he*widthc)+"px");
-			$('#cloud'+i).css('background-size',(he*widthc)+'px '+he+'px');
+						$('#cloud'+i).css('width',he*widthc+"px");
+				$('#cloud'+i).css('background-size','contain');
+//			$('#cloud'+i).css('background-size',(he*widthc)+'px '+he+'px');
 	showDivEfectC($('#cloud'+i),op/10);
 
 	//		$('#cloud'+i).css('visibility','visible');
+if(direction=='left')
+{
+	
+						
+			$('#cloud'+i).sprite({fps: 0, no_of_frames:1})
+			.spRandom({top: $('#cloud'+i).css('top').replace('px',''), left: -(2*$(window).width())-$('#cloud'+i).width(), right: $(window).width()*2, bottom: $('#cloud'+i).css('top').replace('px',''), speed: fp*1000, pause:0 ,notRandom:true,dLeft:true})
+			.active();
 
-		$('#cloud'+i).pan({fps: fp, speed: 1, dir: direction});
+}
+else
+{
+	
+			$('#cloud'+i).sprite({fps: 0, no_of_frames:1})
+			.spRandom({top: $('#cloud'+i).css('top').replace('px',''), left: -(2*$(window).width())-$('#cloud'+i).width(), right:  $(window).width()*2, bottom: $('#cloud'+i).css('top').replace('px',''), speed: fp*1000, pause: 0,notRandom:true,dLeft:false})
+}
+		//$('#cloud'+i).pan({fps: fp, speed: 1, dir: direction});
 
 }
 
