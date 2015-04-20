@@ -2632,9 +2632,9 @@ $('#knowFactContainerAquarium').click(function() {
 	$('#knowFactContainerAquarium').css('z-index','0');
 	$('#knowFactContainerAquarium').animate({ "opacity": 0}, "slow");} 
 	}) ;
-								  clearInterval(intervalDist2);
+	clearInterval(intervalDist2);
 	intervalDist2=setInterval(function () {loadKnowFactA()}, ((updateFreqMilis*20)-15000));		
- //watchOrientation=navigator.compass.watchHeading(compassSuccess, compassError,compassChange, orientationOptions);
+ watchOrientation=navigator.compass.watchHeading(compassSuccess, compassError, orientationOptions);
   });
   
   
@@ -2647,9 +2647,7 @@ function compassError(compassError) {
   $('#mov').html(compassError);
 };
 
-function compassChange(compass) {
-  $('#mov').html(compass);
-};
+
 
 
   function correctFontKows(txt)
