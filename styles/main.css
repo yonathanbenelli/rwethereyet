@@ -298,7 +298,7 @@ body{
 }
 #waterPipe
 {
-			/*background:transparent url(../resources/characters/aquarium/animated/waterpipe.png) 0 0 repeat-y;*/
+			background:transparent url(../resources/characters/aquarium/animated/waterpipe.png) 0 0 repeat-y;
 }
 .waterPipeClass
 {
@@ -427,7 +427,7 @@ opacity:0;
 		height:100%;
 		bottom:0%;
 		position:absolute;
-		overflow:hidden;
+		overflow:visible;
 	
 }
 
@@ -451,7 +451,7 @@ opacity:0;
 		height:100%;
 		bottom:0%;
 		position:absolute;
-		overflow:hidden;
+		overflow:visible;
 	
 }
 
@@ -475,7 +475,7 @@ opacity:0;
 		height:100%;
 		bottom:0%;
 		position:absolute;
-		overflow:hidden;
+		overflow:visible;
 	
 }
 
@@ -502,7 +502,7 @@ opacity:0;
 		height:100%;
 		bottom:0%;
 		position:absolute;
-		overflow:hidden;
+		overflow:visible;
 	
 }
 
@@ -549,7 +549,7 @@ opacity:0;
 }
 #waterLevel
 {
-	/*background: transparent url(../resources/characters/aquarium/animated/waterlevel1.png) 0 0;*/
+	background: transparent url(../resources/characters/aquarium/animated/waterlevel1.png) 0 0;
 	-webkit-background-size:cover;
 	background-repeat':repeat-x;
 	background-size:cover;
