@@ -2643,7 +2643,7 @@ $('#knowFactContainerAquarium').click(function() {
 		  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.beta; 
 		  if((dir>=5 && dir<=45) || (dir<=-5 && dir>=-45))
 			{
-				getDir(-dir);
+				getDir(dir);
 			}
 			else if(dir<5 && dir>-5)
 			{
@@ -2758,7 +2758,7 @@ function setBubble(accelerometer) {
 
   function getDir(dir)
   {
-	  var rot=	  dir;
+	  var rot=	  dir*(-1);
 	  
 	  var rotation = 360 - rot;
 	  var capa=document.getElementById('allA');
