@@ -2793,7 +2793,7 @@ function setBubble(accelerometer) {
   {
 	  var rot=	  dir*(-1);
 	  if(!isAndroid)
-	  {rot=rot-90}
+	  {rot=rot+90}
 		  
 	  var rotation = 360 - rot;
 	  var capa=document.getElementById('allA');
