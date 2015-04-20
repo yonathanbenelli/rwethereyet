@@ -2773,11 +2773,26 @@ function setBubble(accelerometer) {
 	
 	if(phi>=45 && phi<=85)
 	{
-		getDir(phi-90);
+		if(!isAndroid)
+	  {
+		  getDir((phi-90));
+	  }
+	  else
+	  {
+		  
+			getDir(phi-90);
+		}
 	}
 	else 	if(phi>=-85 && phi<=-45)
 	{
+		if(!isAndroid)
+	  {
+		  getDir((phi+90));
+	  }
+	  else
+	  {
 				getDir(phi+90);
+	  }
 	}
 	else if(phi<-85 && phi>=-90)
 			{
@@ -2793,13 +2808,25 @@ function setBubble(accelerometer) {
   {
 	  var rot=	  dir*(-1);
 	  if(!isAndroid)
-	  {rot=rot+90}
+	  {
 		  
-	  var rotation = 360 - rot;
-	  var capa=document.getElementById('allA');
-	capa.style.webkitTransform =  "rotate("+ rot +"deg)";
-	capa.style.MozTransform = "rotate("+ rot +"deg)";
-	capa.style.transform = "rotate("+ rot +"deg) ";
+	    var rotation =rot;
+		var capa=document.getElementById('allA');
+		capa.style.webkitTransform =  "rotate("+ rot +"deg)";
+		capa.style.MozTransform = "rotate("+ rot +"deg)";
+		capa.style.transform = "rotate("+ rot +"deg) ";
+	  }
+	  else
+	  {
+		  var rotation = 360 - rot;
+		var capa=document.getElementById('allA');
+		capa.style.webkitTransform =  "rotate("+ rot +"deg)";
+		capa.style.MozTransform = "rotate("+ rot +"deg)";
+		capa.style.transform = "rotate("+ rot +"deg) ";
+	  }
+	  
+		  
+	  
 
   }
   
