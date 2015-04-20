@@ -368,7 +368,7 @@ var render=true;
 		var levelPos=-1;
 		var timeLeft=-1;
 		var timeFull=-1;
-		var	stopTryGps=false;
+		
 		var doubleTapSpeed=500;
 		var timeNow=0;
 		var intervalRot;
@@ -431,8 +431,6 @@ var app = {
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-window.addEventListener('deviceorientation', function(event) {
-rotateAquarium(event.alpha,event.beta,event.gamma);}, false);
     },
     onDeviceReady: function() {
 
@@ -498,7 +496,10 @@ var zebraSound=null;
  var mermaidSound=null;
  var isLoadSound1=false;
     var isLoadSound2=true;
-	
+var accuracyAct=-1;
+var isTime;
+var timeAccDesired=50000;
+var accuracyDesired=50;	
 	var toImage= 'resources/others/to.png';
 		var fromImage= 'resources/others/from.png';
 				var nowImage= 'resources/others/now.png';
@@ -596,15 +597,7 @@ function   loadSounds2()
 				isLoadSound2=true;
 
 }
-function rotateAquarium(a,b,z)
-{
-	if(setScene==10)
-	{
-		alert("ALPHA "+a);
-				alert("BETHA "+b);
-						alert("GAMMA "+z);
-	}
-}
+
  function onSuccessS() {
 
         }
@@ -1041,8 +1034,12 @@ function clerToInput()
 $(document).on('pageshow','#byDistance', function(e,data){ 
 //intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);
 //    $('#distance-content').css('margin-top',($(window).height() - $('[data-role=header]').height() - $('[data-role=footer]').height() - v$('#distance-content').outerHeight())/2);
+$('#gpsSearch').removeClass('rotatedLoading');
+$('#gpsSearch').css('width',($('#gpsSearch').height()*2.1)+"px");
+
+$('#gpsSearch').addClass('rotatedLoading');
 clickDest=-1;
-	stopTryGps=false;
+
 	pageRender='#byDistance';  
 	zoomLevel=10;
 	
@@ -1060,7 +1057,7 @@ if(mapDest==undefined)
 	mapDest = new google.maps.Map(document.getElementById("map_canvas_1"),optionsCharacterMap);
 	mapDest2 = new google.maps.Map(document.getElementById("map_canvas_2"),optionsCharacterMap);
 	google.maps.event.addListener(mapDest2, 'click', function(event) {
-	stopTryGps=true;
+
 if(marker3!=undefined)
  {
 
@@ -1420,10 +1417,6 @@ function updatePostionAquarium()
 
 
 			}
-			function onFinish(position) {
-
-				 onSuccessByD(position);
-			}
 			function onSuccessByD(position) {
 
 
@@ -1448,12 +1441,10 @@ function updatePostionAquarium()
 				            map: mapDest2,
 							icon:fromImage,
 				            title: "We are here!"
-				        });			
-								if (!stopTryGps)
-				{
-				mapDest.panTo(currentPosition);
-				mapDest2.panTo(currentPosition);
-				}
+				        });		
+					mapDest.panTo(currentPosition);
+					mapDest2.panTo(currentPosition);
+
 				directionsDisplay.setMap(mapDest);
 				directionsDisplay2.setMap(mapDest2);
 				
@@ -1475,11 +1466,36 @@ function updatePostionAquarium()
 			 //         'message: ' + error.message + '\n');
 			}
 
+
+
+function getPositionAcuracy(acc)
+{
+ watchID = navigator.geolocation.watchPosition(onSuccesGetAc,onError,geo_options);	
+	
+}
+function onSuccesGetAc( position)
+{
+	
+
+	onSuccessByD(position)
+	accuracyAct=position.accuracy;
+	if(position.accuracy<=accuracyAct && accuracyAct!=-1)
+	{
+		navigator.geolocation.clearWatch(watchID);
+		clearTimeout(isTime);
+		$('#gpsSearch').removeClass('rotatedLoading');
+	}
+}
+function stopTryGps()
+{
+  	navigator.geolocation.clearWatch(watchID);
+	$('#gpsSearch').removeClass('rotatedLoading');
+}
 function getCurrentPosByDistance()
 {
-	navigator.geolocation.getAccurateCurrentPosition(onFinish, onError, onSuccessByD, {desiredAccuracy:50, maxWait:50000});
-	
-			     // navigator.geolocation.getCurrentPosition(onSuccessByD, onError,geo_options);
+isTime=setTimeout(stopTryGps(),timeAccDesired);
+	getPositionAcuracy(accuracyDesired);
+
 }
 function getCurrentPosCharacter()
 {
@@ -2618,36 +2634,21 @@ $('#knowFactContainerAquarium').click(function() {
 	}) ;
 								  clearInterval(intervalDist2);
 	intervalDist2=setInterval(function () {loadKnowFactA()}, ((updateFreqMilis*20)-15000));		
- watchOrientation=navigator.compass.watchHeading(compassSuccess, compassError,compassChange, orientationOptions);
+ //watchOrientation=navigator.compass.watchHeading(compassSuccess, compassError,compassChange, orientationOptions);
   });
   
+  
   function compassSuccess(heading) {
-   navigator.notification.alert(
-            'comok',  // message
-            alertDismissed,         // callback
-            'Game Over',            // title
-            'Done'                  // buttonName
-        );
+  $('#mov').html(heading);
 
 };
 
 function compassError(compassError) {
-
-   navigator.notification.alert(
-            'comf',  // message
-            alertDismissed,         // callback
-            'Game Over',            // title
-            'Done'                  // buttonName
-        );
+  $('#mov').html(compassError);
 };
 
-function compassChange(compassError) {
-   navigator.notification.alert(
-            'comchange',  // message
-            alertDismissed,         // callback
-            'Game Over',            // title
-            'Done'                  // buttonName
-        );
+function compassChange(compass) {
+  $('#mov').html(compass);
 };
 
 

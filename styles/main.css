@@ -683,6 +683,15 @@ visibility:hidden;
     transform: rotate(360deg);
   }
 }
+#mov
+{
+	  width: 50%;
+  position: absolute;
+  height: 100%;
+  left: 25%;
+  z-index: 100000;
+  font-size: 1.5em !important;
+}
 .rotatedLoading {
   -webkit-animation: rotating 2s linear infinite;
   -moz-animation: rotating 2s linear infinite;
@@ -1371,6 +1380,17 @@ float:left;
  float:right;
 }
 
+#gpsSearch
+{
+		  background: transparent url(../resources/others/loadingcenter.png) 0 0 no-repeat;
+		  height: 2% ;
+		   top: 31%;
+		  width: 5%;
+		  z-index: 10010;
+		  left: 71%;
+		  position: absolute;
+		  background-size:100% 100%;
+}
 #wheelDiv
 {
 	 	  background: transparent url(../resources/others/loadingcenter.png) 0 0 no-repeat;
