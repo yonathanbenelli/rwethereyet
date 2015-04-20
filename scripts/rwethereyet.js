@@ -669,29 +669,6 @@ function fullScreen()
 }
 $(document).on('pageshow','#tripPlanner', function(e,data){  
 
- if (window.DeviceOrientationEvent) {  
-		  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.alpha; 
-		  
-$('#mov').html('alpha  '+ dir+' <br/>beta '+ eventData.beta+' <br/>gamma '+eventData.gamma+ ' <br/>x '+ eventData.x+ ' <br/>y '+eventData.y + '<br/>	z'+ eventData.z);
-
-		   getAlpha(dir);     }, false);
-		 
-	  }
-	  else
-	  {
-		   var options = { frequency: frequency };
-        // set accelerometer watcher
-
-		  if(navigator.accelerometer)
-			{		
-			        accelID = navigator.accelerometer.watchAcceleration(onSuccessAcc, onError, options);
-//		watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
-			}
-			else
-			{
-		
-			}
-		}
 });
 $(document).on('pageshow','#main', function(e,data){  
 if(!isLoadSound1)
@@ -2661,6 +2638,36 @@ $('#knowFactContainerAquarium').click(function() {
 	clearInterval(intervalDist2);
 	intervalDist2=setInterval(function () {loadKnowFactA()}, ((updateFreqMilis*20)-15000));		
 
+ if (window.DeviceOrientationEvent) {  
+
+		  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.beta; 
+		  if((dir>=5 && dir<=45) || (dir<=-5 && dir>=-45))
+			{
+				getDir(-dir);
+			}
+			else if(dir<5 && dir>-5)
+			{
+					getDir(0);
+			}
+}, false);
+		 
+	  }
+	  else
+	  {
+		   var options = { frequency: frequency };
+        // set accelerometer watcher
+
+		  if(navigator.accelerometer)
+			{		
+			        accelID = navigator.accelerometer.watchAcceleration(onSuccessAcc, onError, options);
+//		watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
+			}
+			else
+			{
+		
+			}
+		}
+
      
 });
 var accelID=null;
@@ -2720,7 +2727,7 @@ function setBubble(accelerometer) {
     else {
         phi = parseInt((Math.atan(y/x))*180/Math.PI);
     }
-$('#mov').html('r '+ r+' <br/>theta '+ theta+' <br/>phi '+phi+ ' <br/>x '+ x+ ' <br/>y '+y + '<br/>	z'+ z);
+	
 
     var angles = {
         r: r,
@@ -2730,23 +2737,31 @@ $('#mov').html('r '+ r+' <br/>theta '+ theta+' <br/>phi '+phi+ ' <br/>x '+ x+ ' 
         y: y,
         z: z
     };
-	getAlpha(phi-90);
+	
+	if(phi>=45 && phi<=85)
+	{
+		getDir(phi-90);
+	}
+	else 	if(phi>=-85 && phi<=-45)
+	{
+				getDir(phi+90);
+	}
+	else if(phi<-85 && phi>=-90)
+			{
+					getDir(0);
+			}
+			else if(phi>85 && phi<=90)
+			{
+					getDir(0);
+			}
 }
 
-  function getAlpha(dir)
+  function getDir(dir)
   {
 	  var rot=	  dir;
-	  if(rot>45)
-	  {
-		  rot=45;
-	  }
-	  else if (rot<-45)
-	  {
-		  rot=45;
-	  }
 	  
 	  var rotation = 360 - rot;
-	  var capa=document.getElementById('allA2');
+	  var capa=document.getElementById('allA');
 	capa.style.webkitTransform =  "rotate("+ rot +"deg)";
 	capa.style.MozTransform = "rotate("+ rot +"deg)";
 	capa.style.transform = "rotate("+ rot +"deg) ";
