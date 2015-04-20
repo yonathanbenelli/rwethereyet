@@ -686,7 +686,10 @@ if(!isLoadSound1)
 		 $('#buttonTripPlanner').css('visibility','visible');
 			$('#backMain').css('visibility','hidden');	
 	}
-				if(defaultTrip=='0')
+	
+});
+$(document).on('pageshow','#settings', function(e,data){  
+			if(defaultTrip=='0')
 			{	
 						 $('#defaultTripOption0').css('z-index','100');
 					 $('#defaultTripOption1').css('z-index','99');
@@ -715,9 +718,6 @@ if(!isLoadSound1)
 	{
 	$('#soundImage').css('background','transparent url(resources/buttons/soundonbutton.png) 0 0 no-repeat');		
 	}
-
-});
-$(document).on('pageshow','#settings', function(e,data){  
 
 });
 $(document).on('pageshow','#setCharacter', function(e,data){  
