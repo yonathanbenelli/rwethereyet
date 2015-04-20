@@ -2773,26 +2773,11 @@ function setBubble(accelerometer) {
 	
 	if(phi>=45 && phi<=85)
 	{
-		if(!isAndroid)
-	  {
-		  getDir((phi-90));
-	  }
-	  else
-	  {
-		  
 			getDir(phi-90);
 		}
-	}
 	else 	if(phi>=-85 && phi<=-45)
 	{
-		if(!isAndroid)
-	  {
 		  getDir((phi+90));
-	  }
-	  else
-	  {
-				getDir(phi+90);
-	  }
 	}
 	else if(phi<-85 && phi>=-90)
 			{
