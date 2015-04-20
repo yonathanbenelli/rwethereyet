@@ -686,6 +686,39 @@ if(!isLoadSound1)
 		 $('#buttonTripPlanner').css('visibility','visible');
 			$('#backMain').css('visibility','hidden');	
 	}
+				if(defaultTrip=='0')
+			{	
+						 $('#defaultTripOption0').css('z-index','100');
+					 $('#defaultTripOption1').css('z-index','99');
+						 $('#defaultTripOption2').css('z-index','98');
+			}
+			else if(defaultTrip=='1')
+			{	
+					 $('#defaultTripOption0').css('z-index','98');
+					 $('#defaultTripOption1').css('z-index','100');
+						 $('#defaultTripOption2').css('z-index','99');
+			}
+			else 
+			{	
+				 $('#defaultTripOption0').css('z-index','99');
+					 $('#defaultTripOption1').css('z-index','98');
+						 $('#defaultTripOption2').css('z-index','100');
+			}
+			
+			if(sound==false)
+			{
+	$('#soundImage').css('background','transparent url(resources/buttons/soundoffbutton.png) 0 0 no-repeat');
+	
+		
+	}
+	else
+	{
+	$('#soundImage').css('background','transparent url(resources/buttons/soundonbutton.png) 0 0 no-repeat');		
+	}
+
+});
+$(document).on('pageshow','#settings', function(e,data){  
+
 });
 $(document).on('pageshow','#setCharacter', function(e,data){  
 clearInterval(intervalDist2);
