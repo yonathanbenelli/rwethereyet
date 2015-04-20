@@ -2647,7 +2647,7 @@ $('#knowFactContainerAquarium').click(function() {
 
 		  if(navigator.accelerometer)
 			{		
-			        accelID = navigator.accelerometer.watchAcceleration(onSuccess, onErrorAcc, options);
+			        accelID = navigator.accelerometer.watchAcceleration(onSuccessAcc, onError, options);
 //		watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
 			}
 			else
