@@ -1,5 +1,5 @@
 $(document).bind("pagebeforechange", function(e,ob) {
-if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+//if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -520,7 +520,7 @@ function getMedia(src,loop,i,id)
 				else
 				{
 
-							mediaRes=	 window.plugins.NativeAudio.preloadSimple(id,src,onSuccessS,onErrorS); 
+							mediaRes=	window.plugins.NativeAudio.preloadComplex(id,src,1,1,0,onSuccessS,onErrorS); 
 				}
 
 		}
@@ -1578,9 +1578,9 @@ function updateTimeLeftTextA(timeL)
 function finishTripJungle()
 {
 				changePageSoundF('play');
-			
+	
 	  $('#finishLeafs').destroy();
-	  		stopAllSoundAF();
+	  		stopAllSoundA();
 	  clearTrip();
 	  				pageRender='#main';  
 	  $.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
@@ -3283,6 +3283,7 @@ function stopAllSoundA()
 	aquarium1SoundF('pause');
 	aquarium2SoundF('pause');
 	ovationSoundF('pause');
+	
 	waterPipeSoundF('pause');
 	wavesSoundF('pause');
 
@@ -3404,10 +3405,11 @@ function ovationSoundF(acc)
 	
 				window.plugins.NativeAudio.stop('ovation');
 
-	window.plugins.NativeAudio.setVolumeForComplexAsset('ovation', soundVol50, function(msg){},function(msg){})
+
 
 		if(acc=='play' && sound)
 		{
+				window.plugins.NativeAudio.setVolumeForComplexAsset('ovation', soundVol50, function(msg){},function(msg){})
 			window.plugins.NativeAudio.loop('ovation');
 		}
 	}
@@ -3415,9 +3417,10 @@ function ovationSoundF(acc)
 	{	
 			ovation.stop();
 
-		ovation.setVolume(soundVol50);		
+		
 	if(acc=='play' && sound)
 	{
+		ovation.setVolume(soundVol50);		
 		ovation.play();
 	}
 	}

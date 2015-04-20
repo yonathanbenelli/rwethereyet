@@ -754,10 +754,10 @@ img, object, embed, video {
 #allA
 {
 	position:absolute;
-	width:100%; height:100%; visibility:hidden
-   /* -ms-transform: rotate(45deg); 
-    -webkit-transform: rotate(45deg); 
-    transform: rotate(45deg);*/
+	width:100%; height:100%; visibility:hidden;
+    /*-ms-transform: rotate(-45deg); 
+    -webkit-transform: rotate(-45deg); 
+    transform: rotate(-45deg);*/
 }
 .pageA
 {
@@ -1467,7 +1467,7 @@ float:left;
 	left:0% !important;
 	  padding:0 !important;
 	  visibility:hidden;
-	overflow:hidden !important;
+	overflow:visible !important;
 }
 #headerContentMain
 { 	  background: transparent url(../resources/labels/mainlabel.png) 0 0 no-repeat;}
