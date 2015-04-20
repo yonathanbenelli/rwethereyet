@@ -683,7 +683,25 @@ if(!isLoadSound1)
 		 $('#buttonTripPlanner').css('visibility','visible');
 			$('#backMain').css('visibility','hidden');	
 	}
+ if (window.DeviceOrientationEvent) {  
+		  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.alpha;  getAlpha(dir);     }, false);
+		 
+	  }
+	  else
+	  {
+		   var options = { frequency: frequency };
+        // set accelerometer watcher
 
+		  if(navigator.accelerometer)
+			{		
+			        accelID = navigator.accelerometer.watchAcceleration(onSuccessAcc, onError, options);
+//		watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
+			}
+			else
+			{
+				$('#mov').html('none');
+			}
+		}
 });
 $(document).on('pageshow','#setCharacter', function(e,data){  
 clearInterval(intervalDist2);
@@ -2636,25 +2654,7 @@ $('#knowFactContainerAquarium').click(function() {
 	clearInterval(intervalDist2);
 	intervalDist2=setInterval(function () {loadKnowFactA()}, ((updateFreqMilis*20)-15000));		
 
-      if (window.DeviceOrientationEvent) {  
-		  window.addEventListener('deviceorientation', function(eventData) { var dir = eventData.alpha;  getAlpha(dir);     }, false);
-		 
-	  }
-	  else
-	  {
-		   var options = { frequency: frequency };
-        // set accelerometer watcher
-
-		  if(navigator.accelerometer)
-			{		
-			        accelID = navigator.accelerometer.watchAcceleration(onSuccessAcc, onError, options);
-//		watchOrientation=navigator.compass.watchHeading(compassSuccessE, compassErrorE, orientationOptions);
-			}
-			else
-			{
-				$('#mov').html('none');
-			}
-		}
+     
 });
 var accelID=null;
 var frequency = 100;
@@ -2746,27 +2746,6 @@ $('#mov').html('r '+ r+' theta '+ theta+' phi '+phi+ ' x '+ x+ ' y '+y + 'z'+ z)
 
   }
   
-  function compassSuccessE(heading) {
-  var rot=	  heading.magneticHeading/2;
-	  if(rot>45)
-	  {
-		  rot=45;
-	  }
-	  else if (rot<-45)
-	  {
-		  rot=45;
-	  }
-	  
-	  var rotation = 360 - rot;
-	  var capa=document.getElementById('allA');
-	capa.style.webkitTransform =  "rotate("+ rot +"deg)";
-	capa.style.MozTransform = "rotate("+ rot +"deg)";
-	capa.style.transform = "rotate("+ rot +"deg) ";
-
-
-
-}
-
 function compassErrorE(compassError) {
   $('#mov').html('Compass error: ' + compassError.code)
 }
