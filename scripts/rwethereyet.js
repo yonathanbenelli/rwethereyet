@@ -483,9 +483,9 @@ var app = {
 				if(isAndroid)
 				{
 					
-					
-										document.addEventListener("pause", pauseApp(), false);
-										document.addEventListener("resume", resumeApp(), false);
+					document.addEventListener("pause", function() { pauseApp();}, false);
+				document.addEventListener("resume", function() { resumeApp();}, false);
+				document.addEventListener("menubutton", function() { pauseApp();}, false);
 				}
       
     },
@@ -534,9 +534,25 @@ function myPlay(id)
 {
 	list[id].play({ playAudioWhenScreenIsLocked : false });
 }
+var loops=[];
 function myLoop(id)
 {
+	if(loops[id]!=undefined)
+	{
+		clearInterval(	loops[id]);
+			loops[id].stop();
+	}
 	list[id].play({ playAudioWhenScreenIsLocked : false });
+	if(list[id].getDuration()!=-1)
+	{
+		loops[id] = setInterval(function () {  	list[id].play({ playAudioWhenScreenIsLocked : false });}, (list[id].getDuration()+5)*1000);
+	}
+	else
+	{
+			loops[id] = setInterval(function () {  clearInterval(	loops[id]);
+			loops[id].stop();	list[id].play({ playAudioWhenScreenIsLocked : false });}, 50000);
+	}
+
 }
 function myVolume(id,vol,succ,err)
 {
@@ -3610,7 +3626,6 @@ knowJSoundF('pause',setScene);
 birdsConSoundF('pause');	
 
 stopMusic();
-	
 
 	
 }
