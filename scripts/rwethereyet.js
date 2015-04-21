@@ -561,7 +561,7 @@ function getMedia(src,loop,i,id,delay)
 			*/
 //			var src2='file:///android/assets/www/'+src;
 						var src2='/android_asset/www/'+src;
-			if(window.plugins.Media!=undefined)
+		/*	if(window.plugins.Media!=undefined)
 			{
 				list[id]= new window.plugins.Media(src2, onSuccessS,onErrorS);
 			}
@@ -577,7 +577,8 @@ function getMedia(src,loop,i,id,delay)
 			{
 						list[id]= new window.core.Media(src2, onSuccessS,onErrorS);
 			}
-			
+			*/
+					list[id]= new Media(src2, onSuccessS,onErrorS);
 		}
 		else
 		{
