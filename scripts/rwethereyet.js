@@ -483,6 +483,7 @@ var app = {
 				soundOk=true;
 				if(isAndroid)
 				{
+					
 										document.addEventListener("pause", pauseApp(), false);
 										document.addEventListener("resume", resumeApp(), false);
 				}
