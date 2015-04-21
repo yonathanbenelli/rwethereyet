@@ -6,7 +6,7 @@ $(document).bind("scroll", function(e) {
 	   
 });
 
-var simulateGps=true;
+var simulateGps=false;
 var notStart=true;
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
 "Did you know?<br/>most lipsticks contain fish scales",
@@ -3460,8 +3460,13 @@ $(document).on('pageshow','#loading', function(e,data){
 
 playMusic();
 
-				 rotTimes=2000;	
-				 
+if(distanceFull==distanceLeft)
+{rotTimes=7000;	
+	}
+else
+{
+rotTimes=2000;	
+}
 			  loadCharacter();
 				setTimeout(function () { 
 
