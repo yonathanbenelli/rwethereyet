@@ -44,16 +44,30 @@
 
 
     <!-- Define app splash screen for each platform. -->
-    <gap:splash src="splash1.png"       gap:platform="android" gap:qualifier="port-ldpi" />
+<!--
+    <gap:splash src="splash0.png"       gap:platform="android" gap:qualifier="port-ldpi" />
     <gap:splash src="splash1.png"              gap:platform="android" gap:qualifier="port-mdpi" />
-    <gap:splash src="splash1.png"             gap:platform="android" gap:qualifier="port-hdpi" />
-    <gap:splash src="splash1.png"             gap:platform="android" gap:qualifier="port-xhdpi" />
-    <gap:splash src="splash1.png"                     gap:platform="blackberry" />
-    <gap:splash src="splash1.png"                gap:platform="ios"     width="320" height="480" />
-    <gap:splash src="splash1.png"            gap:platform="ios"     width="640" height="960" />
-    <gap:splash src="splash1.png"        gap:platform="ios"     width="640" height="1136" />
-    <gap:splash src="splash1.png"                  gap:platform="ios"     width="768" height="1024" />
-    <gap:splash src="splash1.png"                 gap:platform="ios"     width="1024" height="768" />
-    <gap:splash src="splash1.png"             gap:platform="winphone" />
+    <gap:splash src="splash2.png"             gap:platform="android" gap:qualifier="port-hdpi" />
+    <gap:splash src="splash3.png"             gap:platform="android" gap:qualifier="port-xhdpi" />
+    <gap:splash src="splash4.png"                     gap:platform="blackberry" />
+    <gap:splash src="splash5.png"                gap:platform="ios"     width="320" height="480" />
+    <gap:splash src="splash6.png"            gap:platform="ios"     width="640" height="960" />
+    <gap:splash src="splash7.png"        gap:platform="ios"     width="640" height="1136" />
+    <gap:splash src="splash8.png"                  gap:platform="ios"     width="768" height="1024" />
+    <gap:splash src="splash9.png"                 gap:platform="ios"     width="1024" height="768" />
+    <gap:splash src="splash10.png"             gap:platform="winphone" />
+-->
+<gap:splash gap:density="ldpi" gap:platform="android" src="res/screen/android/splash0.png" />
+<gap:splash gap:density="mdpi" gap:platform="android" src="res/screen/android/splash1.png" />
+<gap:splash gap:density="hdpi" gap:platform="android" src="res/screen/android/splash2.png" />
+<gap:splash gap:density="xhdpi" gap:platform="android" src="res/screen/android/splash3.png" />
+<gap:splash gap:platform="ios" height="480" src="res/screen/ios/splash4.png" width="320" />
+<gap:splash gap:platform="ios" height="960" src="res/screen/ios/splash5.png" width="640" />
+<gap:splash gap:platform="ios" height="1024" src="res/screen/ios/splash6.png" width="768" />
+<gap:splash gap:platform="ios" height="768" src="res/screen/ios/splash7.png" width="1024" />
+<gap:splash gap:platform="ios" height="1136" src="res/screen/ios/splash8.png" width="640" />
+<gap:splash gap:platform="ios" height="1334" src="res/screen/ios/splash9.png" width="750" />
+<gap:splash gap:platform="ios" height="2208" src="res/screen/ios/splash10.png" width="1242" />
+<gap:splash gap:platform="ios" height="2248" src="res/screen/ios/splash11.png" width="1536" />
 
 </widget>
