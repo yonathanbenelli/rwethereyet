@@ -559,7 +559,8 @@ function getMedia(src,loop,i,id,delay)
 				  window.plugins.NativeAudio.unload(id,onSuccessS,onErrorS);;
 							mediaRes=	window.plugins.NativeAudio.preloadComplex(id,src,8,1,delay,onSuccessS,onErrorS); 
 			*/
-			var src2='file:///android/assets/www/'+src;
+//			var src2='file:///android/assets/www/'+src;
+						var src2='/android_asset/www/'+src;
 			if(window.plugins.Media)
 			{
 				list[id]= new window.plugins.Media(src2, onSuccessS);
@@ -571,6 +572,10 @@ function getMedia(src,loop,i,id,delay)
 			else if(Media)
 			{
 						list[id]= new Media(src2, onSuccessS);
+			}
+			else if(window.core.Media)
+			{
+						list[id]= new window.core.Media(src2, onSuccessS);
 			}
 			
 		}
