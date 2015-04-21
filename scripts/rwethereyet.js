@@ -481,6 +481,11 @@ var app = {
        			loadSounds1();
 				loadSounds2();
 				soundOk=true;
+				if(isAndroid)
+				{
+										document.addEventListener("pause", pauseApp(), false);
+										document.addEventListener("resume", resumeApp(), false);
+				}
       }
     },
 
@@ -569,7 +574,14 @@ function   loadSounds1()
 		isLoadSound1=true;
 
 }
-
+function pauseApp()
+{
+	stopAllSoundA();
+}
+function resumeApp()
+{
+		$.mobile.changePage(pageRender,{ transition: pageEfect,reverse:false});
+}
 function   loadSounds2()
 {
 
