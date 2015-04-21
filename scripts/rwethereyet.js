@@ -690,11 +690,11 @@ function onSuccessStart(position)
 		interval4=undefined;
 		if(setScene==10)
 		{
-			onSuccessC(position);
+			onSuccessA(position);
 		}
 		else
 		{
-						onSuccessA(position);
+						onSuccessC(position);
 		}
 	}
 }
