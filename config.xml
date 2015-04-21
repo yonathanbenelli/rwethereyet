@@ -23,18 +23,18 @@
 <preference name="DisallowOverscroll" value="true"/>
 <icon src="icon1.png" />
 
-    <gap:plugin name="org.apache.cordova.media-capture" />
-    <gap:plugin name="org.apache.cordova.device" />
-<gap:plugin name="org.apache.cordova.dialogs" />
-    <gap:plugin name="org.apache.cordova.file" />
-    <gap:plugin name="org.apache.cordova.geolocation" />
-    <gap:plugin name="org.apache.cordova.media" />
-	<gap:plugin name="org.apache.cordova.device-motion"/>
-    <gap:plugin name="org.apache.cordova.network-information" />
-	<gap:plugin name="org.apache.cordova.splashscreen" version="0.3.4" />
+    <gap:plugin name="org.apache.cordova.core.media-capture" />
+    <gap:plugin name="org.apache.cordova.core.device" />
+<gap:plugin name="org.apache.cordova.core.dialogs" />
+    <gap:plugin name="org.apache.cordova.core.file" />
+    <gap:plugin name="org.apache.cordova.core.geolocation" />
+    <gap:plugin name="org.apache.cordova.core.media" />
+	<gap:plugin name="org.apache.cordova.core.device-motion"/>
+    <gap:plugin name="org.apache.cordova.core.network-information" />
+	<gap:plugin name="org.apache.cordova.core.splashscreen" version="0.3.4" />
 	<gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.4" />
 	<gap:plugin name="de.neofonie.cordova.plugin.nativeaudio"/>
-	<gap:plugin name="org.apache.cordova.device-orientation" />
+	<gap:plugin name="org.apache.cordova.core.device-orientation" />
 
 <access origin="*"/>
     <!-- Added the following intents to support the removal of whitelist code from base cordova to a plugin -->

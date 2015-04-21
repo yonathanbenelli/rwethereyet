@@ -456,8 +456,7 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 
-        if( window.plugins && window.plugins.NativeAudio ) {
-			if(window.localStorage.getItem('default')=='0')
+      	if(window.localStorage.getItem('default')=='0')
 			{	defaultTrip=0;
 			}
 			else if(window.localStorage.getItem('default')=='1')
@@ -484,10 +483,11 @@ var app = {
 				if(isAndroid)
 				{
 					
+					
 										document.addEventListener("pause", pauseApp(), false);
 										document.addEventListener("resume", resumeApp(), false);
 				}
-      }
+      
     },
 
 };
@@ -559,7 +559,19 @@ function getMedia(src,loop,i,id,delay)
 				  window.plugins.NativeAudio.unload(id,onSuccessS,onErrorS);;
 							mediaRes=	window.plugins.NativeAudio.preloadComplex(id,src,8,1,delay,onSuccessS,onErrorS); 
 			*/
-			list[id]= new Media(src, onSuccessS);
+			if(window.plugins.Media)
+			{
+				list[id]= new window.plugins.Media(src, onSuccessS);
+			}
+			else if(window.Media)
+			{
+					list[id]= new window.plugins.Media(src, onSuccessS);
+			}
+			else if(Media)
+			{
+						list[id]= new Media(src, onSuccessS);
+			}
+			
 		}
 		else
 		{
