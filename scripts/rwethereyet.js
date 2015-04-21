@@ -522,7 +522,7 @@ var 	notFullScreen=true;
 	var toImage= 'resources/others/to.png';
 		var fromImage= 'resources/others/from.png';
 				var nowImage= 'resources/others/now.png';
-function getMedia(src,loop,i,id)
+function getMedia(src,loop,i,id,delay)
 {
 		       var mediaRes; 
 			  
@@ -531,21 +531,11 @@ function getMedia(src,loop,i,id)
 //          src = '/android_asset/www/' + src;
 
 				  window.plugins.NativeAudio.unload(id,onSuccessS,onErrorS);;
-				if(loop)
-				{
-						
-						mediaRes =  window.plugins.NativeAudio.preloadComplex(id,src,1,1,0,onSuccessS,onErrorS); 
-				}
-				
-				else
-				{
-
-							mediaRes=	window.plugins.NativeAudio.preloadComplex(id,src,1,1,0,onSuccessS,onErrorS); 
-				}
-
+							mediaRes=	window.plugins.NativeAudio.preloadComplex(id,src,8,1,delay,onSuccessS,onErrorS); 
+			
 		}
-			else
-			{
+		else
+		{
 				if(loop)
 				{
 					mediaRes =new buzz.sound(src, { loop: true});
@@ -554,7 +544,7 @@ function getMedia(src,loop,i,id)
 				{
 						mediaRes =new buzz.sound(src);
 				}
-			}
+		}
 	return mediaRes;
 }
 function   loadSounds1()
@@ -575,7 +565,7 @@ function   loadSounds1()
 		changePageSound = getMedia("resources/sounds/changepage.mp3",false,0,'changePageSound');
 		swipe2Sound= getMedia("resources/sounds/swipe2.mp3",false,0,'swipe2Sound');
 		tapASound= getMedia("resources/sounds/tapa.mp3",false,0,'tapASound');
-		swipe1Sound= getMedia("resources/sounds/swipe1.mp3",'swipe1Sound');
+		swipe1Sound= getMedia("resources/sounds/swipe1.mp3",false,0,'swipe1Sound');
 		isLoadSound1=true;
 
 }
@@ -591,30 +581,30 @@ function   loadSounds2()
 	music[5]= music[1];
 	music[6]=music[1];
 	music[7]=music[1];*/
-	music[2]= getMedia("resources/music/music2.mp3", true,2,'2');
-	music[3]= getMedia("resources/music/music3.mp3", true,3,'3');
-	music[4]= getMedia("resources/music/music4.mp3", true,4,'4');
-	music[5]= getMedia("resources/music/music5.mp3", true,5,'5');
-	music[6]= getMedia("resources/music/music6.mp3", true,6,'6');
-	music[7]= getMedia("resources/music/music7.mp3", true,7,'7');
+	music[2]= getMedia("resources/music/music2.mp3", true,2,'2',1);
+	music[3]= getMedia("resources/music/music3.mp3", true,3,'3',1);
+	music[4]= getMedia("resources/music/music4.mp3", true,4,'4',1);
+	music[5]= getMedia("resources/music/music5.mp3", true,5,'5',1);
+	music[6]= getMedia("resources/music/music6.mp3", true,6,'6',1);
+	music[7]= getMedia("resources/music/music7.mp3", true,7,'7',1);
 	toucanSound= getMedia("resources/sounds/toucan.mp3",false,0,'toucanSound');
 	zebraSound= getMedia("resources/sounds/zebra.mp3",false,0,'zebraSound');
-	ovation= getMedia("resources/sounds/ovation.mp3",true,0,'ovation');
+	ovation= getMedia("resources/sounds/ovation.mp3",true,1,'ovation',1);
 	crocodileSound= getMedia("resources/sounds/crocodile.mp3",false,0,'crocodileSound');
 		elephantSound= getMedia("resources/sounds/elephant.mp3",false,0,'elephantSound');
 	jungleSound= getMedia("resources/sounds/jungle.mp3",false,0,'jungleSound');
 	lionSound= getMedia("resources/sounds/lion.mp3",false,0,'lionSound');
 		monkeySound= getMedia("resources/sounds/monkey.mp3",false,0,'monkeySound');
-		wavesSound= getMedia("resources/sounds/waves.mp3",true,1,'wavesSound');
+		wavesSound= getMedia("resources/sounds/waves.mp3",true,1,'wavesSound',1);
 		dolphinSound= getMedia("resources/sounds/dolphin.mp3",false,0,'dolphinSound');
 				mermaidSound= getMedia("resources/sounds/mermaid.mp3",false,0,'mermaidSound');
-		birdsConSound= getMedia("resources/sounds/birdscon.mp3",true,4,'birdsConSound');
+		birdsConSound= getMedia("resources/sounds/birdscon.mp3",true,4,'birdsConSound',1);
 		bird1Sound= getMedia("resources/sounds/bird1.mp3",false,0,'bird1Sound');
 		bird2Sound= getMedia("resources/sounds/bird2.mp3",false,0,'bird2Sound');
-		aquarium1Sound= getMedia("resources/sounds/aquarium1.mp3", true,5,'aquarium1Sound');
-		aquarium2Sound= getMedia("resources/sounds/aquarium2.mp3", true,6,'aquarium2Sound');
-		bubblesFinishSound= getMedia("resources/sounds/bubblesfinish.mp3", true,3,'bubblesFinishSound');
-		waterPipeSound= getMedia("resources/sounds/waterpipe.mp3", true,2,'waterPipeSound');
+		aquarium1Sound= getMedia("resources/sounds/aquarium1.mp3", true,5,'aquarium1Sound',1);
+		aquarium2Sound= getMedia("resources/sounds/aquarium2.mp3", true,6,'aquarium2Sound',1);
+		bubblesFinishSound= getMedia("resources/sounds/bubblesfinish.mp3", true,3,'bubblesFinishSound',1);
+		waterPipeSound= getMedia("resources/sounds/waterpipe.mp3", true,2,'waterPipeSound',1);
 				isLoadSound2=true;
 
 }
@@ -1799,8 +1789,7 @@ function updateTimeLeftTextA(timeL)
 function finishTripJungle()
 {
 				changePageSoundF('play');
-	
-	  $('#finishLeafs').destroy();
+		  $('#finishLeafs').destroy();
 	  		stopAllSoundA();
 	  clearTrip();
 	  				pageRender='#main';  
@@ -3707,133 +3696,128 @@ function dolphinSoundF(acc)
 {
 	if(soundOk)
 	{
-clearInterval(dolphinSoundIn);
-	dolphinSoundIn=setInterval(function () {
-	
+			
 		if(isAndroid)
 	{	
-				window.plugins.NativeAudio.stop('dolphinSound');
-	
-
+					window.plugins.NativeAudio.stop('dolphinSound');
 	window.plugins.NativeAudio.setVolumeForComplexAsset('dolphinSound', soundVol50, function(msg){},function(msg){})
 
 		if(acc=='play' && sound)
 		{
-			window.plugins.NativeAudio.play('dolphinSound');
+			window.plugins.NativeAudio.loop('dolphinSound');
 		}
 	}
-	else
-	{	
-			
-			dolphinSound.stop();
-	
-	dolphinSound.setVolume(soundVol50);		
-	if(acc=='play' && sound)
-	{
-		dolphinSound.play();
+	else{
+	clearInterval(dolphinSoundIn);
+		dolphinSoundIn=setInterval(function () {
+				dolphinSound.stop();
+		
+		dolphinSound.setVolume(soundVol50);		
+		if(acc=='play' && sound)
+		{
+			dolphinSound.play();
+		}
+		
+			},10000);
 	}
 	}
-		},10000);
-}
 }
 
 function mermaidSoundF(acc)
 {
 	if(soundOk)
 	{
-clearInterval(mermaidSoundIn);
-	mermaidSoundIn=setInterval(function () {
+			
 		if(isAndroid)
 	{	
-	
-				window.plugins.NativeAudio.stop('mermaidSound');
-
+					window.plugins.NativeAudio.stop('mermaidSound');
 	window.plugins.NativeAudio.setVolumeForComplexAsset('mermaidSound', soundVol50, function(msg){},function(msg){})
 
 		if(acc=='play' && sound)
 		{
-			window.plugins.NativeAudio.play('mermaidSound');
+			window.plugins.NativeAudio.loop('mermaidSound');
 		}
 	}
-	else
-	{	
+	else{
+	clearInterval(mermaidSoundIn);
+		mermaidSoundIn=setInterval(function () {
+				mermaidSound.stop();
 		
-			mermaidSound.stop();
-	mermaidSound.setVolume(soundVol50);		
-	
-	if(acc=='play' && sound)
-	{
-		mermaidSound.play();
+		mermaidSound.setVolume(soundVol50);		
+		if(acc=='play' && sound)
+		{
+			mermaidSound.play();
+		}
+		
+			},10000);
+		}
 	}
-	}
-		},10000);
-}
 }
 
 function bird1SoundF(acc)
 {
+
 	if(soundOk)
 	{
-clearInterval(bird1SoundIn);
-bird1SoundIn=setInterval(function () {
+			
 		if(isAndroid)
 	{	
-				window.plugins.NativeAudio.stop('bird1Sound');
-	
-
+					window.plugins.NativeAudio.stop('bird1Sound');
 	window.plugins.NativeAudio.setVolumeForComplexAsset('bird1Sound', soundVol10, function(msg){},function(msg){})
 
 		if(acc=='play' && sound)
 		{
-			window.plugins.NativeAudio.play('bird1Sound');
+			window.plugins.NativeAudio.loop('bird1Sound');
 		}
 	}
-	else
-	{	
-			bird1Sound.stop();	
-	bird1Sound.setVolume(soundVol10);		
+	else{
+	clearInterval(bird1SoundIn);
+		bird1SoundIn=setInterval(function () {
+				bird1Sound.stop();
+		
+		bird1Sound.setVolume(soundVol10);		
+		if(acc=='play' && sound)
+		{
+			bird1Sound.play();
+		}
+		
+			},20000);
+		}
+	}
+}
 
-	if(acc=='play' && sound)
-	{
-		bird1Sound.play();
-	}
-	
-	}
-	},20000);
-}
-}
 
 
 function bird2SoundF(acc)
 {
+
 	if(soundOk)
 	{
-clearInterval(bird2SoundIn);
-bird2SoundIn=setInterval(function () {
-
+			
 		if(isAndroid)
 	{	
-	
-			window.plugins.NativeAudio.stop('bird2Sound');
+					window.plugins.NativeAudio.stop('bird2Sound');
 	window.plugins.NativeAudio.setVolumeForComplexAsset('bird2Sound', soundVol10, function(msg){},function(msg){})
 
 		if(acc=='play' && sound)
 		{
-			window.plugins.NativeAudio.play('bird2Sound');
+			window.plugins.NativeAudio.loop('bird2Sound');
 		}
-
 	}
-	else
-	{				bird2Sound.stop();
-	bird2Sound.setVolume(soundVol10);		
-	if(acc=='play' && sound)
-	{
-		bird2Sound.play();
+	else{
+	clearInterval(bird2SoundIn);
+		bird2SoundIn=setInterval(function () {
+				bird2Sound.stop();
+		
+		bird2Sound.setVolume(soundVol10);		
+		if(acc=='play' && sound)
+		{
+			bird2Sound.play();
+		}
+		
+			},4000);
+		}
 	}
-	
-	}
-	},4000);
-}
 }
 
 function scrollSoundF(acc)
