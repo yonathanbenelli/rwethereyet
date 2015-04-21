@@ -477,6 +477,7 @@ var app = {
 			{
 				sound=true;	
 			}
+			
        			loadSounds1();
 				loadSounds2();
 				soundOk=true;
@@ -528,10 +529,11 @@ function getMedia(src,loop,i,id)
 		if (isAndroid) 
 		{
 //          src = '/android_asset/www/' + src;
-			 
+
+				  window.plugins.NativeAudio.unload(id,onSuccessS,onErrorS);;
 				if(loop)
 				{
-		
+						
 						mediaRes =  window.plugins.NativeAudio.preloadComplex(id,src,1,1,0,onSuccessS,onErrorS); 
 				}
 				
@@ -625,49 +627,7 @@ function   loadSounds2()
         //
         function onErrorS(error) {
         }
-	function onStatusSWave(status) {
-        if( status==4 ) {
-
-			wavesSoundF('play');
-		}
-	}
-		function onStatusSWaterP(status) {
-        if( status==4 ) {
-
-			waterPipeSoundF('play');
-		}
-	}
-
-	function onStatusSBubbleF(status) {
-        if( status==4 ) {
-
-			finishBubblesSoundAF('play');
-		}
-	}
-		function onStatusSBirdCon(status) {
-        if( status==4 ) {
-
-
-		birdsConSoundF('play');
-		}
-	}
-	function onStatusSAquarium1(status) {
-        if( status==4 ) {
-			aquarium1SoundF('play');
-		}
-	}
-	function onStatusSAquarium2(status) {
-        if( status==4 ) {
-			aquarium2SoundF('play');
-		}
-	}
-
-	function onStatusSMusic(status) {
-        if( status==4 ) {
-			playMusic();
-        }
-		
-	}
+	
 	
 function minScreen()
 {
@@ -3723,10 +3683,7 @@ if(soundOk)
 	{	
 	
 				window.plugins.NativeAudio.stop('ovation');
-
-
-
-		if(acc=='play' && sound)
+	if(acc=='play' && sound)
 		{
 				window.plugins.NativeAudio.setVolumeForComplexAsset('ovation', soundVol50, function(msg){},function(msg){})
 			window.plugins.NativeAudio.loop('ovation');
