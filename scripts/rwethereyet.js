@@ -532,21 +532,21 @@ var list=[];
 
 function myPlay(id)
 {
-	list(id).play({ playAudioWhenScreenIsLocked : false });
+	list[id].play({ playAudioWhenScreenIsLocked : false });
 }
 function myLoop(id)
 {
-	list(id).play({ playAudioWhenScreenIsLocked : false });
+	list[id].play({ playAudioWhenScreenIsLocked : false });
 }
 function myVolume(id,vol,succ,err)
 {
-	list(id).setVolume(vol);
+	list[id].setVolume(vol);
 }
 
 
 function myStop(id)
 {
-	list(id).stop();
+	list[id].stop();
 }
 function getMedia(src,loop,i,id,delay)
 {
@@ -559,7 +559,7 @@ function getMedia(src,loop,i,id,delay)
 				  window.plugins.NativeAudio.unload(id,onSuccessS,onErrorS);;
 							mediaRes=	window.plugins.NativeAudio.preloadComplex(id,src,8,1,delay,onSuccessS,onErrorS); 
 			*/
-			list(id)= new Media(src, onSuccessS);
+			list[id]= new Media(src, onSuccessS);
 		}
 		else
 		{
