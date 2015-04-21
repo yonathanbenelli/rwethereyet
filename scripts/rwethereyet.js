@@ -336,6 +336,7 @@ var pageEfect="flip";
 		var defaultLatLng = new google.maps.LatLng(45.2501566,-75.8002568);
 		var rendererOptions = {
 
+
   suppressMarkers : true
 }
 			var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
@@ -375,7 +376,7 @@ var render=true;
 		var levelPos=-1;
 		var timeLeft=-1;
 		var timeFull=-1;
-		
+		var getAccu;
 		var doubleTapSpeed=500;
 		var timeNow=0;
 		var intervalRot;
@@ -478,7 +479,7 @@ var app = {
 			}
        			loadSounds1();
 				loadSounds2();
-		soundOK=true;
+				soundOk=true;
       }
     },
 
@@ -516,6 +517,7 @@ var accuracyAct=-1;
 var isTime;
 var timeAccDesired=20000;
 var accuracyDesired=50;	
+var 	notFullScreen=true;
 	var toImage= 'resources/others/to.png';
 		var fromImage= 'resources/others/from.png';
 				var nowImage= 'resources/others/now.png';
@@ -575,6 +577,7 @@ function   loadSounds1()
 		isLoadSound1=true;
 
 }
+
 function   loadSounds2()
 {
 
@@ -668,15 +671,25 @@ function   loadSounds2()
 	
 function minScreen()
 {
+		notFullScreen=true;
 		tapJSoundF('play');
 			$('#minScreenMap').css('visibility','hidden');
 			$('#map_canvas_2').css('z-index','-100');
 				$('#mapFind').removeClass('mapFindFull');
 						$('#mapAdd').css('visibility','visible');
+						
+							$('#gpsSearch').css('visibility','visible');
+							if(!getAccu && 	destPosition==undefined)
+						{
+								$('#gpsSearch').addClass('rotatedLoading');
+						}
 }
 function fullScreen()
 {
+	notFullScreen=false;
 	tapJSoundF('play');
+	$('#gpsSearch').removeClass('rotatedLoading');
+								$('#gpsSearch').css('visibility','hidden');
 	$('#map_canvas_2').css('z-index','10000');
 	$('#minScreenMap').css('visibility','visible');
 	$('#mapFind').addClass('mapFindFull');
@@ -690,10 +703,15 @@ $(document).on('pageshow','#tripPlanner', function(e,data){
 
 function onSuccessStart(position)
 {
-	console.log(position.coords.latitude +" "+notStart);
+
 	if(notStart)
 	{
-			
+		if(setTrip==1)
+		{
+				onSuccessByD(position);
+		}
+		else
+		{
 			currentPosition=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 			if(simulateGps)
 			{
@@ -703,6 +721,7 @@ function onSuccessStart(position)
 					interval4=setInterval(function(){onSuccessStart(position)},1000);
 				}
 			}
+		}
 			
 	}
 	else
@@ -725,7 +744,7 @@ if(!isLoadSound1)
 {
 	//loadSounds1();
 }
-	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
+	if((distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0) )&&!notStart)
 	{
 		$('#backMain').css('visibility','visible');	
 		 $('#buttonTripPlanner').css('visibility','hidden');
@@ -1111,13 +1130,38 @@ function defaultTripNone()
 
 }
 
-function clerToInput()
+function clearToInput()
 {
-	$('#toInput').val('');
+	if($('#toInput').val()=='ENTER DESTINATION')
+	{
+			$('#toInput').val('');
+	}
 	 clickDest=-1;
 }
 $(document).on('pageshow','#byDistance', function(e,data){ 
-//intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);
+					getAccu=false;
+												$('#gpsSearch').addClass('rotatedLoading');
+			destPosition=undefined;
+				notFullScreen=true;
+				 if(marker3!=undefined)
+		 {
+			marker3.setMap(null);
+			}
+									 if(marker4!=undefined)
+						 {
+		marker4.setMap(null);
+ }
+				
+			 if(directionsDisplay != null) { 
+   directionsDisplay.setMap(null);
+   directionsDisplay = null; }
+   			 if(directionsDisplay2 != null) { 
+   directionsDisplay2.setMap(null);
+   directionsDisplay2 = null; }
+	directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+						directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions);
+
+			//intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);
 //    $('#distance-content').css('margin-top',($(window).height() - $('[data-role=header]').height() - $('[data-role=footer]').height() - v$('#distance-content').outerHeight())/2);
 
 $('#gpsSearch').css('width',($('#gpsSearch').height()*2.1)+"px");
@@ -1135,7 +1179,7 @@ $('#borderMap').height($('#borderMap').width());
 $('#map_canvas_1').height($('#map_canvas_1').width()*(1-0.05));
 $('#map_canvas_1').css('visibility','visible');	
 $('#borderMap').css('visibility','visible');	
-$('#toInput').val('Juncal 1511 Montevideo');
+$('#toInput').val('ENTER DESTINATION');
 
 if(mapDest==undefined)
 {
@@ -1326,7 +1370,8 @@ distanceFull=-1;
 								//console.log(response.routes[0].legs[0].duration.text);
 												$('#nextByDistance').css('visibility','visible');
 															$('#msg').css('visibility','hidden');
-													
+					directionsDisplay.setMap(mapDest);
+					directionsDisplay2.setMap(mapDest2);
 								}
 								else
 								{
@@ -1334,7 +1379,26 @@ distanceFull=-1;
 									$('#msg').css('visibility','visible');
 									$('#msg').css('z-index','5000');
 									$('#msg').click(function(){$('#msg').css('z-index','0');		$('#msg').css('visibility','hidden');});
-
+									
+											destPosition=undefined;
+											
+													 if(marker3!=undefined)
+											 {
+												marker3.setMap(null);
+												}
+																		 if(marker4!=undefined)
+															 {
+											marker4.setMap(null);
+									 }
+													
+												 if(directionsDisplay != null) { 
+									   directionsDisplay.setMap(null);
+									   directionsDisplay = null; }
+												 if(directionsDisplay2 != null) { 
+									   directionsDisplay2.setMap(null);
+									   directionsDisplay2 = null; }
+										directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+										directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions);
 
 									$('#msg').html("Destination not found, please be more specific");
 								}
@@ -1558,7 +1622,7 @@ var interval4;
 
 
 			function onSuccessC(position) {
-console.log(currentPosition.lat());
+
 				if(simulateGps)
 				{ 
 
@@ -1643,8 +1707,9 @@ console.log(currentPosition.lat());
 
 			}
 			function onSuccessByD(position) {
-
 				
+				if(destPosition==undefined && 	!getAccu)
+					{
 				currentPosition=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 				
 				        // Add an overlay to the map of current lat/lng
@@ -1668,12 +1733,22 @@ console.log(currentPosition.lat());
 							icon:fromImage,
 				            title: "We are here!"
 				        });		
-					mapDest.panTo(currentPosition);
-					mapDest2.panTo(currentPosition);
 
-				directionsDisplay.setMap(mapDest);
-				directionsDisplay2.setMap(mapDest2);
+				if(notFullScreen)
+					{
+
+						mapDest.panTo(currentPosition);
+						mapDest2.panTo(currentPosition);
+					}
+					
 				
+					}
+
+				if(position.coords.acurracy<=accuracyDesired && !getAcc)
+				{
+					getAccu=true;
+					$('#gpsSearch').removeClass('rotatedLoading');
+				}
 			}
 			
 			
@@ -1696,26 +1771,22 @@ console.log(currentPosition.lat());
 
 function getPositionAcuracy(acc)
 {
-watchID2=navigator.geolocation.watchPosition(onSuccesGetAc,onError,geo_options);	
+//watchID=navigator.geolocation.watchPosition(onSuccesGetAc,onError,geo_options);	
 	
 }
 function onSuccesGetAc(position)
 {
 	
 
-	onSuccessByD(position)
-	accuracyAct=position.accuracy;
-	if(position.accuracy<=accuracyDesired && accuracyAct!=-1)
-	{
-		stopTryGps();
-	}
+	//onSuccessByD(position)
+	//accuracyAct=position.accuracy;
 	
 }
 function stopTryGps()
 {
-	navigator.geolocation.clearWatch(watchID2);
-		clearTimeout(isTime);
-		//$('#gpsSearch').removeClass('rotatedLoading');
+	//navigator.geolocation.clearWatch(watchID);
+
+		////$('#gpsSearch').removeClass('rotatedLoading');
 }
 function getCurrentPosByDistance()
 {
@@ -1836,14 +1907,16 @@ showDivEfect($('#finishBubbles'));
 function goToBackFromSetCharacter()
 {
 		 							changePageSoundF('play');
-	if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
+	if((distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0)) && !notStart)
 	{
-					backFromHome=0;
-									pageRender='#main';  
+		
+			backFromHome=0;
+			pageRender='#main';  
 			$.mobile.changePage('#main',{ transition: pageEfect,reverse:true});
 	}
 	else
 	{
+		backFromHome=0;
 				$.mobile.changePage(goToTripPlanner(),{ transition: pageEfect,reverse:true});
 	}
 }
@@ -3267,6 +3340,7 @@ function clearTripNo()
 	function clearTrip()
 	{
 		notStart=true;
+		setTrip=undefined;
 		  clearTimeout(timeOut1);
 						clearInterval(interval4);
 						interval4=undefined;
@@ -3289,6 +3363,7 @@ function clearTripNo()
 			levelPos=-1;
 			timeLeft=-1;
 			timeFull=-1;
+					
 			frontCharacterTop=0;
 			characterContentHeight=0;
 			map=undefined;
@@ -3299,7 +3374,10 @@ function clearTripNo()
 	
 	function clearTripA()
 	{
+
+					
 		notStart=true;
+				setTrip=undefined;
 						clearInterval(interval4);
 						interval4=undefined;
 		  clearTimeout(timeOut1);
