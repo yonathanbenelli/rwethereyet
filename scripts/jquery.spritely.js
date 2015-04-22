@@ -356,7 +356,7 @@
         // isDraggable requires jQuery ui
         isDraggable: function(options) {
             if ((!$(this).draggable)) {
-                //console.log('To use the isDraggable method you need to load jquery-ui.js');
+
                 return this;
             }
             var options = $.extend({

@@ -1,5 +1,5 @@
 $(document).bind("pagebeforechange", function(e,ob) {
-//if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
+if(ob.toPage && (typeof ob.toPage==="string") && ob.toPage.indexOf('index.html') >= 0) {       e.preventDefault();   }
 });
 $(document).bind("scroll", function(e) {
   window.scrollTo(0,0);
@@ -1385,8 +1385,7 @@ distanceFull=-1;
 				        });			
 
 				
-								//console.log(inspeccionar(response.routes[0].legs[0]));
-								//console.log(response.routes[0].legs[0].duration.text);
+								
 												$('#nextByDistance').css('visibility','visible');
 															$('#msg').css('visibility','hidden');
 					directionsDisplay.setMap(mapDest);
