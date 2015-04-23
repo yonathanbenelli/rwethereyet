@@ -568,7 +568,7 @@ function confirmedPurchaseAquarium(data)
 {
 	isBuyAquarium=true;
 	window.localStorage.setItem('aquariumP', 'true');	
-	if(isAndroid)
+/*	if(isAndroid)
 	{
 		for(var a=0;a<4;a++)
 		{
@@ -583,7 +583,7 @@ function confirmedPurchaseAquarium(data)
 			for(var a=0;a<8;a++)
 		{
 			window.resolveLocalFileSystemURI(cordova.file.applicationDirectory+"www/res/screen/ios/splash"+a+"_2.png", copySplash, failF);									 		}
-	}
+	}*/
 	goToBilling('aquarium');
 }
 
