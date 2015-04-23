@@ -1554,7 +1554,7 @@ distanceFull=-1;
 								else
 								{
 									$('#nextByDistance').css('visibility','hidden');
-									$('#msg').css('visibility','visible');
+									$('#msg').css('visibility','hidden');
 									$('#msg').css('z-index','5000');
 									$('#msg').click(function(){$('#msg').css('z-index','0');		$('#msg').css('visibility','hidden');});
 									
@@ -1579,6 +1579,8 @@ distanceFull=-1;
 										directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions);
 
 									$('#msg').html("Destination not found, please be more specific");
+																		$('#msg').css('z-index','5000');
+									$('#msg').css('visibility','visible');
 								}
   });
 
@@ -3269,19 +3271,19 @@ function setBubble(accelerometer) {
         z: z
     };
 	
-	if(phi>=45 && phi<=85)
+	if(phi>=45 && phi<=70)
 	{
 			getDir(phi-90);
 		}
-	else 	if(phi>=-85 && phi<=-45)
+	else 	if(phi>=-70 && phi<=-45)
 	{
 		  getDir((phi+90));
 	}
-	else if(phi<-85 && phi>=-90)
+	else if(phi<-70 && phi>=-90)
 			{
 					getDir(0);
 			}
-			else if(phi>85 && phi<=90)
+			else if(phi>70 && phi<=90)
 			{
 					getDir(0);
 			}
@@ -3604,6 +3606,19 @@ function clearTripNo()
 	
 function goToLoading()
 {
+	if(setScene==10)
+{
+	$('#laoding').css('background: transparent url(resources/backgrounds/backsplash.png) 0 0 no-repeat;');
+	$('#wheelBorder').css('visibility','hidden');
+		$('#wheelDiv').css('visibility','hidden');
+	}
+	else
+	{
+			$('#laoding').css('background: transparent url(resources/backgrounds/back0_0.png) 0 0 no-repeat;');
+				$('#wheelBorder').css('visibility','hidden');
+		$('#wheelDiv').css('visibility','hidden');
+
+	}
 
 				changePageSoundF('play');
 		$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
@@ -3633,6 +3648,7 @@ function	loadLoading()
 }
 
 $(document).on('pageshow','#loading', function(e,data){ 
+
 	loadLoading();
 	if(!isLoadSound2)
 {

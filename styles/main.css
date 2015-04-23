@@ -30,6 +30,8 @@ body{
   scrollbar-arrow-color: #864217;
   scrollbar-shadow-color: #864217;
   scrollbar-dark-shadow-color: #864217;
+  -webkit-user-select: none !important;
+-webkit-touch-callout: none !important;
 }
 ::-webkit-scrollbar { width: 3px; height: 3px;}
 ::-webkit-scrollbar-button {  background-color: #864217; }
@@ -1024,6 +1026,7 @@ font-size: 1.5em;
 }
 #submit
 {
+	
 width: 20% !important;
   height: 100% !important;
   padding: 0 !important;
@@ -1035,6 +1038,7 @@ width: 20% !important;
 	float: left;
   width: 65% !important;
     z-index:1000;
+	background-color:white;
 }
 #knowFactContainer
 {
