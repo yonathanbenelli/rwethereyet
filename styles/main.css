@@ -730,6 +730,18 @@ img, object, embed, video {
 	background-size:cover;
 
 }
+.loadingHidden
+{
+	visibility:hidden !important;
+}
+.pagel
+{
+	  background: transparent url(../resources/backgrounds/backsplash.png) 0 0 no-repeat;
+	-webkit-background-size:cover;
+	background-repeat:no-repeat;
+	background-size:cover;
+
+}
 #backGroundA
 {
 		  background: transparent url(../resources/backgrounds/back4_0.png) 50% 0 no-repeat;

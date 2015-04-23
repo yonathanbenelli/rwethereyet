@@ -3619,30 +3619,37 @@ function goToLoading()
 {
 	if(setScene==10)
 {
-				$('#laoding').css('bakground: transparent url(resources/backgrounds/backsplash.png) 0 0 no-repeat;');
-			$('#wheelBorder').css('visibility','hidden');
-				$('#wheelDiv').css('visibility','hidden');
+	
+				$('#loading').removeClass('page');
+				$('#loading').addClass('pagel');
 
+		$('#wheelBorder').addClass('loadingHidden');
+				$('#wheelDiv').addClass('loadingHidden');
+				
+console.log('aeaee');
 		if(!getFree && !isBuyAquarium)
 		{
 			goToBilling('aquarium');
 		}
 		else
 		{
-					goToLoading();	
+			changePageSoundF('play');
+		$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
 		}
 	}
 	else
 	{
-			$('#laoding').css('background: transparent url(resources/backgrounds/back0_0.png) 0 0 no-repeat;');
-				$('#wheelBorder').css('visibility','hidden');
-		$('#wheelDiv').css('visibility','hidden');
+				$('#loading').removeClass('pagel');
+								$('#loading').addClass('page');
+		$('#wheelBorder').removeClass('loadingHidden');
+				$('#wheelDiv').removeClass('loadingHidden');
+				
+			changePageSoundF('play');
+		$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
 
 	}
 
-				changePageSoundF('play');
-		$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
-
+	
 
 }
 function	loadLoading()
