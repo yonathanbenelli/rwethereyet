@@ -21,13 +21,15 @@
     	<script type="text/javascript" charset="utf-8" src="scripts/jquery.touchSwipe.min.js"></script>	
      <script type="text/javascript" src="phonegap.js"></script>
 	<script src="scripts/buzz.min.js" type="text/javascript"></script>
+
     <script src="scripts/rwethereyet.js" type="text/javascript"></script>
+
     <script type="text/javascript">
             app.initialize();
 			
-       			loadSounds1();
-				loadSounds2();
-				soundOk=true;
+       			//loadSounds1();
+				//loadSounds2();
+				//soundOk=true;
         </script>
 
 </head>
@@ -189,7 +191,22 @@
 	 </div>
 </div>
 
+<div data-role="page" id="confirmBuyaquarium" class="page" >
+               
+<div  id="headerSetting" data-role="header"  >    <div  id="headerContentSettings"  class="headerContent" >   	 </div>  </div>
 
+<div data-role="content" id="confirmaquarium">
+<div data-role="button"  onClick="buyYes('aquarium');" >YES</div>
+<div data-role="button" onClick="backFromNoPurchase();" >NO</div>
+<div id="errorBuyAquarium">
+	<div data-role="okErrorBuy" onClick="$('#errorBuyaquarium').css('visibility','hidden');backFromNoPurchase();" ></div>
+ </div>	
+</div>
+
+<div data-role="footer" id="footerSetting" >
+			   <div data-role="buttonBack" id="backSetting" onClick="backToMain();"></div>
+	 </div>
+</div>
 <div data-role="page" id="setCharacter" class="page" >
                
 <div  id="headerSetCharacter" data-role="header"  >    <div  id="headerContentSetCharacter"  class="headerContent" >   	 </div>  </div>
@@ -206,7 +223,7 @@
         <div   id="setToucan" data-role="setCharacterButton"      onClick="setScene=7;goToLoading();"></div>
         <div  id="setCrocodile" data-role="setCharacterButton"  onClick="setScene=8;goToLoading();"></div>
         <div   id="setGiraffe" data-role="setCharacterButton"     onClick="setScene=9;goToLoading();"></div>
-        <div  id="setAquarium" data-role="setCharacterButton"     onClick="setScene=10;goToLoading();"></div>
+        <div  id="setAquarium" data-role="setCharacterButton"     onClick="goToBilling('aquarium');"></div>
 </div>   
     </div>
     <div data-role="footer" id="footerSetCharacter" >

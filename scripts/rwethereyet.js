@@ -6,6 +6,7 @@ $(document).bind("scroll", function(e) {
 	   
 });
 
+var getFree=true;
 var simulateGps=false;
 var notStart=true;
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -320,6 +321,8 @@ var charConH;
 var watchID;
 var watchID2;
 var pageEfect="flip";
+var confirmBuy=false;
+var isBuyAquarium=false;
 	var	sound=true;
 	      var doubleTapCount=0;
 			var defaultTrip=2;
@@ -487,10 +490,152 @@ var app = {
 				document.addEventListener("resume", function() { resumeApp();}, false);
 				document.addEventListener("menubutton", function() { pauseApp();}, false);
 				}
+				if(window.localStorage.getItem('aquariumP')=='true')
+				{
+					isBuyAquarium=true;
+				}
       
     },
-
+initIap: function() {
+        inappbilling.init(
+            function() {
+                app.receivedEvent('inappbillingready');
+                app.log('init succeed');
+            },
+           errorPurchase,
+            {
+                showLog: true
+            },
+            [
+                "aquarium"
+            ]
+        );
+        
+    },
+    getPurchases: function() {
+        inappbilling.getPurchases(
+            function(purchases) {
+               successCallGetP(purchases);
+            },    errorPurchase
+           
+        );
+    },
+    getAvailableProducts: function() {
+        inappbilling.getLoadedProducts(
+            function(prods) {
+		          successCallGetProducts(prods);
+            },
+            errorPurchase
+        );
+    },
+    buyAquarium: function() {
+        inappbilling.buy(
+            function(data) {confirmedPurchaseAquarium(data);
+            },
+            errorPurchase,
+            'aquarium'
+        );
+    },
 };
+
+function errorPurchase(err)
+{
+	if(window.localStorage.setItem('aquariumP')=='true')
+	{
+		isBuyAquarium=true;
+		goToBilling('aquarium');
+	}
+	else
+	{	 $('#errorBuyAquarium').css('visibility','visible');
+	 		 $('#errorBuyAquarium').html(err);
+	}
+}
+
+
+function failF()
+{
+}
+function succF()
+{
+}
+function copySplash(entry)
+{
+	entry.copyTo(entry,entry.name.replace('_2',''),succF,failF);
+}
+function confirmedPurchaseAquarium(data)
+{
+	isBuyAquarium=true;
+	window.localStorage.setItem('aquariumP', 'true');	
+	if(isAndroid)
+	{
+		for(var a=0;a<4;a++)
+		{
+
+
+			window.resolveLocalFileSystemURL(cordova.file.applicationDirectory+"/res/screen/android/splash"+a+"_2.png", copySplash, failF);			
+			
+		}
+	}
+	else
+	{
+			for(var a=0;a<8;a++)
+		{
+			window.resolveLocalFileSystemURL(cordova.file.applicationDirectory+"/res/screen/ios/splash"+a+"_2.png", copySplash, failF);									 		}
+	}
+	goToBilling(product);
+}
+function buyYes(product)
+{
+	switch(product)
+	{	case 'aquarium' : 	if(!getFree){	app.buyAquarium();}else {confirmedPurchaseAquarium('');}	break;
+	}
+}
+
+function goToBilling(product)
+{
+		switch(product)
+		{
+			case 'aquarium' : 		
+				if(isBuyAquarium)
+				{	
+					setScene=10;
+					goToLoading();
+				}
+				else
+				{
+						$.mobile.changePage('#confirmBuy'+product,{ transition: pageEfect,reverse:false});
+				}
+				break;
+		}
+
+	
+}
+
+function verifyPurchase()
+{
+	if(!isBuyAquarium)
+	{
+		app.initIap();
+		app.getPurchases();
+	}
+
+}
+function successCallGetP(purchases)
+{
+	if(purchases!=undefined)
+	{ 
+		for(i=0;i<purchases.length;i++)
+		{
+			if(purchases[i]=='aquarium')	
+			{
+				isBuyAquarium=true;
+				 window.localStorage.setItem('aquariumP', 'true');	
+				$('#setAquarium').css('background: transparent url(../resources/buttons/aqueariumbuttonunlock.png) 0 0 no-repeat;')
+			}
+		}
+	}
+
+}
 var music=[null,null,null,null,null,null,null,null];
 var wavesSound=null;
 var dolphinSound=null;
@@ -633,11 +778,11 @@ function   loadSounds1()
 }
 function pauseApp()
 {
-	stopAllSoundA();
+	pauseAllSoundA();
 }
 function resumeApp()
 {
-		$.mobile.changePage(pageRender,{ transition: pageEfect,reverse:false});
+	resumeAllSoundA();		
 }
 function   loadSounds2()
 {
@@ -763,7 +908,7 @@ if(!isLoadSound1)
 {
 	//loadSounds1();
 }
-	if((distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0) )&&!notStart)
+	if((distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0) ) && !notStart)
 	{
 		$('#backMain').css('visibility','visible');	
 		 $('#buttonTripPlanner').css('visibility','hidden');
@@ -772,7 +917,19 @@ if(!isLoadSound1)
 	else
 	{
 		 $('#buttonTripPlanner').css('visibility','visible');
-			$('#backMain').css('visibility','hidden');	
+		 $('#backMain').css('visibility','hidden');	
+		 if(!notStart)
+		 {
+			 if(setScene==10)
+			 {
+				 clearTripA();
+			 }
+			 else 
+			 {
+				 clearTrip();
+			 }
+		 }
+		 
 	}
 	
 });
@@ -2790,7 +2947,11 @@ bird1SoundF('play');
 bird2SoundF('play');
 aquarium2SoundF('play');
 }
+
 $(document).on('pageshow','#aquarium', function(e,data){ 
+
+
+
 			notStart=false;
 render=true;
 	pageRender='#aquarium';  
@@ -3512,6 +3673,11 @@ function backFromCharacter()
 									  $('#backCharacter').css('visibility','hidden');
 									  $.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:true});
 }
+function backFromNoPurchase()
+{
+	tapSoundAF('play');
+	 $.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:true});
+}
 function backFromAquarium()
 {
 	tapSoundAF('play');
@@ -3609,6 +3775,28 @@ $('#sun').css('opacity','0');
 function stopAllSoundA()
 {
 
+	finishBubblesSoundAF('stop');
+	aquarium1SoundF('stop');
+	aquarium2SoundF('stop');
+	ovationSoundF('stop');
+	
+	waterPipeSoundF('stop');
+	wavesSoundF('stop');
+
+clearInterval(dolphinSoundIn);
+clearInterval(mermaidSoundIn);
+clearInterval(bird1SoundIn);
+clearInterval(bird2SoundIn);
+knowJSoundF('stop',setScene);
+birdsConSoundF('stop');	
+
+stopMusic();
+
+	
+}
+function pauseAllSoundA()
+{
+
 	finishBubblesSoundAF('pause');
 	aquarium1SoundF('pause');
 	aquarium2SoundF('pause');
@@ -3623,6 +3811,49 @@ clearInterval(bird1SoundIn);
 clearInterval(bird2SoundIn);
 knowJSoundF('pause',setScene);
 birdsConSoundF('pause');	
+
+pauseMusic();
+
+	
+}
+function resumeAllSoundA()
+{
+	if(setScene==10)
+	{
+	finishBubblesSoundAF('play');
+aquarium1SoundF('play');
+	aquarium2SoundF('play');
+	ovationSoundF('play');
+	
+	waterPipeSoundF('play');
+	wavesSoundF('play');
+
+birdsConSoundF('play');	
+	}
+	else
+	{
+		knowJSoundF('stop',setScene);
+	}
+
+playMusic();
+
+}
+function stopAllSoundA()
+{
+finishBubblesSoundAF('stop');
+aquarium1SoundF('stop');
+	aquarium2SoundF('stop');
+	ovationSoundF('stop');
+	
+	waterPipeSoundF('stop');
+	wavesSoundF('stop');
+
+clearInterval(dolphinSoundIn);
+clearInterval(mermaidSoundIn);
+clearInterval(bird1SoundIn);
+clearInterval(bird2SoundIn);
+knowJSoundF('stop',setScene);
+birdsConSoundF('stop');	
 
 stopMusic();
 
@@ -3717,6 +3948,7 @@ if(soundOk)
 
 			myLoop('aquarium2Sound');
 		}
+		
 	}
 	else
 	{	
