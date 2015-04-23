@@ -1426,6 +1426,16 @@ float:left;
 		  position: absolute;
 		  background-size:100% 100%;
 }
+.loadingAquariumW
+{
+	 background: transparent url(../resources/others/bubble1.png) 0 0 no-repeat !important;
+     height: 10% ;
+  margin-left: auto;
+  margin-right: auto;
+  top: 40%;
+  
+  width: 20% !important;
+}
 #wheelDiv
 {
 	 	  background: transparent url(../resources/others/loadingcenter.png) 0 0 no-repeat;
@@ -1447,6 +1457,17 @@ float:left;
 #contentSetCharacter
 {
 			overflow-y:	scroll !important;
+}
+.loadingAquariumB
+{
+	 	  background: transparent url(../resources/others/bordermapa.png) 0 0 no-repeat !important;
+    background-size: 100% 100%!important;
+  height: 60% ;
+  width: 80% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 45% !important;
+ opacity:0.7;
 }
 #wheelBorder
 { 	  background: transparent url(../resources/others/loadingborder.png) 0 0 no-repeat;

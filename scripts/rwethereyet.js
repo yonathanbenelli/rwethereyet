@@ -3623,8 +3623,8 @@ function goToLoading()
 				$('#loading').removeClass('page');
 				$('#loading').addClass('pagel');
 
-		$('#wheelBorder').addClass('loadingHidden');
-				$('#wheelDiv').addClass('loadingHidden');
+		$('#wheelBorder').addClass('loadingAquariumB');
+				$('#wheelDiv').addClass('loadingAquariumW');
 				
 console.log('aeaee');
 		if(!getFree && !isBuyAquarium)
@@ -3641,8 +3641,8 @@ console.log('aeaee');
 	{
 				$('#loading').removeClass('pagel');
 								$('#loading').addClass('page');
-		$('#wheelBorder').removeClass('loadingHidden');
-				$('#wheelDiv').removeClass('loadingHidden');
+		$('#wheelBorder').removeClass('loadingAquariumB');
+				$('#wheelDiv').removeClass('loadingAquariumW');
 				
 			changePageSoundF('play');
 		$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
