@@ -558,6 +558,7 @@ function failF(err)
 }
 function succF()
 {
+		console.log("file copied");
 }
 function copySplash(entry)
 {
