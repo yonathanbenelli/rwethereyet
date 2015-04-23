@@ -737,10 +737,10 @@ img, object, embed, video {
 .pagel
 {
 	  background: transparent url(../resources/backgrounds/backsplash.png) 0 0 no-repeat;
-	-webkit-background-size:cover;
+	-webkit-background-size:contain !important;
 	background-repeat:no-repeat;
-	background-size:cover;
-
+	background-size:contain !important;
+  background-position: center !important;
 }
 #backGroundA
 {
@@ -885,6 +885,7 @@ position: absolute !important;
 #loadingContent
 {
 	overflow:visible;
+	height:100% !important;
 }
 #greyCharacter
 {
@@ -1429,12 +1430,14 @@ float:left;
 .loadingAquariumW
 {
 	 background: transparent url(../resources/others/bubble1.png) 0 0 no-repeat !important;
-     height: 10% ;
   margin-left: auto;
   margin-right: auto;
-  top: 40%;
   
-  width: 20% !important;
+  height: 20% !important;
+  margin-left: auto;
+  margin-right: auto;
+  background-size: 100% 100% !important;
+  width: 50% !important;
 }
 #wheelDiv
 {
@@ -1443,7 +1446,7 @@ float:left;
   margin-left: auto;
   margin-right: auto;
   top: 40%;
-  width: 50% !important;
+  width: 50% ;
   position: relative;
   visibility:hidden;
 }
@@ -1466,7 +1469,7 @@ float:left;
   width: 80% !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  margin-top: 45% !important;
+
  opacity:0.7;
 }
 #wheelBorder
@@ -1476,7 +1479,8 @@ float:left;
   width: 80% !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  margin-top: 45% !important;
+top:20%;
+position:absolute;
     visibility:hidden;
 }
 #contentByDistance
