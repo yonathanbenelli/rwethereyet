@@ -574,7 +574,7 @@ function confirmedPurchaseAquarium(data)
 		{
 
 			console.log(cordova.file.applicationDirectory+"www/res/screen/android/splash"+a+"_2.png");
-			window.resolveLocalFileSystemURL(cordova.file.applicationDirectory+"www/res/screen/android/splash"+a+"_2.png", copySplash, failF);			
+			window.resolveLocalFileSystemURI(cordova.file.applicationDirectory+"www/res/screen/android/splash"+a+"_2.png", copySplash, failF);			
 			
 		}
 	}
@@ -582,7 +582,7 @@ function confirmedPurchaseAquarium(data)
 	{
 			for(var a=0;a<8;a++)
 		{
-			window.resolveLocalFileSystemURL(cordova.file.applicationDirectory+"www/res/screen/ios/splash"+a+"_2.png", copySplash, failF);									 		}
+			window.resolveLocalFileSystemURI(cordova.file.applicationDirectory+"www/res/screen/ios/splash"+a+"_2.png", copySplash, failF);									 		}
 	}
 	goToBilling('aquarium');
 }
