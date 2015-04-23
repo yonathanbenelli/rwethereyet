@@ -552,8 +552,9 @@ function errorPurchase(err)
 }
 
 
-function failF()
+function failF(err)
 {
+	console.log(err+" error file");
 }
 function succF()
 {
@@ -571,7 +572,7 @@ function confirmedPurchaseAquarium(data)
 		for(var a=0;a<4;a++)
 		{
 
-
+			console.log(cordova.file.applicationDirectory+"/res/screen/android/splash"+a+"_2.png");
 			window.resolveLocalFileSystemURL(cordova.file.applicationDirectory+"/res/screen/android/splash"+a+"_2.png", copySplash, failF);			
 			
 		}
@@ -582,8 +583,9 @@ function confirmedPurchaseAquarium(data)
 		{
 			window.resolveLocalFileSystemURL(cordova.file.applicationDirectory+"/res/screen/ios/splash"+a+"_2.png", copySplash, failF);									 		}
 	}
-	goToBilling(product);
+	goToBilling('aquarium');
 }
+
 function buyYes(product)
 {
 	switch(product)
