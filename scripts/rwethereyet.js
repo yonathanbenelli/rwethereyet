@@ -591,7 +591,7 @@ function confirmedPurchaseAquarium(data)
 function buyYes(product)
 {
 	switch(product)
-	{	case 'aquarium' : 	if(!getFree){	app.buyAquarium();}else {confirmedPurchaseAquarium('');}	break;
+	{	case 'aquarium' : 	app.buyAquarium();	break;
 	}
 }
 
@@ -602,7 +602,7 @@ function goToBilling(product)
 			case 'aquarium' : 		
 				if(isBuyAquarium)
 				{	
-					setScene=10;
+
 					goToLoading();
 				}
 				else
@@ -3619,9 +3619,18 @@ function goToLoading()
 {
 	if(setScene==10)
 {
-	$('#laoding').css('background: transparent url(resources/backgrounds/backsplash.png) 0 0 no-repeat;');
-	$('#wheelBorder').css('visibility','hidden');
-		$('#wheelDiv').css('visibility','hidden');
+				$('#laoding').css('bakground: transparent url(resources/backgrounds/backsplash.png) 0 0 no-repeat;');
+			$('#wheelBorder').css('visibility','hidden');
+				$('#wheelDiv').css('visibility','hidden');
+
+		if(!getFree && !isBuyAquarium)
+		{
+			goToBilling('aquarium');
+		}
+		else
+		{
+					goToLoading();	
+		}
 	}
 	else
 	{
