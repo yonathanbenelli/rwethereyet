@@ -336,7 +336,7 @@ var isBuyAquarium=false;
 		var clickDest=-1;
 			var updateFreqMilis=3000;
 /// init google maps 
-		var defaultLatLng = new google.maps.LatLng(45.2501566,-75.8002568);
+		var defaultLatLng = new google.maps.LatLng(50.4585942,-104.6354091);
 		var rendererOptions = {
 
 
@@ -345,7 +345,7 @@ var isBuyAquarium=false;
 			var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
 			var directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions);
 			var directionsService=new google.maps.DirectionsService();
-		var currentPosition= new google.maps.LatLng(45.2501566,-75.8002568);
+		var currentPosition= new google.maps.LatLng(50.4585942,-104.6354091);
 		var optionsCharacterMap= {
 					zoom: zoomLevel ,
 				center: currentPosition,
@@ -367,6 +367,7 @@ var isBuyAquarium=false;
 		var soundVol50=50;
 		var soundVol10=10;
 		var from;
+		var errorGpsLoc=false;
 		var distanceLeft=-1;
 		var distanceFull=-1;
 var render=true;
@@ -1350,9 +1351,10 @@ clickDest=-1;
 
 	pageRender='#byDistance';  
 	zoomLevel=10;
-	
+if(errorGpsLoc)
+{
 $('#msg').css('visibility','hidden');
-
+}
 $('#borderMap').height($('#borderMap').width());
 
 $('#map_canvas_1').height($('#map_canvas_1').width()*(1-0.05));
@@ -1580,6 +1582,7 @@ distanceFull=-1;
 
 									$('#msg').html("Destination not found, please be more specific");
 																		$('#msg').css('z-index','5000');
+									$('#msg').css('font-size','1.5em');
 									$('#msg').css('visibility','visible');
 								}
   });
@@ -1929,6 +1932,7 @@ var interval4;
 					getAccu=true;
 					$('#gpsSearch').removeClass('rotatedLoading');
 				}
+					  				var errorGpsLoc=false;			
 			}
 			
 			
@@ -1937,11 +1941,18 @@ var interval4;
 			function onError(error) {
 				// alert('code: '    + error.code    + '\n' +
 					//		'message: ' + error.message + '\n');
-					  				 //  currentPosition=defaultLatLng; 
+		 //  currentPosition=defaultLatLng; 
 			
-				$('#mapAdd').css('color','red');
-				$('#mapAdd').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
-						$('#nextByDistance').css('visibility','hidden');
+	  				var errorGpsLoc=true;			
+					$('#msg').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
+																		$('#msg').css('z-index','5000');
+										$('#msg').css('font-size','1em');		
+										$('#msg').click(function(){$('#msg').css('z-index','0');		$('#msg').css('visibility','hidden');});
+													
+									$('#msg').css('visibility','visible');
+				//$('#mapAdd').css('color','red');
+				//$('#mapAdd').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
+				//		$('#nextByDistance').css('visibility','hidden');
 			
 			//    alert('code: '    + error.code    + '\n' +
 			 //         'message: ' + error.message + '\n');
