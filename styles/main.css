@@ -304,26 +304,26 @@ body{
 {
 	width: 2%;
 left: 8%;
-  height: 90%;
+  height: 100%;
   position: absolute;
-  top: 10%;
-visibility:hidden;
+
+	visibility:hidden;
 	  opacity:0;
 	  border-top-right-radius:20%;
 	  	  border-top-left-radius:20%;
   background-size: cover !important;
-  z-index:4999;
+  z-index:4998;
 
 }
 .waterPipeContentClass
 {
 
 		width:100%;
-		height:100%;
-		bottom:0%;
+		height:90%;
+		top:10%;
 		left: 25%;
 		position:absolute;
-		overflow:visible;
+		overflow:visible !important;
 		
 }
 #fish1
@@ -529,10 +529,11 @@ opacity:0;
 .bubblesLevelClass
 {
 	position:absolute;
-	height:200%;
-	width:15%;
-	left:25%;
+	height:10%;
+	width:15.5%;
+	/*left:25%;*/
 	overflow:visible;
+	bottom:-5%;
 	z-index:4999;
 	background-repeat:repeat-y;
 	background-position-y:30% !important;
@@ -578,6 +579,7 @@ opacity:0;
 	visibility:hidden;
 	width:100%;
 	height:100%;
+	bottom:0%;
 	z-index:5000;
 }
 .birdClass
@@ -1031,6 +1033,11 @@ opacity:0;
 		background: transparent url(../resources/buttons/aqueariumbuttonlock.png) 0 0 no-repeat;
 }
 
+.setAquariumUnlock
+{
+		background: transparent url(../resources/buttons/aqueariumbuttonunlock.png) 0 0 no-repeat !important;
+		  background-size: 90% 90% !important;
+}
 
 #toText
 {
@@ -1218,6 +1225,8 @@ top:10%;
   left: 5% !important;
   display: inline-table;
  
+ -webkit-border-radius: 99% !important;
+-moz-border-radius:99% !important;
   border-radius: 99% !important;
   top: 0% !important;
   z-index: 10000 !important;
@@ -1264,6 +1273,8 @@ width: 110%;
   top:5%;
   position: absolute !important;
 
+ -webkit-border-radius:50%;
+-moz-border-radius:50%;
     border-radius: 50%;
   }
 
