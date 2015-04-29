@@ -6,7 +6,7 @@ $(document).bind("scroll", function(e) {
 	   
 });
 
-var getFree=true;
+var getFree=false;
 var simulateGps=false;
 var notStart=true;
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -488,13 +488,10 @@ var app = {
 				{
 					
 					document.addEventListener("pause", function() { pauseApp();}, false);
-				document.addEventListener("resume", function() { resumeApp();}, false);
-				document.addEventListener("menubutton", function() { pauseApp();}, false);
+					document.addEventListener("resume", function() { resumeApp();}, false);
+					document.addEventListener("menubutton", function() { pauseApp();}, false);
 				}
-				if(window.localStorage.getItem('aquariumP')=='true')
-				{
-					isBuyAquarium=true;
-				}
+				loadAlreadyPurchase();
       
     },
 initIap: function() {
@@ -529,21 +526,29 @@ initIap: function() {
             errorPurchase
         );
     },
-    buyAquarium: function() {
-        inappbilling.buy(
-            function(data) {confirmedPurchaseAquarium(data);
-            },
-            errorPurchase,
-            'aquarium'
-        );
+    buyAquarium: function(product) {
+        inappbilling.buy(function(data) {confirmedPurchaseAquarium(data); }, errorPurchase,  product     );
     },
 };
 
+function loadAlreadyPurchase()
+{
+
+	if(window.localStorage.getItem('aquariumP')=='true' )
+	{
+		setAquariumPurchase();
+
+	}
+	else
+	{
+		app.getPurchases();	
+	}
+}
 function errorPurchase(err)
 {
 	if(window.localStorage.setItem('aquariumP')=='true')
 	{
-		isBuyAquarium=true;
+		setAquariumPurchase();
 		goToBilling('aquarium');
 	}
 	else
@@ -553,50 +558,38 @@ function errorPurchase(err)
 }
 
 
-function failF(err)
-{
-	console.log(err.code+" error file");
-}
-function succF()
-{
-		console.log("file copied");
-}
-function copySplash(entry)
-{
-	entry.copyTo(entry,entry.name.replace('_2',''),succF,failF);
-}
 function confirmedPurchaseAquarium(data)
 {
-	isBuyAquarium=true;
-	window.localStorage.setItem('aquariumP', 'true');	
-/*	if(isAndroid)
-	{
-		for(var a=0;a<4;a++)
-		{
+				setAquariumPurchase();
+				goToBilling('aquarium');
+}
 
-			console.log(cordova.file.applicationDirectory+"www/res/screen/android/splash"+a+"_2.png");
-			window.resolveLocalFileSystemURI(cordova.file.applicationDirectory+"www/res/screen/android/splash"+a+"_2.png", copySplash, failF);			
-			
+function successCallGetP(purchases)
+{
+	if(purchases!=undefined)
+	{ 
+		for(i=0;i<purchases.length;i++)
+		{
+			if(purchases[i]=='aquarium')	
+			{
+				setAquariumPurchase();
+			}
 		}
 	}
-	else
-	{
-			for(var a=0;a<8;a++)
-		{
-			window.resolveLocalFileSystemURI(cordova.file.applicationDirectory+"www/res/screen/ios/splash"+a+"_2.png", copySplash, failF);									 		}
-	}*/
-	goToBilling('aquarium');
+
 }
 
 function buyYes(product)
 {
 	switch(product)
-	{	case 'aquarium' : 	app.buyAquarium();	break;
+	{	case 'aquarium' : 	app.buyAquarium(product);	break;
 	}
 }
 
 function goToBilling(product)
 {
+		app.initIap();
+
 		switch(product)
 		{
 			case 'aquarium' : 		
@@ -615,30 +608,13 @@ function goToBilling(product)
 	
 }
 
-function verifyPurchase()
+function setAquariumPurchase()
 {
-	if(!isBuyAquarium)
-	{
-		app.initIap();
-		app.getPurchases();
-	}
 
-}
-function successCallGetP(purchases)
-{
-	if(purchases!=undefined)
-	{ 
-		for(i=0;i<purchases.length;i++)
-		{
-			if(purchases[i]=='aquarium')	
-			{
-				isBuyAquarium=true;
-				 window.localStorage.setItem('aquariumP', 'true');	
-				$('#setAquarium').css('background: transparent url(../resources/buttons/aqueariumbuttonunlock.png) 0 0 no-repeat;')
-			}
-		}
-	}
-
+	isBuyAquarium=true;
+	 window.localStorage.setItem('aquariumP', 'true');	
+	 $('#setAquarium').addClass('setAquariumUnlock');
+//	$('#setAquarium').css('background: transparent url(../resources/buttons/aqueariumbuttonunlock.png) 0 0 no-repeat;')
 }
 var music=[null,null,null,null,null,null,null,null];
 var wavesSound=null;
@@ -674,9 +650,13 @@ var isTime;
 var timeAccDesired=20000;
 var accuracyDesired=50;	
 var 	notFullScreen=true;
-	var toImage= 'resources/others/to.png';
-		var fromImage= 'resources/others/from.png';
-				var nowImage= 'resources/others/now.png';
+var toImage= 'resources/others/to.png';
+var fromImage= 'resources/others/from.png';
+var nowImage= 'resources/others/now.png';
+var toImageA= 'resources/others/toa.png';
+var fromImageA= 'resources/others/froma.png';
+var nowImageA= 'resources/others/nowa.png';
+
 var list=[];
 
 function myPlay(id)
@@ -912,6 +892,7 @@ if(!isLoadSound1)
 {
 	//loadSounds1();
 }
+
 	if((distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0) ) && !notStart)
 	{
 		$('#backMain').css('visibility','visible');	
@@ -1761,25 +1742,25 @@ var interval4;
 					levelPos =100*(1-(distanceLeft/distanceFull));
 					
 						distanceLeft=parseInt(google.maps.geometry.spherical.computeDistanceBetween(currentPosition,destPosition))-radiusDistanceFinish;
-			 if(marker3!=undefined)
+					 if(marker3!=undefined)
 						 {
 									marker3.setMap(null);
 									}
-									 if(marker4!=undefined)
+					 if(marker4!=undefined)
 						 {
 								marker4.setMap(null);
 						 }
 				         marker3 = new google.maps.Marker({
 				            position: startPosition,
 				            map: map,
-							icon:fromImage,
+							icon:fromImageA,
 				            title: "We come from!"
 				        });		
 								currentPosition
 						 marker4 = new google.maps.Marker({
 				            position: destPosition,
 				            map: map,
-							icon:toImage,
+							icon:toImageA,
 				            title: "We go there!"
 				        });				
 				
@@ -1793,7 +1774,7 @@ var interval4;
 					      // Add an overlay to the map of current lat/lng
 				         marker5 = new google.maps.Marker({
 				            position: currentPosition,
-								icon:nowImage,
+								icon:nowImageA,
 				            map: map,
 				            title: "We are here!"
 				        });
@@ -1852,8 +1833,8 @@ var interval4;
 			 if(marker3!=undefined)
 						 {
 									marker3.setMap(null);
-									}
-									 if(marker4!=undefined)
+							}
+				 if(marker4!=undefined)
 						 {
 								marker4.setMap(null);
 						 }
@@ -2485,9 +2466,12 @@ var apprsPlant=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var apprsFish=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var apprsMermaid=0;
 var apprsWhale=0;
+
 function apearMermaid()
 {
-		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+		//		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+		var difContentAqWi=$(window).height()*(0.9)-$('#contentAquarium').height();
+		var topW=$('#waterPipeContent').height()-difContentAqWi;
 		var topP=parseInt($('#mermaid').css('top').replace('%','').replace('px',''));
 		
 		if(topW<=topP)
@@ -2538,7 +2522,10 @@ function showMermaid()
 var apprsWhale=0;
 function apearWhale()
 {
-		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+//		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+		var difContentAqWi=$(window).height()*(0.9)-$('#contentAquarium').height();
+		var topW=$('#waterPipeContent').height()-difContentAqWi;
+
 		var topP=parseInt($('#whale').css('top').replace('%','').replace('px',''));
 		
 		if(topW<=topP)
@@ -2589,7 +2576,10 @@ function showWhale()
 var apprsDolphin=0;
 function apearDolphin()
 {
-		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+//		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+		var difContentAqWi=$(window).height()*(0.9)-$('#contentAquarium').height();
+		var topW=$('#waterPipeContent').height()-difContentAqWi;
+
 		var topP=parseInt($('#dolphin').css('top').replace('%','').replace('px',''));
 		
 	if(topW<=topP)
@@ -2641,7 +2631,10 @@ function showDolphin()
 	
 function apearPlants(i)
 {
-		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+//		var topW=parseInt($('.waterLevelClass').css('top').replace('%','').replace('px',''));
+		var difContentAqWi=$(window).height()*(0.9)-$('#contentAquarium').height();
+		var topW=$('#waterPipeContent').height()-difContentAqWi;
+
 		var topP=parseInt($('#plant'+i).css('top').replace('%','').replace('px',''));
 		if(topW<=topP)
 		{
@@ -2721,16 +2714,17 @@ function updateWaterLevel()
 			
 //		var bhc=$('#contentAquarium').height()-bhw;
 
-		var bhc=$('#contentAquarium').height()-bhw;
-		
-	var newTop=bhc -(bhc*(levelPos/100));
+		var bhc=$(window).height()*0.9;
+//			var dif=	$(window).height()-	$('#contentAquarium').height();
+	var newTop=bhc-(bhc*(levelPos/100));
 	var wLH=$('#waterLevel').height();
 //	 $('#waterLevel').animate({ "top": newTop+'px'}, "slow");
-	 	 $('#waterLevel').css("top", newTop+'px');
-$('#waterPipe').height(newTop+wLH+parseFloat($('#waterPipe').css('top').replace('px','')));
-	 	// $('#waterPipe').animate({ "height": oldHeight-(oldTop-newTop)+'px'}, "slow");
+	 	 //$('#waterLevel').css("top", newTop+'px');
+//$('#waterPipe').height(newTop+wLH+parseFloat($('#waterPipe').css('top').replace('px','')));
+//$('#waterPipeContent').height(newTop);
+ $('#waterPipeContent').animate({ "height": newTop+'px'}, "slow");
 
-	 $('#waterLevel0').css("top", newTop+'px');
+//	 $('#waterLevel0').css("top", newTop+'px');
 
 	for(var j=1;j<=20;j++)
 	{
@@ -2746,10 +2740,10 @@ $('#waterPipe').height(newTop+wLH+parseFloat($('#waterPipe').css('top').replace(
 		{
 				apearFishs(j);
 		}
-				else if(apprsFish[j-1]==0)
+		else if(apprsFish[j-1]==0)
 		{
 			hideDivEfect($('#fish'+j));
-						}
+		}
 
 	}
 	if(apprsMermaid==1)
@@ -2785,7 +2779,7 @@ function showWaterLevel()
 {
 		var bhc=$('#contentAquarium').height()-bhw;
 		$('#waterLevel').height(bhw);
-		$('#waterLevel0').height($(window).height()*1.1);
+	//	$('#waterLevel0').height($(window).height()*1.1);
 	
 	 var lv;
 	 if(levelPos==-1)
@@ -2797,10 +2791,10 @@ function showWaterLevel()
 		 lv=levelPos;
 	 }
 	 var t=bhc -(bhc*(lv/100));
-	 	 $('#waterLevel').css('top',t+'px');
-		 $('#waterLevel0').css('top',t+'px');
+	 	// $('#waterLevel').css('top',t+'px');
+		// $('#waterLevel0').css('top',t+'px');
 		$('#waterLevel').css('visibility','visible');
-		$('#waterLevel0').css('visibility','visible');
+	//	$('#waterLevel0').css('visibility','visible');
 	
 $('#waterLevel').pan({fps: 15, speed: 20, dir: 'left'});
 }
@@ -2874,8 +2868,13 @@ function apearFishs(i)
 		var hC=$('#contentAquarium').height();
 		var hF=$('#fish'+i).height();
 		var tF=parseInt($('#fish'+i).css('top').replace('px',''));
-		var topM=Math.floor($(window).height()*0.8*0.06);
-		var wl=parseInt($('#waterLevel').css('top').replace('px',''))+topM;
+		//var topM=Math.floor($(window).height()*0.8*0.06);
+		var topM=Math.floor($(window).height()*0.1);
+	//		var wl=parseInt($('#waterLevel').css('top').replace('px',''))+topM;
+			var difContentAqWi=$(window).height()*(0.9)-$('#contentAquarium').height();
+		var wl=$('#waterPipeContent').height()-difContentAqWi;
+
+//		var wl=$('#waterPipeContent').height()+topM;
 		if((tF>wl) && (hC>=(tF+hF)))
 		{
 			apprsFish[i-1]=2;
@@ -2893,9 +2892,13 @@ function apearFishs(i)
 			var topMin=topM;
 			var le=$(window).width()*0.5;
 			var ri=($(window).width()*1.5)-$('#fish'+i).width();
+			var difContentAqWi=$(window).height()*(0.9)-$('#contentAquarium').height();
+		var wl=$('#waterPipeContent').height()-difContentAqWi;
 			var toP=parseInt($('#fish'+i).css('top').replace('%','').replace('px',''));
-				if(	topM+parseInt($('#waterLevel').css('top').replace('px',''))>toP){
-					$('#fish'+i).css('top',(topM+parseInt($('#waterLevel').css('top').replace('px','')))+'px');
+				//if(	topM+parseInt($('#waterLevel').css('top').replace('px',''))>toP){
+					if(	wl>toP){
+					//$('#fish'+i).css('top',(topM+parseInt($('#waterLevel').css('top').replace('px','')))+'px');
+					$('#fish'+i).css('top',(wl)+'px');
 					return false;}
 					
 			if(	parseInt($('#fish'+i).css('left').replace('px',''))<le){$('#fish'+i).css('left',le+'px');return false;}
@@ -2946,6 +2949,7 @@ function showFishs(i)
 
 		if(getRandom(0,9)<7)
 		{
+			
 			apprsFish[i-1]=1;
 			generateFishs(i);
 			
@@ -2967,7 +2971,7 @@ aquarium2SoundF('play');
 $(document).on('pageshow','#aquarium', function(e,data){ 
 
 
-
+$('#waterPipeContent').height($(window).height()*0.9);
 			notStart=false;
 render=true;
 	pageRender='#aquarium';  
@@ -2991,13 +2995,15 @@ startSoundsA();
 showMermaid();
 showWhale();
 showDolphin();
+	$('#bubblesLevel').height($(window).height()*0.1);
+		$('#bubblesLevel').css('bottom',	-$('#bubblesLevel').height()/2+'px');
 	$('#bubblesLevel')
 					.sprite({fps: 5, no_of_frames: 5})
 					.active();
 
 
 var lP=($('#pipeContainer').width()*0.08)-($('#pipe').width()*0.91);
-$('#waterPipe').height(0.90*$('#waterPipeContent').height());
+	//$('#waterPipe').height(0.90*$('#waterPipeContent').height());
 $('#pipe').css('left',lP+'px');
 waterPipeSoundF('play');
 showDivEfect($('#pipe'));
@@ -3110,7 +3116,7 @@ wavesSoundF('play');
 			});
       $("#buttonMenuAquarium2").click(function() {
 		  	tapSoundAF('play');
-		  zoomLevel=16;
+		  zoomLevel=10;
 		  map.setZoom(Math.floor(zoomLevel));
 		  	$('#positionLeftAquarium').css('z-index','6890');
 				 $('#positionLeftAquarium').css('visibility','visible');
@@ -3162,6 +3168,29 @@ wavesSoundF('play');
 					if (distanceFull==distanceLeft)
 					{
 						$('#timeLeftAquarium').html("<br/>WITHOUT INFORMATION");
+										directionsDisplay.setMap(map);		
+						if(marker3!=undefined)
+						 {
+									marker3.setMap(null);
+									}
+									 if(marker4!=undefined)
+						 {
+								marker4.setMap(null);
+						 }
+				         marker3 = new google.maps.Marker({
+				            position: startPosition,
+				            map: map,
+							icon:fromImageA,
+				            title: "We come from!"
+				        });		
+								currentPosition
+						 marker4 = new google.maps.Marker({
+				            position: destPosition,
+				            map: map,
+							icon:toImageA,
+				            title: "We go there!"
+				        });				
+
 	
 						  updatePostionAquarium();
 						  							  clearInterval(intervalDist);
@@ -3468,16 +3497,18 @@ function loadCharacter()
 	}
 	
 		  $('#headerContentCharacter').css('background','transparent url('+headerCharacter+') 0 0 no-repeat');
+var heightCharacter=$('#character').height()*parseInt($('#contentCharacter').css('height').replace('%',''))/100;
 
-  $('#greyCharacter').css({
+ $('#greyCharacter').css({
     'background' : 'transparent url('+frontCharacter+') 0 0 no-repeat',
-    'background-size' : '100% ' + $('#loadingContent').height()+'px' ,
+    'background-size' : '100% ' + heightCharacter+'px' ,
 });
 
   $('#colorCharacter').css({
     'background' : 'transparent url('+backCharacter+') 0 0 no-repeat',
-    'background-size' : '100% ' + $('#loadingContent').height()+'px',
+    'background-size' : '100% ' + heightCharacter+'px',
 });
+ 
 }
 function clearTripYesAquarium()
 {
@@ -3583,7 +3614,7 @@ function clearTripNo()
 				clearInterval(intervalDist2);
 			navigator.geolocation.clearWatch(watchID);
 						$('#knowFactContainerAquarium').css('opacity','0');
-
+		hideDivEfect($('#finishBubbles'));
 				  $('#finishAquarium').css('visibility','hidden');
 				  				  $('#finishAquarium').css('opacity','0');
 			directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
@@ -3618,15 +3649,13 @@ function clearTripNo()
 function goToLoading()
 {
 	if(setScene==10)
-{
+	{	
 	
-				$('#loading').removeClass('page');
-				$('#loading').addClass('pagel');
-
+		$('#loading').removeClass('page');
+		$('#loading').addClass('pagel');
 		$('#wheelBorder').addClass('loadingAquariumB');
-				$('#wheelDiv').addClass('loadingAquariumW');
-				
-console.log('aeaee');
+		$('#wheelDiv').addClass('loadingAquariumW');
+
 		if(!getFree && !isBuyAquarium)
 		{
 			goToBilling('aquarium');
@@ -3634,7 +3663,8 @@ console.log('aeaee');
 		else
 		{
 			changePageSoundF('play');
-		$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
+
+			$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
 		}
 	}
 	else
@@ -3677,25 +3707,28 @@ function	loadLoading()
 $(document).on('pageshow','#loading', function(e,data){ 
 
 	loadLoading();
-	if(!isLoadSound2)
+if(!isLoadSound2)
 {
 	//loadSounds2();
 }
 
 playMusic();
 
-if(distanceFull==distanceLeft)
-{rotTimes=7000;	
-	}
+if(distanceFull==distanceLeft && timeLeft==timeFull)
+{
+	rotTimes=7000;	
+}
 else
 {
 rotTimes=2000;	
 }
-			  loadCharacter();
+			  
+
 				setTimeout(function () { 
 
 						if(setScene<=9)
 						{
+							loadCharacter();
 							$.mobile.changePage("#character",{ transition: pageEfect,reverse:false});
 						}
 						else
@@ -3795,8 +3828,8 @@ $('#waterLevel').destroy();
 $('#waterLevel').css('visibility','hidden');
 
 
-$('#waterLevel0').destroy();	
-$('#waterLevel0').css('visibility','hidden');
+//$('#waterLevel0').destroy();	
+//$('#waterLevel0').css('visibility','hidden');
 
 
 $('#mermaid').destroy();	
