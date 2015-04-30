@@ -460,49 +460,58 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 
-      	if(window.localStorage.getItem('default')=='0')
-			{	defaultTrip=0;
-			}
-			else if(window.localStorage.getItem('default')=='1')
-			{	
-				defaultTrip=1;
-			}
-			else 
-			{	
-				defaultTrip=2;
-			}
-			
-			if(window.localStorage.getItem('sound')=='false')
-			{
-				sound=false;
-			}
-			else
-			{
-				sound=true;	
-			}
-			
-       			loadSounds1();
-				loadSounds2();
-				soundOk=true;
-				if(isAndroid)
-				{
-					
-					document.addEventListener("pause", function() { pauseApp();}, false);
-					document.addEventListener("resume", function() { resumeApp();}, false);
-					document.addEventListener("menubutton", function() { pauseApp();}, false);
+		if(id=='deviceready')
+		{
+			if(window.localStorage.getItem('default')=='0')
+				{	defaultTrip=0;
 				}
-				loadAlreadyPurchase();
-      
+				else if(window.localStorage.getItem('default')=='1')
+				{	
+					defaultTrip=1;
+				}
+				else 
+				{	
+					defaultTrip=2;
+				}
+				
+				if(window.localStorage.getItem('sound')=='false')
+				{
+					sound=false;
+				}
+				else
+				{
+					sound=true;	
+				}
+				
+					loadSounds1();
+					loadSounds2();
+					soundOk=true;
+					if(isAndroid)
+					{
+						
+						document.addEventListener("pause", function() { pauseApp();}, false);
+						document.addEventListener("resume", function() { resumeApp();}, false);
+						document.addEventListener("menubutton", function() { pauseApp();}, false);
+					}
+			app.initIap();
+		}
+      if (id=='inappbillingready')
+	  {
+		  				loadAlreadyPurchase();
+	  }
     },
+	
 initIap: function() {
         inappbilling.init(
             function() {
                 app.receivedEvent('inappbillingready');
-                app.log('init succeed');
+                $('#msgErrors').css('z-index','20000');
+				$('#msgErrors').html('INAPP READY');
+				console.log('ok');
             },
-           errorPurchase,
+           errorPurchaseInit(err),
             {
-                showLog: true
+                showLog: false
             },
             [
                 "aquarium"
@@ -543,6 +552,13 @@ function loadAlreadyPurchase()
 	{
 		app.getPurchases();	
 	}
+}
+function errorPurchaseInit(err)
+{
+            	
+                $('#msgErrors').css('z-index','20000');
+				$('#msgErrors').html('INAPP ERROR READY '+err);
+			
 }
 function errorPurchase(err)
 {
@@ -588,7 +604,7 @@ function buyYes(product)
 
 function goToBilling(product)
 {
-		app.initIap();
+
 
 		switch(product)
 		{
