@@ -557,14 +557,14 @@ function errorPurchaseInit(err)
 {
             	
                 $('#msgErrors').css('z-index','20000');
-				$('#msgErrors').html('INAPP ERROR READY '+err);
+				$('#msgErrors').html('INAPP ERROR INIT '+err.msg);
 			
 }
 function errorPurchase(err)
 {
 	
                 $('#msgErrors').css('z-index','20000');
-				$('#msgErrors').html('INAPP ERROR READY '+err);
+				$('#msgErrors').html('INAPP ERROR purchase '+err.msg);
 	if(window.localStorage.setItem('aquariumP')=='true')
 	{
 		setAquariumPurchase();
@@ -607,10 +607,10 @@ function buyYes(product)
 function goToBilling(product)
 {
 
-
+/*
 		switch(product)
 		{
-			case 'aquarium' : 		
+			case 'aquarium' : 		*/
 				if(isBuyAquarium)
 				{	
 
@@ -620,9 +620,9 @@ function goToBilling(product)
 				{
 						$.mobile.changePage('#confirmBuy'+product,{ transition: pageEfect,reverse:false});
 				}
-				break;
+/*				break;
 		}
-
+*/
 	
 }
 
