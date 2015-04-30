@@ -509,7 +509,7 @@ initIap: function() {
 				$('#msgErrors').html('INAPP READY');
 				console.log('ok');
             },
-           errorPurchaseInit(err),
+           errorPurchaseInit,
             {
                 showLog: false
             },
