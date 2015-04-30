@@ -562,6 +562,9 @@ function errorPurchaseInit(err)
 }
 function errorPurchase(err)
 {
+	
+                $('#msgErrors').css('z-index','20000');
+				$('#msgErrors').html('INAPP ERROR READY '+err);
 	if(window.localStorage.setItem('aquariumP')=='true')
 	{
 		setAquariumPurchase();
@@ -597,9 +600,8 @@ function successCallGetP(purchases)
 
 function buyYes(product)
 {
-	switch(product)
-	{	case 'aquarium' : 	app.buyAquarium(product);	break;
-	}
+	app.buyAquarium(product);	
+
 }
 
 function goToBilling(product)
