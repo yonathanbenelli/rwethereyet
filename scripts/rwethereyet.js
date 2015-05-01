@@ -532,14 +532,21 @@ initIap: function() {
             function(prods) {
 		          successCallGetProducts(prods);
             },
-            errorPurchase
+            errorGetAviable
         );
     },
     buyAquarium: function(product) {
-        inappbilling.buy(function(data) {confirmedPurchaseAquarium(data); }, errorPurchase,  product     );
+        inappbilling.buy(function(data) {confirmedPurchaseAquarium(data); }, errorPurchase, 'aquarium'     );
     },
 };
 
+function  successCallGetProducts(prods)
+{
+	for(var i=0;i<prods.length;i++)
+	{
+		$('#listProducts').html('Unlock: '+prods[i].title+' for $:'+prods[i].price+'</br>');
+	}
+}
 function loadAlreadyPurchase()
 {
 
@@ -559,6 +566,13 @@ function errorPurchaseInit(err)
                 $('#msgErrors').css('z-index','20000');
 				$('#msgErrors').html('INAPP ERROR INIT '+err.msg);
 			
+}
+
+function errorGetAviable(err)
+{
+	               $('#msgErrors').css('z-index','20000');
+				$('#msgErrors').html('INAPP ERROR get aviable products '+err.msg);
+
 }
 function errorPurchase(err)
 {
@@ -618,6 +632,7 @@ function goToBilling(product)
 				}
 				else
 				{
+						app.getAvailableProducts();
 						$.mobile.changePage('#confirmBuy'+product,{ transition: pageEfect,reverse:false});
 				}
 /*				break;
