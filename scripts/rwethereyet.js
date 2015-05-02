@@ -504,10 +504,11 @@ var app = {
 initIap: function() {
         inappbilling.init(
             function() {
-                app.receivedEvent('inappbillingready');
+//                app.receivedEvent('inappbillingready');
                 $('#msgErrors').css('z-index','20000');
 				$('#msgErrors').html('INAPP READY');
 				console.log('ok');
+				loadAlreadyPurchase();
             },
            errorPurchaseInit,
             {
@@ -523,7 +524,7 @@ initIap: function() {
         inappbilling.getPurchases(
             function(purchases) {
                successCallGetP(purchases);
-            },    errorPurchase
+            },    errorPurchaseGet
            
         );
     },
@@ -536,7 +537,7 @@ initIap: function() {
         );
     },
     buyAquarium: function(product) {
-        inappbilling.buy(function(data) {confirmedPurchaseAquarium(data); }, errorPurchase, 'aquarium'     );
+        inappbilling.buy(function(data) {confirmedPurchaseAquarium(data); }, errorPurchase, 'Aquarium'     );
     },
 };
 
@@ -574,6 +575,13 @@ function errorGetAviable(err)
 				$('#msgErrors').html('INAPP ERROR get aviable products '+err.msg);
 
 }
+function errorPurchaseGet(err)
+{
+	
+                $('#msgErrors').css('z-index','20000');
+				$('#msgErrors').html('INAPP ERROR GET PURCHASES '+err.msg);
+}
+
 function errorPurchase(err)
 {
 	
@@ -593,8 +601,10 @@ function errorPurchase(err)
 
 function confirmedPurchaseAquarium(data)
 {
+				 $('#msgErrors').css('z-index','20000');
+				$('#msgErrors').html('INAPP COMPRA OK');
 				setAquariumPurchase();
-				goToBilling('aquarium');
+			//	goToBilling('aquarium');
 }
 
 function successCallGetP(purchases)
