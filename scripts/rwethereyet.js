@@ -444,6 +444,54 @@ var render=true;
                  android=0;
     }
 
+var music=[null,null,null,null,null,null,null,null];
+var wavesSound=null;
+var dolphinSound=null;
+var birdsConSound=null;
+var bird1Sound=null;
+var bird2Sound=null;
+var tapASound=null;
+var aquarium1Sound=null;
+var aquarium2Sound=null;
+var bubblesFinishSound=null;
+var waterPipeSound=null;
+var tapJSound=null;
+var scrollSound=null;
+var changePageSound=null;
+var swipe1Sound=null;
+var swipe2Sound=null;
+var ovation=null;
+var crocodileSound=null;
+var elephantSound=null;
+var jungleSound=null;
+var lionSound=null;
+var monkeySound=null;
+
+   var toucanSound=null;
+   var pinchSound=null;
+var zebraSound=null;
+ var mermaidSound=null;
+ var isLoadSound1=false;
+    var isLoadSound2=true;
+var accuracyAct=-1;
+var isTime;
+var timeAccDesired=20000;
+var accuracyDesired=50;	
+var 	notFullScreen=true;
+var toImage= 'resources/others/to.png';
+var fromImage= 'resources/others/from.png';
+var nowImage= 'resources/others/now.png';
+var toImageA= 'resources/others/toa.png';
+var fromImageA= 'resources/others/froma.png';
+var nowImageA= 'resources/others/nowa.png';
+
+var list=[];
+
+
+var IAP = {
+  list: [ "Aquarium" ]
+};
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -492,19 +540,111 @@ var app = {
 						document.addEventListener("pause", function() { pauseApp();}, false);
 						document.addEventListener("resume", function() { resumeApp();}, false);
 						document.addEventListener("menubutton", function() { pauseApp();}, false);
+									//IAPA.initialize();
 					}
-			app.initIap();
+					else
+					{
+									IAP.initialize();						
+					}
+
+
 		}
-      if (id=='inappbillingready')
-	  {
-		  				loadAlreadyPurchase();
-	  }
+      
     },
-	
+}
+
+IAP.initialize = function () {
+  // Check availability of the storekit plugin
+  if (!window.storekit) {
+	  setInappMsg('<br/> error','load plugin' ,'Plugin not ready');
+    console.log("In-App Purchases not available");
+    return;
+  }
+  else
+  {
+	  			IAP.restore();
+  }
+  
+  // Initialize
+  storekit.init({
+    debug:    true, // Enable IAP messages on the console
+    ready:    IAP.onReady,
+    purchase: IAP.onPurchase,
+    restore:  IAP.onRestore,
+    error:    IAP.onError
+  });
+};
+
+IAP.onReady = function () {
+    // Once setup is done, load all product data.
+    storekit.load(IAP.list, function (products, invalidIds) {
+		
+      IAP.products = products;
+      IAP.loaded = true;
+	var  prods="";
+      for (var i = 0; i < invalidIds.length; ++i) {
+       prods=prods+invalidIds[i];
+      }
+	  	  setInappMsg('<br/> error','on ready loading products' ,'product not ready '+prods);
+  });
+};
+
+IAP.onRestore = function (transactionId, productId, transactionReceipt) {
+  // Pseudo code that unlocks the full version.
+  if (productId === 'Aquarium') {
+	   setAquariumPurchase();
+  }
+};
+IAP.restore = function () {
+  storekit.restore();
+};
+
+IAP.onPurchase = function (transactionId, productId, receipt) {
+  if (productId === 'Aquarium')
+	   setAquariumPurchase();
+};
+ 
+IAP.onError = function (errorCode, errorMessage) {
+  	  setInappMsg('<br/> error','on buy code:'+errorCode ,errorMessage);
+};
+
+
+IAP.buy = function (productId) {
+  storekit.purchase(productId);
+};
+
+var renderIAPs = function (el) {
+  if (IAP.loaded) {
+    var auquarium  = IAP.products["Aquarium"];
+    var html = "<ul>";
+    for (var id in IAP.products) {
+      var prod = IAP.products[id];
+      html += "<li>" + 
+       "<h3>" + prod.title + "</h3>" +
+       "<p>" + prod.description + "</p>" +
+       "<button type='button' " +
+       "onclick='IAP.buy(\"" + prod.id + "\")'>" +
+       prod.price + "</button>" +
+       "</li>";
+    }
+    html += "</ul>";
+    el.innerHTML = html;
+  }
+  else {
+    el.innerHTML = "In-App Purchases not available.";
+  }
+};
+
+function setInappMsg(st,i, msg)
+{
+	  $('#msgErrors').css('z-index','20000');
+				$('#msgErrors').html('INAPP ' +st+" "+i+" "+msg);
+}
+/*	
 initIap: function() {
         inappbilling.init(
             function() {
-//                app.receivedEvent('inappbillingready');
+               app.receivedEvent('inappbillingready');
                 $('#msgErrors').css('z-index','20000');
 				$('#msgErrors').html('INAPP READY');
 				console.log('ok');
@@ -628,6 +768,7 @@ function buyYes(product)
 	app.buyAquarium(product);	
 
 }
+*/
 
 function goToBilling(product)
 {
@@ -643,8 +784,9 @@ function goToBilling(product)
 				}
 				else
 				{
-						app.getAvailableProducts();
+
 						$.mobile.changePage('#confirmBuy'+product,{ transition: pageEfect,reverse:false});
+						renderIAPs(document.getElementById('confirmaquarium'));
 				}
 /*				break;
 		}
@@ -660,49 +802,6 @@ function setAquariumPurchase()
 	 $('#setAquarium').addClass('setAquariumUnlock');
 //	$('#setAquarium').css('background: transparent url(../resources/buttons/aqueariumbuttonunlock.png) 0 0 no-repeat;')
 }
-var music=[null,null,null,null,null,null,null,null];
-var wavesSound=null;
-var dolphinSound=null;
-var birdsConSound=null;
-var bird1Sound=null;
-var bird2Sound=null;
-var tapASound=null;
-var aquarium1Sound=null;
-var aquarium2Sound=null;
-var bubblesFinishSound=null;
-var waterPipeSound=null;
-var tapJSound=null;
-var scrollSound=null;
-var changePageSound=null;
-var swipe1Sound=null;
-var swipe2Sound=null;
-var ovation=null;
-var crocodileSound=null;
-var elephantSound=null;
-var jungleSound=null;
-var lionSound=null;
-var monkeySound=null;
-
-   var toucanSound=null;
-   var pinchSound=null;
-var zebraSound=null;
- var mermaidSound=null;
- var isLoadSound1=false;
-    var isLoadSound2=true;
-var accuracyAct=-1;
-var isTime;
-var timeAccDesired=20000;
-var accuracyDesired=50;	
-var 	notFullScreen=true;
-var toImage= 'resources/others/to.png';
-var fromImage= 'resources/others/from.png';
-var nowImage= 'resources/others/now.png';
-var toImageA= 'resources/others/toa.png';
-var fromImageA= 'resources/others/froma.png';
-var nowImageA= 'resources/others/nowa.png';
-
-var list=[];
-
 function myPlay(id)
 {
 	list[id].play({ playAudioWhenScreenIsLocked : false });
@@ -743,30 +842,7 @@ function getMedia(src,loop,i,id,delay)
 			  
 		if (isAndroid) 
 		{
-//          src = '/android_asset/www/' + src;
-				/*
-				  window.plugins.NativeAudio.unload(id,onSuccessS,onErrorS);;
-							mediaRes=	window.plugins.NativeAudio.preloadComplex(id,src,8,1,delay,onSuccessS,onErrorS); 
-			*/
-//			var src2='file:///android/assets/www/'+src;
 						var src2='/android_asset/www/'+src;
-		/*	if(window.plugins.Media!=undefined)
-			{
-				list[id]= new window.plugins.Media(src2, onSuccessS,onErrorS);
-			}
-			else if(window.Media!=undefined)
-			{
-					list[id]= new window.plugins.Media(src2, onSuccessS,onErrorS);
-			}
-			else if(Media!=undefined)
-			{
-						list[id]= new Media(src2, onSuccessS,onErrorS);
-			}
-			else if(window.core.Media!=undefined)
-			{
-						list[id]= new window.core.Media(src2, onSuccessS,onErrorS);
-			}
-			*/
 					list[id]= new Media(src2, onSuccessS,onErrorS);
 		}
 		else
@@ -817,12 +893,6 @@ function   loadSounds2()
 
 
 	music[1]= getMedia("resources/music/music1.mp3", true,1,'1');
-	/*music[2]=music[1];
-	music[3]=music[1];
-	music[4]=music[1];
-	music[5]= music[1];
-	music[6]=music[1];
-	music[7]=music[1];*/
 	music[2]= getMedia("resources/music/music2.mp3", true,2,'2',1);
 	music[3]= getMedia("resources/music/music3.mp3", true,3,'3',1);
 	music[4]= getMedia("resources/music/music4.mp3", true,4,'4',1);
@@ -854,9 +924,6 @@ function   loadSounds2()
  function onSuccessS() {
 
         }
-
-        // onError Callback
-        //
         function onErrorS(error) {
         }
 	
