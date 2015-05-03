@@ -508,14 +508,14 @@ initIap: function() {
                 $('#msgErrors').css('z-index','20000');
 				$('#msgErrors').html('INAPP READY');
 				console.log('ok');
-				loadAlreadyPurchase();
+				//loadAlreadyPurchase();
             },
            errorPurchaseInit,
             {
                 showLog: false
             },
             [
-                "aquarium"
+                "Aquarium"
             ]
         );
         
@@ -537,10 +537,14 @@ initIap: function() {
         );
     },
     buyAquarium: function(product) {
-        inappbilling.buy(function(data) {confirmedPurchaseAquarium(data); }, errorPurchase, 'Aquarium'     );
+        inappbilling.buy(succPurchase, errorPurchase, 'Aquarium'     );
     },
 };
 
+function succPurchase(data)
+{
+	confirmedPurchaseAquarium(data); 
+}
 function  successCallGetProducts(prods)
 {
 	for(var i=0;i<prods.length;i++)
@@ -592,10 +596,7 @@ function errorPurchase(err)
 		setAquariumPurchase();
 		goToBilling('aquarium');
 	}
-	else
-	{	 $('#errorBuyAquarium').css('visibility','visible');
-	 		 $('#errorBuyAquarium').html(err);
-	}
+	
 }
 
 
@@ -3706,7 +3707,6 @@ function goToLoading()
 		else
 		{
 			changePageSoundF('play');
-
 			$.mobile.changePage('#loading',{ transition: pageEfect,reverse:false});
 		}
 	}
