@@ -786,7 +786,7 @@ function goToBilling(product)
 				{
 
 						$.mobile.changePage('#confirmBuy'+product,{ transition: pageEfect,reverse:false});
-						renderIAPs(document.getElementById('confirmaquarium'));
+						renderIAPs(document.getElementById('confirmAquarium'));
 				}
 /*				break;
 		}
@@ -3769,7 +3769,7 @@ function goToLoading()
 
 		if(!getFree && !isBuyAquarium)
 		{
-			goToBilling('aquarium');
+			goToBilling('Aquarium');
 		}
 		else
 		{
