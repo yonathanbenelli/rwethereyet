@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "uy.com.bullseye.rwethereyet"
-        version   = "1.0.6">
+        version   = "1.0.7">
 
     <name>R We There Yet?</name>
 

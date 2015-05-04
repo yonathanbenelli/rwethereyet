@@ -541,10 +541,26 @@ var app = {
 						document.addEventListener("resume", function() { resumeApp();}, false);
 						document.addEventListener("menubutton", function() { pauseApp();}, false);
 									//IAPA.initialize();
+						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
+						{
+							setAquariumPurchase();
+						}
+						else
+						{
+							//IAPA.initialize();						
+						}
+
 					}
 					else
 					{
-									IAP.initialize();						
+						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
+						{
+							setAquariumPurchase();
+						}
+						else
+						{
+							IAP.initialize();						
+						}
 					}
 
 
@@ -556,8 +572,8 @@ var app = {
 IAP.initialize = function () {
   // Check availability of the storekit plugin
   if (!window.storekit) {
-	  setInappMsg('<br/> error','load plugin' ,'Plugin not ready');
-    console.log("In-App Purchases not available");
+	  setInappMsg('','' ,'StoreKit Not Load, please check internet connection');
+
     return;
   }
   else
@@ -585,7 +601,7 @@ IAP.onReady = function () {
       for (var i = 0; i < invalidIds.length; ++i) {
        prods=prods+invalidIds[i];
       }
-	  	  setInappMsg('<br/> error','on ready loading products' ,'product not ready '+prods);
+	  	 
   });
 };
 
@@ -601,11 +617,14 @@ IAP.restore = function () {
 
 IAP.onPurchase = function (transactionId, productId, receipt) {
   if (productId === 'Aquarium')
+  {
 	   setAquariumPurchase();
+	   goToBilling(productId);
+  }
 };
  
 IAP.onError = function (errorCode, errorMessage) {
-  	  setInappMsg('<br/> error','on buy code:'+errorCode ,errorMessage);
+  	  setInappMsg('','' ,errorCode+": "+errorMessage);
 };
 
 
@@ -615,7 +634,7 @@ IAP.buy = function (productId) {
 
 var renderIAPs = function (el) {
   if (IAP.loaded) {
-    var auquarium  = IAP.products["Aquarium"];
+    var aquarium  = IAP.products["Aquarium"];
     var html = "<ul>";
     for (var id in IAP.products) {
       var prod = IAP.products[id];
@@ -623,7 +642,7 @@ var renderIAPs = function (el) {
        "<h3>" + prod.title + "</h3>" +
        "<p>" + prod.description + "</p>" +
        "<button type='button' " +
-       "onclick='IAP.buy(\"" + prod.id + "\")'>" +
+       "onclick='IAP.buy(\"" + IAP.products["Aquarium"].id + "\")'>" +
        prod.price + "</button>" +
        "</li>";
     }
@@ -637,138 +656,18 @@ var renderIAPs = function (el) {
 
 function setInappMsg(st,i, msg)
 {
-	  $('#msgErrors').css('z-index','20000');
-				$('#msgErrors').html('INAPP ' +st+" "+i+" "+msg);
+	navigator.notification.alert(
+    msg,  // message
+    callBackMsg,         // callback
+    'Error',            // title
+    'Close'                  // buttonName
+);
+	  
 }
-/*	
-initIap: function() {
-        inappbilling.init(
-            function() {
-               app.receivedEvent('inappbillingready');
-                $('#msgErrors').css('z-index','20000');
-				$('#msgErrors').html('INAPP READY');
-				console.log('ok');
-				//loadAlreadyPurchase();
-            },
-           errorPurchaseInit,
-            {
-                showLog: false
-            },
-            [
-                "Aquarium"
-            ]
-        );
-        
-    },
-    getPurchases: function() {
-        inappbilling.getPurchases(
-            function(purchases) {
-               successCallGetP(purchases);
-            },    errorPurchaseGet
-           
-        );
-    },
-    getAvailableProducts: function() {
-        inappbilling.getLoadedProducts(
-            function(prods) {
-		          successCallGetProducts(prods);
-            },
-            errorGetAviable
-        );
-    },
-    buyAquarium: function(product) {
-        inappbilling.buy(succPurchase, errorPurchase, 'Aquarium'     );
-    },
-};
-
-function succPurchase(data)
+function callBackMsg()
 {
-	confirmedPurchaseAquarium(data); 
-}
-function  successCallGetProducts(prods)
-{
-	for(var i=0;i<prods.length;i++)
-	{
-		$('#listProducts').html('Unlock: '+prods[i].title+' for $:'+prods[i].price+'</br>');
-	}
-}
-function loadAlreadyPurchase()
-{
-
-	if(window.localStorage.getItem('aquariumP')=='true' )
-	{
-		setAquariumPurchase();
-
-	}
-	else
-	{
-		app.getPurchases();	
-	}
-}
-function errorPurchaseInit(err)
-{
-            	
-                $('#msgErrors').css('z-index','20000');
-				$('#msgErrors').html('INAPP ERROR INIT '+err.msg);
-			
 }
 
-function errorGetAviable(err)
-{
-	               $('#msgErrors').css('z-index','20000');
-				$('#msgErrors').html('INAPP ERROR get aviable products '+err.msg);
-
-}
-function errorPurchaseGet(err)
-{
-	
-                $('#msgErrors').css('z-index','20000');
-				$('#msgErrors').html('INAPP ERROR GET PURCHASES '+err.msg);
-}
-
-function errorPurchase(err)
-{
-	
-                $('#msgErrors').css('z-index','20000');
-				$('#msgErrors').html('INAPP ERROR purchase '+err.msg);
-	if(window.localStorage.setItem('aquariumP')=='true')
-	{
-		setAquariumPurchase();
-		goToBilling('aquarium');
-	}
-	
-}
-
-
-function confirmedPurchaseAquarium(data)
-{
-				 $('#msgErrors').css('z-index','20000');
-				$('#msgErrors').html('INAPP COMPRA OK');
-				setAquariumPurchase();
-			//	goToBilling('aquarium');
-}
-
-function successCallGetP(purchases)
-{
-	if(purchases!=undefined)
-	{ 
-		for(i=0;i<purchases.length;i++)
-		{
-			if(purchases[i]=='aquarium')	
-			{
-				setAquariumPurchase();
-			}
-		}
-	}
-
-}
-
-function buyYes(product)
-{
-	app.buyAquarium(product);	
-
-}
-*/
 
 function goToBilling(product)
 {
@@ -784,9 +683,22 @@ function goToBilling(product)
 				}
 				else
 				{
-
-						$.mobile.changePage('#confirmBuy'+product,{ transition: pageEfect,reverse:false});
-						renderIAPs(document.getElementById('confirmAquarium'));
+					if(isAndroid)
+					{
+					}
+					else
+					{
+					  if (IAP.loaded) {
+						IAP.buy(IAP.products["Aquarium"].id);
+					  }
+					  else
+					  {
+						  setInappMsg('','', 'In-App Purchases not available.');
+					  }
+					  
+					}
+						//$.mobile.changePage('#confirmBuy'+product,{ transition: pageEfect,reverse:false});
+						//renderIAPs(document.getElementById('confirmAquarium'));
 				}
 /*				break;
 		}
@@ -2100,8 +2012,13 @@ function updateTimeLeftText(timeL)
 				{
 						mins=0;
 				}
-				
-				$('#timeLeftCharacter').html("<br/><br/>"+hrs+" HOURS AND <br/>"+mins+" MINUTES LEFT");
+				if(hrs==-1 && mins==-1)
+				{
+					
+					hrs=0;
+					mins=0;
+				}
+				$('#timeLeftCharacter').html(""+hrs+" HOURS AND <br/>"+mins+" MINUTES LEFT");
 }
 function updateTimeLeftTextA(timeL)
 {
@@ -2115,6 +2032,12 @@ function updateTimeLeftTextA(timeL)
 				if(timeL==0)
 				{
 						mins=0;
+				}
+				if(hrs==-1 && mins==-1)
+				{
+					
+					hrs=0;
+					mins=0;
 				}
 				
 				$('#timeLeftAquarium').html("<br/><br/>"+hrs+" HOURS AND <br/>"+mins+" MINUTES LEFT");
@@ -2648,7 +2571,7 @@ function apearWhale()
 			var r=$('#contentAquarium').width()/2;
 			$('#whale')
 			.sprite({fps: 5, no_of_frames:6})
-			.spRandom({top: topP, left: -r, right: (r+$('#whale').width()), bottom: maxT, speed: 10000, pause: 5000, haveBack:true })
+			.spRandom({top: 'waterPipeContent', left: -r, right: (r+$('#whale').width()), bottom: maxT, speed: 10000, pause: 5000, haveBack:true,isFish:true })
 			.active();
 	
 		}
@@ -2702,7 +2625,7 @@ function apearDolphin()
 			var maxT=$('#contentAquarium').height();
 			$('#dolphin')
 			.sprite({fps: 7, no_of_frames:7})
-			.spRandom({top: topP, left: -r, right: (r+$('#dolphin').width()), bottom: maxT, speed: 10000, pause: 5000, haveBack:true })
+			.spRandom({top: 'waterPipeContent', left: -r, right: (r+$('#dolphin').width()), bottom: maxT, speed: 10000, pause: 5000, haveBack:true,isFish:true })
 			.active();
 	
 		}
@@ -2988,6 +2911,7 @@ function apearFishs(i)
 //		var wl=$('#waterPipeContent').height()+topM;
 		if((tF>wl) && (hC>=(tF+hF)))
 		{
+
 			apprsFish[i-1]=2;
 			showDivEfect($('#fish'+i));
 			var r=$('#contentAquarium').width();
@@ -2998,7 +2922,7 @@ function apearFishs(i)
 			var bot=hC;
 			$('#fish'+i)
 			.sprite({fps: fp, no_of_frames:6})
-			.spRandom({top: wl, left: 0, right: r, bottom: bot, speed: sp*1000, pause: p*1000, haveBack:true })
+			.spRandom({top: 'waterPipeContent', left: 0, right: r, bottom: bot, speed: sp*1000, pause: p*1000, haveBack:true, isFish:true })
 			.isDraggable({drag: function() {
 			var topMin=topM;
 			var le=$(window).width()*0.5;
@@ -3032,8 +2956,8 @@ function generateFishs(i)
 			$('#fish'+i).css('height',h+'px');
 			var w=parseInt(aspectRatioFishs[(i%10)]*h);
 			$('#fish'+i).css('width',w+'px');
-			var minTop=Math.floor($(window).height()*0.8*0.06);;
-			var maxTop=$('#contentAquarium').height();
+			var maxTop=Math.floor($(window).height()*0.9);
+			var minTop=Math.floor($(window).height()*0.2);
 			var t=getRandom(minTop,maxTop);
 				var l=getRandom(0,$('#contentAquarium').width());
 				if(l<=$('#contentAquarium').width()/2)

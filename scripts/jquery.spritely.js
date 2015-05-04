@@ -419,7 +419,8 @@
                 pause: 0,
                notRandom: false,
 			   dLeft: false,
-                haveBack: false
+                haveBack: false,
+                isFish: false
             }, options || {});
             var el_id = $(this).attr('id');
 
@@ -458,10 +459,19 @@
 					}
 				}
 				else{
+					var r = $._spritely.randomIntBetween;
+					if(options.isFish)
+					{
+						var idWl=options.top;
+						var tW=$('#'+idWl).height();
 					
-                var r = $._spritely.randomIntBetween;
-                var t = r(options.top, options.bottom);
-				var l = r(options.left, options.right);
+						var t = r(tW, options.bottom);
+					}
+					else
+					{
+						 var t = r(options.top, options.bottom);
+					}
+			    	var l = r(options.left, options.right);
 				}
 				if(options.haveBack)
 				{
