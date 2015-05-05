@@ -38,7 +38,7 @@
 	<gap:plugin name="de.neofonie.cordova.plugin.nativeaudio"/>
 	<gap:plugin name="org.apache.cordova.core.device-orientation" />
 	<gap:plugin name="cc.fovea.plugins.inapppurchase" version="3.4.0" />
-<gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay"/>
+<gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" />
 
 <preference name="orientation"                value="portrait" />  
 <preference name="exit-on-suspend" value="false"/>
