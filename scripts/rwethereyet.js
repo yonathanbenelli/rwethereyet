@@ -554,6 +554,7 @@ var app = {
 					else
 					{
 						window.plugin.statusbarOverlay.hide();
+						
 						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
 						{
 							setAquariumPurchase();
@@ -805,7 +806,7 @@ function   loadSounds2()
 {
 
 
-	music[1]= getMedia("resources/music/music1.mp3", true,1,'1');
+	music[1]= getMedia("resources/music/music1.mp3", true,1,'1',1);
 	music[2]= getMedia("resources/music/music2.mp3", true,2,'2',1);
 	music[3]= getMedia("resources/music/music3.mp3", true,3,'3',1);
 	music[4]= getMedia("resources/music/music4.mp3", true,4,'4',1);
@@ -3006,7 +3007,7 @@ aquarium2SoundF('play');
 
 $(document).on('pageshow','#aquarium', function(e,data){ 
 
-
+$('body').addClass("bodyA");
 $('#waterPipeContent').height($(window).height()*0.9);
 			notStart=false;
 render=true;
@@ -3795,6 +3796,8 @@ function backFromNoPurchase()
 function backFromAquarium()
 {
 	tapSoundAF('play');
+	$('body').removeClass("bodyA");
+
 	stopAllSoundA();
 	render=false;
 	$('#allA').css('visibility','hidden');
@@ -4039,11 +4042,11 @@ if(soundOk)
 	}
 	else
 	{	
-	if(nMusic!=0)
-	{
-		music[nMusic].stop();
-		
-	}
+		if(nMusic!=0)
+		{
+			music[nMusic].stop();
+			
+		}
 	}
 }
 }

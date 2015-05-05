@@ -19,6 +19,9 @@ background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
 
 }
 
+.bodyA{
+	background-color:rgb(255, 222, 101) !important;
+}
 body{
 	overflow:visible;
 	background-color:#86FDF0 !important;
@@ -780,7 +783,7 @@ img, object, embed, video {
 
 width:200% !important;
 left:-50% !important;
- 
+
 overflow:hidden !important
 }
 

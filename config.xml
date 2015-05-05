@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "uy.com.bullseye.rwethereyet"
-        version   = "1.0.9">
+        version   = "1.0.10">
 
     <name>RWeThereYet?</name>
 
@@ -45,7 +45,7 @@
 <preference name="ios-statusbarstyle" value="black-opaque" />
 <preference name="DisallowOverscroll" value="true"/>
 <preference name="Fullscreen" value="true" />
-<preference name="DisallowOverscroll" value="true" />
+
 
 <preference name="android-iabplugin-license-key"    value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgpcszfpuw8LodJtKvbKXE0n2c8R22tPDj3oQg1/xk/3p9mUqsF2HDfIlOE/dwFCbzvBGuS5+7REIk1TziIx8dtDAowyWpd91TtqF+lEBlSXOckpF9+cuZ5lEmdGTv4d5R6Ij4Ld3LYlbTDB7L5sJ0GUexR5byq6b229wcmtNKOryQjT2PmTRtMpuq4Fctr/pu510uN5q0Frp27GTUxn+du2t5sfJdCzrBN3bXkSUjUjMaUb5F2KQBuYHbDFQl2kKWNmMCMmrvSun9vqQ4rsYGq62YvNxRWd0sx6X09Ak+7cLmG3+R75nhbZqnbq5vIiWu9GY3H5wGTB/5tJ9BeOQYwIDAQAB" />
 <access origin="*"/>
