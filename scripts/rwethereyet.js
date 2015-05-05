@@ -553,6 +553,7 @@ var app = {
 					}
 					else
 					{
+						window.plugin.statusbarOverlay.hide();
 						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
 						{
 							setAquariumPurchase();
