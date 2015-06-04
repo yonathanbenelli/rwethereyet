@@ -503,7 +503,7 @@ opacity:0;
 }
 
 
-@media  screen and (-webkit-device-pixel-ratio: 3) and  (max-device-width: 320px) , screen and (-webkit-device-pixel-ratio: 2) and  (max-device-width: 560px) 
+@media  screen and (-webkit-device-pixel-ratio: 3) and  (min-device-width: 320px)  , screen and (-webkit-device-pixel-ratio: 2) and  (min-device-width: 370px) , screen and (-webkit-device-pixel-ratio: 2) and  (min-device-height: 560px)  and  (device-width: 320px)
 {
 	#plant1
 {
