@@ -543,15 +543,7 @@ var app = {
 						document.addEventListener("pause", function() { pauseApp();}, false);
 						document.addEventListener("resume", function() { resumeApp();}, false);
 						document.addEventListener("menubutton", function() { pauseApp();}, false);
-									//IAPA.initialize();
-						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
-						{
-							setAquariumPurchase();
-						}
-						else
-						{
-							//IAPA.initialize();						
-						}
+						
 						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
 						{
 							setAquariumPurchaseA();
