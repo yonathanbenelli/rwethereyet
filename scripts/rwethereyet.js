@@ -491,6 +491,9 @@ var list=[];
 var IAP = {
   list: [ "Aquarium" ]
 };
+var IAPA = {
+  list: [ "aquarium_stage" ]
+};
 
 var app = {
     // Application Constructor
@@ -549,7 +552,14 @@ var app = {
 						{
 							//IAPA.initialize();						
 						}
-
+						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
+						{
+							setAquariumPurchaseA();
+						}
+						else
+						{
+							IAPA.initialize();						
+						}
 					}
 					else
 					{
@@ -570,6 +580,14 @@ var app = {
       
     },
 }
+
+
+IAPA.initialize = function () {
+  // Check availability of the storekit plugin
+ inappbilling.init(IAPA.onReady, IAPA.onError, {showLog:false},IAPA.list); 
+ 
+  // Initialize
+};
 
 IAP.initialize = function () {
   // Check availability of the storekit plugin
@@ -596,8 +614,7 @@ IAP.initialize = function () {
 IAP.onReady = function () {
     // Once setup is done, load all product data.
     storekit.load(IAP.list, function (products, invalidIds) {
-		
-      IAP.products = products;
+	   IAP.products = products;
       IAP.loaded = true;
 	var  prods="";
       for (var i = 0; i < invalidIds.length; ++i) {
@@ -606,6 +623,17 @@ IAP.onReady = function () {
 	  	 
   });
 };
+IAPA.onReady = function () {
+    // Once setup is done, load all product data.
+
+	inappbilling.getAvailableProducts(function (products) {
+      IAPA.products = products;
+      IAPA.loaded = true;
+	  	  			IAPA.onRestore();
+	    }, IAPA.onError);
+  
+};
+
 
 IAP.onRestore = function (transactionId, productId, transactionReceipt) {
   // Pseudo code that unlocks the full version.
@@ -613,9 +641,24 @@ IAP.onRestore = function (transactionId, productId, transactionReceipt) {
 	   setAquariumPurchase();
   }
 };
+IAPA.onRestore = function () {
+	  inappbilling.getPurchases(function (productsOwned) {
+		  for (var i=0;i<productsOwned.length;i++)
+		  {
+			  var productId=productsOwned[i].productId;
+			  if (productId === 'aquarium_stage') {
+			   setAquariumPurchase();
+				}
+		  }
+	  }, IAPA.onError);
+  // Pseudo code that unlocks the full version.
+  
+};
+
 IAP.restore = function () {
   storekit.restore();
 };
+
 
 IAP.onPurchase = function (transactionId, productId, receipt) {
   if (productId === 'Aquarium')
@@ -624,9 +667,27 @@ IAP.onPurchase = function (transactionId, productId, receipt) {
 	   goToBilling(productId);
   }
 };
+
+IAPA.onPurchase = function (productId) {
+  if (productId === 'aquarium_stage')
+  {
+	   setAquariumPurchase();
+	   goToBilling(productId);
+  }
+};
  
+IAPA.onError = function (errorCode) {
+  	  setInappMsg('','' ,errorCode);
+};
+
+
 IAP.onError = function (errorCode, errorMessage) {
   	  setInappMsg('','' ,errorCode+": "+errorMessage);
+};
+
+
+IAPA.buy = function (productId) {
+	inappbilling.buy(IAPA.onPurchase(productId), IAPA.onError, productId)
 };
 
 
@@ -687,6 +748,13 @@ function goToBilling(product)
 				{
 					if(isAndroid)
 					{
+						if (IAPA.loaded) {
+							IAPA.buy("aquarium_stage");
+						  }
+						  else
+						  {
+							  setInappMsg('','', 'In-App Purchases not available.');
+						  }
 					}
 					else
 					{
@@ -748,7 +816,10 @@ function myVolume(id,vol,succ,err)
 
 function myStop(id)
 {
-	list[id].stop();
+	if(list[id]!=undefined && list[id]!=null)
+	{
+		list[id].stop();
+	}
 }
 function getMedia(src,loop,i,id,delay)
 {
@@ -917,6 +988,7 @@ if(!isLoadSound1)
 {
 	//loadSounds1();
 }
+stopAllS();
 
 	if((distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0) ) && !notStart)
 	{
@@ -1950,7 +2022,8 @@ var interval4;
 		 //  currentPosition=defaultLatLng; 
 			
 	  				var errorGpsLoc=true;			
-					$('#msg').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
+					//$('#msg').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
+					$('#msg').html("SORRY, WE CAN'T GET YOUR CURRENT POSITION, PLEASE MAKE SURE, DO YOU HAVE ACTIVATE GPS AND INTERNET, THEN TRY AGAIN.");
 																		$('#msg').css('z-index','5000');
 										$('#msg').css('font-size','1em');		
 										$('#msg').click(function(){$('#msg').css('z-index','0');		$('#msg').css('visibility','hidden');});
@@ -3954,6 +4027,25 @@ birdsConSoundF('play');
 
 playMusic();
 
+}
+function stopAllS()
+{
+	stopAllSoundA();
+	for(var i=1;i<=7;i++)
+	{
+	if(soundOk)
+	{	
+		if(isAndroid)
+	{	
+		myStop(i);
+			}
+	else
+	{	
+			music[i].stop();
+		
+	}
+	}
+}
 }
 function stopAllSoundA()
 {

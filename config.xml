@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "uy.com.bullseye.rwethereyet"
-        version   = "1.0.10">
+        version   = "1.0.11">
 
     <name>RWeThereYet?</name>
 
@@ -38,6 +38,7 @@
 	<gap:plugin name="de.neofonie.cordova.plugin.nativeaudio"/>
 	<gap:plugin name="org.apache.cordova.core.device-orientation" />
 	<gap:plugin name="cc.fovea.plugins.inapppurchase" version="3.4.0" />
+<gap:plugin name="com.mcm.plugins.androidinappbilling" version="3.0.6" />
 <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" />
 
 <preference name="orientation"                value="portrait" />  

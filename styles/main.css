@@ -12,7 +12,8 @@
 [data-role=buttonNext]{   background: transparent url(../resources/buttons/nextarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:right !important; visibility:hidden ;z-index: 10100	}
 [data-role=setCharacterButton]{  height: 35% !important; width: 40% !important;     margin-left: 7% !important; float:left !important;
 background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
-
+[data-role=setHelp]{  height: 100% !important; width: 100% !important;     margin-left: 7% !important; float:left !important;
+background-size: 100% 100% !important;  background-position: 50% 50% !important;	}
 @font-face {
   font-family: sharkyspotdemo;
   src: url('sharkyspotdemo.ttf');
@@ -69,6 +70,38 @@ body{
 			left:80%;
 			z-index:10100;
 			visibility:hidden;
+}
+
+#help1
+{
+			background:transparent url(../resources/others/help1.png) 0 0 no-repeat;
+			
+}
+#help2
+{
+			background:transparent url(../resources/others/help2.png) 0 0 no-repeat;
+			
+}
+
+#help3
+{
+			background:transparent url(../resources/others/help3.png) 0 0 no-repeat;
+			
+}
+
+#help4
+{
+			background:transparent url(../resources/others/help4.png) 0 0 no-repeat;
+			
+}
+
+#help
+{
+			background:transparent url(../resources/others/help.png) 0 0 no-repeat;
+			background-size:contain;
+			position:absolute;
+			height:100%;
+			width:100%;
 }
 #fullSreenMap
 {
@@ -329,6 +362,7 @@ left: 8%;
 		overflow:visible !important;
 		
 }
+
 #fish1
 {
 			background:transparent url(../resources/characters/aquarium/animated/fish1.png) 0 0 no-repeat;
@@ -424,15 +458,7 @@ opacity:0;
 
 
 }
-.mermaidContentClass
-{
-	width:100%;
-		height:100%;
-		bottom:0%;
-		position:absolute;
-		overflow:visible;
-	
-}
+
 
 .whaleClass
 {
@@ -448,16 +474,6 @@ opacity:0;
 
 
 }
-.whaleContentClass
-{
-	width:100%;
-		height:100%;
-		bottom:0%;
-		position:absolute;
-		overflow:visible;
-	
-}
-
 .dolphinClass
 {
 		background:transparent url(../resources/characters/aquarium/animated/dolphin.png) 0 0 no-repeat;
@@ -472,6 +488,266 @@ opacity:0;
 
 
 }
+.birdClass
+{
+	position:absolute !important;
+	visibility:hidden;
+	  opacity:0;
+	background:transparent url(../resources/characters/aquarium/animated/birds.png) 0 0 no-repeat;
+	height:10%;
+	width:10%;
+	left:50%;
+	top:0px;
+	overflow:visible;
+	background-size:400% 100% !important;
+}
+
+
+@media  screen and (-webkit-device-pixel-ratio: 3) and  (max-device-width: 320px) , screen and (-webkit-device-pixel-ratio: 2) and  (max-device-width: 560px) 
+{
+	#plant1
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant1.png) 0 0 no-repeat;
+}
+#plant2
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant2.png) 0 0 no-repeat;
+}
+#plant3
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant3.png) 0 0 no-repeat;
+}
+#plant4
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant4.png) 0 0 no-repeat;
+}
+#plant5
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant5.png) 0 0 no-repeat;
+}
+#plant6
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant6.png) 0 0 no-repeat;
+}
+#plant7
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant7.png) 0 0 no-repeat;
+}
+#plant8
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant8.png) 0 0 no-repeat;
+}
+#plant9
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant9.png) 0 0 no-repeat;
+}
+#plant10
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant10.png) 0 0 no-repeat;
+}
+#plant11
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant1.png) 0 0 no-repeat;
+}
+#plant12
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant2.png) 0 0 no-repeat;
+}
+#plant13
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant3.png) 0 0 no-repeat;
+}
+#plant14
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant4.png) 0 0 no-repeat;
+}
+#plant15
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant5.png) 0 0 no-repeat;
+}
+#plant16
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant6.png) 0 0 no-repeat;
+}
+#plant17
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant7.png) 0 0 no-repeat;
+}
+#plant18
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant8.png) 0 0 no-repeat;
+}
+#plant19
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant9.png) 0 0 no-repeat;
+}
+#plant20
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/plant10.png) 0 0 no-repeat;
+}
+
+	.birdClass
+{
+	position:absolute !important;
+	visibility:hidden;
+	  opacity:0;
+	background:transparent url(../resources/characters/aquarium/animatedhd/birds.png) 0 0 no-repeat;
+	height:10%;
+	width:10%;
+	left:50%;
+	top:0px;
+	overflow:visible;
+	background-size:400% 100% !important;
+}
+
+#fish1
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish1.png) 0 0 no-repeat;
+}
+#fish2
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish2.png) 0 0 no-repeat;
+}
+#fish3
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish3.png) 0 0 no-repeat;
+}
+#fish4
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish4.png) 0 0 no-repeat;
+}
+#fish5
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish5.png) 0 0 no-repeat;
+}
+#fish6
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish6.png) 0 0 no-repeat;
+}
+#fish7
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish7.png) 0 0 no-repeat;
+}
+#fish8
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish8.png) 0 0 no-repeat;
+}
+#fish9
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish9.png) 0 0 no-repeat;
+}
+#fish10
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish10.png) 0 0 no-repeat;
+}
+#fish11
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish1.png) 0 0 no-repeat;
+}
+#fish12
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish2.png) 0 0 no-repeat;
+}
+#fish13
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish3.png) 0 0 no-repeat;
+}
+#fish14
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish4.png) 0 0 no-repeat;
+}
+#fish15
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish5.png) 0 0 no-repeat;
+}
+#fish16
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish6.png) 0 0 no-repeat;
+}
+#fish17
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish7.png) 0 0 no-repeat;
+}
+#fish18
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish8.png) 0 0 no-repeat;
+}
+#fish19
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish9.png) 0 0 no-repeat;
+}
+#fish20
+{
+			background:transparent url(../resources/characters/aquarium/animatedhd/fish10.png) 0 0 no-repeat;
+}
+
+.mermaidClass
+{
+		background:transparent url(../resources/characters/aquarium/animatedhd/mermaid.png) 0 0 no-repeat;
+   width: 25%;
+  height: 25%;
+  top:70%;
+	position: absolute;
+  visibility: hidden;
+opacity:0;
+  background-size: 600% 200% !important;
+
+
+
+}
+
+
+.whaleClass
+{
+		background:transparent url(../resources/characters/aquarium/animatedhd/whale.png) 0 0 no-repeat;
+   width: 40%;
+  height: 40%;
+  top:25%;
+	position: absolute;
+  visibility: hidden;
+opacity:0;
+  background-size: 600% 200% !important;
+
+
+
+}
+.dolphinClass
+{
+		background:transparent url(../resources/characters/aquarium/animatedhd/dolphin.png) 0 0 no-repeat;
+   width: 20%;
+  height: 20%;
+  top:5%;
+	position: absolute;
+  visibility: hidden;
+opacity:0;
+  background-size: 700% 200% !important;
+
+
+
+}
+	
+}
+
+.mermaidContentClass
+{
+	width:100%;
+		height:100%;
+		bottom:0%;
+		position:absolute;
+		overflow:visible;
+	
+}
+
+.whaleContentClass
+{
+	width:100%;
+		height:100%;
+		bottom:0%;
+		position:absolute;
+		overflow:visible;
+	
+}
+
 .dolphinContentClass
 {
 	width:100%;
@@ -585,19 +861,6 @@ opacity:0;
 	height:100%;
 	bottom:0%;
 	z-index:5000;
-}
-.birdClass
-{
-	position:absolute !important;
-	visibility:hidden;
-	  opacity:0;
-	background:transparent url(../resources/characters/aquarium/animated/birds.png) 0 0 no-repeat;
-	height:10%;
-	width:10%;
-	left:50%;
-	top:0px;
-	overflow:visible;
-	background-size:400% 100% !important;
 }
 
 .cloudClass
@@ -1214,8 +1477,10 @@ top:10%;
   z-index: 10001;
   text-align: center;
   font-weight: lighter;
-  color: red !important;
+  color: yellow !important;
   padding-left: 10px;
+  padding-top: 10px;
+  text-shadow: none;
   padding-right: 10px;
 	background: transparent url(../resources/others/wood1.png) 0 0 no-repeat;
 	background-size: 100% 100% !important; 
@@ -1474,8 +1739,18 @@ float:left;
 	  height:100% !important;
 	    position: relative !important;
 }
+#containerHelp
+{
+	  width: 100% !important;
+	  height:100% !important;
+	    position: relative !important;
+}
 
 #contentSetCharacter
+{
+			overflow-y:	scroll !important;
+}
+#contentHelp
 {
 			overflow-y:	scroll !important;
 }

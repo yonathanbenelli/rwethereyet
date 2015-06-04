@@ -49,7 +49,7 @@
 
     <div data-role="buttonMenuMain"  id="buttonTripPlanner"  onClick="goToPage(goToTripPlanner(),false)"></div>
     <div data-role="buttonMenuMain" id="buttonSettings"  onClick="goToPage('#settings',false);"></div>
-   <div data-role="buttonMenuMain" id="buttonHelp"  onClick="goToPage('#help',false);"></div>
+   <div data-role="buttonMenuMain" id="buttonHelp"  onClick="goToPage('#helpPage',false);"></div>
        
 
   </div>
@@ -58,6 +58,7 @@
             </div>	
       
 </div>
+
 <div data-role="page" id="tripPlanner" class="page" >
 
 <div  id="headerTripPlanner" data-role="header"  >    <div  id="headerContentTripPlanner"  class="headerContent" >   	 </div>  </div>
@@ -191,6 +192,26 @@
             	
 	 </div>
 </div>
+
+<div data-role="page" id="helpPage" class="page" >
+               
+<div  id="headerHelp" data-role="header"  >    <div  id="headerContentHelp"  class="headerContent" >   	 </div>  </div>
+
+  <div data-role="content" id="contentHelp">
+    <div id="containerHelp">
+        <div id="help1"   data-role="setHelp"  >    </div>
+        <div    id="help2"  data-role="setHelp"    ></div>
+        <div  id="help3"  data-role="setHelp" ></div>
+          <div  id="help4"  data-role="setHelp" ></div>
+</div>   
+    </div>
+    <div data-role="footer" id="footerHelp" >
+			   <div data-role="buttonBack" id="backHelp" onClick="backToMain();" ></div>
+            	
+	 </div>
+
+</div>
+
 
 <div data-role="page" id="setCharacter" class="page" >
                
