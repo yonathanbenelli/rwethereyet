@@ -574,13 +574,6 @@ var app = {
 }
 
 
-IAPA.initialize = function () {
-  // Check availability of the storekit plugin
- inappbilling.init(IAPA.onReady, IAPA.onError, {showLog:false},IAPA.list); 
- 
-  // Initialize
-};
-
 IAP.initialize = function () {
   // Check availability of the storekit plugin
   if (!window.storekit) {
@@ -615,36 +608,37 @@ IAP.onReady = function () {
 	  	 
   });
 };
+
+IAPA.initialize = function () {
+  // Check availability of the storekit plugin
+ inappbilling.init(IAPA.onReady, IAPA.onError, {showLog:false},IAPA.list); 
+ 
+  // Initialize
+};
+
 IAPA.onReady = function () {
     // Once setup is done, load all product data.
-
-	inappbilling.getAvailableProducts(function (products) {
-      IAPA.products = products;
-      IAPA.loaded = true;
-	  	  			IAPA.onRestore();
-	    }, IAPA.onError);
+	inappbilling.getAvailableProducts(function (products) {  IAPA.products = products;    IAPA.loaded = true;	  			IAPA.onRestore();}, IAPA.onError);
   
 };
 
+IAPA.onRestore = function () {
+	  inappbilling.getPurchases(function (productsOwned) {
+		  for (var i=0;i<productsOwned.length;i++)
+		  {
+			  var productId=productsOwned[i].productId;
+			  if (productId === 'aquarium_stage') {   setAquariumPurchase();}
+		  }
+	  }, IAPA.onError);
+  // Pseudo code that unlocks the full version.
+  
+};
 
 IAP.onRestore = function (transactionId, productId, transactionReceipt) {
   // Pseudo code that unlocks the full version.
   if (productId === 'Aquarium') {
 	   setAquariumPurchase();
   }
-};
-IAPA.onRestore = function () {
-	  inappbilling.getPurchases(function (productsOwned) {
-		  for (var i=0;i<productsOwned.length;i++)
-		  {
-			  var productId=productsOwned[i].productId;
-			  if (productId === 'aquarium_stage') {
-			   setAquariumPurchase();
-				}
-		  }
-	  }, IAPA.onError);
-  // Pseudo code that unlocks the full version.
-  
 };
 
 IAP.restore = function () {
@@ -711,13 +705,14 @@ var renderIAPs = function (el) {
 
 function setInappMsg(st,i, msg)
 {
-	navigator.notification.alert(
+	$('#containerSetCharacter').html(msg);
+/*	navigator.notification.alert(
     msg,  // message
     callBackMsg,         // callback
     'Error',            // title
     'Close'                  // buttonName
 );
-	  
+	*/  
 }
 function callBackMsg()
 {
@@ -727,10 +722,6 @@ function callBackMsg()
 function goToBilling(product)
 {
 
-/*
-		switch(product)
-		{
-			case 'aquarium' : 		*/
 				if(isBuyAquarium)
 				{	
 
@@ -741,7 +732,7 @@ function goToBilling(product)
 					if(isAndroid)
 					{
 						if (IAPA.loaded) {
-							IAPA.buy("aquarium_stage");
+								IAPA.buy("aquarium_stage");
 						  }
 						  else
 						  {
@@ -759,12 +750,7 @@ function goToBilling(product)
 					  }
 					  
 					}
-						//$.mobile.changePage('#confirmBuy'+product,{ transition: pageEfect,reverse:false});
-						//renderIAPs(document.getElementById('confirmAquarium'));
 				}
-/*				break;
-		}
-*/
 	
 }
 
@@ -976,6 +962,7 @@ function onSuccessStart(position)
 }
 
 $(document).on('pageshow','#main', function(e,data){  
+	$('body').removeClass("bodyA");
 if(!isLoadSound1)
 {
 	//loadSounds1();
@@ -990,6 +977,7 @@ stopAllS();
 	}
 	else
 	{
+			$('#nextByTime').css('visibility','hidden');
 		 $('#buttonTripPlanner').css('visibility','visible');
 		 $('#backMain').css('visibility','hidden');	
 		 if(!notStart)
@@ -1040,6 +1028,7 @@ $(document).on('pageshow','#settings', function(e,data){
 
 });
 $(document).on('pageshow','#setCharacter', function(e,data){  
+	$('body').removeClass("bodyA");
 clearInterval(intervalDist2);
 	pageRender='#setCharacter';  
 if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
@@ -1308,10 +1297,10 @@ function goToTripPlanner()
 }
 function goToBackPlanner()
 {
-				changePageSoundF('play');
+	changePageSoundF('play');
 	if(defaultTrip==0)
 	{
-				pageRender='#main';  	
+		pageRender='#main';  	
 		return '#main';
 
 	}
