@@ -654,11 +654,15 @@ IAP.onPurchase = function (transactionId, productId, receipt) {
   }
 };
 
-IAPA.onPurchase = function (productId) {
-  if (productId === 'aquarium_stage')
+IAPA.onPurchase = function (receipt) {
+	
+  if(typeof receipt === 'object')
   {
 	   setAquariumPurchase();
 	   goToBilling(productId);
+  }
+  else
+  {setInappMsg('','' ,'error comprado ok, pero no objeto'+receipt);
   }
 };
  
@@ -673,7 +677,7 @@ IAP.onError = function (errorCode, errorMessage) {
 
 
 IAPA.buy = function (productId) {
-	inappbilling.buy(IAPA.onPurchase(productId), IAPA.onError, productId)
+	inappbilling.buy(IAPA.onPurchase, IAPA.onError, productId)
 };
 
 
@@ -919,7 +923,7 @@ function fullScreen()
 
 }
 $(document).on('pageshow','#tripPlanner', function(e,data){  
-
+										$('#nextByTime').css('visibility','hidden');
 	   watchID = navigator.geolocation.watchPosition(onSuccessStart,onError,geo_options);
 });
 
