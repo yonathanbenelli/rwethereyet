@@ -618,12 +618,12 @@ IAPA.initialize = function () {
 
 IAPA.onReady = function () {
     // Once setup is done, load all product data.
-	inappbilling.getAvailableProducts(function (products) {  IAPA.products = products;    IAPA.loaded = true;	  			IAPA.onRestore();}, IAPA.onError);
+  IAPA.products = IAPA.list;    IAPA.loaded = true;	  			IAPA.onRestore()
   
 };
 
 IAPA.onRestore = function () {
-	  inappbilling.getAvailableProducts(function (productsOwned) {
+	  inappbilling.getPurchases(function (productsOwned) {
 		  for (var i=0;i<productsOwned.length;i++)
 		  {
 			  var productId=productsOwned[i].productId;
