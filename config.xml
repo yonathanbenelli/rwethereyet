@@ -38,8 +38,6 @@
 	<gap:plugin name="de.neofonie.cordova.plugin.nativeaudio"/>
 	<gap:plugin name="org.apache.cordova.core.device-orientation" />
 <gap:plugin name="com.smartmobilesoftware.inappbilling" version="3.0.2" />
-
-<gap:plugin name="com.mcm.plugins.androidinappbilling" version="3.0.6" />
 <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" />
 
 <preference name="orientation"                value="portrait" />  
