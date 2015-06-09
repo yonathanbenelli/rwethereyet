@@ -37,7 +37,8 @@
 	<gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.4" />
 	<gap:plugin name="de.neofonie.cordova.plugin.nativeaudio"/>
 	<gap:plugin name="org.apache.cordova.core.device-orientation" />
-	<gap:plugin name="cc.fovea.plugins.inapppurchase" version="3.4.0" />
+<gap:plugin name="com.smartmobilesoftware.inappbilling" version="3.0.2" />
+
 <gap:plugin name="com.mcm.plugins.androidinappbilling" version="3.0.6" />
 <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" />
 
@@ -46,9 +47,6 @@
 <preference name="ios-statusbarstyle" value="black-opaque" />
 <preference name="DisallowOverscroll" value="true"/>
 <preference name="Fullscreen" value="true" />
-
-
-<preference name="android-iabplugin-license-key"    value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmnp/ggNVZioe7kJNorPFFzVUOKieegIjP3AvRWe5e3wmkv+SzX0cBAwq7bCTIr9bZFapjeNMcaxGm4Gg9H/E5jEddNYS5hj/Hcb1QxePhShlETnNDFwwRbBzV1Zogz2Gh3GCEXtbG55wOZjP28gbq4e8LrpY9TRn/I5tp00QDx9IB0ExbL9KmkXPeDr7tBeCpHfkUwcoaILl0uYt4oMOLoeAx7sqEWeb0f3XS28ZaxpiU+kXwMEGSL2ZKTCxy+xvgK+f3nMMF8dd716v3IQnl3zEZum62Q5lgU1tPKDNXoghKfPQFyC8plp+eQfaGfR19v4LcbdzZ79vESBZzOqJmwIDAQAB" />
 <access origin="*"/>
     <!-- Added the following intents to support the removal of whitelist code from base cordova to a plugin -->
     <!-- Whitelist configuration. Refer to https://cordova.apache.org/docs/en/edge/guide_appdev_whitelist_index.md.html -->

@@ -546,7 +546,7 @@ var app = {
 						
 						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
 						{
-							setAquariumPurchaseA();
+							setAquariumPurchase();
 						}
 						else
 						{
@@ -611,7 +611,7 @@ IAP.onReady = function () {
 
 IAPA.initialize = function () {
   // Check availability of the storekit plugin
- inappbilling.init(IAPA.onReady, IAPA.onError, {showLog:false},IAPA.list); 
+ inappbilling.init(IAPA.onReady, IAPA.onError,  {showLog:true, key: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmnp/ggNVZioe7kJNorPFFzVUOKieegIjP3AvRWe5e3wmkv+SzX0cBAwq7bCTIr9bZFapjeNMcaxGm4Gg9H/E5jEddNYS5hj/Hcb1QxePhShlETnNDFwwRbBzV1Zogz2Gh3GCEXtbG55wOZjP28gbq4e8LrpY9TRn/I5tp00QDx9IB0ExbL9KmkXPeDr7tBeCpHfkUwcoaILl0uYt4oMOLoeAx7sqEWeb0f3XS28ZaxpiU+kXwMEGSL2ZKTCxy+xvgK+f3nMMF8dd716v3IQnl3zEZum62Q5lgU1tPKDNXoghKfPQFyC8plp+eQfaGfR19v4LcbdzZ79vESBZzOqJmwIDAQAB'},IAPA.list); 
  
   // Initialize
 };
@@ -623,11 +623,11 @@ IAPA.onReady = function () {
 };
 
 IAPA.onRestore = function () {
-	  inappbilling.getPurchases(function (productsOwned) {
+	  inappbilling.getAvailableProducts(function (productsOwned) {
 		  for (var i=0;i<productsOwned.length;i++)
 		  {
 			  var productId=productsOwned[i].productId;
-			  if (productId === 'aquarium_stage') {   setAquariumPurchase();}
+			  if (productId == 'aquarium_stage') {   setAquariumPurchase();}
 		  }
 	  }, IAPA.onError);
   // Pseudo code that unlocks the full version.
@@ -658,11 +658,13 @@ IAPA.onPurchase = function (receipt) {
 	
   if(typeof receipt === 'object')
   {
-	   setAquariumPurchase();
-	   goToBilling(productId);
+	  // setAquariumPurchase();
+	 //  goToBilling(productId);
+	 setInappMsg('','' ,'comprado ok'+receipt);
   }
   else
-  {setInappMsg('','' ,'error comprado ok, pero no objeto'+receipt);
+  {
+	  setInappMsg('','' ,'error comprado ok, pero no objeto'+receipt);
   }
 };
  
@@ -703,13 +705,15 @@ var renderIAPs = function (el) {
     el.innerHTML = html;
   }
   else {
-    el.innerHTML = "In-App Purchases not available.";
+    el.innerHTML = "In-App Purchases not available2.";
   }
 };
 
 function setInappMsg(st,i, msg)
 {
+
 	$('#containerSetCharacter').html(msg);
+		$('#bodyId').html(msg);
 /*	navigator.notification.alert(
     msg,  // message
     callBackMsg,         // callback
