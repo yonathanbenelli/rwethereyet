@@ -618,7 +618,7 @@ IAPA.initialize = function () {
 
 IAPA.onReady = function () {
     // Once setup is done, load all product data.
-  IAPA.products = IAPA.list;    IAPA.loaded = true;	  			IAPA.onRestore()
+  IAPA.products = IAPA.list;    IAPA.loaded = true;	  			IAPA.onRestore();
   
 };
 
@@ -658,12 +658,13 @@ IAPA.onPurchase = function (receipt) {
 	
   if(typeof receipt === 'object')
   {
-	  // setAquariumPurchase();
-	 //  goToBilling(productId);
+	   setAquariumPurchase();
+	   goToBilling(productId);
 	 setInappMsg('','' ,'comprado ok'+receipt);
   }
   else
   {
+	  goToTripPlanner();
 	  setInappMsg('','' ,'error comprado ok, pero no objeto'+receipt);
   }
 };
@@ -712,8 +713,8 @@ var renderIAPs = function (el) {
 function setInappMsg(st,i, msg)
 {
 
-	$('#containerSetCharacter').html(msg);
-		$('#bodyId').html(msg);
+//	$('#containerSetCharacter').html(msg);
+	//	$('#bodyId').html(msg);
 /*	navigator.notification.alert(
     msg,  // message
     callBackMsg,         // callback
