@@ -6,6 +6,8 @@ $(document).bind("scroll", function(e) {
 	   
 });
 
+						
+			
 var getFree=false;
 var simulateGps=false;
 var notStart=true;
@@ -543,7 +545,6 @@ var app = {
 						document.addEventListener("pause", function() { pauseApp();}, false);
 						document.addEventListener("resume", function() { resumeApp();}, false);
 						document.addEventListener("menubutton", function() { pauseApp();}, false);
-						
 						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
 						{
 							setAquariumPurchase();
@@ -572,7 +573,6 @@ var app = {
       
     },
 }
-
 
 IAP.initialize = function () {
   // Check availability of the storekit plugin
@@ -620,28 +620,30 @@ IAPA.onReady = function (result) {
     // Once setup is done, load all product data.
   //IAPA.products = IAPA.list;   
    IAPA.loaded = true;	
-     			IAPA.onRestore();
+    inappbilling.getPurchases(IAPA.onGetPurchases, IAPA.onError);
   
 };
 
-IAPA.onRestore = function () {
-	inappbilling.getPurchases(IAPA.onGetPurchases, IAPA.onError);
-  // Pseudo code that unlocks the full version.
-  
-};
+var ids="None";
 IAPA.onGetPurchases = function (productsOwned) {
 
+
+  ids=ids+productsOwned.length;
 		  for (var i=0;i<productsOwned.length;i++)
 		  {
 			  var pro=productsOwned[i].productId;
-			  if (pro == 'aquarium_stage') { 
+			  ids=ids+pro;
+			  if (pro == "aquarium_stage") { 
+			  			  ids=ids+"true";
 			    	setAquariumPurchase();
 				}
+							  			  ids=ids+"false";
+				
 		  }
+		  
 
   
 };
-
 IAP.onRestore = function (transactionId, productId, transactionReceipt) {
   // Pseudo code that unlocks the full version.
   if (productId === 'Aquarium') {
@@ -721,8 +723,7 @@ var renderIAPs = function (el) {
 function setInappMsg(st,i, msg)
 {
 
-$('#containerSetCharacter').html(msg);
-		$('#bodyId').html(msg);
+	$('#tripPlanner').html(msg);
 /*	navigator.notification.alert(
     msg,  // message
     callBackMsg,         // callback
@@ -937,6 +938,7 @@ function fullScreen()
 }
 $(document).on('pageshow','#tripPlanner', function(e,data){  
 										$('#nextByTime').css('visibility','hidden');
+												$('#tripPlanner').html(ids);
 	   watchID = navigator.geolocation.watchPosition(onSuccessStart,onError,geo_options);
 });
 
