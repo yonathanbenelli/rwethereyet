@@ -659,13 +659,13 @@ IAPA.onPurchase = function (receipt) {
   if(typeof receipt === 'object')
   {
 	   setAquariumPurchase();
-	   goToBilling(productId);
-	 setInappMsg('','' ,'comprado ok'+receipt);
+	   goToBilling('aquarium_stage');
+		// setInappMsg('','' ,'comprado ok'+receipt);
   }
   else
   {
 	  goToTripPlanner();
-	  setInappMsg('','' ,'error comprado ok, pero no objeto'+receipt);
+	 // setInappMsg('','' ,'error comprado ok, pero no objeto'+receipt);
   }
 };
  
