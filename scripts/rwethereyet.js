@@ -616,21 +616,29 @@ IAPA.initialize = function () {
   // Initialize
 };
 
-IAPA.onReady = function () {
+IAPA.onReady = function (result) {
     // Once setup is done, load all product data.
-  IAPA.products = IAPA.list;    IAPA.loaded = true;	  			IAPA.onRestore();
+  //IAPA.products = IAPA.list;   
+   IAPA.loaded = true;	
+     			IAPA.onRestore();
   
 };
 
 IAPA.onRestore = function () {
-	  inappbilling.getPurchases(function (productsOwned) {
+	inappbilling.getPurchases(IAPA.onGetPurchases, IAPA.onError);
+  // Pseudo code that unlocks the full version.
+  
+};
+IAPA.onGetPurchases = function (productsOwned) {
+
 		  for (var i=0;i<productsOwned.length;i++)
 		  {
-			  var productId=productsOwned[i].productId;
-			  if (productId == 'aquarium_stage') {   setAquariumPurchase();}
+			  var pro=productsOwned[i].productId;
+			  if (pro == 'aquarium_stage') { 
+			    	setAquariumPurchase();
+				}
 		  }
-	  }, IAPA.onError);
-  // Pseudo code that unlocks the full version.
+
   
 };
 
@@ -713,8 +721,8 @@ var renderIAPs = function (el) {
 function setInappMsg(st,i, msg)
 {
 
-//	$('#containerSetCharacter').html(msg);
-	//	$('#bodyId').html(msg);
+$('#containerSetCharacter').html(msg);
+		$('#bodyId').html(msg);
 /*	navigator.notification.alert(
     msg,  // message
     callBackMsg,         // callback
