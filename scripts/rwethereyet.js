@@ -624,26 +624,74 @@ IAPA.onReady = function (result) {
   
 };
 
-var ids="None";
+function inspeccionar(obj)
+
+	    {
+
+	      var msg = '';
+
+	     
+
+	      for (var property in obj)
+
+	      {
+
+	        if (typeof obj[property] == 'function')
+
+	        {
+
+	          var inicio = obj[property].toString().indexOf('function');
+
+	          var fin = obj[property].toString().indexOf(')')+1;
+
+	          var propertyValue=obj[property].toString().substring(inicio,fin);
+
+	          msg +=(typeof obj[property])+' '+property+' : '+propertyValue+' ;\n';
+
+	        }
+
+	        else if (typeof obj[property] == 'unknown')
+
+	        {
+
+	          msg += 'unknown '+property+' : unknown ;\n';
+
+	        }
+
+	        else
+
+	        {
+
+	          msg +=(typeof obj[property])+' '+property+' : '+obj[property]+' ;\n';
+
+	        }
+
+	      }
+
+	      return msg;
+
+	    }
+
+
+var ids="";
 IAPA.onGetPurchases = function (productsOwned) {
-
-
-  ids=ids+productsOwned.length;
 		  for (var i=0;i<productsOwned.length;i++)
 		  {
 			  var pro=productsOwned[i].productId;
-			  ids=ids+pro;
-			  if (pro == "aquarium_stage") { 
+			  ids=ids+pro+inspeccionar(productsOwned[i]);
+			  if (pro == "aquarium_stage") 
+			  { 
 			  			  ids=ids+"true";
 			    	setAquariumPurchase();
 				}
 							  			  ids=ids+"false";
 				
 		  }
-		  
+
 
   
 };
+
 IAP.onRestore = function (transactionId, productId, transactionReceipt) {
   // Pseudo code that unlocks the full version.
   if (productId === 'Aquarium') {
@@ -698,39 +746,12 @@ IAP.buy = function (productId) {
   storekit.purchase(productId);
 };
 
-var renderIAPs = function (el) {
-  if (IAP.loaded) {
-    var aquarium  = IAP.products["Aquarium"];
-    var html = "<ul>";
-    for (var id in IAP.products) {
-      var prod = IAP.products[id];
-      html += "<li>" + 
-       "<h3>" + prod.title + "</h3>" +
-       "<p>" + prod.description + "</p>" +
-       "<button type='button' " +
-       "onclick='IAP.buy(\"" + IAP.products["Aquarium"].id + "\")'>" +
-       prod.price + "</button>" +
-       "</li>";
-    }
-    html += "</ul>";
-    el.innerHTML = html;
-  }
-  else {
-    el.innerHTML = "In-App Purchases not available2.";
-  }
-};
+
 
 function setInappMsg(st,i, msg)
 {
 
 	$('#tripPlanner').html(msg);
-/*	navigator.notification.alert(
-    msg,  // message
-    callBackMsg,         // callback
-    'Error',            // title
-    'Close'                  // buttonName
-);
-	*/  
 }
 function callBackMsg()
 {
