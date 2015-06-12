@@ -624,71 +624,14 @@ IAPA.onReady = function (result) {
   
 };
 
-function inspeccionar(obj)
-
-	    {
-
-	      var msg = '';
-
-	     
-
-	      for (var property in obj)
-
-	      {
-
-	        if (typeof obj[property] == 'function')
-
-	        {
-
-	          var inicio = obj[property].toString().indexOf('function');
-
-	          var fin = obj[property].toString().indexOf(')')+1;
-
-	          var propertyValue=obj[property].toString().substring(inicio,fin);
-
-	          msg +=(typeof obj[property])+' '+property+' : '+propertyValue+' ;\n';
-
-	        }
-
-	        else if (typeof obj[property] == 'unknown')
-
-	        {
-
-	          msg += 'unknown '+property+' : unknown ;\n';
-
-	        }
-
-	        else
-
-	        {
-
-	          msg +=(typeof obj[property])+' '+property+' : '+obj[property]+' ;\n';
-
-	        }
-
-	      }
-
-	      return msg;
-
-	    }
 
 
-var ids="";
 IAPA.onGetPurchases = function (productsOwned) {
-		  for (var i=0;i<productsOwned.length;i++)
-		  {
-			  var pro=productsOwned[i];
-			  ids=ids+pro[0]+inspeccionar(pro[0]);
-			  if (pro[0].productId == "aquarium_stage") 
-			  { 
-			  			  ids=ids+"true";
-			    	setAquariumPurchase();
-				}
-							  			  ids=ids+"false";
-				
-		  }
-
-
+	
+	if(productsOwned.length>0)
+	{
+				    	setAquariumPurchase();
+	}
   
 };
 
@@ -951,7 +894,7 @@ function fullScreen()
 }
 $(document).on('pageshow','#tripPlanner', function(e,data){  
 										$('#nextByTime').css('visibility','hidden');
-												$('#tripPlanner').html(ids);
+											
 	   watchID = navigator.geolocation.watchPosition(onSuccessStart,onError,geo_options);
 });
 
