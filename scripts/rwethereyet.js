@@ -677,9 +677,9 @@ var ids="";
 IAPA.onGetPurchases = function (productsOwned) {
 		  for (var i=0;i<productsOwned.length;i++)
 		  {
-			  var pro=productsOwned[i].productId;
-			  ids=ids+pro+inspeccionar(productsOwned[i]);
-			  if (pro == "aquarium_stage") 
+			  var pro=productsOwned[i];
+			  ids=ids+pro[0]+inspeccionar(pro[0]);
+			  if (pro[0].productId == "aquarium_stage") 
 			  { 
 			  			  ids=ids+"true";
 			    	setAquariumPurchase();
@@ -714,17 +714,9 @@ IAP.onPurchase = function (transactionId, productId, receipt) {
 
 IAPA.onPurchase = function (receipt) {
 	
-  if(typeof receipt === 'object')
-  {
-	   setAquariumPurchase();
+     setAquariumPurchase();
 	   goToBilling('aquarium_stage');
-		// setInappMsg('','' ,'comprado ok'+receipt);
-  }
-  else
-  {
-	  goToTripPlanner();
-	 // setInappMsg('','' ,'error comprado ok, pero no objeto'+receipt);
-  }
+	
 };
  
 IAPA.onError = function (errorCode) {
