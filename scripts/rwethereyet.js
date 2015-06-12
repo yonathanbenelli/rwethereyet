@@ -686,7 +686,7 @@ IAP.buy = function (productId) {
 function setInappMsg(st,i, msg)
 {
 
-	$('#tripPlanner').html(msg);
+	//$('#tripPlanner').html(msg);
 }
 function callBackMsg()
 {
