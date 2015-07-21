@@ -653,6 +653,10 @@ IAP.onPurchase = function (transactionId, productId, receipt) {
 	   setAquariumPurchase();
 	   goToBilling(productId);
   }
+  else
+  {
+	  setInappMsg('','', 'Error id not found'+productId);
+  }
 };
 
 IAPA.onPurchase = function (receipt) {
@@ -682,10 +686,18 @@ IAP.buy = function (productId) {
 };
 
 
-
+function alertDismissed() {
+    // do something
+}
 function setInappMsg(st,i, msg)
 {
 
+navigator.notification.alert(
+    msg,  // message
+    alertDismissed,         // callback
+    'Error',            // title
+    'Close'                  // buttonName
+);
 	//$('#tripPlanner').html(msg);
 }
 function callBackMsg()
