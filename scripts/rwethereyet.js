@@ -556,7 +556,7 @@ var app = {
 					}
 					else
 					{
-						window.plugin.statusbarOverlay.hide();
+						
 						
 						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
 						{
@@ -566,6 +566,7 @@ var app = {
 						{
 							IAP.initialize();						
 						}
+						window.plugin.statusbarOverlay.hide();
 					}
 
 
@@ -578,14 +579,9 @@ IAP.initialize = function () {
   // Check availability of the storekit plugin
   if (!window.storekit) {
 	  setInappMsg('','' ,'StoreKit Not Load, please check internet connection');
-
     return;
   }
-  else
-  {
-	  			IAP.restore();
-  }
-  
+
   // Initialize
   storekit.init({
     debug:    true, // Enable IAP messages on the console
@@ -594,6 +590,7 @@ IAP.initialize = function () {
     restore:  IAP.onRestore,
     error:    IAP.onError
   });
+  	  			IAP.restore();
 };
 
 IAP.onReady = function () {
@@ -692,12 +689,16 @@ function alertDismissed() {
 function setInappMsg(st,i, msg)
 {
 
-navigator.notification.alert(
+
+$('.noError').css('display', 'block');
+$('#error').html(msg);
+/*navigator.notification.alert(
     msg,  // message
     alertDismissed,         // callback
     'Error',            // title
     'Close'                  // buttonName
 );
+*/
 	//$('#tripPlanner').html(msg);
 }
 function callBackMsg()
@@ -728,7 +729,8 @@ function goToBilling(product)
 					else
 					{
 					  if (IAP.loaded) {
-						IAP.buy(IAP.products["Aquarium"].id);
+//						IAP.buy(IAP.products["Aquarium"].id);
+						IAP.buy("Aquarium");
 					  }
 					  else
 					  {
