@@ -8,7 +8,7 @@ $(document).bind("scroll", function(e) {
 
 						
 			
-var getFree=false;
+var getFree=true;
 var simulateGps=false;
 var notStart=true;
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
