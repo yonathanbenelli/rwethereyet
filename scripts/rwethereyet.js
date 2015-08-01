@@ -8,7 +8,7 @@ $(document).bind("scroll", function(e) {
 
 						
 			
-var getFree=true;
+var getFree=false;
 var simulateGps=false;
 var notStart=true;
 var knows=["Did you know?<br/>a bear has 42 teeth", "Did you know?<br/>an ostrich's eye is bigger than it's brain",
@@ -690,8 +690,8 @@ function setInappMsg(st,i, msg)
 {
 
 
-$('.noError').css('display', 'block');
-$('#error').html(msg);
+//$('.noError').css('display', 'block');
+//$('#error').html(msg);
 /*navigator.notification.alert(
     msg,  // message
     alertDismissed,         // callback
