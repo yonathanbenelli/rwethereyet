@@ -21,6 +21,10 @@ background-size: 100% 100% !important;  background-position: 50% 50% !important;
   src: url('sharkyspotdemo.ttf');
 
 }
+.classHide
+{
+	display:none;
+}
 .classError
 {
 	height::500px;

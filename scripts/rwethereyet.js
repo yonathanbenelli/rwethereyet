@@ -539,12 +539,14 @@ var app = {
 					loadSounds1();
 					loadSounds2();
 					soundOk=true;
+
 					if(isAndroid)
 					{
 						
 						document.addEventListener("pause", function() { pauseApp();}, false);
 						document.addEventListener("resume", function() { resumeApp();}, false);
 						document.addEventListener("menubutton", function() { pauseApp();}, false);
+
 						if (window.localStorage.getItem('aquariumP')=='true' || getFree)
 						{
 							setAquariumPurchase();
@@ -685,7 +687,6 @@ IAP.buy = function (productId) {
 
 function getPrevPurchase()
 {
-
 	if(isAndroid)
 	{
 		
@@ -707,6 +708,7 @@ function getPrevPurchase()
 		  setInappMsg('','', 'In-App Purchases not available.');
 	  }
 	}
+	
 };
 
 function alertDismissed() {
@@ -735,10 +737,13 @@ function callBackMsg()
 function goToBilling(product)
 {
 
+
 				if(isBuyAquarium)
 				{	
 
+					
 					goToLoading();
+
 				}
 				else
 				{
@@ -774,6 +779,7 @@ function setAquariumPurchase()
 	isBuyAquarium=true;
 	 window.localStorage.setItem('aquariumP', 'true');	
 	 $('#setAquarium').addClass('setAquariumUnlock');
+	 $('#getPrevPurchase').addClass('classHide');
 //	$('#setAquarium').css('background: transparent url(../resources/buttons/aqueariumbuttonunlock.png) 0 0 no-repeat;')
 }
 function myPlay(id)
