@@ -590,7 +590,7 @@ IAP.initialize = function () {
     restore:  IAP.onRestore,
     error:    IAP.onError
   });
-  	  			IAP.restore();
+  	  			//IAP.restore();
 };
 
 IAP.onReady = function () {
@@ -617,7 +617,7 @@ IAPA.onReady = function (result) {
     // Once setup is done, load all product data.
   //IAPA.products = IAPA.list;   
    IAPA.loaded = true;	
-    inappbilling.getPurchases(IAPA.onGetPurchases, IAPA.onError);
+//    inappbilling.getPurchases(IAPA.onGetPurchases, IAPA.onError);
   
 };
 
@@ -627,7 +627,7 @@ IAPA.onGetPurchases = function (productsOwned) {
 	
 	if(productsOwned.length>0)
 	{
-				    	setAquariumPurchase();
+	    	setAquariumPurchase();
 	}
   
 };
@@ -656,6 +656,7 @@ IAP.onPurchase = function (transactionId, productId, receipt) {
   }
 };
 
+
 IAPA.onPurchase = function (receipt) {
 	
      setAquariumPurchase();
@@ -682,6 +683,31 @@ IAP.buy = function (productId) {
   storekit.purchase(productId);
 };
 
+function getPrevPurchase()
+{
+
+	if(isAndroid)
+	{
+		
+		if (IAPA.loaded) {
+			    inappbilling.getPurchases(IAPA.onGetPurchases, IAPA.onError);
+		  }
+		  else
+		  {
+			  setInappMsg('','', 'In-App Purchases not available.');
+		  }
+	}
+	else
+	{
+	  if (IAP.loaded) {
+			IAP.restore();
+	  }
+	  else
+	  {
+		  setInappMsg('','', 'In-App Purchases not available.');
+	  }
+	}
+};
 
 function alertDismissed() {
     // do something

@@ -10,6 +10,8 @@
 [data-role=buttonBack]{   background: transparent url(../resources/buttons/backarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:left !important ; z-index: 10100	  	}
 [data-role=buttonBackA]{   background: transparent url(../resources/buttons/backarrowa.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:left !important 	  	}
 [data-role=buttonNext]{   background: transparent url(../resources/buttons/nextarrow.png) 0 0 no-repeat; background-size: 100% !important;  height: 100% !important; width: 15% !important; float:right !important; visibility:hidden ;z-index: 10100	}
+[data-role=buttonRestore]{   background: transparent url(../resources/buttons/restore.png) 0 0 no-repeat;     background-size: 100% !important;    height: 100% !important;    width: 60% !important;    margin-right: 2%;    margin-top: 5%;    float: right !important;    z-index: 10100;}
+
 [data-role=setCharacterButton]{  height: 35% !important; width: 40% !important;     margin-left: 7% !important; float:left !important;
 background-size: 90% 90% !important;  background-position: 50% 50% !important;	}
 [data-role=setHelp]{  height: 100% !important; width: 100% !important;     margin-left: 7% !important; float:left !important;
