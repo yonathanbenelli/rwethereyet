@@ -1314,7 +1314,8 @@ opacity:0;
 
 #setAquarium
 {
-		background: transparent url(../resources/buttons/aqueariumbuttonlock.png) 0 0 no-repeat;
+		/*background: transparent url(../resources/buttons/aqueariumbuttonlock.png) 0 0 no-repeat;*/
+		background: transparent url(../resources/buttons/aqueariumbuttonunlock.png) 0 0 no-repeat;
 }
 
 .setAquariumUnlock
