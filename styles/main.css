@@ -1251,18 +1251,18 @@ opacity:0;
                  
 #menuLeaf
 {
-  top: 2% !important;
+  top: 1% !important;
 
-	height: 10% !important; width: 10% !important;    left:88% !important; background-size: 100% 100% !important; 
+	height: 6% !important; width: 9% !important;    left:90% !important; background-size: 100% 100% !important; 
 	z-index:6000 !important; position:absolute !important;
 			background: transparent url(../resources/buttons/leafbutton2.png) 0 0 no-repeat;
 
 }
 #menuBubble
 {
-  top: 2% !important;
+  top: 1% !important;
 
-	height: 10% !important; width: 5% !important;    left:68% !important; background-size: 100% 100% !important; 
+	height: 6% !important; width: 5% !important;    left:69% !important; background-size: 100% 100% !important; 
 	z-index:6000 !important; position:absolute !important;
 			background: transparent url(../resources/buttons/bubblebutton2.png) 0 0 no-repeat;
 
@@ -1703,7 +1703,11 @@ background-size:100% !important;  height: 15% !important; width: 80% !important;
  }
  
 #containerSound
-{ width: 80%; height: 20%;}
+{ width: 80%; height: 20%;
+    margin-left: auto;
+    margin-right: auto;
+	    margin-top: 20%;
+}
 
 #soundLabel
 { background: transparent url(../resources/labels/soundlabel.png) 0 0 no-repeat;
@@ -1820,7 +1824,8 @@ position:absolute;
 	overflow:visible !important;
 }
 #headerContentMain
-{ 	  background: transparent url(../resources/labels/mainlabel.png) 0 0 no-repeat;}
+{ 	  background: transparent url(../resources/labels/mainlabel2.png) 0 0 no-repeat;}
+
 #headerContentSettings
 { background: transparent url(../resources/labels/settingslabel.png) 0 0 no-repeat;}
 #headerContentHelp

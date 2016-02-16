@@ -1050,6 +1050,7 @@ $(document).on('pageshow','#settings', function(e,data){
 });
 $(document).on('pageshow','#setCharacter', function(e,data){  
 	$('body').removeClass("bodyA");
+	
 clearInterval(intervalDist2);
 	pageRender='#setCharacter';  
 if(distanceLeft>0 || (timeLeft>0 && timeFull-timeLeft>0))
@@ -1105,8 +1106,12 @@ $(document).on('pageshow','#byTime', function(e,data){
 
 	var pixelMove2=	(($('#minuteThinTime1').width()/numbersWidth[resolution])*numbersHeight[resolution])/10;
 		var pixelMove3=	(($('#minuteThinTime2').width()/numbersWidth[resolution])*numbersHeight[resolution])/10;
+		
 	$('#minuteThinTime1').css('background-position-y',parseInt((pixelMove2*(1-0.282))/2.5));
 	$('#minuteThinTime2').css('background-position-y',parseInt((pixelMove2*(1-0.282))/2.5));
+			
+			$('#hourBoldTime').css('background-position-y',0);
+			
 	hourpos=0;
 	minute1pos=0;
 	timeLeft=-1;
@@ -1296,6 +1301,7 @@ function goToSetCharacter()
 				changePageSoundF('play');
 						pageRender='#setCharacter';  
 	$.mobile.changePage('#setCharacter',{ transition: pageEfect,reverse:false});
+
 }
 
 function goToTripPlanner()
@@ -1631,6 +1637,7 @@ distanceFull=-1;
 												$('#nextByDistance').css('visibility','visible');
 															$('#msg').css('visibility','hidden');
 					directionsDisplay.setMap(mapDest);
+
 					directionsDisplay2.setMap(mapDest2);
 								}
 								else
@@ -1729,21 +1736,23 @@ function getTimeC()
 		if(setScene==10)
 		{
 			//showFinishAquarium();
+			getCurrentPosAquarium();
 			if(render)
-		{
+			{
 						updateTimeLeftTextA(timeLeft);
 				updateWaterLevel();
-		}
+			}
 		
 		}
 		else
 		{
+
 			updateGreyCharacter(100-levelPos);
 			updateTimeLeftText(timeLeft);
 
 		}
-		
-	//	getCurrentPosCharacter();
+
+		//getCurrentPosCharacter();
 		
 		timeOut1=setTimeout('getTimeC()',updateFreqMilis);
 	}
@@ -1768,7 +1777,11 @@ var geo_options = {
 };
 
 
-
+var geo_optionsU = {
+  enableHighAccuracy: true, 
+  maximumAge        : 0, 
+  timeout           : 16000
+};
 
 function updatePostionCharacter()
 {
@@ -1778,19 +1791,26 @@ function updatePostionCharacter()
 	}
 	else
 	{
-	 //  watchID = navigator.geolocation.watchPosition(onSuccessC,onError,geo_options);
+
+		
+			onSuccessC();
+						navigator.geolocation.clearWatch(watchID);
+	  watchID = navigator.geolocation.watchPosition(onSuccessC,onError,geo_optionsU);
 	}
 
 }
 function updatePostionAquarium()
 {
+	
 	if(setTrip==1 && simulateGps)
 	{
 		onSuccessA();
 	}
 	else
 	{
-	//   watchID = navigator.geolocation.watchPosition(onSuccessA,onError,geo_options);
+					onSuccessA();
+					navigator.geolocation.clearWatch(watchID);
+	  watchID = navigator.geolocation.watchPosition(onSuccessA,onError,geo_optionsU);
 	}
 	
 }
@@ -1833,7 +1853,14 @@ var interval4;
 				}
 				else
 				{
+					if(position==undefined)
+								{
+								}
+								else
+								{				
 					currentPosition=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+								}
+
 				}
 
 				if(setTrip==1)
@@ -1921,8 +1948,13 @@ var interval4;
 				}
 				else
 				{
-															
+								if(position==undefined)
+								{
+								}
+								else
+								{				
 					currentPosition=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+								}
 				}
 				if(setTrip==1)
 				{			
@@ -1943,7 +1975,6 @@ var interval4;
 							icon:fromImage,
 				            title: "We come from!"
 				        });		
-								currentPosition
 						 marker4 = new google.maps.Marker({
 				            position: destPosition,
 				            map: map,
@@ -2019,46 +2050,53 @@ var interval4;
 			// onError Callback receives a PositionError object
 			//
 			function onError(error) {
-				// alert('code: '    + error.code    + '\n' +
-					//		'message: ' + error.message + '\n');
-		 //  currentPosition=defaultLatLng; 
-			
-	  				var errorGpsLoc=true;			
-					//$('#msg').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
+
+	  				var errorGpsLoc=true;		
+
 					$('#msg').html("SORRY, WE CAN'T GET YOUR CURRENT POSITION, PLEASE MAKE SURE, DO YOU HAVE ACTIVATE GPS AND INTERNET, THEN TRY AGAIN.");
 																		$('#msg').css('z-index','5000');
 										$('#msg').css('font-size','1em');		
 										$('#msg').click(function(){$('#msg').css('z-index','0');		$('#msg').css('visibility','hidden');});
-													
-									$('#msg').css('visibility','visible');
-				//$('#mapAdd').css('color','red');
-				//$('#mapAdd').html("Sorry, we can't get your current position, please make sure, do you have activate gps and internet and try again.");
-				//		$('#nextByDistance').css('visibility','hidden');
-			
-			//    alert('code: '    + error.code    + '\n' +
-			 //         'message: ' + error.message + '\n');
+										if(error.code==3)
+										{
+											if(setScene==10)
+		{
+											onSuccessA();
+														navigator.geolocation.clearWatch(watchID);
+									  watchID = navigator.geolocation.watchPosition(onSuccessA,onError,geo_optionsU);		
+								
+										}
+										else
+										{
+											onSuccessC();
+														navigator.geolocation.clearWatch(watchID);
+									  watchID = navigator.geolocation.watchPosition(onSuccessC,onError,geo_optionsU);		
+								
+										}
+										
+										}
 			}
 
 
 
 function getPositionAcuracy(acc)
 {
-//watchID=navigator.geolocation.watchPosition(onSuccesGetAc,onError,geo_options);	
+watchID=navigator.geolocation.watchPosition(onSuccesGetAc,onError,geo_options);	
 	
 }
 function onSuccesGetAc(position)
 {
 	
 
-	//onSuccessByD(position)
-	//accuracyAct=position.accuracy;
+	onSuccessByD(position)
+	accuracyAct=position.accuracy;
 	
 }
 function stopTryGps()
 {
-	//navigator.geolocation.clearWatch(watchID);
+	navigator.geolocation.clearWatch(watchID);
 
-		////$('#gpsSearch').removeClass('rotatedLoading');
+		$('#gpsSearch').removeClass('rotatedLoading');
 }
 function getCurrentPosByDistance()
 {
@@ -2068,11 +2106,14 @@ isTime=setTimeout(stopTryGps(),timeAccDesired);
 }
 function getCurrentPosCharacter()
 {
+
+//navigator.geolocation.watchPosition(onSuccessC,onError,geo_options);	
 			      navigator.geolocation.getCurrentPosition(onSuccessC, onError,geo_options);
 }
 
 function getCurrentPosAquarium()
 {
+//	navigator.geolocation.watchPosition(onSuccessA,onError,geo_options);	
 			      navigator.geolocation.getCurrentPosition(onSuccessA, onError,geo_options);
 }
 
@@ -2228,7 +2269,9 @@ $(document).on('pageshow','#character', function(e,data){
 	  charConH=$("#characterContainer").height();
 
  	map = new google.maps.Map(document.getElementById("map_canvas_character"),optionsCharacterMap);
-											directionsDisplay.setMap(map);			
+																	
+											directionsDisplay.setMap(map);	
+
      $(function() {  
       $("#borderMapCharacter").swipe( {
 		  swipeStatus:function(event, phase, direction, distance , duration , fingerCount){
@@ -2301,14 +2344,14 @@ $(document).on('pageshow','#character', function(e,data){
       $("#menuLeaf").swipe( {tap:function(event, target) {
 		  								tapJSoundF('play');
 							doubleTapCount++;
-					     	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
-							if(doubleTapCount==2)
-							{
+					     //	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
+						//	if(doubleTapCount==2)
+						//	{
 								$('#menuJungle').css('visibility', 'visible').animate({opacity: 1.0}, 200);
 
 
 									  $('#backCharacter').css('visibility','visible');
-							}
+							//}
 	}, 
 		 
 		threshold:50 });
@@ -2329,6 +2372,7 @@ $(document).on('pageshow','#character', function(e,data){
 				 $('#positionLeftCharacter').css('visibility','visible');
  					$('#timeLeftCharacter').css('visibility','hidden');
 					 $('#resetTripContainer').css('visibility','hidden');
+				map.panTo(currentPosition);		
 });
 
       $("#buttonMenuJungle3").click(function() {
@@ -2352,7 +2396,7 @@ $(document).on('pageshow','#character', function(e,data){
 	 
 //$('#fish').sprite({fps: 12, no_of_frames: 6});
 	
-  		
+
 				if(setTrip==0)
 				{
 					if (timeFull==timeLeft)
@@ -2361,7 +2405,8 @@ $(document).on('pageshow','#character', function(e,data){
 					
 	  											
 						timeNow=new Date().getTime();
-						  updatePostionCharacter();
+
+						updatePostionCharacter();
 						getTimeC();
 					}
 				}
@@ -2385,7 +2430,7 @@ $(document).on('pageshow','#character', function(e,data){
 							icon:fromImage,
 				            title: "We come from!"
 				        });		
-								currentPosition
+
 						 marker4 = new google.maps.Marker({
 				            position: destPosition,
 				            map: map,
@@ -2393,9 +2438,10 @@ $(document).on('pageshow','#character', function(e,data){
 				            title: "We go there!"
 				        });				
 
+
 						  clearInterval(intervalDist);
-						   intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
-						   	updatePostionCharacter();
+						   intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);								     																			updatePostionCharacter();
+
 					}
 				}
 
@@ -2408,7 +2454,7 @@ $('#knowFactContainer').click(function() {
 	if($('#knowFactContainer').css('opacity')==1){$('#knowFactContainer').animate({ "opacity": 0}, "slow");} }) ;
 							  clearInterval(intervalDist2);
 	intervalDist2=setInterval(function () {loadKnowFact()}, ((updateFreqMilis*20)-15000));		
-//	  getCurrentPosCharacter();
+	  getCurrentPosCharacter();
   });
 
 
@@ -3129,7 +3175,8 @@ wavesSoundF('play');
 	  charConH=$("#aquariumContainer").height();
 
  map = new google.maps.Map(document.getElementById("map_canvas_aquarium"),optionsCharacterMap);
-										directionsDisplay.setMap(map);			
+										directionsDisplay.setMap(map);
+
      $(function() {  
       $("#borderMapAquarium").swipe( {
 		  swipeStatus:function(event, phase, direction, distance , duration , fingerCount){
@@ -3202,14 +3249,14 @@ wavesSoundF('play');
 							doubleTapCount++;
 							tapSoundAF('play');
 							
-					     	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
-							if(doubleTapCount==2)
-							{
+					     //	setTimeout(function () { doubleTapCount=0;},doubleTapSpeed); 
+							//if(doubleTapCount==2)
+							//{
 								$('#menuAquarium').css('visibility', 'visible').animate({opacity: 1.0}, 200);
 
 
 									  $('#backAquarium').css('visibility','visible');
-							}
+							//}
 	}, 
 		 
 		threshold:50 });
@@ -3236,6 +3283,7 @@ wavesSoundF('play');
 					$('#timeLeftAquarium').css('z-index','0');
 					 $('#resetTripContainerAquarium').css('visibility','hidden');
 					 				 				 $('#resetTripContainerAquarium').css('z-index','0');
+													 				map.panTo(currentPosition);		
 });
 
       $("#buttonMenuAquarium3").click(function() {
@@ -3262,7 +3310,7 @@ wavesSoundF('play');
 				  $('#backAquarium').css('visibility','hidden');
 			});
 
-		
+
 				if(setTrip==0)
 				{
 					if (timeFull==timeLeft)
@@ -3271,7 +3319,8 @@ wavesSoundF('play');
 
 	  											
 						timeNow=new Date().getTime();
-						  updatePostionAquarium();
+						updatePostionAquarium();
+
 						getTimeC();
 					}
 				}
@@ -3304,7 +3353,7 @@ wavesSoundF('play');
 				        });				
 
 	
-						  updatePostionAquarium();
+					updatePostionAquarium();
 						  							  clearInterval(intervalDist);
 						   intervalDist=setInterval(function () {getPosition()}, updateFreqMilis);		
 					}
@@ -3839,11 +3888,13 @@ rotTimes=2000;
 
 						if(setScene<=9)
 						{
+							   navigator.geolocation.getCurrentPosition(onSuccessC, onError,geo_options);
 							loadCharacter();
 							$.mobile.changePage("#character",{ transition: pageEfect,reverse:false});
 						}
 						else
 						{
+							   navigator.geolocation.getCurrentPosition(onSuccessA, onError,geo_options);
 							$.mobile.changePage("#aquarium",{ transition: pageEfect,reverse:false});
 						}
 						},rotTimes); 
